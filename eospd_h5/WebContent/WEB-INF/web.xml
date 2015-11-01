@@ -11,6 +11,7 @@
             <param-name>modules</param-name>
             <param-value>com.eospd.MainModule</param-value>
         </init-param>
+        
         <init-param>
             <param-name>exclusions</param-name>
             <!-- *.XXX 忽略后缀 -->
@@ -19,7 +20,6 @@
             <!-- 下面的例子忽略了html和ftl后缀, 忽略了/rs/和/druid/前缀,和忽略了固定路径/abc/notaction -->
             <param-value>*.js,*.css,*.html,*.ftl,/rs/*,/druid/*</param-value>
         </init-param>
-        
     </filter>
 
     <filter-mapping>
