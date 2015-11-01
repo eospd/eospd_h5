@@ -13,4 +13,10 @@ public class Meter {
     public String doHello() {
         return "Hello Meter";
     }
+	
+	@At
+	@Ok("raw")
+	public String static_mm() {
+		return "";
+	}
 }
