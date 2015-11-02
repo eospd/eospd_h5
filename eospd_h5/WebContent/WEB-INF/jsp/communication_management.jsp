@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    DataTables Advanced Tables
+                    通讯管理
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
