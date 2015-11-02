@@ -139,14 +139,14 @@
             </div><!--/span-->
         	</div><!--/row-->
 		  </div>
-		  <div class="col-md-7">
+		  <div class="col-md-9">
 
 		  	<div class="row">
 				<h4>仪表指标</h4>
 				<!-- /.col-lg-12 -->
 			</div>
 		  	
-				<div class="row-fluid example">
+			<div class="row-fluid example">
 				    <div id="graphic" class="col-lg-12">
 						<div id="meters_cr" class="meters_cr"></div>
 					</div><!--/span-->
