@@ -924,7 +924,7 @@ function getMyEcharts(obj) {
 			    legend: {
 			        y: 55,
 			        itemGap : document.getElementById(myContainerId).offsetWidth / 8,
-			        data:['仪表器一', '仪表器一','仪表器一', '仪表器一']
+			        data:['仪表器一', '仪表器二','仪表器三', '仪表器四']
 			    },
 			    toolbox: {
 			        show : true,
@@ -960,7 +960,7 @@ function getMyEcharts(obj) {
 			            type:'bar',
 			            stack: '总量',
 			            itemStyle : dataStyle,
-			            data:[38, 50, 33
+			            data:[38, 50, 33]
 			        },
 			        {
 			            name:'仪表器二',
