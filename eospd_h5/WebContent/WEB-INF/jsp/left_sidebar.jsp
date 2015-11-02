@@ -30,12 +30,12 @@
 			</li>
 			<li><a href="/eospd_h5"><i class="fa fa-dashboard fa-fw"></i>
 					数据采集</a></li>
-			<li><a href="/eospd_h5/dataontime"><i
+			<li><a href="/eospd_h5/dm"><i
 					class="fa fa-bar-chart-o fa-fw"></i> 数据管理</a></li>
-			<li><a href=""><i class="fa fa-table fa-fw"></i> 通讯管理</a></li>
-			<li><a href=""><i class="fa fa-edit fa-fw"></i> 能流图</a></li>
-			<li><a href=""><i class="fa fa-wrench fa-fw"></i> 表具管理</a></li>
-			<li><a href=""><i class="fa fa-files-o fa-fw"></i> 系统配置</a></li>
+			<li><a href="/eospd_h5/cm"><i class="fa fa-table fa-fw"></i> 通讯管理</a></li>
+			<li><a href="/eospd_h5/efd"><i class="fa fa-edit fa-fw"></i> 能流图</a></li>
+			<li><a href="/eospd_h5/mm"><i class="fa fa-wrench fa-fw"></i> 表具管理</a></li>
+			<li><a href="/eospd_h5/sc"><i class="fa fa-files-o fa-fw"></i> 系统配置</a></li>
 		</ul>
 	</div>
 	<!-- /.sidebar-collapse -->
