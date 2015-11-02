@@ -37,11 +37,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
-
     <link href="css/carousel.css" rel="stylesheet">
     <link href="css/echartsHome.css" rel="stylesheet">
-    <script src="js/echarts.js"></script>
     <script src="js/codemirror.js"></script>
     <script src="js/javascript.js"></script>
 
@@ -111,149 +108,46 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">今日数据</h3>
+					<h3 class="page-header">数据指标</h3>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			
-			<div class="row-fluid example">
-            <div id="sidebar-code" class="col-md-4">
-                <div class="well sidebar-nav">
-                    <div class="nav-header"><a href="#" onclick="autoResize()" class="glyphicon glyphicon-resize-full" id ="icon-resize" ></a>option</div>
-                    <textarea id="code" name="code">
-						option = {
-						    tooltip : {
-						        formatter: "{a} <br/>{b} : {c}%"
-						    },
-						    toolbox: {
-						        show : true,
-						        feature : {
-						            mark : {show: true},
-						            restore : {show: true},
-						            saveAsImage : {show: true}
-						        }
-						    },
-						    series : [
-						        {
-						            name:'业务指标',
-						            type:'gauge',
-						            detail : {formatter:'{value}%'},
-						            data:[{value: 50, name: '完成率'}]
-						        }
-						    ]
-						};
+			
+        <div class="row">
+		  <div class="col-md-3">
 
-						clearInterval(timeTicket);
-						timeTicket = setInterval(function (){
-						    option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-						    myChart.setOption(option, true);
-						},2000);
-                    </textarea>
-              </div><!--/.well -->
-            </div><!--/span-->
-            <div id="graphic" class="col-md-8">
-                <div id="main" class="main"></div>
-                <div>
-                    <button type="button" class="btn btn-sm btn-success" onclick="refresh(true)">刷 新</button>
-                    <span class="text-primary">切换主题</span>
-                    <select id="theme-select"></select>
+		  	<div class="row">
+				<h4>系统指标</h4>
+				<!-- /.col-lg-12 -->
+			</div>
 
-                    <span id='wrong-message' style="color:red"></span>
-                </div>
+		  	<div class="row-fluid example">
+            <div id="graphic" class="col-lg-12">
+                <div id="data_efficiency" class="data_efficiency"></div>
             </div><!--/span-->
         	</div><!--/row-->
-        
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">Kitchen Sink</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<div class="table-responsive">
-								<table class="table table-striped table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>First Name</th>
-											<th>Last Name</th>
-											<th>Username</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>@twitter</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- /.table-responsive -->
-						</div>
-						<!-- /.panel-body -->
-					</div>
-					<!-- /.panel -->
-				</div>
-				<!-- /.col-lg-6 -->
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">Basic Table</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>First Name</th>
-											<th>Last Name</th>
-											<th>Username</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>@twitter</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- /.table-responsive -->
-						</div>
-						<!-- /.panel-body -->
-					</div>
-					<!-- /.panel -->
-				</div>
-				<!-- /.col-lg-6 -->
-			</div>
-			<!-- /.row -->
+        	<div class="row-fluid example">
+            <div id="graphic" class="col-lg-12">
+                <div id="meter_online_r" class="meter_online_r"></div>
+            </div><!--/span-->
+        	</div><!--/row-->
+
+        	<div class="row-fluid example">
+            <div id="graphic" class="col-lg-12">
+                <div id="real_time_cr" class="real_time_cr"></div>
+            </div><!--/span-->
+        	</div><!--/row-->
+		  </div>
+		  <div class="col-md-7">
+		  	
+				<div class="row-fluid example">
+				    <div id="graphic" class="col-lg-12">
+						<div id="main" class="main"></div>
+					</div><!--/span-->
+				</div><!--/row-->
+		  </div>
+		</div>
 			
 		</div>
 		<!-- /#page-wrapper -->
@@ -278,14 +172,98 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 
+    <script src="js/echarts.js"></script>
 
-    <script type="text/javascript" src="js/echartsHome.js"></script>
-    <script type="text/javascript">var timeTicket;</script>
-    <script src="js/echartsExample.js"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
+
+	     // Step:3 conifg ECharts's path, link to echarts.js from current page.
+	    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+	    require.config({
+	        paths: {
+	            echarts: 'js/'
+	        }
+	    });
+
+    	require(
+        [
+            'echarts',
+            'echarts/chart/gauge',
+        ],
+        function (ec) {
+            var data_efficiency_chart = ec.init(document.getElementById('data_efficiency'));
+            var meter_online_r_chart = ec.init(document.getElementById('meter_online_r'));
+            var real_time_cr_chart = ec.init(document.getElementById('real_time_cr'));
+
+			data_efficiency_chart.setOption({
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}%"
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            mark : {show: true},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    series : [
+			        {
+			            name:'数据有效率',
+			            type:'gauge',
+			            detail : {formatter:'{value}%'},
+			            data:[{value: 50, name: '数据有效率'}]
+			        }
+			    ]
+            });
+
+            meter_online_r_chart.setOption({
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}%"
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            mark : {show: true},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    series : [
+			        {
+			            name:'仪表在线率',
+			            type:'gauge',
+			            detail : {formatter:'{value}%'},
+			            data:[{value: 60, name: '仪表在线率'}]
+			        }
+			    ]
+            });
+
+            real_time_cr_chart.setOption({
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}%"
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            mark : {show: true},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    series : [
+			        {
+			            name:'实时采集率',
+			            type:'gauge',
+			            detail : {formatter:'{value}%'},
+			            data:[{value: 80, name: '实时采集率'}]
+			        }
+			    ]
+            });
+		});
+
         $('#dataTables-example').DataTable({
                 responsive: true
         });
