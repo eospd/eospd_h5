@@ -140,10 +140,15 @@
         	</div><!--/row-->
 		  </div>
 		  <div class="col-md-7">
+
+		  	<div class="row">
+				<h4>仪表指标</h4>
+				<!-- /.col-lg-12 -->
+			</div>
 		  	
 				<div class="row-fluid example">
 				    <div id="graphic" class="col-lg-12">
-						<div id="main" class="main"></div>
+						<div id="meters_cr" class="meters_cr"></div>
 					</div><!--/span-->
 				</div><!--/row-->
 		  </div>
@@ -173,96 +178,49 @@
 	<script src="js/sb-admin-2.js"></script>
 
     <script src="js/echarts.js"></script>
+    <script src="js/eospd.js"></script>
 
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
 
-	     // Step:3 conifg ECharts's path, link to echarts.js from current page.
-	    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
-	    require.config({
-	        paths: {
-	            echarts: 'js/'
-	        }
-	    });
+		var objBar1 = [], objBar2 = [], objBar3 = [];
+		objBar1.myChartBackgroundColor = "#000000";
+		objBar1.myChartType = "gauge";
+		objBar1.myChartLegendData = new Array('有功功率');
+		objBar1.myChartYAxisFormatter = "kw";
+		objBar1.myChartDataColor = [ '#ff9000' ];
+		objBar1.myChartDyType = "0";
 
-    	require(
-        [
-            'echarts',
-            'echarts/chart/gauge',
-        ],
-        function (ec) {
-            var data_efficiency_chart = ec.init(document.getElementById('data_efficiency'));
-            var meter_online_r_chart = ec.init(document.getElementById('meter_online_r'));
-            var real_time_cr_chart = ec.init(document.getElementById('real_time_cr'));
+		objBar1.myContainerId = "data_efficiency";
+		objBar1.myName = "数据有效率";
+		objBar1.myValue = 50;
 
-			data_efficiency_chart.setOption({
-			    tooltip : {
-			        formatter: "{a} <br/>{b} : {c}%"
-			    },
-			    toolbox: {
-			        show : true,
-			        feature : {
-			            mark : {show: true},
-			            restore : {show: true},
-			            saveAsImage : {show: true}
-			        }
-			    },
-			    series : [
-			        {
-			            name:'数据有效率',
-			            type:'gauge',
-			            detail : {formatter:'{value}%'},
-			            data:[{value: 50, name: '数据有效率'}]
-			        }
-			    ]
-            });
+	   	getMyEcharts(objBar1);
 
-            meter_online_r_chart.setOption({
-			    tooltip : {
-			        formatter: "{a} <br/>{b} : {c}%"
-			    },
-			    toolbox: {
-			        show : true,
-			        feature : {
-			            mark : {show: true},
-			            restore : {show: true},
-			            saveAsImage : {show: true}
-			        }
-			    },
-			    series : [
-			        {
-			            name:'仪表在线率',
-			            type:'gauge',
-			            detail : {formatter:'{value}%'},
-			            data:[{value: 60, name: '仪表在线率'}]
-			        }
-			    ]
-            });
+		objBar2.myChartType = "gauge";
+		objBar2.myContainerId = "meter_online_r";
+		objBar2.myName = "仪表在线率";
+		objBar2.myValue = 60;
 
-            real_time_cr_chart.setOption({
-			    tooltip : {
-			        formatter: "{a} <br/>{b} : {c}%"
-			    },
-			    toolbox: {
-			        show : true,
-			        feature : {
-			            mark : {show: true},
-			            restore : {show: true},
-			            saveAsImage : {show: true}
-			        }
-			    },
-			    series : [
-			        {
-			            name:'实时采集率',
-			            type:'gauge',
-			            detail : {formatter:'{value}%'},
-			            data:[{value: 80, name: '实时采集率'}]
-			        }
-			    ]
-            });
-		});
+	   	getMyEcharts(objBar2);
+
+		objBar3.myChartType = "gauge";
+	   	objBar3.myContainerId = "real_time_cr";
+		objBar3.myName = "实时采集率";
+		objBar3.myValue = 80;
+	   	getMyEcharts(objBar3);
+
+
+	   	var objBarMeters = [];
+
+		objBarMeters.myChartType = "mul_bar";
+	   	objBarMeters.myContainerId = "meters_cr";
+		objBarMeters.myName = "实时采集率";
+		objBarMeters.myValue = 80;
+	   	getMyEcharts(objBarMeters);
+
 
         $('#dataTables-example').DataTable({
                 responsive: true

@@ -461,7 +461,7 @@ table.full {width:100%;}
 }
 
 
-.data_efficiency, .meter_online_r, .real_time_cr {
+.data_efficiency, .meter_online_r, .real_time_cr, .meters_cr {
     height: 300px;
     /*width: 778px !important;*/
     overflow: hidden;
