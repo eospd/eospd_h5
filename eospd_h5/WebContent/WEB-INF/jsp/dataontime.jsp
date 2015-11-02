@@ -8,59 +8,12 @@
 <body>
 
 	<div id="wrapper">
-
-		<jsp:include page="left_sidebar.jsp"></jsp:include>
+		
+		<jsp:include page="left_sidebar.jsp"></jsp:include>	
 
 		<div id="page-wrapper">
-			<div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header">数据指标</h3>
-				</div>
-				<!-- /.col-lg-12 -->
-			</div>
-			
-			
-        <div class="row">
-		  <div class="col-md-4">
 
-		  	<div class="row">
-				<h4>系统指标</h4>
-				<!-- /.col-lg-12 -->
-			</div>
-
-		  	<div class="row-fluid example">
-            <div id="graphic" class="col-lg-12">
-                <div id="data_efficiency" class="data_efficiency"></div>
-            </div><!--/span-->
-        	</div><!--/row-->
-        	<div class="row-fluid example">
-            <div id="graphic" class="col-lg-12">
-                <div id="meter_online_r" class="meter_online_r"></div>
-            </div><!--/span-->
-        	</div><!--/row-->
-
-        	<div class="row-fluid example">
-            <div id="graphic" class="col-lg-12">
-                <div id="real_time_cr" class="real_time_cr"></div>
-            </div><!--/span-->
-        	</div><!--/row-->
-		  </div>
-		  <div class="col-md-8">
-
-		  	<div class="row">
-				<h4>仪表指标</h4>
-				<!-- /.col-lg-12 -->
-			</div>
-		  	
-			<div class="row-fluid example">
-				    <div id="graphic" class="col-lg-12">
-						<div id="meters_cr" class="meters_cr"></div>
-					</div><!--/span-->
-				</div><!--/row-->
-		  </div>
-		</div>
-
-		    <div class="row">
+	    <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
