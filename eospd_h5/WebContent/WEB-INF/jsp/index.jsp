@@ -78,7 +78,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="panel panel-default">
-												<div class="panel-heading">DataTables Advanced Tables</div>
+												<div class="panel-heading">数据采集历史数据</div>
 												<!-- /.panel-heading -->
 												<div class="panel-body">
 													<div class="dataTable_wrapper">
