@@ -11,22 +11,13 @@
 		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 		<span class="icon-bar"></span> <span class="icon-bar"></span>
 	</button>
-	<a class="navbar-brand" href="">能源管理系统</a>
+	<a class="navbar-brand" href="/eospd_h5">能源管理系统</a>
 </div>
 <!-- /.navbar-header -->
 <div class="navbar-default sidebar" role="navigation">
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
-			<li class="sidebar-search">
-				<div class="input-group custom-search-form">
-					<input type="text" class="form-control" placeholder="Search...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-				</div> <!-- /input-group -->
-			</li>
+
 			<li><a href="/eospd_h5"><i class="fa fa-dashboard fa-fw"></i> 数据采集</a></li>
 			<li><a href="/eospd_h5/dm"><i
 					class="fa fa-bar-chart-o fa-fw"></i> 数据管理</a></li>
