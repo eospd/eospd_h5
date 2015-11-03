@@ -24,12 +24,16 @@
 									id="dm_table">
 									<thead>
 										<tr>
-											<th>First name</th>
-											<th>Last name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<th>时间</th>
+											<th>能源ID</th>
+											<th>仪表名称	</th>
+											<th>采集器ID</th>
+											<th>采集器URL</th>
+											<th>采集器地址</th>
+											<th>采集器IP</th>
+											<th>厂商</th>
+											<th>p1Pv</th>
+											<th>p1Err</th>
 										</tr>
 									</thead>
 								</table>
@@ -74,6 +78,18 @@
 	<script>
     $(document).ready(function() {
     	
+    	/*
+    												<th>时间</th>
+											<th>能源ID</th>
+											<th>仪表名称	</th>
+											<th>采集器ID</th>
+											<th>采集器URL</th>
+											<th>采集器地址</th>
+											<th>采集器IP</th>
+											<th>厂商</th>
+											<th>p1Pv</th>
+											<th>p1Err</th>
+											*/
     	$('#dm_table').DataTable( {
             "processing": true,
             "serverSide": true,
@@ -82,12 +98,16 @@
                 "type": "POST"
             },
             "columns": [
-                { "data": "first_name" },
-                { "data": "last_name" },
-                { "data": "position" },
-                { "data": "office" },
-                { "data": "start_date" },
-                { "data": "salary" }
+                { "data": "currentTime" },
+                { "data": "dataId" },
+                { "data": "meterName" },
+                { "data": "dcId" },
+                { "data": "dcUrl" },
+                { "data": "dcLocation" },
+                { "data": "dcIP" },
+                { "data": "venderName" },
+                { "data": "p1Pv" },
+                { "data": "p1Err" }
             ]
         } );
 
