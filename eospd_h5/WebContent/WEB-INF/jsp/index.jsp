@@ -27,51 +27,28 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="home-pills">
+									
 									<div class="row">
-										<div class="col-md-4">
-											<div class="row">
-												<h4>系统指标</h4>
-												<!-- /.col-lg-12 -->
-											</div>
+										<h4>系统指标</h4>
+									</div>
+									    
+									<div class="row">
+								        <div class="col-lg-4">
+								        <div id="data_efficiency" class="data_efficiency"></div>
+								        </div>
+								        <div class="col-lg-4">
+								        <div id="meter_online_r" class="meter_online_r"></div>
+								        </div>
+								        <div class="col-lg-4">
+								        <div id="real_time_cr" class="real_time_cr"></div>
+								        </div>
+							    	</div>
 
-											<div class="row-fluid example">
-												<div id="graphic" class="col-lg-12">
-													<div id="data_efficiency" class="data_efficiency"></div>
-												</div>
-												<!--/span-->
-											</div>
-											<!--/row-->
-											<div class="row-fluid example">
-												<div id="graphic" class="col-lg-12">
-													<div id="meter_online_r" class="meter_online_r"></div>
-												</div>
-												<!--/span-->
-											</div>
-											<!--/row-->
-
-											<div class="row-fluid example">
-												<div id="graphic" class="col-lg-12">
-													<div id="real_time_cr" class="real_time_cr"></div>
-												</div>
-												<!--/span-->
-											</div>
-											<!--/row-->
-										</div>
-										<div class="col-md-8">
-
-											<div class="row">
-												<h4>仪表指标</h4>
-												<!-- /.col-lg-12 -->
-											</div>
-
-											<div class="row-fluid example">
-												<div id="graphic" class="col-lg-12">
-													<div id="meters_cr" class="meters_cr"></div>
-												</div>
-												<!--/span-->
-											</div>
-											<!--/row-->
-										</div>
+									<div class="row">
+										<h4>仪表指标</h4>
+									</div>
+									<div class="row">
+										<canvas id="topo_canvas" class="col-lg-12"></canvas>
 									</div>
 								</div>
 								<div class="tab-pane fade" id="history-pills">
@@ -540,7 +517,96 @@
 	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
 
+<script type="text/javascript" src="js/ctopo.js"></script>
+	<script type="text/javascript" src="js/consolepanel.js"></script>
+	<script type="text/javascript">
+    var json = {"nodes": [
+                  {
+                      "id": "838644321",
+                      "url": "数据采集系统"
+                  },
+                  {
+                      "id": "1001",
+                      "label": "名称：仪表3\n地址：192.168.12.41"
+                  },
+                  {
+                      "id": "1002",
+                      "label": "名称：仪表3\n192.168.12.40"
+                  },
+                  {
+                      "id": "1003",
+                      "label": "名称：仪表3\n192.168.12.39"
+                  },
+                  {
+                      "id": "1004",
+                      "label": "名称：仪表3\n地址：192.168.12.41"
+                  },
+                  {
+                      "id": "1005",
+                      "label": "名称：仪表3\n地址：192.168.12.41"
+                  },
+                  {
+                      "id": "1006",
+                      "label": "名称：仪表3\n地址：192.168.12.41"
+                  },
+                  {
+                      "id": "1007",
+                      "label": "名称：仪表3\n地址：192.168.12.41"
+                  }
+                  ],
+               "edges":[
+                  
+                 {
+                  "target": "1001",
+                  "source": "838644321"
+                 } ,
+                 {
+                  "target": "1002",
+                  "source": "838644321"
+                 } ,
+                 {
+                  "target": "1003",
+                  "source": "838644321"
+                 } 
+                  ,
+                 {
+                  "target": "1004",
+                  "source": "838644321"
+                 } 
+                  ,
+                 {
+                  "target": "1005",
+                  "source": "838644321"
+                 } 
+                  ,
+                 {
+                  "target": "1006",
+                  "source": "838644321"
+                 }  ,
+                 {
+                  "target": "1007",
+                  "source": "838644321"
+                 } 
+                 ]
+                 
+              };            
+      var drawtopo = function(){
+      	
+              console.log("Draw topo "+json);
+              //console.log(JSON.parse(xhr.responseText));
+              //var json = JSON.parse(xhr.responseText);
+              //第一步: 转本页第18行
 
+              //第二步: 构建配置对象
+              var option = {
+                  id:"topo_canvas",    //说明: canvas标签的id,也可以省略,默认取第一个canvas
+                  data:json       //说明: 绑定数据
+              };
+              //第三步: 构建ctopo绘制canvas
+              ctopo(option);
+       }
+
+    </script>
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
@@ -573,14 +639,15 @@
 	   	getMyEcharts(objBar3);
 
 
-	   	var objBarMeters = [];
+	   	//var objBarMeters = [];
 
-		objBarMeters.myChartType = "mul_bar";
-	   	objBarMeters.myContainerId = "meters_cr";
-		objBarMeters.myName = "实时采集率";
-		objBarMeters.myValue = 80;
-	   	getMyEcharts(objBarMeters);
+		//objBarMeters.myChartType = "mul_bar";
+	   	//objBarMeters.myContainerId = "meters_cr";
+		//objBarMeters.myName = "实时采集率";
+		//objBarMeters.myValue = 80;
+	   	//getMyEcharts(objBarMeters);
 
+		drawtopo();
 
         $('#dataTables-example').DataTable({
                 responsive: true
