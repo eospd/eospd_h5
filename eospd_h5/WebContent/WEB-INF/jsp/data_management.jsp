@@ -35,12 +35,11 @@
 										<li><a href="#"> 仪表器三 </a></li>
 									</ul></li>
 									
-
 								<li><a data-toggle="tab">
 										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value="2012-04-05">
+											<input type="text" class="form-control" value="">
 											<span class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="2012-04-19">
+												class="form-control" value="">
 										</div>
 								</a></li>
 							</ul>
