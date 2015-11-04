@@ -36,12 +36,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="css/carousel.css" rel="stylesheet">
-    <link href="css/echartsHome.css" rel="stylesheet">
-    <script src="js/codemirror.js"></script>
-    <script src="js/javascript.js"></script>
+<link href="css/echartsHome.css" rel="stylesheet">
 
-    <link href="css/codemirror.css" rel="stylesheet">
-    <link href="css/monokai.css" rel="stylesheet">
+<link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
 </head>

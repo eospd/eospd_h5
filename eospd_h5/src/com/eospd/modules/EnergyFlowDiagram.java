@@ -12,4 +12,16 @@ public class EnergyFlowDiagram {
     public String index() {
         return "";
     }
+	
+	@At("/efd_chart")
+	@Ok("jsp:jsp.efd_chart")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+    public void efd_chart() {
+    }
+	
+	@At("/efd_his")
+	@Ok("jsp:jsp.efd_his")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+    public void efd_his() {
+    }
 }
