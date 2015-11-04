@@ -5,14 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 
 import org.nutz.dao.Dao;
-import org.nutz.dao.impl.NutDao;
-import org.nutz.ioc.Ioc;
-import org.nutz.ioc.impl.NutIoc;
-import org.nutz.ioc.loader.json.JsonLoader;
 import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
@@ -29,6 +23,7 @@ public class DataManagement {
 		return "";
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/dm/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
