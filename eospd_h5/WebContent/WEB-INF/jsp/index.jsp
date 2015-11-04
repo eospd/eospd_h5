@@ -599,8 +599,8 @@
 
               //第二步: 构建配置对象
               var option = {
-                  id:"topo_canvas",    //说明: canvas标签的id,也可以省略,默认取第一个canvas
-                  data:json       //说明: 绑定数据
+                  id:"topo_canvas",   
+                  data:json
               };
               //第三步: 构建ctopo绘制canvas
               ctopo(option);

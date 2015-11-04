@@ -385,7 +385,7 @@ function ctopo(opt){
 		function scaleCallBack(prevScale,scale){
 			animate.destory();
 			//逻辑处理
-			utils.inOutScale(tp.nodes,tp.canvas.width,tp.canvas.height,prevScale,scale);
+			//utils.inOutScale(tp.nodes,tp.canvas.width,tp.canvas.height,prevScale,scale);
 			//初始完成后才进行绘制
 			if( appState == STATE_INIT_OVER ){
 				render.draw();
@@ -393,7 +393,7 @@ function ctopo(opt){
 			}
 			//设置回调
 			if( tp.option.event.scale ){
-				tp.option.event.scale(prevScale,scale);
+			//	tp.option.event.scale(prevScale,scale);
 			}
 		}
 	}
@@ -1116,7 +1116,7 @@ function ctopo(opt){
   	function drawRoundedRect(strokeStyle,fillStyle,cornerX,cornerY,width,height,cornerRadius) {
    		context.beginPath();
    		context.lineWidth=3;
-   		roundedRect(cornerX-width, cornerY-height, width, height, cornerRadius);
+   		roundedRect(cornerX, cornerY, width, height, cornerRadius);
    		context.strokeStyle = strokeStyle;
    		context.fillStyle = fillStyle;
    		context.stroke();
@@ -1128,12 +1128,12 @@ function ctopo(opt){
 	  			//console.log("cornerX:"+node.x+", conrnerY:"+node.y+", w:"+width);
 	  			
 	  		context.beginPath();
-			  context.fillStyle="green";	//node对象样式 > 全局样式
+			context.fillStyle="green";	//node对象样式 > 全局样式
 		  	context.arc(node.x,node.y,parseInt(node.size/2),0,(Math.PI/180)*360,false);
 		  	context.fill();
 		  	context.closePath();
 		  }else {
-		  	drawRoundedRect('black',  'white',  node.x,  node.y,  120,  120, 10);
+		  	drawRoundedRect('black',  'white',  node.x-50,  node.y-50,  120,  120, 10);
 		  }
 		  	//绘制节点label
 		  	if( node.label && tp.option.isShowNodeLabel ){
@@ -1147,7 +1147,7 @@ function ctopo(opt){
 			context.font=node.textSize+"px serif";
 			var sub = node.label.split("\n");
 			for (i = 0; i < sub.length; i++) {
-			context.fillText(sub[i],node.x-120,node.y-100+node.textSize*i);
+			context.fillText(sub[i],node.x,node.y+node.textSize*i);
 		}
 		}
 
