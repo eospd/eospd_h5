@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    通讯管理
+                  		 历史数据
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -480,7 +480,6 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
-
         $('#dataTables-example').DataTable({
                 responsive: true
         });

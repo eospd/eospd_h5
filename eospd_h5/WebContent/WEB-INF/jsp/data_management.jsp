@@ -23,22 +23,21 @@
 							<ul class="nav nav-tabs">
 
 								<li class="active"><a href="#home" data-toggle="tab">数据明细</a></li>
-								
+
 								<li class='dropdown'><a data-toggle="dropdown" href=""
 									role="button" aria-expanded="false">全部仪表器 <span
 										class="caret"></span>
 								</a>
-
 									<ul class="dropdown-menu">
 										<li><a href="#"> 仪表器一 </a></li>
 										<li><a href="#"> 仪表器二 </a></li>
 										<li><a href="#"> 仪表器三 </a></li>
 									</ul></li>
-									
+
 								<li><a data-toggle="tab">
 										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value="">
-											<span class="input-group-addon">到</span> <input type="text"
+											<input type="text" class="form-control" value=""> <span
+												class="input-group-addon">到</span> <input type="text"
 												class="form-control" value="">
 										</div>
 								</a></li>
@@ -106,13 +105,13 @@
 	<!-- /#wrapper -->
 
 
-	
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
