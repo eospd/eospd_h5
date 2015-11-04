@@ -111,6 +111,9 @@
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.zh-CN.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
@@ -126,9 +129,6 @@
 	<script src="js/sb-admin-2.js"></script>
 	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
-	
-	<script src="js/bootstrap-datepicker.min.js"></script>
-	<script src="js/bootstrap-datepicker.zh-CN.min.js"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
@@ -162,8 +162,10 @@
 					"data" : "p1Err"
 				} ]
 			});
+			
+
 		    $('.input-daterange input').each(function() {
-		        $(this).datepicker();
+		        $(this).datepicker({language: 'zh-CN',autoclose:true} );
 		    });
 		});
 	</script>

@@ -23,6 +23,13 @@ public class DataManagement {
 		return "";
 	}
 
+	@At("/test")
+	@Ok("jsp:jsp.test")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public String test() {
+		return "";
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/dm/list")
 	@Ok("json")
