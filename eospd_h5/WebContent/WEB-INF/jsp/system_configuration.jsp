@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    系统配置
+                	系统配置
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -480,43 +480,6 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
-
-		var objBar1 = [], objBar2 = [], objBar3 = [];
-		objBar1.myChartBackgroundColor = "#000000";
-		objBar1.myChartType = "gauge";
-		objBar1.myChartLegendData = new Array('有功功率');
-		objBar1.myChartYAxisFormatter = "kw";
-		objBar1.myChartDataColor = [ '#ff9000' ];
-		objBar1.myChartDyType = "0";
-
-		objBar1.myContainerId = "data_efficiency";
-		objBar1.myName = "数据有效率";
-		objBar1.myValue = 50;
-
-	   	getMyEcharts(objBar1);
-
-		objBar2.myChartType = "gauge";
-		objBar2.myContainerId = "meter_online_r";
-		objBar2.myName = "仪表在线率";
-		objBar2.myValue = 60;
-
-	   	getMyEcharts(objBar2);
-
-		objBar3.myChartType = "gauge";
-	   	objBar3.myContainerId = "real_time_cr";
-		objBar3.myName = "实时采集率";
-		objBar3.myValue = 80;
-	   	getMyEcharts(objBar3);
-
-
-	   	var objBarMeters = [];
-
-		objBarMeters.myChartType = "mul_bar";
-	   	objBarMeters.myContainerId = "meters_cr";
-		objBarMeters.myName = "实时采集率";
-		objBarMeters.myValue = 80;
-	   	getMyEcharts(objBarMeters);
-
 
         $('#dataTables-example').DataTable({
                 responsive: true

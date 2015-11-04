@@ -22,18 +22,16 @@
 			<li><a href="/eospd_h5/dm"><i
 					class="fa fa-bar-chart-o fa-fw"></i> 数据管理</a></li>
 					
-			<li><a href="/eospd_h5/cm"><i
+			<li><a href="#"><i
 					class="fa fa-bar-chart-o fa-fw"></i> 通讯管理<span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="false"
-					style="height: 0px;">
+				<ul class="nav nav-second-level collapse" aria-expanded="true">
 					<li><a href="/eospd_h5/cm_chart">通讯结构</a></li>
 					<li><a href="/eospd_h5/cm_his">历史数据</a></li>
 				</ul> <!-- /.nav-second-level --></li>
 			
-			<li><a href="/eospd_h5/efd"><i
+			<li><a href="#"><i
 					class="fa fa-edit fa-fw"></i> 能流图 <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="false"
-					style="height: 0px;">
+				<ul class="nav nav-second-level collapse" aria-expanded="true">
 					<li><a href="/eospd_h5/efd_chart">电支路结构</a></li>
 					<li><a href="/eospd_h5/efd_his">电支路信息</a></li>
 				</ul> <!-- /.nav-second-level --></li>
