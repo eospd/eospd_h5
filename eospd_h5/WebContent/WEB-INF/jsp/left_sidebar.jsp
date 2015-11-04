@@ -23,7 +23,7 @@
 					class="fa fa-bar-chart-o fa-fw"></i> 数据管理</a></li>
 					
 			<li><a href="#"><i
-					class="fa fa-bar-chart-o fa-fw"></i> 通讯管理<span class="fa arrow"></span></a>
+					class="fa fa-table fa-fw"></i> 通讯管理<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="true">
 					<li><a href="/eospd_h5/cm_chart">通讯结构</a></li>
 					<li><a href="/eospd_h5/cm_his">历史数据</a></li>
