@@ -3,6 +3,7 @@ package com.eospd.bean;
 import java.sql.Date;
 
 import org.nutz.dao.entity.annotation.Column;
+import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.Index;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.dao.entity.annotation.TableIndexes;
@@ -27,6 +28,7 @@ import org.nutz.dao.entity.annotation.TableIndexes;
 @TableIndexes(value = { @Index(fields = { "deviceType" }, name = "dtIndex"),
 		@Index(fields = { "deviceId" }, name = "didIndex"), @Index(fields = { "currentTime" }, name = "ctIndex") })
 public class DevOnline {
+	@Id
 	private int devolId;
 	@Column
 	private int dcId;
