@@ -43,5 +43,7 @@
 
     <link href="css/codemirror.css" rel="stylesheet">
     <link href="css/monokai.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
 </head>
