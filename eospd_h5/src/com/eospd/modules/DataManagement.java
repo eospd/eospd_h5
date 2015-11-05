@@ -13,6 +13,7 @@ import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 
 import com.eospd.bean.DataOnTime;
+import com.eospd.bean.Dc;
 
 public class DataManagement {
 
@@ -35,30 +36,6 @@ public class DataManagement {
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list() {
-		/*
-		 * Map<Object, Object> map = new HashMap<Object, Object>();
-		 * 
-		 * map.put("draw", 1); map.put("recordsTotal", 2);
-		 * map.put("recordsFiltered", 2);
-		 * 
-		 * List<Object> rows = new ArrayList(); Map<Object, Object> map1 = new
-		 * HashMap<Object, Object>(); map1.put("currentTime", "28th Nov 08");
-		 * map1.put("dataId", 1); map1.put("meterName", "Accountant");
-		 * map1.put("dcId", "Tokyo"); map1.put("dcUrl", "234234");
-		 * map1.put("dcLocation", "234234"); map1.put("dcIP", "$162,700");
-		 * map1.put("venderName", "$162,700"); map1.put("p1Pv", "$162,700");
-		 * map1.put("p1Err", "$162,700"); rows.add(map1);
-		 * 
-		 * map1 = new HashMap<Object, Object>(); map1.put("currentTime",
-		 * "29th Nov 08"); map1.put("dataId", 2); map1.put("meterName", "aa");
-		 * map1.put("dcId", "dd"); map1.put("dcUrl", "345345");
-		 * map1.put("dcLocation", "234234"); map1.put("dcIP", "111");
-		 * map1.put("venderName", "3333"); map1.put("p1Pv", "44");
-		 * map1.put("p1Err", "55");
-		 * 
-		 * rows.add(map1); map.put("data", rows);
-		 */
-
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 		List<DataOnTime> dataontimes = dao.query(DataOnTime.class, null);
 
@@ -70,16 +47,17 @@ public class DataManagement {
 		List<Object> data = new ArrayList();
 		for (int i = 0; i < dataontimes.size(); i++) {
 			DataOnTime d = dataontimes.get(i);
+			Dc dc = dao.fetch(Dc.class, d.getDcId());
 
 			Map<Object, Object> map1 = new HashMap<Object, Object>();
 
 			map1.put("currentTime", d.getCurrentTime());
 			map1.put("dataId", d.getDataId());
-			map1.put("meterName", "aa");
+			map1.put("meterName", dc.getDcId());
 			map1.put("dcId", d.getDcId());
-			map1.put("dcUrl", "345345");
-			map1.put("dcLocation", "234234");
-			map1.put("dcIP", "111");
+			map1.put("dcUrl", dc.getDcUrl());
+			map1.put("dcLocation", "" + dc.getLocation());
+			map1.put("dcIP", dc.getDcIP());
 			map1.put("venderName", "3333");
 			map1.put("p1Pv", d.getP1Pv());
 			map1.put("p1Err", d.getP1Err());
