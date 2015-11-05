@@ -17,33 +17,140 @@
 				<div class="col-lg-12">
 
 					<div class="panel panel-default">
+                    <div class="panel-heading">表具管理
+                    <div class="pull-right">
+						<button "class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                            		增加表具
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- modal window -->
+						        	
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">增加电支路</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        
+										<form role="form">
+											<div class="form-group">
+												<label>仪表名称</label> <input class="form-control">
+											</div>
+											<div class="form-group">
+												<label>采集器名称</label> <input class="form-control">
+											</div>
 
-						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-
-								<li class="active"><a href="#home" data-toggle="tab">表具管理</a></li>
-								
-								<li clsss="add_data"><a href="#add" data-toggle="tab">增加表具</a></li>
-
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
+											<div class="form-group">
+												<label>厂商</label> <input class="form-control">
+											</div>
+											<div class="form-group">
+												<label>电支路名称</label> <input class="form-control">
+											</div>
+											<button type="submit" class="btn btn-default">提交</button>
+											<button type="reset" class="btn btn-default">重置</button>
+										</form>  
 										</div>
-								</a></li>
-							</ul>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                    
+						<div class="panel-body">
+							<table class="table table-bordered"
+											id="filter_table">
+											<tr>
+											<th></th>
+									<th style="width:100px">
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部仪表类型
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部仪表类型</a>
+                                        </li>
+                                        <li><a href="#">/e/dae/smb350_8</a>
+                                        </li>
+                                        <li><a href="#">/e/dae/smb350_4</a>
+                                        </li>
+                                        <li><a href="#">/e/lckj/ex8</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th style="width:100px">
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部仪表
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部仪表</a>
+                                        </li>
+                                        <li><a href="#">仪表一</a>
+                                        </li>
+                                        <li><a href="#">仪表二</a>
+                                        </li>
+                                        <li><a href="#">仪表三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th style="width:100px">
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部采集器
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部采集器</a>
+                                        </li>
+                                        <li><a href="#">采集器一</a>
+                                        </li>
+                                        <li><a href="#">采集器二</a>
+                                        </li>
+                                        <li><a href="#">采集器三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th style="width:100px">
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部电支路
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部电支路</a>
+                                        </li>
+                                        <li><a href="#">电支路一</a>
+                                        </li>
+                                        <li><a href="#">电支路二</a>
+                                        </li>
+                                        <li><a href="#">电支路三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            	</tr>
+                            	</table>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
@@ -66,28 +173,6 @@
 									</div>
 									<!-- /.table-responsive -->
 								</div>
-								<div class="tab-pane fade" id="add">
-									<div class="col-lg-6">
-										<form role="form">
-											<div class="form-group">
-												<label>仪表名称</label> <input class="form-control">
-											</div>
-											<div class="form-group">
-												<label>采集器名称</label> <input class="form-control">
-											</div>
-
-											<div class="form-group">
-												<label>厂商</label> <input class="form-control">
-											</div>
-											<div class="form-group">
-												<label>电支路名称</label> <input class="form-control">
-											</div>
-											<button type="submit" class="btn btn-default">提交</button>
-											<button type="reset" class="btn btn-default">重置</button>
-										</form>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="messages"></div>
 							</div>
 						</div>
 						<!-- /.panel-body -->

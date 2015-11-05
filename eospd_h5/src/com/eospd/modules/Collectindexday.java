@@ -23,6 +23,13 @@ public class Collectindexday {
         return "Hello Meter";
     }
 	
+	@At("/col_his")
+    @Ok("jsp:jsp.col_his")
+    @Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+    public String his() {
+        return "";
+    }
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/cid/list")
 	@Ok("json")

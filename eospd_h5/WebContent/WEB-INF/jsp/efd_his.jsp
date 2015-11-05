@@ -13,58 +13,27 @@
 				<div class="col-lg-12">
 
 					<div class="panel panel-default">
-
-						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-
-								<li class="active"><a href="#home" data-toggle="tab">电支路信息</a></li>
-								<li clsss="add_data"><a href="#add" data-toggle="tab">增加电支路</a></li>
-
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li class="home_select"><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
-										</div>
-								</a></li>
-							</ul>
-
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div class="tab-pane fade in active" id="home">
-									<div class="dataTable_wrapper">
-										<table class="table table-striped table-bordered table-hover"
-											id="dm_table">
-											<thead>
-												<tr>
-													<th>时间</th>
-													<th>电支路URL</th>
-													<th>电支路名称</th>
-													<th>所在位置</th>
-													<th>开关额定电流</th>
-													<th>电压等级</th>
-													<th>设计功率</th>
-													<th>电源相数</th>
-													<th>上级</th>
-												</tr>
-											</thead>
-										</table>
-									</div>
-									<!-- /.table-responsive -->
-								</div>
-								<div class="tab-pane fade" id="add">
-									<div class="col-lg-6">
+						<div class="panel-heading">
+						电支路信息
+						<div class="pull-right">
+						<button "class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                            		增加电支路
+                            </button>
+                        </div>
+						</div>
+						
+						<!-- modal window -->
+						        	
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">增加电支路</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        
 										<form role="form">
 											<div class="form-group">
 												<label>电支路URL</label> <input class="form-control">
@@ -81,10 +50,37 @@
 											</div>
 											<button type="submit" class="btn btn-default">提交</button>
 											<button type="reset" class="btn btn-default">重置</button>
-										</form>
+										</form>  
+										</div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+						
+						
+						<div class="panel-body">
+
+									<div class="col-lg-12">
+						<div style="overflow:auto">
+										<table class="table table-striped table-bordered table-hover"
+											id="dm_table">
+											<thead>
+												<tr>
+													<th >电支路URL</th>
+													<th>电支路名称</th>
+													<th>所在位置</th>
+													<th>开关额定电流</th>
+													<th>电压等级</th>
+													<th>设计功率</th>
+													<th>电源相数</th>
+													<th>上级</th>
+												</tr>
+											</thead>
+										</table>
 									</div>
+									<!-- /.table-responsive -->
 								</div>
-								<div class="tab-pane fade" id="messages"></div>
 							</div>
 						</div>
 						<!-- /.panel-body -->
@@ -130,9 +126,8 @@
 					"url" : "/eospd_h5/efd/list",
 					"type" : "POST"
 				},
-				"columns" : [ {
-					"data" : "currentTime"
-				}, {
+				"columns" : [ 
+				{
 					"data" : "circuitUrl"
 				}, {
 					"data" : "circuitName"

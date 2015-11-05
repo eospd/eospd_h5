@@ -15,43 +15,63 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-
 					<div class="panel panel-default">
+                    <div class="panel-heading">系统配置</div>
 
 						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-
-								<li class="active"><a href="#home" data-toggle="tab">系统配置</a></li>
-
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li class='dropdown nav-right'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部采集器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 采集器一 </a></li>
-										<li><a href="#"> 采集器二 </a></li>
-										<li><a href="#"> 采集器三 </a></li>
-									</ul></li>
-
-								<li><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
-										</div>
-								</a></li>
-							</ul>
+							<table class="table table-bordered"
+											id="filter_table">
+											<tr>
+											<th>
+											<div class="pull-left">累计</div>
+											</th>
+											<th style="width:400px">
+									<div class="input-group input-daterange pull-right">
+										<input type="text" class="form-control" value=""> <span
+											class="input-group-addon">到</span> <input type="text"
+											class="form-control" value=""></div>
+									</th>
+									<th style="width:100px">
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部仪表类型
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部仪表类型</a>
+                                        </li>
+                                        <li><a href="#">/e/dae/smb350_8</a>
+                                        </li>
+                                        <li><a href="#">/e/dae/smb350_4</a>
+                                        </li>
+                                        <li><a href="#">/e/lckj/ex8</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th style="width:100px">
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部厂商
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部厂商</a>
+                                        </li>
+                                        <li><a href="#">山东力创科技有限公司</a>
+                                        </li>
+                                        <li><a href="#">台科电科技股份有限公司</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            	</tr>
+                            	</table>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
@@ -61,18 +81,25 @@
 											id="dm_table">
 											<thead>
 												<tr>
-													<th>时间</th>
-													<th>能源ID</th>
-													<th>仪表名称</th>
-													<th>采集器ID</th>
-													<th>采集器URL</th>
-													<th>采集器地址</th>
-													<th>采集器IP</th>
-													<th>厂商</th>
-													<th>p1Pv</th>
-													<th>p1Err</th>
+													<th>仪表URL</th>
+													<th>仪表类型</th>
+													<th>类型URL</th>
+													<th>仪表安装</th>
+													<th>操作</th>
 												</tr>
 											</thead>
+											<tr>
+												<td>/pd/meter/e/1</td>
+												<td>SMB350-8路多回路电表</td>
+												<td>/e/dae/smb350_8</td>
+												<td><a>查看厂商信息</a></td>
+												</tr>
+												<tr>
+												<td>/pd/meter/e/2</td>
+												<td>SMB350-4路多回路电表</td>
+												<td>/e/dae/smb350_4</td>
+												<td><a>查看厂商信息</a></td>
+												</tr>
 										</table>
 									</div>
 									<!-- /.table-responsive -->
@@ -120,7 +147,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(function() {
-			$('#dm_table').DataTable({
+		/*	$('#dm_table').DataTable({
 				"processing" : true,
 				"serverSide" : true,
 				"ajax" : {
@@ -149,7 +176,7 @@
 					"data" : "p1Err"
 				} ]
 			});
-			
+			*/
 
 		    $('.input-daterange input').each(function() {
 		    	var d = new Date()

@@ -18,7 +18,12 @@
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
 
-			<li><a href="/eospd_h5"><i class="fa fa-dashboard fa-fw"></i> 数据采集</a></li>
+			<li><a href="#"><i class="fa fa-dashboard fa-fw"></i> 数据采集<span class="fa arrow"></span></a>
+			<ul class="nav nav-second-level collapse" aria-expanded="true">
+					<li><a href="/eospd_h5/">数据指标</a></li>
+					<li><a href="/eospd_h5/col_his">历史数据</a></li>
+				</ul> <!-- /.nav-second-level --></li>
+			</li>
 			<li><a href="/eospd_h5/dm"><i
 					class="fa fa-bar-chart-o fa-fw"></i> 数据管理</a></li>
 					

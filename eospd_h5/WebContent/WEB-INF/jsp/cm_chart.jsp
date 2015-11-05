@@ -76,13 +76,23 @@
 				myTree.add(0,-1,"Apex Node", 100, 50, "#CCCCFF", "#CCCCFF", "head", "能源采集系统");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
 				var w = 70;
 				var h = 80;
-				myTree.add(1,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(2,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/2\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(3,1,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/3\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(4,1,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/4\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(5,2,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/5\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(6,2,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/6\n有效率:30%\n在线率:%40\n采集率:70%");
-				myTree.add(7,2,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/7\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(101,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/dc/1\nIP:192.168.1.10\n总线数：1\n状态:在线");
+				myTree.add(102,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/dc/2\nIP:192.168.1.11\n总线数：2\n状态:在线");
+				
+				myTree.add(1011,101,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/dc/1\n总线地址:1");
+				
+				myTree.add(1021,102,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/dc/2\n总线地址:1");
+				myTree.add(1022,102,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/dc/2\n总线地址:2");
+
+				
+				myTree.add(1,1011,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n通讯地址:1\n总线地址:1\n状态:在线");
+				myTree.add(2,1011,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/2\n通讯地址:2\n总线地址:1\n状态:在线");
+				
+				myTree.add(3,1021,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/3\n通讯地址:3\n总线地址:1\n状态:在线");
+				myTree.add(4,1021,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/4\n通讯地址:4\n总线地址:1\n状态:离线");
+				myTree.add(5,1022,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/5\n通讯地址:5\n总线地址:2\n状态:在线");
+				myTree.add(6,1022,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/6\n通讯地址:6\n总线地址:2\n状态:离线");
+				myTree.add(7,1022,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/7\n通讯地址:7\n总线地址:2\n状态:在线");
 				myTree.UpdateTree();
 			}			
 		</script>

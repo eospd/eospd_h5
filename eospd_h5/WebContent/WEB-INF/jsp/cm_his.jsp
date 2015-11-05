@@ -17,41 +17,65 @@
 				<div class="col-lg-12">
 
 					<div class="panel panel-default">
-
+						<div class="panel-heading">历史数据</div>
 						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-
-								<li class="active"><a href="#home" data-toggle="tab">历史数据</a></li>
-
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li class='dropdown nav-right'><a data-toggle="dropdown"
-									href="" role="button" aria-expanded="false">全部采集器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 采集器一 </a></li>
-										<li><a href="#"> 采集器二 </a></li>
-										<li><a href="#"> 采集器三 </a></li>
-									</ul></li>
-
-								<li><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
-										</div>
-								</a></li>
-							</ul>
+						
+										<table class="table table-bordered"
+											id="filter_table">
+											<tr>
+											<th>
+											<div class="pull-left">累计</div>
+											</th>
+											<th style="width:400px">
+									<div class="input-group input-daterange pull-right">
+										<input type="text" class="form-control" value=""> <span
+											class="input-group-addon">到</span> <input type="text"
+											class="form-control" value=""></div>
+									</th>
+									<th style="width:100px">
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部仪表
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部仪表</a>
+                                        </li>
+                                        <li><a href="#">仪表一</a>
+                                        </li>
+                                        <li><a href="#">仪表二</a>
+                                        </li>
+                                        <li><a href="#">仪表三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th style="width:100px">
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部采集器
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部采集器</a>
+                                        </li>
+                                        <li><a href="#">采集器一</a>
+                                        </li>
+                                        <li><a href="#">采集器二</a>
+                                        </li>
+                                        <li><a href="#">采集器三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            	</tr>
+                            	</table>
+							</div>
 
 							<!-- Tab panes -->
 							<div class="tab-content">

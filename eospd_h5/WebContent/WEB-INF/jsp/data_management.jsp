@@ -17,45 +17,84 @@
 				<div class="col-lg-12">
 
 					<div class="panel panel-default">
-
+						<div class="panel-heading">数据管理</div>
 						<div class="panel-body">
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-
-								<li class="active"><a href="#home" data-toggle="tab">数据明细</a></li>
-
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li class='dropdown nav-right'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部采集器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 采集器一 </a></li>
-										<li><a href="#"> 采集器二 </a></li>
-										<li><a href="#"> 采集器三 </a></li>
-									</ul></li>
-
-								<li><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control"> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control">
-										</div>
-								</a></li>
-							</ul>
-
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div class="tab-pane fade in active" id="home">
+							<table class="table table-bordered"
+											id="filter_table">
+											<tr>
+											<th>
+											<div class="pull-left">累计</div>
+											</th>
+											<th>
+									<div class="input-group input-daterange pull-right">
+										<input type="text" class="form-control" value=""> <span
+											class="input-group-addon">到</span> <input type="text"
+											class="form-control" value="">
+									</th>
+									<th>
+									<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部电支路
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部电支路</a>
+                                        </li>
+                                        <li><a href="#">电支路一</a>
+                                        </li>
+                                        <li><a href="#">电支路二</a>
+                                        </li>
+                                        <li><a href="#">电支路三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+									</th>
+									<th>
+											
+								<div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部仪表
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部仪表</a>
+                                        </li>
+                                        <li><a href="#">仪表一</a>
+                                        </li>
+                                        <li><a href="#">仪表二</a>
+                                        </li>
+                                        <li><a href="#">仪表三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </th>
+                            <th>
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                       		全部采集器
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#">全部采集器</a>
+                                        </li>
+                                        <li><a href="#">采集器一</a>
+                                        </li>
+                                        <li><a href="#">采集器二</a>
+                                        </li>
+                                        <li><a href="#">采集器三</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            </th>
+                            	</tr>
+                            	</table>
 									<div class="dataTable_wrapper">
 										<table class="table table-striped table-bordered table-hover"
 											id="dm_table">
@@ -76,11 +115,7 @@
 										</table>
 									</div>
 									<!-- /.table-responsive -->
-								</div>
-								<div class="tab-pane fade" id="profile">
-								</div>
-								<div class="tab-pane fade" id="messages">
-								</div>
+								</div>				
 							</div>
 						</div>
 						<!-- /.panel-body -->

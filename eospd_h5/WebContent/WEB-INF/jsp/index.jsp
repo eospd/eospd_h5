@@ -17,36 +17,23 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">数据采集</div>
+							<div class="panel-heading">数据指标
+							
+							
+										</div>
 							<div class="panel-body">
-								<!-- Nav tabs -->
-								<ul class="nav nav-pills">
-									<li class="active"><a href="#home-pills" data-toggle="tab"
-										aria-expanded="true">数据指标</a></li>
-									<li class=""><a href="#history-pills" data-toggle="tab"
-										aria-expanded="false">历史数据</a></li>
-								<li class='dropdown'><a data-toggle="dropdown" href=""
-									role="button" aria-expanded="false">全部仪表器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 仪表器一 </a></li>
-										<li><a href="#"> 仪表器二 </a></li>
-										<li><a href="#"> 仪表器三 </a></li>
-									</ul></li>
-
-								<li class="home_select"><a data-toggle="tab">
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
+							
+							<table class="table table-bordered"
+											id="filter_table">
+											<tr>
+											<th></th>
+											<th style="width:250px">
+									<div class="input-group input-daterange pull-right">
+										
+										<span class="input-group-addon">日期：</span> <input type="text"
 												class="form-control" value="">
 										</div>
-								</a></li>
-								</ul>
-
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<div class="tab-pane fade active in" id="home-pills">
+										</th></tr></table>
 										<div class="panel panel-default">
 
 											<div class="panel-heading">
@@ -66,7 +53,8 @@
 													</div>
 												</div>
 											</div>
-										</div>
+											</div>
+										
 										<div class="panel panel-default">
 
 											<div class="panel-heading">
@@ -80,32 +68,7 @@
 											</div>
 										</div>
 
-									</div>
 
-									<!-- history pannel -->
-									<div class="tab-pane fade" id="history-pills">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="panel panel-default">
-													<div class="panel-heading">数据采集历史数据</div>
-													<!-- /.panel-heading -->
-													<div class="panel-body">
-														<div class="dataTable_wrapper">
-															<table
-																class="table table-striped table-bordered table-hover"
-																id="dm_table">
-																<thead>
-																	<tr>
-																		<th>时间</th>
-																		<th>仪表ID</th>
-																		<th>数据有效率</th>
-																		<th>仪表在线率</th>
-																		<th>实时采集率</th>
-																	</tr>
-																</thead>
-															</table>
-														</div>
-														<!-- /.table-responsive -->
 													</div>
 													<!-- /.panel-body -->
 												</div>
@@ -116,14 +79,6 @@
 									</div>
 
 								</div>
-							</div>
-							<!-- /.panel-body -->
-						</div>
-					</div>
-					<!-- /.col-lg-12 -->
-				</div>
-			</div>
-			<!-- /#page-wrapper -->
 
 
 		</div>
@@ -171,31 +126,31 @@
 				myTree
 						.add(1, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/1\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/1\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(2, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/2\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/2\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(3, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/3\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/3\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(4, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/4\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/4\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(5, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/5\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/5\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(6, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/6\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/6\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree
 						.add(7, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
 								"hello",
-								"URL:/pd/meter/e/7\n有效率:30%\n在线率:%40\n采集率:70%");
+								"URL:/pd/meter/e/7\n有效率:30%\n在线率:40%\n采集率:70%");
 				myTree.UpdateTree();
 			}
 		</script>

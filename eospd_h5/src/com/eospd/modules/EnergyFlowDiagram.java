@@ -56,7 +56,6 @@ public class EnergyFlowDiagram {
 
 			Map<Object, Object> map1 = new HashMap<Object, Object>();
 
-			map1.put("currentTime", d.getCircuitName());
 			map1.put("circuitUrl", d.getCircuitUrl());
 			map1.put("circuitName", d.getCircuitName());
 			map1.put("location", "location:" + d.getLocation());

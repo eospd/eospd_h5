@@ -9,7 +9,7 @@ body {
 }
 
 #wrapper {
-    width: 1024px;
+    width: 100%;
 }
 
 #page-wrapper {
@@ -21,7 +21,7 @@ body {
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 120px;
+        margin: 0 0 0 130px;
         padding: 5px;
         border-left: 1px solid #e7e7e7;
     }
@@ -131,7 +131,7 @@ body {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 120px;
+        width: 130px;
         margin-top: 51px;
     }
 
