@@ -18,7 +18,7 @@ body p {
     margin-bottom: 0;
 }
 .navbar > .container .navbar-brand {
-    margin-left:0;
+    margin-left:10px;
 }
 .navbar a.navbar-brand {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -79,7 +79,7 @@ blockquote {
     text-align:right;
 }
 .thx div {
-    padding:0;
+    padding:10px;
 }
 div.user {
     margin-top: 30px;
@@ -113,8 +113,8 @@ hr {
 }
 
 .row {
-    margin-right: 0;
-    margin-left: 0;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 .jumbotron {
     margin: 0;
@@ -232,7 +232,7 @@ hr {
     -o-transition: width 1s;
 }
 .main {
-    height: 200px;
+    height: 150px;
     /*width: 778px !important;*/
     overflow: hidden;
     padding : 5px;
@@ -266,13 +266,13 @@ a#icon-resize:hover {
 /*doc*/
 .panel {
     background-color:transparent;
-    margin-left: -15px;
+    margin-left: -10px;
     margin-top: 10px;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 .panel-body {
-    padding: 0 0 0 10px;
+    padding: 12px;
 }
 #toc,
 #config {
@@ -459,9 +459,8 @@ table.full {width:100%;}
     background-position: 0 -526px;
 }
 
-
 .data_efficiency, .meter_online_r, .real_time_cr, .meters_cr {
-    height: 200px;
+    height: 150px;
     /*width: 778px !important;*/
     overflow: hidden;
     padding : 5px;

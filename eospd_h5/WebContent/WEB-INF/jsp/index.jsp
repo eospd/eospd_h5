@@ -12,12 +12,15 @@
 		<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 		<div id="page-wrapper">
+		
+		<div class="row">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
+						<div class="panel-heading">数据采集</div>
 						<div class="panel-body">
 							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
+							<ul class="nav nav-pills">
 								<li class="active"><a href="#home-pills" data-toggle="tab"
 									aria-expanded="true">数据指标</a></li>
 								<li class=""><a href="#history-pills" data-toggle="tab"
@@ -27,11 +30,11 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="home-pills">
+									<div class="panel panel-default">
+								
+									<div class="panel-heading"><h4 class="panel-title">系统指标</h4></div>
+									<div class="panel-body">
 									
-									<div class="row">
-										<h4>系统指标</h4>
-									</div>
-									    
 									<div class="row">
 								        <div class="col-lg-4">
 								        <div id="data_efficiency" class="data_efficiency"></div>
@@ -43,14 +46,22 @@
 								        <div id="real_time_cr" class="real_time_cr"></div>
 								        </div>
 							    	</div>
-
+						    	</div>
+						    	</div>
+								<div class="panel panel-default">
+								
+									<div class="panel-heading"><h4 class="panel-title">仪表指标</h4></div>
+									<div class="panel-body">
+									
 									<div class="row">
-										<h4>仪表指标</h4>
+										<div id="topo_canvas" class="col-lg-12"></div>
 									</div>
-									<div class="row">
-										<canvas id="topo_canvas" class="col-lg-12"></canvas>
 									</div>
 								</div>
+								
+								</div>
+								
+								<!-- history pannel -->
 								<div class="tab-pane fade" id="history-pills">
 									<div class="row">
 										<div class="col-lg-12">
@@ -484,7 +495,8 @@
 										<!-- /.col-lg-12 -->
 									</div>
 								</div>
-							</div>
+							
+						</div>
 						</div>
 						<!-- /.panel-body -->
 					</div>
@@ -516,97 +528,34 @@
 
 	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
-
-<script type="text/javascript" src="js/ctopo.js"></script>
-	<script type="text/javascript" src="js/consolepanel.js"></script>
-	<script type="text/javascript">
-    var json = {"nodes": [
-                  {
-                      "id": "838644321",
-                      "url": "数据采集系统"
-                  },
-                  {
-                      "id": "1001",
-                      "label": "名称：仪表3\n地址：192.168.12.41"
-                  },
-                  {
-                      "id": "1002",
-                      "label": "名称：仪表3\n192.168.12.40"
-                  },
-                  {
-                      "id": "1003",
-                      "label": "名称：仪表3\n192.168.12.39"
-                  },
-                  {
-                      "id": "1004",
-                      "label": "名称：仪表3\n地址：192.168.12.41"
-                  },
-                  {
-                      "id": "1005",
-                      "label": "名称：仪表3\n地址：192.168.12.41"
-                  },
-                  {
-                      "id": "1006",
-                      "label": "名称：仪表3\n地址：192.168.12.41"
-                  },
-                  {
-                      "id": "1007",
-                      "label": "名称：仪表3\n地址：192.168.12.41"
-                  }
-                  ],
-               "edges":[
-                  
-                 {
-                  "target": "1001",
-                  "source": "838644321"
-                 } ,
-                 {
-                  "target": "1002",
-                  "source": "838644321"
-                 } ,
-                 {
-                  "target": "1003",
-                  "source": "838644321"
-                 } 
-                  ,
-                 {
-                  "target": "1004",
-                  "source": "838644321"
-                 } 
-                  ,
-                 {
-                  "target": "1005",
-                  "source": "838644321"
-                 } 
-                  ,
-                 {
-                  "target": "1006",
-                  "source": "838644321"
-                 }  ,
-                 {
-                  "target": "1007",
-                  "source": "838644321"
-                 } 
-                 ]
-                 
-              };            
-      var drawtopo = function(){
-      	
-              console.log("Draw topo "+json);
-              //console.log(JSON.parse(xhr.responseText));
-              //var json = JSON.parse(xhr.responseText);
-              //第一步: 转本页第18行
-
-              //第二步: 构建配置对象
-              var option = {
-                  id:"topo_canvas",   
-                  data:json
-              };
-              //第三步: 构建ctopo绘制canvas
-              ctopo(option);
-       }
-
-    </script>
+	
+	<script type="text/javascript" src="js/ECOTree.js"></script>
+	<script type="text/javascript" >
+			var CreateTree = function() {
+				myTree = new ECOTree('myTree','topo_canvas');		
+				//	myTree.config.linkType = 'B';
+				//myTree.config.iRootOrientation = ECOTree.RO_TOP;						
+				//myTree.config.topYAdjustment = -180;
+				myTree.config.linkColor = "black";
+				myTree.config.nodeColor = "#FFAAAA";
+				myTree.config.nodeBorderColor = "black";
+				myTree.config.useTarget = false;
+				myTree.config.iLevelSeparation = 80;
+				//myTree.config.selectMode = ECOTree.SL_SINGLE;			
+				//(id, pid, dsc, w, h, c, bc, target, meta)		
+				myTree.add(0,-1,"Apex Node", 100, 50, "#CCCCFF", "#CCCCFF", "head", "能源采集系统");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
+				var w = 70;
+				var h = 80;
+				myTree.add(1,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(2,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/2\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(3,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/3\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(4,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/4\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(5,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/5\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(6,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/6\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.add(7,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/7\n有效率:30%\n在线率:%40\n采集率:70%");
+				myTree.UpdateTree();
+			}			
+		</script>	
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
@@ -647,8 +596,8 @@
 		//objBarMeters.myValue = 80;
 	   	//getMyEcharts(objBarMeters);
 
-		drawtopo();
-
+		//drawtopo();
+		CreateTree();
         $('#dataTables-example').DataTable({
                 responsive: true
         });

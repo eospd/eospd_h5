@@ -1117,24 +1117,31 @@ function ctopo(opt){
    		context.beginPath();
    		context.lineWidth=3;
    		roundedRect(cornerX, cornerY, width, height, cornerRadius);
-   		context.strokeStyle = strokeStyle;
-   		context.fillStyle = fillStyle;
-   		context.stroke();
+//   		context.strokeStyle = strokeStyle;
+//   		context.fillStyle = lgradient;
+   		var lgradient = context.createLinearGradient(cornerX,0,cornerX+width,0);
+		lgradient.addColorStop(0.0,"#FFFFCC");
+		lgradient.addColorStop(1.0,"#F5FFF5");
+		context.fillStyle = lgradient;
+		context.stroke();
      	context.fill();
     }
 
 		function drawNode(node, flag){
-	  		if (flag==0){
+	  		if (flag!=1){
 	  			//console.log("cornerX:"+node.x+", conrnerY:"+node.y+", w:"+width);
 	  			
 	  		context.beginPath();
 			context.fillStyle="green";	//node对象样式 > 全局样式
-		  	context.arc(node.x,node.y,parseInt(node.size/2),0,(Math.PI/180)*360,false);
-		  	context.fill();
+			context.strokeStyle="blue";
+		  	context.arc(node.x,node.y,50,0,(Math.PI/180)*360,false);
+		  	//context.fill();
+		  	context.stroke();
 		  	context.closePath();
-		  }else {
-		  	drawRoundedRect('black',  'white',  node.x-50,  node.y-50,  120,  120, 10);
 		  }
+	  		//else {
+//		  	drawRoundedRect('blue',  'white',  node.x,  node.y,  120,  120, 10);
+//		  }
 		  	//绘制节点label
 		  	if( node.label && tp.option.isShowNodeLabel ){
 		  		drawNodeLabel(node);
@@ -1155,6 +1162,7 @@ function ctopo(opt){
 			var nodeS = tp.nodes[edge.sourceIndex];
 		    var nodeE = tp.nodes[edge.targetIndex];
 			context.beginPath();
+			context.lineCap="round"; 
 			context.strokeStyle=edge.color;
 			context.lineWidth=edge.size;
 		  	context.moveTo(nodeS.x,nodeS.y);
