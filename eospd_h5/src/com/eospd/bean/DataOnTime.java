@@ -5,6 +5,7 @@ import java.sql.Date;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.Index;
+import org.nutz.dao.entity.annotation.One;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.dao.entity.annotation.TableIndexes;
 
@@ -48,13 +49,17 @@ public class DataOnTime {
 
 	@Column
 	private int dataLayer;
+
 	@Column
 	private int dcId;
+
+	@One(target = Dc.class, field = "dcId")
+	private Dc dc;
 
 	@Column
 	private Date currentTime;
 	@Column
-	private Date creceTime;
+	private Date receTime;
 	@Column
 	private int timeInterval;
 	@Column
@@ -85,6 +90,14 @@ public class DataOnTime {
 	private double p2Dv;
 	@Column
 	private int p2Rsz;
+
+	public Dc getDc() {
+		return dc;
+	}
+
+	public void setDc(Dc dc) {
+		this.dc = dc;
+	}
 
 	public int getDoId() {
 		return doId;
@@ -119,11 +132,11 @@ public class DataOnTime {
 	}
 
 	public Date getCreceTime() {
-		return creceTime;
+		return receTime;
 	}
 
 	public void setCreceTime(Date creceTime) {
-		this.creceTime = creceTime;
+		this.receTime = creceTime;
 	}
 
 	public int getTimeInterval() {
