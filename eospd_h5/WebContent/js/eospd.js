@@ -769,7 +769,7 @@ function getMyEcharts(obj) {
 				series : [ {
 					name : obj['myName'],
 					type : 'gauge',
-					splitNumber : 10, // 分割段数，默认为5
+					splitNumber : 5, // 分割段数，默认为5
 					axisLine : { // 坐标轴线
 						lineStyle : { // 属性lineStyle控制线条样式
 							color : [ [ 0.6, '#48b' ], [ 1, '#ff4500' ] ],
@@ -790,7 +790,7 @@ function getMyEcharts(obj) {
 					},
 					splitLine : { // 分隔线
 						show : true, // 默认显示，属性show控制显示与否
-						length : 30, // 属性length控制线长
+						length : 10, // 属性length控制线长
 						lineStyle : { // 属性lineStyle（详见lineStyle）控制线条样式
 							color : 'auto'
 						}

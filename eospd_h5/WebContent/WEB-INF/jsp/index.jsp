@@ -212,21 +212,21 @@
 				objBar1.myChartDyType = "0";
 
 				objBar1.myContainerId = "data_efficiency";
-				objBar1.myName = "数据有效率";
+				objBar1.myName = "有效率";
 				objBar1.myValue = 50;
 
 				getMyEcharts(objBar1);
 
 				objBar2.myChartType = "gauge";
 				objBar2.myContainerId = "meter_online_r";
-				objBar2.myName = "仪表在线率";
+				objBar2.myName = "在线率";
 				objBar2.myValue = 60;
 
 				getMyEcharts(objBar2);
 
 				objBar3.myChartType = "gauge";
 				objBar3.myContainerId = "real_time_cr";
-				objBar3.myName = "实时采集率";
+				objBar3.myName = "采集率";
 				objBar3.myValue = 80;
 				getMyEcharts(objBar3);
 
