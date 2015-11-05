@@ -19,6 +19,7 @@
 							<ul class="nav nav-tabs">
 
 								<li class="active"><a href="#home" data-toggle="tab">电支路信息</a></li>
+								<li clsss="add_data"><a href="#add" data-toggle="tab">增加电支路</a></li>
 
 								<li class='dropdown'><a data-toggle="dropdown" href=""
 									role="button" aria-expanded="false">全部仪表器 <span
@@ -30,17 +31,7 @@
 										<li><a href="#"> 仪表器三 </a></li>
 									</ul></li>
 
-								<li class='dropdown nav-right'><a data-toggle="dropdown"
-									href="" role="button" aria-expanded="false">全部采集器 <span
-										class="caret"></span>
-								</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"> 采集器一 </a></li>
-										<li><a href="#"> 采集器二 </a></li>
-										<li><a href="#"> 采集器三 </a></li>
-									</ul></li>
-
-								<li><a data-toggle="tab">
+								<li class="home_select"><a data-toggle="tab">
 										<div class="input-group input-daterange">
 											<input type="text" class="form-control" value=""> <span
 												class="input-group-addon">到</span> <input type="text"
@@ -72,7 +63,27 @@
 									</div>
 									<!-- /.table-responsive -->
 								</div>
-								<div class="tab-pane fade" id="profile"></div>
+								<div class="tab-pane fade" id="add">
+									<div class="col-lg-6">
+										<form role="form">
+											<div class="form-group">
+												<label>电支路URL</label> <input class="form-control">
+												<p class="help-block">/pd/t2/eng_station/total2</p>
+											</div>
+											<div class="form-group">
+												<label>电支路名称</label> <input class="form-control">
+												<p class="help-block">测试电支路</p>
+											</div>
+
+											<div class="form-group">
+												<label>所在位置</label> <input class="form-control">
+												<p class="help-block">第五机柜</p>
+											</div>
+											<button type="submit" class="btn btn-default">提交</button>
+											<button type="reset" class="btn btn-default">重置</button>
+										</form>
+									</div>
+								</div>
 								<div class="tab-pane fade" id="messages"></div>
 							</div>
 						</div>
@@ -140,10 +151,9 @@
 				} ]
 			});
 			$('.input-daterange input').each(function() {
-				$(this).datepicker({
-					language : 'zh-CN',
-					autoclose : true
-				});
+		    	var d = new Date()
+		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 			});
 		});
 	</script>

@@ -46,9 +46,9 @@
 
 								<li><a data-toggle="tab">
 										<div class="input-group input-daterange">
-											<input type="text" class="form-control" value=""> <span
+											<input type="text" class="form-control"> <span
 												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
+												class="form-control">
 										</div>
 								</a></li>
 							</ul>
@@ -152,7 +152,9 @@
 			
 
 		    $('.input-daterange input').each(function() {
-		        $(this).datepicker({language: 'zh-CN',autoclose:true} );
+		    	var d = new Date()
+		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 		    });
 		});
 	</script>

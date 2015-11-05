@@ -66,6 +66,5 @@ public class CommunicationManagement {
 		}
 		map.put("data", data);
 		return map;
-
 	}
 }
