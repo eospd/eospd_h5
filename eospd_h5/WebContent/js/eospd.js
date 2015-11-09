@@ -1,3 +1,49 @@
+function col_his() {
+	$('#dm_table').DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax" : {
+			"url" : "/eospd_h5/cid/list",
+			"type" : "POST"
+		},
+		"columns" : [ {
+			"data" : "currentTime"
+		},{
+			"data" : "meterUrl"
+		}, {
+			"data" : "dataEffRate"
+		}, {
+			"data" : "meterOnlineRate"
+		}, {
+			"data" : "realCollectRate"
+		}]
+	});
+	
+	$('.input-daterange input').each(function() {
+    	var d = new Date()
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
+	});
+	
+	$.get('/eospd_h5/mm/meters',  function(result){
+		 	var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部仪表 <span class="caret"></span></button>';
+		 	output += '<ul class="dropdown-menu pull-right" role="menu">';
+		 	
+            $.each(result, function(key, val) {
+            	output += '<li value = "' + val.deviceUrl + '" onclick=gen_dm_table("'+ val.deviceUrl + '")><a href ="#">' + val.deviceUrl + '</a></li>';
+            });
+            output+= '</ul>';
+            
+            $('.meter-dropdown').html(output);
+	});	
+}
+
+function gen_dm_table(deviceUrl){
+	var table = $('#dm_table').DataTable(); 
+	table.search( deviceUrl ).draw();
+}
+
+
 
 function getMyEcharts(obj) {
 	// 报表标题

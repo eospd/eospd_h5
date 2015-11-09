@@ -33,9 +33,7 @@
 									</th>
 									<th style="width: 100px">
 
-										<div class="btn-group meter-dropdown">
-
-										</div>
+										<div class="btn-group meter-dropdown"></div>
 									</th>
 								</tr>
 							</table>
@@ -101,45 +99,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 			$(document).ready(function() {
-				$('#dm_table').DataTable({
-					"processing" : true,
-					"serverSide" : true,
-					"ajax" : {
-						"url" : "/eospd_h5/cid/list",
-						"type" : "POST"
-					},
-					"columns" : [ {
-						"data" : "currentTime"
-					},{
-						"data" : "meterUrl"
-					}, {
-						"data" : "dataEffRate"
-					}, {
-						"data" : "meterOnlineRate"
-					}, {
-						"data" : "realCollectRate"
-					}]
-				});
-				$('.input-daterange input').each(function() {
-			    	var d = new Date()
-			    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
-			        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
-				});
-				
-				$.get('/eospd_h5/mm/meters',  function(result){
-					 	var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部仪表 <span class="caret"></span></button>';
-					 	output += '<ul class="dropdown-menu pull-right" role="menu">';
-					 	
-		                $.each(result, function(key, val) {
-		                	
-		                	output += '<li><a href="#">' + val.deviceUrl + '</li>';
-
-		                });
-		                output+= '</ul>';
-		                
-		                $('.meter-dropdown').html(output);
-				});
-				
+				col_his();			
 			});
 		</script>
 </body>
