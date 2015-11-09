@@ -12,6 +12,7 @@ import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 
 import com.eospd.bean.Dc;
+import com.eospd.bean.Meter;
 
 public class MeterManagement {
 	
@@ -53,5 +54,14 @@ public class MeterManagement {
 		map.put("data", data);
 		return map;
 
+	}
+	
+	@At("/mm/meters")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public List<Meter> meter_json() {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		List<Meter> items = dao.query(Meter.class, null);
+		return items;
 	}
 }
