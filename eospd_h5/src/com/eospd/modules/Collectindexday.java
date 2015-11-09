@@ -55,9 +55,9 @@ public class Collectindexday {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
 					map1.put("currentTime", rs.getDate("indexTime"));
 					map1.put("meterUrl", rs.getString("deviceUrl"));
-					map1.put("dataEffRate", rs.getDouble("dataEffRate"));
-					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate"));
-					map1.put("realCollectRate", rs.getDouble("realCollectRate"));
+					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
+					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");
+					map1.put("realCollectRate", rs.getDouble("realCollectRate") + "%");
 					data.add(map1);
 				}
 				return data;
