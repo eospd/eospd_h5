@@ -50,7 +50,7 @@
 											<thead>
 												<tr>
 													<th>时间</th>
-													<th>仪表ID</th>
+													<th>仪表URL</th>
 													<th>数据有效率</th>
 													<th>仪表在线率</th>
 													<th>实时采集率</th>
@@ -111,7 +111,7 @@
 					"columns" : [ {
 						"data" : "currentTime"
 					},{
-						"data" : "deviceId"
+						"data" : "meterUrl"
 					}, {
 						"data" : "dataEffRate"
 					}, {

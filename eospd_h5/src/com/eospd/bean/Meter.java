@@ -24,7 +24,7 @@ import org.nutz.dao.entity.annotation.Table;
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='5 仪表信息表';
  */
 @Table("meter")
-public class Meter extends BasePojo {
+public class Meter {
 
 	@Id
 	private int deviceId;
