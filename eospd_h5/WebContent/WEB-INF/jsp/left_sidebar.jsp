@@ -19,7 +19,7 @@
 		<ul class="nav" id="side-menu">
 
 			<li><a href="#"><i class="fa fa-dashboard fa-fw"></i> 数据采集<span class="fa arrow"></span></a>
-			<ul class="nav nav-second-level collapse" aria-expanded="true">
+			<ul class="nav nav-second-level collapse" aria-expanded="false">
 					<li><a href="/eospd_h5/">数据指标</a></li>
 					<li><a href="/eospd_h5/col_his">历史数据</a></li>
 				</ul> <!-- /.nav-second-level --></li>
@@ -29,14 +29,14 @@
 					
 			<li><a href="#"><i
 					class="fa fa-table fa-fw"></i> 通讯管理<span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="true">
+				<ul class="nav nav-second-level collapse" aria-expanded="false">
 					<li><a href="/eospd_h5/cm_chart">通讯结构</a></li>
 					<li><a href="/eospd_h5/cm_his">历史数据</a></li>
 				</ul> <!-- /.nav-second-level --></li>
 			
 			<li><a href="#"><i
 					class="fa fa-edit fa-fw"></i> 能流图 <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="true">
+				<ul class="nav nav-second-level collapse" aria-expanded="false">
 					<li><a href="/eospd_h5/efd_chart">电支路结构</a></li>
 					<li><a href="/eospd_h5/efd_his">电支路信息</a></li>
 				</ul> <!-- /.nav-second-level --></li>

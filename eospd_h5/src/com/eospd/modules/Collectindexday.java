@@ -43,8 +43,6 @@ public class Collectindexday {
 			@Param(value = "draw") int draw,
 			@Param("search[value]") String tsearch) {
 		
-		System.out.println("tsearch.value:"+tsearch);
-		
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 		
 		String sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId limit $start, $length";
