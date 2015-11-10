@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
@@ -19,6 +21,9 @@ import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
+
+import com.eospd.bean.CollectIndexDay;
+
 
 public class Collectindexday {
 
@@ -32,6 +37,23 @@ public class Collectindexday {
 	@Ok("jsp:jsp.col_his")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public void his() {
+	}
+	
+	@SuppressWarnings({ "rawtypes" })
+	@At("/cid/sys_spec")
+	@AdaptBy(type = PairAdaptor.class)
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map system_specification(@Param(value = "time") Date time, @Param(value = "deviceid") int deviceid) {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		if (null == time) {
+			time = new Date();
+		}
+		CollectIndexDay item = dao.fetch(CollectIndexDay.class, Cnd.where("deviceId","=",deviceid).and("indexTime", "=", time));
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("sys_spec", item);
+		return map;
 	}
 
 	@SuppressWarnings({ "rawtypes" })

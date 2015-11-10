@@ -18,6 +18,8 @@ CREATE TABLE `collectindexday` (
   PRIMARY KEY (`indexId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='1 数据采集指标日表';
  */
+
+
 @Table("collectindexday")
 public class CollectIndexDay {
 	@Id
@@ -32,6 +34,7 @@ public class CollectIndexDay {
 	private double meterOnlineRate;
 	@Column
 	private double realCollectRate;
+	
 	public int getIndexId() {
 		return indexId;
 	}
