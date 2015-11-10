@@ -24,7 +24,6 @@ import org.nutz.mvc.annotation.Param;
 
 import com.eospd.bean.CollectIndexDay;
 
-
 public class Collectindexday {
 
 	@At("/")
@@ -38,7 +37,7 @@ public class Collectindexday {
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public void his() {
 	}
-	
+
 	@SuppressWarnings({ "rawtypes" })
 	@At("/cid/sys_spec")
 	@AdaptBy(type = PairAdaptor.class)
@@ -49,7 +48,8 @@ public class Collectindexday {
 		if (null == time) {
 			time = new Date();
 		}
-		CollectIndexDay item = dao.fetch(CollectIndexDay.class, Cnd.where("deviceId","=",deviceid).and("indexTime", "=", time));
+		CollectIndexDay item = dao.fetch(CollectIndexDay.class,
+				Cnd.where("deviceId", "=", deviceid).and("indexTime", "=", time));
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("sys_spec", item);
@@ -62,20 +62,19 @@ public class Collectindexday {
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
-			@Param(value = "draw") int draw,
-			@Param("search[value]") String tsearch) {
-		
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
+
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		
+
 		String sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId limit $start, $length";
 
-		if (tsearch.length() != 0){
+		if (tsearch.length() != 0) {
 			sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" limit $start, $length";
 		}
 		Sql sql = Sqls.create(sqlString);
-		
+
 		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
-		
+
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 
@@ -95,9 +94,9 @@ public class Collectindexday {
 		});
 
 		dao.execute(sql);
-		
+
 		String sqlString1 = "SELECT count(*) as recordsTotal FROM `collectindexday` a";
-		if (tsearch.length() != 0){
+		if (tsearch.length() != 0) {
 			sqlString1 = "SELECT count(*) as recordsTotal FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\"";
 		}
 
