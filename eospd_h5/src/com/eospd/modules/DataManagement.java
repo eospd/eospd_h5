@@ -68,11 +68,11 @@ public class DataManagement {
 						map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重传"));
 						map1.put("dataUrl", rs.getString("dataUrl"));
 						map1.put("ivSign", (rs.getInt("ivSign") == 0 ? "正常" : "插值"));
-						map1.put("p1Pv", (rs.getInt("p1Pv") + "kW·h"));
+						map1.put("p1Pv", (rs.getInt("p1Pv") + "KWh"));
 						map1.put("p1Err", (rs.getInt("bpSign") == 0 ? "正常" : "错误"));
-						map1.put("p1Dv", (rs.getInt("p1Dv") + "kW·h"));
+						map1.put("p1Dv", (rs.getInt("p1Dv") + "KWh"));
 						map1.put("p1Rsz", (rs.getInt("p1Rsz") == 0 ? "正常" : "归零"));
-						map1.put("p2Pv", (rs.getInt("p2Pv") + "kW"));
+						map1.put("p2Pv", (rs.getInt("p2Pv") + "KW"));
 						map1.put("p3Pv", (rs.getInt("p3Pv")));
 						map1.put("p4Pv", (rs.getInt("p4Pv") + "A"));
 						map1.put("p5Pv", (rs.getInt("p5Pv") + "A"));
