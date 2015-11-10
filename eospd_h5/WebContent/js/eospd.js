@@ -25,17 +25,36 @@ function col_his() {
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 	});
 	
-	$.get('/eospd_h5/mm/meters',  function(result){
-		 	var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部仪表 <span class="caret"></span></button>';
-		 	output += '<ul class="dropdown-menu pull-right" role="menu">';
-		 	
-            $.each(result, function(key, val) {
-            	output += '<li value = "' + val.deviceUrl + '" onclick=gen_dm_table("'+ val.deviceUrl + '")><a href ="#">' + val.deviceUrl + '</a></li>';
-            });
-            output+= '</ul>';
-            
-            $('.meter-dropdown').html(output);
-	});	
+	gen_all_meter();	
+}
+function cm_his() {
+	$('#dm_table').DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax" : {
+			"url" : "/eospd_h5/cm/list",
+			"type" : "POST"
+		},
+		"columns" : [ {
+			"data" : "currentTime"
+		}, {
+			"data" : "deviceType"
+		}, {
+			"data" : "deviceUrl"
+		}, {
+			"data" : "deviceStatus"
+		}, {
+			"data" : "bpSign"
+		}]
+	});
+
+	$('.input-daterange input').each(function() {
+    	var d = new Date()
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"});
+	});
+	
+	gen_all_meter();
 }
 
 function gen_dm_table(deviceUrl){
@@ -43,6 +62,32 @@ function gen_dm_table(deviceUrl){
 	table.search( deviceUrl ).draw();
 }
 
+function gen_all_dc() {
+	$.get('/eospd_h5/mm/dcs',  function(result){
+	 	var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部采集器 <span class="caret"></span></button>';
+	 	output += '<ul class="dropdown-menu pull-right" role="menu">';
+	 	
+        $.each(result, function(key, val) {
+        	output += '<li value = "' + val.deviceUrl + '" onclick=gen_dm_table("'+ val.dcUrl + '")><a href ="#">' + val.dcUrl + '</a></li>';
+        });
+        output+= '</ul>';
+        
+        $('.dc-meter-dropdown').html(output);
+	});	
+}
+function gen_all_meter() {
+	$.get('/eospd_h5/mm/meters',  function(result){
+	 	var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部仪表 <span class="caret"></span></button>';
+	 	output += '<ul class="dropdown-menu pull-right" role="menu">';
+	 	
+        $.each(result, function(key, val) {
+        	output += '<li value = "' + val.deviceUrl + '" onclick=gen_dm_table("'+ val.deviceUrl + '")><a href ="#">' + val.deviceUrl + '</a></li>';
+        });
+        output+= '</ul>';
+        
+        $('.dc-meter-dropdown').html(output);
+});	
+}
 
 
 function getMyEcharts(obj) {

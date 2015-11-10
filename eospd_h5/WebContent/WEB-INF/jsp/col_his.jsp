@@ -33,7 +33,7 @@
 									</th>
 									<th style="width: 100px">
 
-										<div class="btn-group meter-dropdown"></div>
+										<div class="btn-group dc-meter-dropdown"></div>
 									</th>
 								</tr>
 							</table>

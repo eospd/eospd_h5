@@ -64,4 +64,13 @@ public class MeterManagement {
 		List<Meter> items = dao.query(Meter.class, null);
 		return items;
 	}
+	
+	@At("/mm/dcs")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public List<Dc> dcs_json() {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		List<Dc> items = dao.query(Dc.class, null);
+		return items;
+	}
 }
