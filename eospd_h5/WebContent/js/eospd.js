@@ -91,19 +91,17 @@ function gen_all_meter() {
 }
 
 function add_efd() {
-	console.log(">>> add_efd");
-	 $.post("/eospd_h5/efd/add", {circuitUrl: $('circuitUrl').value, circuitName: $('circuitName').value,
-		 location: $('location').value,
-		 parentId: $('parentId').value,
-		 circuitName: $('circuitName').value,
-		 switchRatedC: $('switchRatedC').value,
-		 levelV: $('levelV').value,
-		 designPower: $('designPower').value,
-		 powerPhase: $('powerPhase').value}, function(result){
+	 $.post("/eospd_h5/efd/add", {circuitUrl: $('.circuitUrl')[0].value, circuitName: $('.circuitName')[0].value,
+		 location: $('.location')[0].value,
+		 parentId: $('.parentId')[0].value,
+		 circuitName: $('.circuitName')[0].value,
+		 switchRatedC: $('.switchRatedC')[0].value,
+		 levelV: $('.levelV')[0].value,
+		 designPower: $('.designPower')[0].value,
+		 powerPhase: $('.powerPhase')[0].value}, function(result){
 		    alert(result);
 	 });
 }
-
 
 function getMyEcharts(obj) {
 	// 报表标题

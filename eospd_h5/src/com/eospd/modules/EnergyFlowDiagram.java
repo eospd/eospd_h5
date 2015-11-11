@@ -62,10 +62,10 @@ public class EnergyFlowDiagram {
 
 			map1.put("circuitUrl", d.getCircuitUrl());
 			map1.put("circuitName", d.getCircuitName());
-			map1.put("location", "location:" + d.getLocation());
+			map1.put("location", "" + d.getLocation());
 			map1.put("switchRatedC", d.getSwitchRatedC() + "A");
 			map1.put("levelV", d.getLevelV() + "V");
-			map1.put("designPower", d.getDesignPower());
+			map1.put("designPower", d.getDesignPower() + "KW");
 			map1.put("powerPhase", d.getPowerPhase());
 			map1.put("parentId", d.getParentId());
 
