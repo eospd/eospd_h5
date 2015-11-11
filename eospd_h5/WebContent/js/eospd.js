@@ -1,4 +1,5 @@
 function col_his() {
+	gen_all_meter();	
 	$('#dm_table').DataTable({
 		"processing" : true,
 		"serverSide" : true,
@@ -24,8 +25,6 @@ function col_his() {
     	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 	});
-	
-	gen_all_meter();	
 }
 function cm_his() {
 	gen_all_meter();

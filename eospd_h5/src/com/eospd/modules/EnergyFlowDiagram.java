@@ -52,7 +52,7 @@ public class EnergyFlowDiagram {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-		List<CircuitInfo> items = dao.query(CircuitInfo.class, null, dao.createPager(start, length));
+		List<CircuitInfo> items = dao.query(CircuitInfo.class, null, dao.createPager((start/length)+1, length));
 
 		List<Object> data = new ArrayList();
 		for (int i = 0; i < items.size(); i++) {
