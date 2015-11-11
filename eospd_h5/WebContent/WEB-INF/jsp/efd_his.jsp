@@ -35,17 +35,17 @@
 									<div class="modal-body">
 
 										<form role="form">
-											<div class="form-group circuitUrl">
-												<label>电支路URL</label> <input class="form-control">
+											<div class="form-group">
+												<label>电支路URL</label> <input class="form-control circuitUrl">
 												<p class="help-block">/pd/t2/eng_station/total2</p>
 											</div>
-											<div class="form-group circuitName">
-												<label>电支路名称</label> <input class="form-control">
+											<div class="form-group">
+												<label>电支路名称</label> <input class="form-control circuitName">
 												<p class="help-block">测试电支路</p>
 											</div>
 											
-											<div class="form-group location">
-												<label>所在位置</label> <input class="form-control">
+											<div class="form-group">
+												<label>所在位置</label> <input class="form-control location">
 												<p class="help-block">第五机柜</p>
 											</div>
 											
@@ -60,21 +60,21 @@
 												</select>
 											</div>
 											
-											<div class="form-group switchRatedC">
-												<label>额定电流,单位：A</label> <input class="form-control">
+											<div class="form-group">
+												<label>额定电流,单位：A</label> <input class="form-control switchRatedC">
 												<p class="help-block">100</p>
 											</div>
-											<div class="form-group levelV">
-												<label>电压等级，单位：V</label> <input class="form-control">
+											<div class="form-group">
+												<label>电压等级，单位：V</label> <input class="form-control levelV">
 												<p class="help-block">220</p>
 											</div>
 											
-											<div class="form-group designPower">
-												<label>设计功率，单位：kw</label> <input class="form-control">
+											<div class="form-group">
+												<label>设计功率，单位：kw</label> <input class="form-control designPower">
 												<p class="help-block">100</p>
 											</div>
 											
-											<div class="form-group powerPhase">
+											<div class="form-group">
 												<label>电源相数，1 or 3</label>
 												 <select class="form-control powerPhase">
 													<option>1</option>
