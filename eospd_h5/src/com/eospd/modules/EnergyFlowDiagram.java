@@ -23,37 +23,35 @@ import com.eospd.bean.Dc;
 import com.eospd.bean.DevOnline;
 
 public class EnergyFlowDiagram {
-	
+
 	@At("/efd")
 	@Ok("jsp:jsp.energy_flow_diagram")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public String index() {
-        return "";
-    }
-	
+	public String index() {
+		return "";
+	}
+
 	@At("/efd_chart")
 	@Ok("jsp:jsp.efd_chart")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public void efd_chart() {
-    }
-	
+	public void efd_chart() {
+	}
+
 	@At("/efd_his")
 	@Ok("jsp:jsp.efd_his")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public void efd_his() {
-    }
-	
+	public void efd_his() {
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/efd/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
-			@Param(value = "draw") int draw,
-			@Param("search[value]") String tsearch) {
-		
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
+
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		
+
 		List<CircuitInfo> items = dao.query(CircuitInfo.class, null, dao.createPager(start, length));
 
 		List<Object> data = new ArrayList();
@@ -70,10 +68,10 @@ public class EnergyFlowDiagram {
 			map1.put("designPower", d.getDesignPower());
 			map1.put("powerPhase", d.getPowerPhase());
 			map1.put("parentId", d.getParentId());
-			
+
 			data.add(map1);
 		}
-		
+
 		String sqlString1 = "SELECT count(*) as recordsTotal FROM `circuitinfo` a";
 		Sql sql1 = Sqls.create(sqlString1);
 
@@ -87,14 +85,49 @@ public class EnergyFlowDiagram {
 			}
 		});
 		dao.execute(sql1);
-		
+
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("draw", draw+1);
+		map.put("draw", draw + 1);
 		map.put("recordsTotal", sql1.getResult());
 		map.put("recordsFiltered", sql1.getResult());
-		
+
 		map.put("data", data);
 		return map;
 
+	}
+
+	@At("/efd/la")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public List<CircuitInfo> list_all(@Param(value = "start") int start, @Param(value = "length") int length,
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
+
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+
+		List<CircuitInfo> items = dao.query(CircuitInfo.class, null);
+
+		return items;
+
+	}
+
+	@At("/efd/add")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map<Object, Object> add(@Param("..") CircuitInfo efd) {
+
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+
+		dao.insert(efd);
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		if (0 != efd.getCircuitId()) {
+			map.put("code", 1);
+		} else {
+			map.put("code", 2);
+		}
+		
+		map.put("efd", efd);
+		return map;
 	}
 }

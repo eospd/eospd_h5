@@ -14,84 +14,113 @@
 
 					<div class="panel panel-default">
 						<div class="panel-heading">
-						电支路信息
-						<div class="pull-right">
-						<button "class="btn btn-default" data-toggle="modal" data-target="#myModal">
-                            		增加电支路
-                            </button>
-                        </div>
+							电支路信息
+							<div class="pull-right">
+								<button "class="btn btn-default" data-toggle="modal"
+									data-target="#myModal">增加电支路</button>
+							</div>
 						</div>
-						
+
 						<!-- modal window -->
-						        	
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">增加电支路</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                        
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">增加电支路</h4>
+									</div>
+									<div class="modal-body">
+
 										<form role="form">
-											<div class="form-group">
+											<div class="form-group circuitUrl">
 												<label>电支路URL</label> <input class="form-control">
 												<p class="help-block">/pd/t2/eng_station/total2</p>
 											</div>
-											<div class="form-group">
+											<div class="form-group circuitName">
 												<label>电支路名称</label> <input class="form-control">
 												<p class="help-block">测试电支路</p>
 											</div>
-
-											<div class="form-group">
+											
+											<div class="form-group location">
 												<label>所在位置</label> <input class="form-control">
 												<p class="help-block">第五机柜</p>
 											</div>
-											<button type="submit" class="btn btn-default">提交</button>
+											
+											<div class="form-group all-efds">
+												<label>上级电支路</label> 
+												<select class="form-control parentId">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+													<option>5</option>
+												</select>
+											</div>
+											
+											<div class="form-group switchRatedC">
+												<label>额定电流,单位：A</label> <input class="form-control">
+												<p class="help-block">100</p>
+											</div>
+											<div class="form-group levelV">
+												<label>电压等级，单位：V</label> <input class="form-control">
+												<p class="help-block">220</p>
+											</div>
+											
+											<div class="form-group designPower">
+												<label>设计功率，单位：kw</label> <input class="form-control">
+												<p class="help-block">100</p>
+											</div>
+											
+											<div class="form-group powerPhase">
+												<label>电源相数，1 or 3</label>
+												 <select class="form-control powerPhase">
+													<option>1</option>
+													<option>3</option>
+												</select>
+											</div>
+											<button type="submit" onclick = add_efd() class="btn btn-default">提交</button>
 											<button type="reset" class="btn btn-default">重置</button>
-										</form>  
-										</div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-						
-						
-						<div class="panel-body">
-
-									<div class="col-lg-12">
-						<div style="overflow:auto">
-										<table class="table table-striped table-bordered table-hover"
-											id="dm_table">
-											<thead>
-												<tr>
-													<th>电支路URL</th>
-													<th>电支路名称</th>
-													<th>所在位置</th>
-													<th>额定电流</th>
-													<th>电压等级</th>
-													<th>设计功率</th>
-													<th>电源相数</th>
-													<th>上级</th>
-												</tr>
-											</thead>
-										</table>
+										</form>
 									</div>
-									<!-- /.table-responsive -->
 								</div>
+								<!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+
+
+						<div class="panel-body">
+							<div class="col-lg-12">
+								<div style="overflow: auto">
+									<table class="table table-striped table-bordered table-hover"
+										id="dm_table">
+										<thead>
+											<tr>
+												<th>电支路URL</th>
+												<th>电支路名称</th>
+												<th>所在位置</th>
+												<th>额定电流</th>
+												<th>电压等级</th>
+												<th>设计功率</th>
+												<th>电源相数</th>
+												<th>上级</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<!-- /.table-responsive -->
 							</div>
 						</div>
-						<!-- /.panel-body -->
 					</div>
+					<!-- /.panel-body -->
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 		</div>
 		<!-- /#page-wrapper -->
-
-
 	</div>
 	<!-- /#wrapper -->
 

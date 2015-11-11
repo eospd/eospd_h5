@@ -28,6 +28,8 @@ function col_his() {
 	gen_all_meter();	
 }
 function cm_his() {
+	gen_all_meter();
+	
 	$('#dm_table').DataTable({
 		"processing" : true,
 		"serverSide" : true,
@@ -54,7 +56,6 @@ function cm_his() {
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"});
 	});
 	
-	gen_all_meter();
 }
 
 function gen_dm_table(deviceUrl){
@@ -87,6 +88,10 @@ function gen_all_meter() {
         
         $('.dc-meter-dropdown').html(output);
 });	
+}
+
+function add_efd() {
+	console.log(">>> add_eft");
 }
 
 
