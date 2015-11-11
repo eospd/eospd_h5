@@ -67,10 +67,10 @@
 											id="dm_table">
 											<thead>
 												<tr>
-													<th >电支路URL</th>
+													<th>电支路URL</th>
 													<th>电支路名称</th>
 													<th>所在位置</th>
-													<th>开关额定电流</th>
+													<th>额定电流</th>
 													<th>电压等级</th>
 													<th>设计功率</th>
 													<th>电源相数</th>

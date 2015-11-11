@@ -1,15 +1,22 @@
 package com.eospd.modules;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.nutz.dao.Dao;
+import org.nutz.dao.Sqls;
+import org.nutz.dao.sql.Sql;
+import org.nutz.dao.sql.SqlCallback;
 import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.annotation.Param;
 
 import com.eospd.bean.CircuitInfo;
 import com.eospd.bean.Dc;
@@ -41,14 +48,13 @@ public class EnergyFlowDiagram {
 	@At("/efd/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-	public Map list() {
+	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
+			@Param(value = "draw") int draw,
+			@Param("search[value]") String tsearch) {
+		
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		List<CircuitInfo> items = dao.query(CircuitInfo.class, null);
-
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("draw", 1);
-		map.put("recordsTotal", items.size());
-		map.put("recordsFiltered", items.size());
+		
+		List<CircuitInfo> items = dao.query(CircuitInfo.class, null, dao.createPager(start, length));
 
 		List<Object> data = new ArrayList();
 		for (int i = 0; i < items.size(); i++) {
@@ -59,13 +65,34 @@ public class EnergyFlowDiagram {
 			map1.put("circuitUrl", d.getCircuitUrl());
 			map1.put("circuitName", d.getCircuitName());
 			map1.put("location", "location:" + d.getLocation());
-			map1.put("switchRatedC", d.getSwitchRatedC());
-			map1.put("levelV", d.getLevelV());
+			map1.put("switchRatedC", d.getSwitchRatedC() + "A");
+			map1.put("levelV", d.getLevelV() + "V");
 			map1.put("designPower", d.getDesignPower());
 			map1.put("powerPhase", d.getPowerPhase());
 			map1.put("parentId", d.getParentId());
+			
 			data.add(map1);
 		}
+		
+		String sqlString1 = "SELECT count(*) as recordsTotal FROM `circuitinfo` a";
+		Sql sql1 = Sqls.create(sqlString1);
+
+		sql1.setCallback(new SqlCallback() {
+			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+				int recordsTotal = 0;
+				while (rs.next()) {
+					recordsTotal = rs.getInt("recordsTotal");
+				}
+				return recordsTotal;
+			}
+		});
+		dao.execute(sql1);
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("draw", draw+1);
+		map.put("recordsTotal", sql1.getResult());
+		map.put("recordsFiltered", sql1.getResult());
+		
 		map.put("data", data);
 		return map;
 
