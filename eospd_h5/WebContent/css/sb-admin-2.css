@@ -418,7 +418,7 @@ table.dataTable thead .sorting:after {
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
-	background-color:rgba(30,35,43,1);
+	background-color:transparent;
 }
 .table-hover>tbody>tr:hover {
 	color:black;
