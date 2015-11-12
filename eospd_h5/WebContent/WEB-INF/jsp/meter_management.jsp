@@ -102,7 +102,6 @@
 									<!-- Tab panes -->
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
-
 										</div>
 									</div>
 								</div>

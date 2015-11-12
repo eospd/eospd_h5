@@ -21,89 +21,30 @@
 								<div class="panel-heading">系统配置</div>
 
 								<div class="panel-body">
-									<table class="table table-bordered" id="filter_table">
-										<tr>
-											<th>
-												<div class="pull-left">累计</div>
-											</th>
-											<th style="width: 400px">
-												<div class="input-group input-daterange pull-right">
-													<input type="text" class="form-control" value=""> <span
-														class="input-group-addon">到</span> <input type="text"
-														class="form-control" value="">
-												</div>
-											</th>
-											<th style="width: 100px">
 
-												<div class="pull-right">
-													<div class="btn-group">
-														<button type="button"
-															class="btn btn-default btn-xs dropdown-toggle"
-															data-toggle="dropdown">
-															全部仪表类型 <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu pull-right" role="menu">
-															<li><a href="#">全部仪表类型</a></li>
-															<li><a href="#">/e/dae/smb350_8</a></li>
-															<li><a href="#">/e/dae/smb350_4</a></li>
-															<li><a href="#">/e/lckj/ex8</a></li>
-														</ul>
-													</div>
-												</div>
-											</th>
-											<th style="width: 100px">
-												<div class="pull-right">
-													<div class="btn-group">
-														<button type="button"
-															class="btn btn-default btn-xs dropdown-toggle"
-															data-toggle="dropdown">
-															全部厂商 <span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu pull-right" role="menu">
-															<li><a href="#">全部厂商</a></li>
-															<li><a href="#">山东力创科技有限公司</a></li>
-															<li><a href="#">台科电科技股份有限公司</a></li>
-														</ul>
-													</div>
-												</div>
-											</th>
-										</tr>
-									</table>
-
-									<!-- Tab panes -->
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
+
 											<div class="dataTable_wrapper">
 												<table
 													class="table table-striped table-bordered table-hover"
 													id="dm_table">
 													<thead>
 														<tr>
-															<th>仪表URL</th>
-															<th>仪表类型</th>
-															<th>类型URL</th>
-															<th>仪表安装</th>
-															<th>操作</th>
+															<th>设备标识</th>
+															<th>设备名称</th>
+															<th>描述</th>
+															<th>厂家名称</th>
+															<th>厂家地址</th>
+															<th>厂家电话</th>
+															<th>厂家联系人</th> 
 														</tr>
 													</thead>
-													<tr>
-														<td>/pd/meter/e/1</td>
-														<td>SMB350-8路多回路电表</td>
-														<td>/e/dae/smb350_8</td>
-														<td><a>查看厂商信息</a></td>
-													</tr>
-													<tr>
-														<td>/pd/meter/e/2</td>
-														<td>SMB350-4路多回路电表</td>
-														<td>/e/dae/smb350_4</td>
-														<td><a>查看厂商信息</a></td>
-													</tr>
 												</table>
 											</div>
 											<!-- /.table-responsive -->
 										</div>
-										<div class="tab-pane fade" id="profile"></div>
-										<div class="tab-pane fade" id="messages"></div>
+										<!-- /.panel-body -->
 									</div>
 								</div>
 								<!-- /.panel-body -->
@@ -146,51 +87,30 @@
 	<script>
 		$(document).ready(
 				function() {
-					/*	$('#dm_table').DataTable({
-							"processing" : true,
-							"serverSide" : true,
-							"ajax" : {
-								"url" : "/eospd_h5/dm/list",
-								"type" : "POST"
-							},
-							"columns" : [ {
-								"data" : "currentTime"
-							}, {
-								"data" : "dataId"
-							}, {
-								"data" : "meterName"
-							}, {
-								"data" : "dcId"
-							}, {
-								"data" : "dcUrl"
-							}, {
-								"data" : "dcLocation"
-							}, {
-								"data" : "dcIP"
-							}, {
-								"data" : "venderName"
-							}, {
-								"data" : "p1Pv"
-							}, {
-								"data" : "p1Err"
-							} ]
-						});
-					 */
-
-					$('.input-daterange input').each(
-							function() {
-								var d = new Date()
-								$(this).val(
-										d.getFullYear() + "年"
-												+ (d.getMonth() + 1) + "月"
-												+ (d.getDay() + 1) + "日");
-								$(this).datepicker({
-									language : 'zh-CN',
-									autoclose : true,
-									todayHighlight : true,
-									todayBtn : "linked"
-								});
-							});
+					$('#dm_table').DataTable({
+						"processing" : true,
+						"serverSide" : true,
+						"ajax" : {
+							"url" : "/eospd_h5/sc/list",
+							"type" : "POST"
+						},
+						"columns" : [ {
+							"data" : "typeUrl"
+						},{
+							"data" : "typeName"
+						}, {
+							"data" : "desc"
+						}, {
+							"data" : "venderName"
+						}, {
+							"data" : "venderAddr"
+						}, {
+							"data" : "contactPhone"
+						}, {
+							"data" : "contactPerson"
+						}]
+					});
+					
 				});
 	</script>
 

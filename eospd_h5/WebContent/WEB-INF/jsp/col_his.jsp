@@ -61,8 +61,6 @@
 											</div>
 											<!-- /.table-responsive -->
 										</div>
-										<div class="tab-pane fade" id="profile"></div>
-										<div class="tab-pane fade" id="messages"></div>
 										<!-- /.panel-body -->
 									</div>
 									<!-- /.panel -->
