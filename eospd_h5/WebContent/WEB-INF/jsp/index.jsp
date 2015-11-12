@@ -108,6 +108,8 @@ body{text-align:center}
 	        var images = {};
 	        var loadedImages = 0;
 	        var numImages = 0;
+	        start = 0;
+	        step = 0;
 	        // get num of sources
 	        for(var src in sources) {
 	          numImages++;
@@ -121,7 +123,7 @@ body{text-align:center}
 	          };
 	          images[src].src = sources[src];
 	        }
-	      }
+	      };
 
 	      var sources = {
 	        guage_bg: 'imgs/guage.png'//,
@@ -275,11 +277,11 @@ body{text-align:center}
 		  ctx.restore();
 	};
 	
-      var start = 0;
 
       var leftV =10;
       var midV = 56;
       var rightV = 0;
+      var start = 0;
       var step = 0;
 		 animat = function (images){
 			//span.textContent = options.start + '%';
@@ -297,7 +299,6 @@ body{text-align:center}
 		};
 			
 		</script>
-		
 		               <script>
                        $(document).ready(function() {
                     	   loadImages(sources, animat);
@@ -323,34 +324,17 @@ body{text-align:center}
                            
                            $('.input-daterange input').each(function() {
                            var d = new Date()
-                           $(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
-                           $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
-                           console.log("d.getMonth:"+d.getMonth()+", d.getDay:"+d.getDay());
+                           $(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
+                           $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked", 
+                           } ).on('changeDate', function(value) {
+                       			   getMeterData(value.date, 0)
+                           });
                            });
                    
                            $("#btn_refresh").click(function(){
                         	   console.log("------click refresh btn------");
-                        	   $.get('/eospd_h5/cid/sys_spec?time=2015-11-1&deviceid=0',  function(result){
-                        		 	
-                        	        $.each(result, function(key, val) {
-                        	        	$.each(val, function(a, b) {
-                        	        		if (a == 'dataEffRate') {
-                        	        			midV = b;
-                        	        		}
-                        	        		if (a == 'meterOnlineRate'){
-                        	        			rightV = b;
-                        	        		}
-                        	        		if (a== 'realCollectRate'){
-                        	        			leftV = b;
-                        	        		}
-                        	        		
-                        	        	console.log(a+" "+b);
-                        	        	});
-                        	        });
-
-                             	   console.log(' leftV:'+leftV+",midV:"+midV+",rightV:"+rightV);
-                             	   loadImages(sources, animat);
-                        		});	
+                        	   var d = new Date();
+                        	   getMeterData(d, 0);
                         	   //"dataEffRate":98.0,"meterOnlineRate":90.0,"realCollectRate":
                         	   //leftV = data.realCollectRate;
                         	   //midV = data.dataEffRate;
@@ -358,6 +342,33 @@ body{text-align:center}
                         	   });
                        
                        });
+                       
+                       getMeterData = function (date, deviceid) {
+            			   var time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+                    	   $.get('/eospd_h5/cid/sys_spec?time='+time+'&deviceid='+deviceid,  function(result){
+                   		 	
+                   	        $.each(result, function(key, val) {
+                   	        	$.each(val, function(a, b) {
+                   	        		if (a == 'dataEffRate') {
+                   	        			midV = b;
+                   	        		}
+                   	        		if (a == 'meterOnlineRate'){
+                   	        			rightV = b;
+                   	        		}
+                   	        		if (a== 'realCollectRate'){
+                   	        			leftV = b;
+                   	        		}
+                   	        		
+                   	        	console.log(a+" "+b);
+                   	        	});
+                   	        });
+
+                        	   console.log(' leftV:'+leftV+",midV:"+midV+",rightV:"+rightV);
+                        	 
+                        	   loadImages(sources, animat);
+                   		});	  
+                       };
+                       
                </script>
 		
 		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
