@@ -44,7 +44,7 @@ body{text-align:center}
 										</div>
 										</th>
 										<th>
-										<button class="color black button" style="margin-left:250px" >刷新</button>
+										<button id = "btn_refresh" class="color black button" style="margin-left:250px" >刷新</button>
 										</th></tr>
 										</table>
 										<div class="div">
@@ -124,53 +124,33 @@ body{text-align:center}
 	      }
 
 	      var sources = {
-	        guage_bg: 'imgs/guage.png',
-	        guage_line: 'imgs/guage_line.png',
-	        guage_round: 'imgs/guage_round.png'
+	        guage_bg: 'imgs/guage.png'//,
+	        //guage_line: 'imgs/guage_line.png',
+	        //guage_round: 'imgs/guage_round.png'
 	      };
-	      
+	    	     
+      createMeter = function(ctx, images, start, leftV, midV, rightV) {
+		ctx.clearRect(0, 0, 508, 220);
+		
 
-	     window.onload =loadImages(sources, function(images) {
-	     	
-				var canvas = document.getElementById("meter_canvas");
-					var ctx = canvas.getContext('2d');
-	        ctx.drawImage(images.guage_bg, 0, 0, 508, 220);
-	        //ctx.drawImage(images.guage_line, 508 / 2 - 10, 220/2 - 79, 20, 80);
-	        //ctx.drawImage(imloadImagesages.guage_round, 508 / 2 - 10, 220/2-10, 20, 20);
-	        
-	        ctx.fillStyle ='rgb(244,92,72)';//填充颜色：红色，半透明
-	   ctx.strokeStyle ='rgb(244,92,72)';//线条颜色：绿色
-	   ctx.lineWidth = 1;//设置线宽
-	   ctx.beginPath();
-	   /*
-	   var midx = 508 / 2;
-	   var midy = 220 / 2;
-	   var midR = 0;//20*Math.PI/180;
-	   ctx.save();   
-	   ctx.translate(midx, midy);
-	   ctx.rotate(midR);
-	   ctx.translate(-1 * midx, -1 * midy);
-	   ctx.moveTo(midx - 5, midy); 
-	   ctx.lineTo(midx, midy-80);
-	   ctx.lineTo(midx+5, midy);
-	   ctx.closePath();//可以把这句注释掉再运行比较下不同
-	   ctx.stroke();//画线框
-	   ctx.fill();//填充颜色
-	   ctx.restore();
-	   ctx.beginPath();
-	   ctx.arc(midx, midy, 10, 0, Math.PI * 2, true); 
-	   ctx.closePath(); 
-	   ctx.fill();
-	   */
-	      
-	      
-	      createMeter = function(ctx, start, leftV, midV, rightV) {
-			ctx.clearRect(0, 0, 508, 220);
-			
-	   ctx.drawImage(images.guage_bg, 0, 0, 508, 220);
-			var midx = 508 / 2;
-	   var midy = 220 / 2;
-	   var midR = start;
+        var canvas = document.getElementById("meter_canvas");
+                var ctx = canvas.getContext('2d');
+		//ctx.drawImage(images.guage_bg, 0, 0, 508, 220);
+		//ctx.drawImage(images.guage_line, 508 / 2 - 10, 220/2 - 79, 20, 80);
+		//ctx.drawImage(imloadImagesages.guage_round, 508 / 2 - 10, 220/2-10, 20, 20);
+		var green = 'rgb(61, 214, 119)';
+		var blue = 'rgb(63,176,234)';
+		var red = 'rgb(244,92,72)';
+		ctx.fillStyle = green;//填充颜色：红色，半透明
+		ctx.strokeStyle = green;//线条颜色：绿色
+		ctx.lineWidth = 1;//设置线宽
+		
+		var img = new Image();
+		img.src = "imgs/guage.png";
+	   	ctx.drawImage(img, 0, 0, 508, 220);
+		var midx = 508 / 2;
+	   	var midy = 220 / 2;
+	  	var midR = start;
 	   
 	   
 	   ctx.save();   
@@ -178,6 +158,14 @@ body{text-align:center}
 	   if (midV < start) {
 		   midR = midV;
 	   } 
+
+	   if (midR > 95){
+		   ctx.fillStyle=red;
+		   ctx.strokeStyle =red;
+	   } else if (midR > 80) {
+	   		ctx.fillStyle=blue;
+	   		ctx.strokeStyle =blue;
+	   }
 	   ctx.rotate(midR * Math.PI / 180 * 2.7 - 135 * Math.PI / 180);
 	   ctx.translate(-1 * midx, -1 * midy);
 	   ctx.moveTo(midx - 5, midy); 
@@ -186,31 +174,42 @@ body{text-align:center}
 	   ctx.closePath();//可以把这句注释掉再运行比较下不同
 	   ctx.stroke();//画线框
 	   ctx.fill();//填充颜色
-	   ctx.restore();
+	   
 	   ctx.beginPath();
 	   ctx.arc(midx, midy, 10, 0, Math.PI * 2, true); 
 	   ctx.closePath(); 
+	   ctx.stroke();
 	   ctx.fill(); 
+	   ctx.restore();
+	   
 	   
 	   ctx.save();
 	   var textWidth = ctx.measureText("数据质量").width; //文字宽
 	   ctx.fillStyle="white";
 	   ctx.font="16px serif";
-		  ctx.fillText("数据质量", midx-textWidth/2-10, midy+midy/3);
-		  ctx.fillText(midR+"%", midx-textWidth/2-10, midy+16+midy/3);
-		  ctx.restore();
-	   
+	   ctx.fillText("数据质量", midx-textWidth/2-10, midy+midy/3);
+	   ctx.fillText(midR+"%", midx-textWidth/2-10, midy+16+midy/3);
+	   ctx.restore();
 		  
 	   var rightx = 508 - 95;
-	   var righty = 220-95;
+	   var righty = 220 - 97;
 	   var rightR = start;
-	   ctx.beginPath();
+	   
 	   ctx.save();   
+	   ctx.beginPath();
+	   
 	   ctx.translate( rightx, righty);
 	   if (rightV < start) {
 		   rightR = rightV;
 	   }
-	   ctx.rotate(rightR * Math.PI / 180 * 1.8 + Math.PI*18*8/180);
+	   if (rightR > 80){
+		   ctx.fillStyle = red;
+		   ctx.strokeStyle = red;
+	   } else if (rightR > 60) {
+	   	   ctx.fillStyle = blue;
+	   	   ctx.strokeStyle =blue;
+	   }
+	   ctx.rotate(Math.PI * (-1 * rightR * 1.8 / 180 + 18*8/180));
 	   ctx.translate(-1 * rightx, -1 * righty);
 	   ctx.moveTo(rightx - 4, righty); 
 	   ctx.lineTo(rightx, righty-60);
@@ -218,29 +217,37 @@ body{text-align:center}
 	   ctx.closePath();//可以把这句注释掉再运行比较下不同
 	   ctx.stroke();//画线框
 	   ctx.fill();//填充颜色
-	   ctx.restore();
+	   
 	   ctx.beginPath();
 	   ctx.arc(rightx, righty, 10, 0, Math.PI * 2, true); 
 	   ctx.closePath(); 
 	   ctx.fill(); 
+	   ctx.restore();
 	   
 	   ctx.save();
 	   var textWidth = ctx.measureText("通讯有效").width; //文字宽
 	   ctx.fillStyle="white";
 	   ctx.font="14px serif";
-		  ctx.fillText("通讯有效", rightx-textWidth/2-10, righty+righty/3);
-		  ctx.fillText(rightR+"%", rightx-textWidth/2-10, righty+14+righty/3);
-		  ctx.restore();
+	   ctx.fillText("通讯有效", rightx-textWidth/2-10, righty+righty/3);
+	   ctx.fillText(rightR+"%", rightx-textWidth/2-10, righty+14+righty/3);
+	   ctx.restore();
 	   
 	   
 	   var leftx = 95;
-	   var lefty = 220-95;
+	   var lefty = 220-97;
 	   ctx.beginPath();
 	   ctx.save();   
 	   ctx.translate( leftx, lefty);
 	   var leftR = start;
 	   if (leftV  < start) {
 		   leftR = leftV;
+	   }
+	   if (leftR > 95){
+		   ctx.fillStyle=red;
+		   ctx.strokeStyle =red;
+	   }else if (leftR > 80) {
+   			ctx.fillStyle = blue;
+		   ctx.strokeStyle =blue;
 	   }
 	   ctx.rotate(leftR * Math.PI / 180 * 1.8 - Math.PI*18*8/180);
 
@@ -251,11 +258,13 @@ body{text-align:center}
 	   ctx.closePath();//可以把这句注释掉再运行比较下不同
 	   ctx.stroke();//画线框
 	   ctx.fill();//填充颜色
-	   ctx.restore();
+	   
 	   ctx.beginPath();
 	   ctx.arc(leftx, lefty, 10, 0, Math.PI * 2, true); 
 	   ctx.closePath(); 
+	   ctx.stroke();
 	   ctx.fill(); 
+	   ctx.restore();
 	   
 	   ctx.save();
 	   var textWidth = ctx.measureText("数据有效").width; //文字宽
@@ -265,55 +274,89 @@ body{text-align:center}
 		  ctx.fillText(leftR+"%", leftx, lefty+14+lefty/3);
 		  ctx.restore();
 	};
-	      var start = 0;
+	
+      var start = 0;
 
-	      var leftV =10;
-	      var midV = 56;
-	      var rightV = 0;
-	      var step = 0;
-			 (function animat() {
-				//span.textContent = options.start + '%';
-				var canvas = document.getElementById("meter_canvas");
-					var ctx = canvas.getContext('2d');
-					
-				createMeter(ctx, start, leftV, midV, rightV);
-				console.log(step);
-				start++;
-				step += 0.02;
-				if (start <= leftV || start <= midV || start <= rightV)
-				{
-					setTimeout(animat, 10);
-				}
-			})();
-	      });
+      var leftV =10;
+      var midV = 56;
+      var rightV = 0;
+      var step = 0;
+		 animat = function (images){
+			//span.textContent = options.start + '%';
+			var canvas = document.getElementById("meter_canvas");
+				var ctx = canvas.getContext('2d');
+				
+			createMeter(ctx, images, start, leftV, midV, rightV);
+			console.log(step);
+			start++;
+			step += 0.02;
+			if (start <= leftV || start <= midV || start <= rightV)
+			{
+				setTimeout(animat, 10);
+			}
+		};
+			
 		</script>
 		
 		               <script>
                        $(document).ready(function() {
-                               $('#dm_table').DataTable({
-                                       "processing" : true,
-                                       "serverSide" : true,
-                                       "ajax" : {
-                                               "url" : "/eospd_h5/cid/list",
-                                               "type" : "POST"
-                                       },
-                                       "columns" : [ {
-                                               "data" : "currentTime"
-                                       },{
-                                               "data" : "deviceId"
-                                       }, {
-                                               "data" : "dataEffRate"
-                                       }, {
-                                               "data" : "meterOnlineRate"
-                                       }, {
-                                               "data" : "realCollectRate"
-                                       }]
-                               });
-                               $('.input-daterange input').each(function() {
-                               var d = new Date()
-                               $(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
-                               $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
-                               });
+                    	   loadImages(sources, animat);
+                           $('#dm_table').DataTable({
+                                   "processing" : true,
+                                   "serverSide" : true,
+                                   "ajax" : {
+                                           "url" : "/eospd_h5/cid/list",
+                                           "type" : "POST"
+                                   },
+                                   "columns" : [ {
+                                           "data" : "currentTime"
+                                   },{
+                                           "data" : "deviceId"
+                                   }, {
+                                           "data" : "dataEffRate"
+                                   }, {
+                                           "data" : "meterOnlineRate"
+                                   }, {
+                                           "data" : "realCollectRate"
+                                   }]
+                           });
+                           
+                           $('.input-daterange input').each(function() {
+                           var d = new Date()
+                           $(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+                           $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
+                           console.log("d.getMonth:"+d.getMonth()+", d.getDay:"+d.getDay());
+                           });
+                   
+                           $("#btn_refresh").click(function(){
+                        	   console.log("------click refresh btn------");
+                        	   $.get('/eospd_h5/cid/sys_spec?time=2015-11-1&deviceid=0',  function(result){
+                        		 	
+                        	        $.each(result, function(key, val) {
+                        	        	$.each(val, function(a, b) {
+                        	        		if (a == 'dataEffRate') {
+                        	        			midV = b;
+                        	        		}
+                        	        		if (a == 'meterOnlineRate'){
+                        	        			rightV = b;
+                        	        		}
+                        	        		if (a== 'realCollectRate'){
+                        	        			leftV = b;
+                        	        		}
+                        	        		
+                        	        	console.log(a+" "+b);
+                        	        	});
+                        	        });
+
+                             	   console.log(' leftV:'+leftV+",midV:"+midV+",rightV:"+rightV);
+                             	   loadImages(sources, animat);
+                        		});	
+                        	   //"dataEffRate":98.0,"meterOnlineRate":90.0,"realCollectRate":
+                        	   //leftV = data.realCollectRate;
+                        	   //midV = data.dataEffRate;
+                        	   //rightV = data.meterOnlineRate;
+                        	   });
+                       
                        });
                </script>
 		
