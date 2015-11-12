@@ -412,3 +412,14 @@ table.dataTable thead .sorting:after {
 #page-wrapper > div > div > div > div > .tab-content {
 	margin-top: 10px;
 }
+
+.panel-body{
+	color: #fff;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+	background-color:rgba(30,35,43,1);
+}
+.table-hover>tbody>tr:hover {
+	color:black;
+}
