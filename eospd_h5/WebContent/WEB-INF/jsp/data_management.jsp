@@ -33,7 +33,7 @@
 									</th>
 								</tr>
 							</table>
-							<div class="dataTable_wrapper">
+							<div class="dataTable_wrapper" style="overflow: auto">
 								<table class="table table-striped table-bordered table-hover"
 									id="dm_table">
 									<thead>

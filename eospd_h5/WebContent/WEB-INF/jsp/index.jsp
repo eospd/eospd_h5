@@ -2,7 +2,25 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+<style>
+body{text-align:center}
+.div-center{
+	margin:0 auto; 
+	}
+.div{
+	margin:0 auto; 
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-color: rgb(50,55,65);
+	}
+.border{
+	border:1px;
+	border-style: solid;
+}
 
+</style>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
@@ -12,75 +30,54 @@
 		<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 		<div id="page-wrapper">
-
-			<div class="row">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">数据指标
-							
-							
-										</div>
+						
 							<div class="panel-body">
 							
-							<table class="table table-bordered"
+							<table class="table-none" 
 											id="filter_table">
 											<tr>
 											<th></th>
-											<th style="width:250px">
-									<div class="input-group input-daterange pull-right">
-										
-										<span class="input-group-addon">日期：</span> <input type="text"
+											<th style="width:250px;padding-left:10px">
+									<div class="input-group input-daterange pull-right" >
+										<span class="input-group-addon" >选择日期：</span> <input type="text"
 												class="form-control" value="">
 										</div>
-										</th></tr></table>
-										<div class="panel panel-default">
-
-											<div class="panel-heading">
-												<h4 class="panel-title">系统指标</h4>
-											</div>
-											<div class="panel-body">
-
-												<div class="row">
-													<div class="col-lg-4">
-														<div id="data_efficiency" class="data_efficiency"></div>
-													</div>
-													<div class="col-lg-4">
-														<div id="meter_online_r" class="meter_online_r"></div>
-													</div>
-													<div class="col-lg-4">
-														<div id="real_time_cr" class="real_time_cr"></div>
-													</div>
-												</div>
-											</div>
-											</div>
+										</th>
+										<th>
+										<button class="color black button" style="margin-left:250px" >刷新</button>
+										</th></tr>
+										</table>
+										<div class="div">
+												<canvas id="meter_canvas" width=508 height=220 style="margin:0 auto;"></canvas>
+										</div>
 										
-										<div class="panel panel-default">
-
-											<div class="panel-heading">
-												<h4 class="panel-title">仪表指标</h4>
-											</div>
-											<div class="panel-body">
-
-												<div class="row">
-													<div id="topo_canvas" class="col-lg-12"></div>
-												</div>
-											</div>
+										<div class="div" style="height:90px; padding-top:10px">
+										<div class="row" >
+										<div class="col-lg-3">
+										<button class="color black button" >机场电力</button>
+										</div><div class="col-lg-3">
+										<button class="color black button" >远程抄表</button>
+										</div><div class="col-lg-3">
+										<button class="color green button" >电力监控</button>
+										</div><div class="col-lg-3">
+										<button class="color black button" >能量监控</button>
 										</div>
-
-
-													</div>
-													<!-- /.panel-body -->
-												</div>
-												<!-- /.panel -->
-											</div>
-											<!-- /.col-lg-12 -->
 										</div>
-									</div>
-
-								</div>
-
-
+										
+										<div class="row" style="padding-top:10px;">
+										<div class="col-lg-4">
+										<button class="color black button" >楼宇自动系统</button>
+										</div>
+										<div class="col-lg-4">
+										<button class="color black button" >机房群控系统</button>
+										</div>
+										<div class="col-lg-4">
+										<button class="color black button" >照明控制系统</button>
+										</div>
+										</div>
+										</div>
+										</div>
+										</div>
 		</div>
 		<!-- /#wrapper -->
 
@@ -107,120 +104,221 @@
 
 		<script type="text/javascript" src="js/ECOTree.js"></script>
 		<script type="text/javascript">
-			var CreateTree = function() {
-				myTree = new ECOTree('myTree', 'topo_canvas');
-				//	myTree.config.linkType = 'B';
-				//myTree.config.iRootOrientation = ECOTree.RO_TOP;						
-				//myTree.config.topYAdjustment = -180;
-				myTree.config.linkColor = "black";
-				myTree.config.nodeColor = "#FFAAAA";
-				myTree.config.nodeBorderColor = "black";
-				myTree.config.useTarget = false;
-				myTree.config.iLevelSeparation = 80;
-				//myTree.config.selectMode = ECOTree.SL_SINGLE;			
-				//(id, pid, dsc, w, h, c, bc, target, meta)		
-				myTree.add(0, -1, "Apex Node", 100, 50, "#CCCCFF", "#CCCCFF",
-						"head", "能源采集系统");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
-				var w = 70;
-				var h = 80;
-				myTree
-						.add(1, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/1\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(2, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/2\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(3, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/3\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(4, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/4\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(5, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/5\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(6, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/6\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree
-						.add(7, 0, "Apex Node", w, h, "#CCCCFF", "#CCCCFF",
-								"hello",
-								"URL:/pd/meter/e/7\n有效率:30%\n在线率:40%\n采集率:70%");
-				myTree.UpdateTree();
-			}
+		function loadImages(sources, callback) {
+	        var images = {};
+	        var loadedImages = 0;
+	        var numImages = 0;
+	        // get num of sources
+	        for(var src in sources) {
+	          numImages++;
+	        }
+	        for(var src in sources) {
+	          images[src] = new Image();
+	          images[src].onload = function() {
+	            if(++loadedImages >= numImages) {
+	              callback(images);
+	            }
+	          };
+	          images[src].src = sources[src];
+	        }
+	      }
+
+	      var sources = {
+	        guage_bg: 'imgs/guage.png',
+	        guage_line: 'imgs/guage_line.png',
+	        guage_round: 'imgs/guage_round.png'
+	      };
+	      
+
+	     window.onload =loadImages(sources, function(images) {
+	     	
+				var canvas = document.getElementById("meter_canvas");
+					var ctx = canvas.getContext('2d');
+	        ctx.drawImage(images.guage_bg, 0, 0, 508, 220);
+	        //ctx.drawImage(images.guage_line, 508 / 2 - 10, 220/2 - 79, 20, 80);
+	        //ctx.drawImage(imloadImagesages.guage_round, 508 / 2 - 10, 220/2-10, 20, 20);
+	        
+	        ctx.fillStyle ='rgb(244,92,72)';//填充颜色：红色，半透明
+	   ctx.strokeStyle ='rgb(244,92,72)';//线条颜色：绿色
+	   ctx.lineWidth = 1;//设置线宽
+	   ctx.beginPath();
+	   /*
+	   var midx = 508 / 2;
+	   var midy = 220 / 2;
+	   var midR = 0;//20*Math.PI/180;
+	   ctx.save();   
+	   ctx.translate(midx, midy);
+	   ctx.rotate(midR);
+	   ctx.translate(-1 * midx, -1 * midy);
+	   ctx.moveTo(midx - 5, midy); 
+	   ctx.lineTo(midx, midy-80);
+	   ctx.lineTo(midx+5, midy);
+	   ctx.closePath();//可以把这句注释掉再运行比较下不同
+	   ctx.stroke();//画线框
+	   ctx.fill();//填充颜色
+	   ctx.restore();
+	   ctx.beginPath();
+	   ctx.arc(midx, midy, 10, 0, Math.PI * 2, true); 
+	   ctx.closePath(); 
+	   ctx.fill();
+	   */
+	      
+	      
+	      createMeter = function(ctx, start, leftV, midV, rightV) {
+			ctx.clearRect(0, 0, 508, 220);
+			
+	   ctx.drawImage(images.guage_bg, 0, 0, 508, 220);
+			var midx = 508 / 2;
+	   var midy = 220 / 2;
+	   var midR = start;
+	   
+	   
+	   ctx.save();   
+	   ctx.translate(midx, midy)
+	   if (midV < start) {
+		   midR = midV;
+	   } 
+	   ctx.rotate(midR * Math.PI / 180 * 2.7 - 135 * Math.PI / 180);
+	   ctx.translate(-1 * midx, -1 * midy);
+	   ctx.moveTo(midx - 5, midy); 
+	   ctx.lineTo(midx, midy-80);
+	   ctx.lineTo(midx+5, midy);
+	   ctx.closePath();//可以把这句注释掉再运行比较下不同
+	   ctx.stroke();//画线框
+	   ctx.fill();//填充颜色
+	   ctx.restore();
+	   ctx.beginPath();
+	   ctx.arc(midx, midy, 10, 0, Math.PI * 2, true); 
+	   ctx.closePath(); 
+	   ctx.fill(); 
+	   
+	   ctx.save();
+	   var textWidth = ctx.measureText("数据质量").width; //文字宽
+	   ctx.fillStyle="white";
+	   ctx.font="16px serif";
+		  ctx.fillText("数据质量", midx-textWidth/2-10, midy+midy/3);
+		  ctx.fillText(midR+"%", midx-textWidth/2-10, midy+16+midy/3);
+		  ctx.restore();
+	   
+		  
+	   var rightx = 508 - 95;
+	   var righty = 220-95;
+	   var rightR = start;
+	   ctx.beginPath();
+	   ctx.save();   
+	   ctx.translate( rightx, righty);
+	   if (rightV < start) {
+		   rightR = rightV;
+	   }
+	   ctx.rotate(rightR * Math.PI / 180 * 1.8 + Math.PI*18*8/180);
+	   ctx.translate(-1 * rightx, -1 * righty);
+	   ctx.moveTo(rightx - 4, righty); 
+	   ctx.lineTo(rightx, righty-60);
+	   ctx.lineTo(rightx + 4, righty);
+	   ctx.closePath();//可以把这句注释掉再运行比较下不同
+	   ctx.stroke();//画线框
+	   ctx.fill();//填充颜色
+	   ctx.restore();
+	   ctx.beginPath();
+	   ctx.arc(rightx, righty, 10, 0, Math.PI * 2, true); 
+	   ctx.closePath(); 
+	   ctx.fill(); 
+	   
+	   ctx.save();
+	   var textWidth = ctx.measureText("通讯有效").width; //文字宽
+	   ctx.fillStyle="white";
+	   ctx.font="14px serif";
+		  ctx.fillText("通讯有效", rightx-textWidth/2-10, righty+righty/3);
+		  ctx.fillText(rightR+"%", rightx-textWidth/2-10, righty+14+righty/3);
+		  ctx.restore();
+	   
+	   
+	   var leftx = 95;
+	   var lefty = 220-95;
+	   ctx.beginPath();
+	   ctx.save();   
+	   ctx.translate( leftx, lefty);
+	   var leftR = start;
+	   if (leftV  < start) {
+		   leftR = leftV;
+	   }
+	   ctx.rotate(leftR * Math.PI / 180 * 1.8 - Math.PI*18*8/180);
+
+	   ctx.translate(-1 * leftx, -1 * lefty);
+	   ctx.moveTo(leftx - 4, lefty); 
+	   ctx.lineTo(leftx, lefty-60);
+	   ctx.lineTo(leftx + 4, lefty);
+	   ctx.closePath();//可以把这句注释掉再运行比较下不同
+	   ctx.stroke();//画线框
+	   ctx.fill();//填充颜色
+	   ctx.restore();
+	   ctx.beginPath();
+	   ctx.arc(leftx, lefty, 10, 0, Math.PI * 2, true); 
+	   ctx.closePath(); 
+	   ctx.fill(); 
+	   
+	   ctx.save();
+	   var textWidth = ctx.measureText("数据有效").width; //文字宽
+	   ctx.fillStyle="white";
+	   ctx.font="14px serif";
+		  ctx.fillText("数据有效", leftx, lefty+lefty/3);
+		  ctx.fillText(leftR+"%", leftx, lefty+14+lefty/3);
+		  ctx.restore();
+	};
+	      var start = 0;
+
+	      var leftV =10;
+	      var midV = 56;
+	      var rightV = 0;
+	      var step = 0;
+			 (function animat() {
+				//span.textContent = options.start + '%';
+				var canvas = document.getElementById("meter_canvas");
+					var ctx = canvas.getContext('2d');
+					
+				createMeter(ctx, start, leftV, midV, rightV);
+				console.log(step);
+				start++;
+				step += 0.02;
+				if (start <= leftV || start <= midV || start <= rightV)
+				{
+					setTimeout(animat, 10);
+				}
+			})();
+	      });
 		</script>
+		
+		               <script>
+                       $(document).ready(function() {
+                               $('#dm_table').DataTable({
+                                       "processing" : true,
+                                       "serverSide" : true,
+                                       "ajax" : {
+                                               "url" : "/eospd_h5/cid/list",
+                                               "type" : "POST"
+                                       },
+                                       "columns" : [ {
+                                               "data" : "currentTime"
+                                       },{
+                                               "data" : "deviceId"
+                                       }, {
+                                               "data" : "dataEffRate"
+                                       }, {
+                                               "data" : "meterOnlineRate"
+                                       }, {
+                                               "data" : "realCollectRate"
+                                       }]
+                               });
+                               $('.input-daterange input').each(function() {
+                               var d = new Date()
+                               $(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+                               $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
+                               });
+                       });
+               </script>
+		
 		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-		<script>
-			$(document).ready(function() {
-
-				var objBar1 = [], objBar2 = [], objBar3 = [];
-				objBar1.myChartBackgroundColor = "#000000";
-				objBar1.myChartType = "gauge";
-				objBar1.myChartLegendData = new Array('有功功率');
-				objBar1.myChartYAxisFormatter = "kw";
-				objBar1.myChartDataColor = [ '#ff9000' ];
-				objBar1.myChartDyType = "0";
-
-				objBar1.myContainerId = "data_efficiency";
-				objBar1.myName = "有效率";
-				objBar1.myValue = 50;
-
-				getMyEcharts(objBar1);
-
-				objBar2.myChartType = "gauge";
-				objBar2.myContainerId = "meter_online_r";
-				objBar2.myName = "在线率";
-				objBar2.myValue = 60;
-
-				getMyEcharts(objBar2);
-
-				objBar3.myChartType = "gauge";
-				objBar3.myContainerId = "real_time_cr";
-				objBar3.myName = "采集率";
-				objBar3.myValue = 80;
-				getMyEcharts(objBar3);
-
-				//var objBarMeters = [];
-
-				//objBarMeters.myChartType = "mul_bar";
-				//objBarMeters.myContainerId = "meters_cr";
-				//objBarMeters.myName = "实时采集率";
-				//objBarMeters.myValue = 80;
-				//getMyEcharts(objBarMeters);
-
-				//drawtopo();
-				CreateTree();
-				$('#dm_table').DataTable({
-					"processing" : true,
-					"serverSide" : true,
-					"ajax" : {
-						"url" : "/eospd_h5/cid/list",
-						"type" : "POST"
-					},
-					"columns" : [ {
-						"data" : "currentTime"
-					},{
-						"data" : "deviceId"
-					}, {
-						"data" : "dataEffRate"
-					}, {
-						"data" : "meterOnlineRate"
-					}, {
-						"data" : "realCollectRate"
-					}]
-				});
-				$('.input-daterange input').each(function() {
-			    	var d = new Date()
-			    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
-			        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
-				});
-			});
-		</script>
+		
 </body>
 
 </html>

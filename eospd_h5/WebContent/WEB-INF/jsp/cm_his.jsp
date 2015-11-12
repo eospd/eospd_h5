@@ -111,7 +111,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 	$(document).ready(function() {
-		cm_his();			
+		cm_his();
 	});
 	</script>
 </body>

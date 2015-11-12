@@ -22,7 +22,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="panel-body">
-                    <div id = "topo_canvas" class="col-lg-12">
+                    <div style="overflow: auto" id = "topo_canvas" class="col-lg-12">
                     </div>
                 </div>
                 <!-- /.panel-body -->
@@ -62,7 +62,7 @@
 	<script type="text/javascript" >
 			var CreateTree = function() {
 				myTree = new ECOTree('myTree','topo_canvas');		
-				//	myTree.config.linkType = 'B';
+				myTree.config.linkType = 'B';
 				//myTree.config.iRootOrientation = ECOTree.RO_TOP;						
 				//myTree.config.topYAdjustment = -180;
 				myTree.config.linkColor = "black";

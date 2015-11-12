@@ -41,4 +41,6 @@
 
 <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
+<link rel="stylesheet" href="css/buttons_style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css">
 </head>

@@ -232,14 +232,24 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 			case "CANVAS":
 				tree.ctx.save();
 				tree.ctx.strokeStyle = tree.config.linkColor;
-				tree.ctx.beginPath();			
+				tree.ctx.beginPath();
+				
+				tree.ctx.lineCap="round";
+				tree.ctx.lineWidth = 3;
+				tree.ctx.shadowColor = "RGBA(127,127,127,1)";
+				tree.ctx.shadowOffsetX = 5;
+				tree.ctx.shadowOffsetY = 5;
+				tree.ctx.shadowBlur = 1;
+				
 				switch (tree.config.linkType)
 				{
 					case "M":						
-						tree.ctx.moveTo(xa,ya);
-						tree.ctx.lineTo(xb,yb);
-						tree.ctx.lineTo(xc,yc);
-						tree.ctx.lineTo(xd,yd);						
+						tree.ctx.moveTo(xa-3*k,ya);
+						tree.ctx.moveTo(xa+3*k,ya);
+						tree.ctx.quadraticCurveTo(xb, yb, xd, yd);
+						//tree.ctx.lineTo(xb,yb);
+						//tree.ctx.lineTo(xc,yc);
+						//tree.ctx.lineTo(xd,yd);
 						break;
 						
 					case "B":
@@ -285,8 +295,8 @@ ECOTree = function (obj, elm) {
 		topYAdjustment : 0,		
 		render : "AUTO",
 		linkType : "M",
-		linkColor : "blue",
-		nodeColor : "#CCCCFF",
+		linkColor : "#458BF2",
+		nodeColor : "#458BF2",
 		nodeFill : ECOTree.NF_GRADIENT,
 		nodeBorderColor : "blue",
 		nodeSelColor : "#FFFFCC",
@@ -326,7 +336,7 @@ ECOTree = function (obj, elm) {
 	this.root = new ECONode(-1, null, null, 2, 2);
 	this.iSelectedNode = -1;
 	this.iLastSearch = 0;
-	
+	console.log("NodeTree construct..."+this.nDatabaseNodes.length);
 }
 
 //Constant values
@@ -657,12 +667,23 @@ ECOTree.prototype._selectAllInt = function (flag) {
 	this.UpdateTree();
 }
 
+ECOTree._loadImages = function (tree){  
+    var image = new Image();
+    image.src = "imgs/meter.png";
+    var i = tree.nDatabaseNodes.length;
+    console.log("database node length:"+i);
+    for (var n = 0; n < tree.nDatabaseNodes.length; n++)
+	{ 
+		node = this.nDatabaseNodes[n];	console.log("this.node.YPosition:"+node.YPosition);
+    this.ctx.drawImage (image, node.XPosition, node.YPosition, node.w, node.h); 
+}  
+}  
+
 ECOTree.prototype._drawTree = function () {
 	var s = [];
 	var node = null;
 	var color = "";
 	var border = "";
-			
 	for (var n = 0; n < this.nDatabaseNodes.length; n++)
 	{ 
 		node = this.nDatabaseNodes[n];
@@ -699,9 +720,13 @@ ECOTree.prototype._drawTree = function () {
 						case ECOTree.NF_FLAT:
 							this.ctx.fillStyle = ((node.isSelected)?this.config.nodeSelColor:color);
 							break;
-					}					
+					}			
 					
-					ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
+					console.log("node x:"+node.XPosition+", y:"+node.YPosition);
+					var img = new Image();
+					img.src = "imgs/meter.png";
+					this.ctx.drawImage(img, node.XPosition,node.YPosition,node.w,node.h);//,node.w,node.h);
+					//ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
 					var textWidth = this.ctx.measureText(node.meta).width; 
 					var textSize = 11;
 			        this.ctx.font= textSize + "px serif";
@@ -786,13 +811,13 @@ ECOTree.prototype._drawTree = function () {
 
 ECOTree.prototype.toString = function () {	
 	var s = [];
-	
+	console.log("====toString===");
 	this._positionTree();
-	
+	console.log("====_positionTree===");
 	switch (this.render)
 	{
 		case "CANVAS":
-			s.push('<canvas id="ECOTreecanvas" width=2000 height=1000></canvas>');
+			s.push('<canvas id="ECOTreecanvas" style="overflow:auto;" width=1024 height=800></canvas>');
 			break;
 			
 		case "HTML":
@@ -821,6 +846,7 @@ ECOTree.prototype.UpdateTree = function () {
 			this.canvasoffsetLeft = canvas.offsetLeft;
 			this.canvasoffsetTop = canvas.offsetTop;
 			this.ctx = canvas.getContext('2d');
+			
 			var h = this._drawTree();	
 			var r = this.elm.ownerDocument.createRange();
 			r.setStartBefore(this.elm);

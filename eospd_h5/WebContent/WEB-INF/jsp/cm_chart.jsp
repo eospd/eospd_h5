@@ -22,7 +22,8 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="panel-body">
-                    <div id = "topo_canvas" class="col-lg-12">
+                    <div style="overflow: auto" id="topo_canvas" class="col-lg-12">
+                    </div>
                     </div>
                 </div>
                 </div>
@@ -63,14 +64,14 @@
 					<script type="text/javascript" >
 					var CreateTree = function() {
 				myTree = new ECOTree('myTree','topo_canvas');		
-				//	myTree.config.linkType = 'B';
-				myTree.config.iRootOrientation = ECOTree.RO_LEFT;						
+				//myTree.config.linkType = 'B';
+				//myTree.config.iRootOrientation = ECOTree.RO_LEFT;						
 				//myTree.config.topYAdjustment = -180;
-				myTree.config.linkColor = "black";
-				myTree.config.nodeColor = "#FFAAAA";
-				myTree.config.nodeBorderColor = "black";
+				//myTree.config.linkColor = "black";
+				//myTree.config.nodeColor = "#FFAAAA";
+				//myTree.config.nodeBorderColor = "black";
 				myTree.config.useTarget = false;
-				myTree.config.iLevelSeparation = 80;
+				//myTree.config.iLevelSeparation = 60;
 				//myTree.config.selectMode = ECOTree.SL_SINGLE;			
 				//(id, pid, dsc, w, h, c, bc, target, meta)		
 				myTree.add(0,-1,"Apex Node", 100, 50, "#CCCCFF", "#CCCCFF", "head", "能源采集系统");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
