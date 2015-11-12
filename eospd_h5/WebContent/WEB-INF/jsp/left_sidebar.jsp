@@ -30,14 +30,6 @@
 					class="fa fa-table fa-fw"></i> 通讯管理</a></li>
 			<li><a href="/eospd_h5/cm_his"><i class="fa fa-table fa-fw"></i>
 					历史数据</a></li>
-			<!--  
-			<li><a href="#"><i
-					class="fa fa-edit fa-fw"></i> 能流图 <span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="false">
-					<li><a href="/eospd_h5/efd_chart">电支路结构</a></li>
-					<li><a href="/eospd_h5/efd_his">电支路信息</a></li>
-				</ul> <!-- /.nav-second-level -->
-			</li>
 
 			<li><a href="/eospd_h5/efd_chart"><i
 					class="fa fa-edit fa-fw"></i> 能流图 </a></li>

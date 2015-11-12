@@ -22,118 +22,111 @@ import com.eospd.bean.DataOnTime;
 import com.eospd.bean.DevOnline;
 
 public class CommunicationManagement {
-	
+
 	@At("/cm")
 	@Ok("jsp:jsp.communication_management")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public String index() {
-        return "";
-    }
-	
+	public String index() {
+		return "";
+	}
+
 	@At("/cm_chart")
 	@Ok("jsp:jsp.cm_chart")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public String chart() {
-        return "";
-    }
-	
+	public String chart() {
+		return "";
+	}
+
 	@At("/cm_his")
 	@Ok("jsp:jsp.cm_his")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-    public String his() {
-        return "";
-    }
-	
+	public String his() {
+		return "";
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/cm/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
-			@Param(value = "draw") int draw, @Param("search[value]") String tsearch, @Param("columns[1][search][value]") int deviceType) {
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch,
+			@Param("columns[1][search][value]") int deviceType) {
 		/*
-		 * 			"data" : "currentTime"
-		}, {
-			"data" : "deviceType"
-		}, {
-			"data" : "deviceUrl"
-		}, {
-			"data" : "deviceStatus"
-		}, {
-			"data" : "bpSign"
+		 * "data" : "currentTime" }, { "data" : "deviceType" }, { "data" :
+		 * "deviceUrl" }, { "data" : "deviceStatus" }, { "data" : "bpSign"
 		 */
-		
 
-			Dao dao = Mvcs.getIoc().get(Dao.class);
+		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-			String sqlString = null;
-			String sqlString1 = null;
-			
-			if (deviceType == 1) {
-				sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId limit $start, $length";
-				sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId";
-			} else if (2 == deviceType) {
-				sqlString = "SELECT a.currentTime, a.deviceType, b.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId limit $start, $length";
-				sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
-			} else {
-				sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId union SELECT a.currentTime, a.deviceType, c.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` c WHERE a. deviceType = 2 and a.deviceId = c.deviceId limit $start, $length";
-				sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline`;";
-			}
-			
-			Sql sql = Sqls.create(sqlString);
+		String sqlString = null;
+		String sqlString1 = null;
 
-			sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
-
-			sql.setCallback(new SqlCallback() {
-				public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
-
-					List<Object> data = new ArrayList<Object>();
-					while (rs.next()) {
-						Map<Object, Object> map1 = new HashMap<Object, Object>();
-						map1.put("currentTime",
-								new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("currentTime")));
-						
-						if (1 == rs.getInt("deviceType")){
-							map1.put("deviceType", "数据采集器");
-						} else {
-							map1.put("deviceType", "仪表");
-						}
-						map1.put("deviceUrl", rs.getString("deviceUrl"));
-						int s = rs.getInt("deviceStatus");
-						String deviceStatus = "离线";
-						if (1 == s) {
-							deviceStatus = "在线";
-						} else if (2 == s) {
-							deviceStatus = "重启";
-						}
-						map1.put("deviceStatus", deviceStatus);	
-						map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重启"));
-						data.add(map1);
-					}
-					return data;
-				}
-			});
-
-			dao.execute(sql);
-
-			Sql sql1 = Sqls.create(sqlString1);
-
-			sql1.setCallback(new SqlCallback() {
-				public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
-					int recordsTotal = 0;
-					while (rs.next()) {
-						recordsTotal = rs.getInt("recordsTotal");
-					}
-					return recordsTotal;
-				}
-			});
-			dao.execute(sql1);
-
-			Map<Object, Object> map = new HashMap<Object, Object>();
-			map.put("draw", draw + 1);
-			map.put("recordsFiltered", sql1.getResult());
-			map.put("recordsTotal", sql1.getInt());
-			map.put("data", sql.getResult());
-
-			return map;
+		if (deviceType == 1) {
+			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId limit $start, $length";
+			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId";
+		} else if (2 == deviceType) {
+			sqlString = "SELECT a.currentTime, a.deviceType, b.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId limit $start, $length";
+			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
+		} else {
+			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId union SELECT a.currentTime, a.deviceType, c.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` c WHERE a. deviceType = 2 and a.deviceId = c.deviceId limit $start, $length";
+			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline`;";
 		}
+
+		Sql sql = Sqls.create(sqlString);
+
+		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
+
+		sql.setCallback(new SqlCallback() {
+			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+
+				List<Object> data = new ArrayList<Object>();
+				while (rs.next()) {
+					Map<Object, Object> map1 = new HashMap<Object, Object>();
+					map1.put("currentTime",
+							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("currentTime")));
+
+					if (1 == rs.getInt("deviceType")) {
+						map1.put("deviceType", "数据采集器");
+					} else {
+						map1.put("deviceType", "仪表");
+					}
+					map1.put("deviceUrl", rs.getString("deviceUrl"));
+					int s = rs.getInt("deviceStatus");
+					String deviceStatus = "离线";
+					if (1 == s) {
+						deviceStatus = "在线";
+					} else if (2 == s) {
+						deviceStatus = "重启";
+					}
+					map1.put("deviceStatus", deviceStatus);
+					map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重启"));
+					data.add(map1);
+				}
+				return data;
+			}
+		});
+
+		dao.execute(sql);
+
+		Sql sql1 = Sqls.create(sqlString1);
+
+		sql1.setCallback(new SqlCallback() {
+			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+				int recordsTotal = 0;
+				while (rs.next()) {
+					recordsTotal = rs.getInt("recordsTotal");
+				}
+				return recordsTotal;
+			}
+		});
+		dao.execute(sql1);
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("draw", draw + 1);
+		map.put("recordsFiltered", sql1.getResult());
+		map.put("recordsTotal", sql1.getInt());
+		map.put("data", sql.getResult());
+
+		return map;
+	}
 }

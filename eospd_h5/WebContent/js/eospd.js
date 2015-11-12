@@ -1,3 +1,13 @@
+function mm_his() {
+	gen_dc_div();
+
+	$('.input-daterange input').each(function() {
+    	var d = new Date()
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
+	});
+}
+
 function col_his() {
 	gen_all_meter();	
 	$('#dm_table').DataTable({
@@ -100,6 +110,63 @@ function add_efd() {
 		 powerPhase: $('.powerPhase')[0].value}, function(result){
 		    alert(result);
 	 });
+}
+
+function gen_meter_div(){
+	gen_all_meter();
+	document.getElementById("home").innerHTML ="";
+	$('#home').html('<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th></tr></thead></table></div>');
+	
+	$('#dm_table').DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax" : {
+			"url" : "/eospd_h5/mm/meter/list",
+			"type" : "POST"
+		},
+		"columns" : [  {
+			"data" : "deviceUrl"
+		}, {
+			"data" : "typeName"
+		}, {
+			"data" : "deviceCommAddr"
+		}, {
+			"data" : "location"
+		}, {
+			"data" : "desc"
+		}, {
+			"data" : "dcUrl"
+		} ]
+	});
+}
+function gen_dc_div(){
+	gen_all_dc();
+	document.getElementById("home").innerHTML ="";
+	$('#home').html('<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>采集器URl</th><th>采集器名称</th><th>位置</th><th>描述</th><th>通道数量</th><th>IP</th><th>安装时间</th></tr></thead></table></div>');
+	$('#dm_table').DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax" : {
+			"url" : "/eospd_h5/mm/dc/list",
+			"type" : "POST"
+		},
+		"columns" : [  {
+			"data" : "dcUrl"
+		}, {
+			"data" : "dcName"
+		}, {
+			"data" : "location"
+		}, {
+			"data" : "desc"
+		}, {
+			"data" : "channelCount"
+		}, {
+			"data" : "dcIP"
+		}, {
+			"data" : "installTime"
+		} ]
+	});
+	
 }
 
 function getMyEcharts(obj) {

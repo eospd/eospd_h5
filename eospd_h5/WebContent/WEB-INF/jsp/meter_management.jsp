@@ -90,8 +90,8 @@
 															全部采集器 <span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu pull-right" role="menu">
-															<li onclick=gen_all_dc()><a href="#">全部采集器</a></li>
-															<li onclick=gen_all_meter()><a href="#">全部仪表</a></li>
+															<li onclick=gen_dc_div()><a href="#">全部采集器</a></li>
+															<li onclick=gen_meter_div()><a href="#">全部仪表</a></li>
 														</ul>
 													</div>
 												</div>
@@ -102,24 +102,7 @@
 									<!-- Tab panes -->
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="home">
-											<div class="dataTable_wrapper">
-												<table
-													class="table table-striped table-bordered table-hover"
-													id="dm_table">
-													<thead>
-														<tr>
-															<th>时间</th>
-															<th>仪表ID</th>
-															<th>仪表名称</th>
-															<th>采集器ID</th>
-															<th>采集器名称</th>
-															<th>厂商</th>
-															<th>电支路名称</th>
-														</tr>
-													</thead>
-												</table>
-											</div>
-											<!-- /.table-responsive -->
+
 										</div>
 									</div>
 								</div>
@@ -158,37 +141,9 @@
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
-		$(document).ready(function() {
-			$('#dm_table').DataTable({
-				"processing" : true,
-				"serverSide" : true,
-				"ajax" : {
-					"url" : "/eospd_h5/mm/list",
-					"type" : "POST"
-				},
-				"columns" : [  {
-					"data" : "currentTime"
-				}, {
-					"data" : "meterId"
-				}, {
-					"data" : "meterName"
-				}, {
-					"data" : "dcId"
-				}, {
-					"data" : "dcName"
-				}, {
-					"data" : "venderName"
-				}, {
-					"data" : "circuitName"
-				} ]
+		$(document).ready(function() { 
+			mm_his();
 			});
-
-			$('.input-daterange input').each(function() {
-		    	var d = new Date()
-		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
-		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
-			});
-		});
 	</script>
 
 </body>

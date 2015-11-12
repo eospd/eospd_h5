@@ -55,11 +55,11 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 
-    <script src="js/echarts.js"></script>
-    <script src="js/eospd.js"></script>
+	<script src="js/echarts.js"></script>
+	<script src="js/eospd.js"></script>
 
-<script type="text/javascript" src="js/ECOTree.js"></script>
-	<script type="text/javascript" >
+	<script type="text/javascript" src="js/ECOTree.js"></script>
+	<script type="text/javascript">
 			var CreateTree = function() {
 				myTree = new ECOTree('myTree','topo_canvas');		
 				myTree.config.linkType = 'B';
@@ -85,7 +85,7 @@
 				myTree.add(7,5,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/chwp/1\n支路名称:浦东T2能源站1号冷却泵支路\n额定电率:500A");
 				myTree.UpdateTree();
 			}			
-		</script>	
+		</script>
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
