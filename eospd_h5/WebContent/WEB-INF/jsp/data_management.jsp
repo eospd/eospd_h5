@@ -6,69 +6,76 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
+	<div class="row">
+		<div class="col-md-1 left-right-empty"></div>
+		<div class="col-md-10 left-right-empty">
 
-	<div id="wrapper">
+			<div id="wrapper">
 
-		<jsp:include page="left_sidebar.jsp"></jsp:include>
+				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
-		<div id="page-wrapper">
+				<div id="page-wrapper">
 
-			<div class="row">
-				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12">
 
-					<div class="panel panel-default">
-						<div class="panel-heading">数据管理</div>
-						<div class="panel-body">
-							<table class="table table-bordered" id="filter_table">
-								<tr>
-									<th>
-										<div class="pull-left">累计</div>
-									</th>
-									<th style="width: 400px;">
-										<div class="input-group input-daterange pull-right">
-											<input type="text" class="form-control" value=""> <span
-												class="input-group-addon">到</span> <input type="text"
-												class="form-control" value="">
-										</div>
-									</th>
-								</tr>
-							</table>
-							<div class="dataTable_wrapper" style="overflow: auto">
-								<table class="table table-striped table-bordered table-hover"
-									id="dm_table">
-									<thead>
+							<div class="panel panel-default">
+								<div class="panel-heading">数据管理</div>
+								<div class="panel-body">
+									<table class="table table-bordered" id="filter_table">
 										<tr>
-											<th>采集时间</th>
-											<th>断点续传</th>
-											<th>电支路</th>
-											<th>插值标志</th>
-											<th>总电量</th>
-											<th>总电量错误标志</th>
-											<th>总电量差值</th>
-											<th>总电量归零标志</th>
-											<th>总功率</th>
-											<th>总功率因数</th>
-											<th>A相电流</th>
-											<th>B相电流</th>
-											<th>C相电流</th>
-											<th>A相电压</th>
-											<th>B相电压</th>
-											<th>C相电压</th>
+											<th>
+												<div class="pull-left">累计</div>
+											</th>
+											<th style="width: 400px;">
+												<div class="input-group input-daterange pull-right">
+													<input type="text" class="form-control" value=""> <span
+														class="input-group-addon">到</span> <input type="text"
+														class="form-control" value="">
+												</div>
+											</th>
 										</tr>
-									</thead>
-								</table>
+									</table>
+									<div class="dataTable_wrapper" style="overflow: auto">
+										<table class="table table-striped table-bordered table-hover"
+											id="dm_table">
+											<thead>
+												<tr>
+													<th>采集时间</th>
+													<th>断点续传</th>
+													<th>电支路</th>
+													<th>插值标志</th>
+													<th>总电量</th>
+													<th>总电量错误标志</th>
+													<th>总电量差值</th>
+													<th>总电量归零标志</th>
+													<th>总功率</th>
+													<th>总功率因数</th>
+													<th>A相电流</th>
+													<th>B相电流</th>
+													<th>C相电流</th>
+													<th>A相电压</th>
+													<th>B相电压</th>
+													<th>C相电压</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+									<!-- /.table-responsive -->
+								</div>
 							</div>
-							<!-- /.table-responsive -->
 						</div>
+						<!-- /.panel-body -->
 					</div>
+					<!-- /.col-lg-12 -->
 				</div>
-				<!-- /.panel-body -->
+				<!-- /#page-wrapper -->
 			</div>
-			<!-- /.col-lg-12 -->
+			<!-- /#wrapper -->
+
 		</div>
-		<!-- /#page-wrapper -->
+		<div class="col-md-1 left-right-empty"></div>
 	</div>
-	<!-- /#wrapper -->
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

@@ -6,7 +6,9 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
-
+	<div class="row">
+		<div class="col-md-1 left-right-empty"></div>
+		<div class="col-md-10 left-right-empty">
 	<div id="wrapper">
 
 		<jsp:include page="left_sidebar.jsp"></jsp:include>
@@ -74,7 +76,9 @@
 		</div>
 		<!-- /#wrapper -->
 	</div>
-
+		</div>
+		<div class="col-md-1 left-right-empty"></div>
+	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>

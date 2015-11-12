@@ -9,7 +9,6 @@ body {
 }
 
 #wrapper {
-    width: 960px;
     border-top-color:#555963;
     background:rgb(45,52,61);
     border-width: 1px;
@@ -413,7 +412,7 @@ table.dataTable thead .sorting:after {
 	margin-top: 10px;
 }
 
-.panel-body{
+.panel-body, .dataTable_wrapper{
 	color: #fff;
 }
 
@@ -422,4 +421,25 @@ table.dataTable thead .sorting:after {
 }
 .table-hover>tbody>tr:hover {
 	color:black;
+}
+body{text-align:center}
+
+.div-center{
+	margin:0 auto; 
+	}
+.div{
+	margin:0 auto; 
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	border-color: rgb(50,55,65);
+	}
+.border{
+	border:1px;
+	border-style: solid;
+}
+.left-right-empty{
+	background-color:rgb(50,50,50);
+	height:696px;
 }

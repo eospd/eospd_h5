@@ -8,29 +8,26 @@
 <body>
 
 	<div id="wrapper">
-		
-		<jsp:include page="left_sidebar.jsp"></jsp:include>	
+
+		<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 
-	    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    	通讯管理
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div id = "topo_canvas" class="col-lg-12">
-                    </div>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">通讯管理</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div id="topo_canvas" class="col-lg-12"></div>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+
 		</div>
 		<!-- /#page-wrapper -->
 
@@ -54,12 +51,12 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 
-    <script src="js/echarts.js"></script>
-    <script src="js/eospd.js"></script>
+	<script src="js/echarts.js"></script>
+	<script src="js/eospd.js"></script>
 
 
 	<script type="text/javascript" src="js/ECOTree.js"></script>
-					<script type="text/javascript" >
+	<script type="text/javascript">
 					var CreateTree = function() {
 				myTree = new ECOTree('myTree','topo_canvas');		
 				//	myTree.config.linkType = 'B';

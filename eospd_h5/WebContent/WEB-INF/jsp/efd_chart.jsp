@@ -6,39 +6,39 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
+	<div class="row">
+		<div class="col-md-1 left-right-empty"></div>
+		<div class="col-md-10 left-right-empty">
+			<div id="wrapper">
+				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
-	<div id="wrapper">
-		
-		<jsp:include page="left_sidebar.jsp"></jsp:include>	
+				<div id="page-wrapper">
 
-		<div id="page-wrapper">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">电支路结构</div>
+								<!-- /.panel-heading -->
+								<div class="panel-body">
+									<div class="panel-body">
+										<div style="overflow: auto" id="topo_canvas" class="col-lg-12">
+										</div>
+									</div>
+									<!-- /.panel-body -->
+								</div>
+								<!-- /.panel -->
+							</div>
+							<!-- /.col-lg-12 -->
+						</div>
 
-	    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                   		电支路结构
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="panel-body">
-                    <div style="overflow: auto" id = "topo_canvas" class="col-lg-12">
-                    </div>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-			
+					</div>
+					<!-- /#page-wrapper -->
+				</div>
+			</div>
+			<!-- /#wrapper -->
 		</div>
-		<!-- /#page-wrapper -->
-
-
+		<div class="col-md-1 left-right-empty"></div>
 	</div>
-	<!-- /#wrapper -->
-
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 

@@ -2,86 +2,76 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
-<style>
-body{text-align:center}
-.div-center{
-	margin:0 auto; 
-	}
-.div{
-	margin:0 auto; 
-	padding-top: 40px;
-	padding-bottom: 40px;
-	border-bottom-width:1px;
-	border-bottom-style:solid;
-	border-color: rgb(50,55,65);
-	}
-.border{
-	border:1px;
-	border-style: solid;
-}
-
-</style>
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
+	<div class="row">
+		<div class="col-md-1 left-right-empty"></div>
+		<div class="col-md-10 left-right-empty">
+			<div id="wrapper">
 
-	<div id="wrapper">
+				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
-		<jsp:include page="left_sidebar.jsp"></jsp:include>
+				<div id="page-wrapper">
 
-		<div id="page-wrapper">
-						
-							<div class="panel-body">
-							
-							<table class="table-none" 
-											id="filter_table">
-											<tr>
-											<th></th>
-											<th style="width:250px;padding-left:10px">
-									<div class="input-group input-daterange pull-right" >
-										<span class="input-group-addon" >选择日期：</span> <input type="text"
-												class="form-control" value="">
-										</div>
-										</th>
-										<th>
-										<button id = "btn_refresh" class="color black button" style="margin-left:250px" >刷新</button>
-										</th></tr>
-										</table>
-										<div class="div">
-												<canvas id="meter_canvas" width=508 height=220 style="margin:0 auto;"></canvas>
-										</div>
-										
-										<div class="div" style="height:90px; padding-top:10px">
-										<div class="row" >
-										<div class="col-lg-3">
-										<button class="color black button" >机场电力</button>
-										</div><div class="col-lg-3">
-										<button class="color black button" >远程抄表</button>
-										</div><div class="col-lg-3">
-										<button class="color green button" >电力监控</button>
-										</div><div class="col-lg-3">
-										<button class="color black button" >能量监控</button>
-										</div>
-										</div>
-										
-										<div class="row" style="padding-top:10px;">
-										<div class="col-lg-4">
-										<button class="color black button" >楼宇自动系统</button>
-										</div>
-										<div class="col-lg-4">
-										<button class="color black button" >机房群控系统</button>
-										</div>
-										<div class="col-lg-4">
-										<button class="color black button" >照明控制系统</button>
-										</div>
-										</div>
-										</div>
-										</div>
-										</div>
+					<div class="panel-body">
+
+						<table class="table-none" id="filter_table">
+							<tr>
+								<th></th>
+								<th style="width: 250px; padding-left: 10px">
+									<div class="input-group input-daterange pull-right">
+										<span class="input-group-addon">选择日期：</span> <input
+											type="text" class="form-control" value="">
+									</div>
+								</th>
+								<th>
+									<button id="btn_refresh" class="color black button"
+										style="margin-left: 250px">刷新</button>
+								</th>
+							</tr>
+						</table>
+						<div class="div">
+							<canvas id="meter_canvas" width=508 height=220
+								style="margin:0 auto;"></canvas>
+						</div>
+
+						<div class="div" style="height: 90px; padding-top: 10px">
+							<div class="row">
+								<div class="col-lg-3">
+									<button class="color black button">机场电力</button>
+								</div>
+								<div class="col-lg-3">
+									<button class="color black button">远程抄表</button>
+								</div>
+								<div class="col-lg-3">
+									<button class="color green button">电力监控</button>
+								</div>
+								<div class="col-lg-3">
+									<button class="color black button">能量监控</button>
+								</div>
+							</div>
+
+							<div class="row" style="padding-top: 10px;">
+								<div class="col-lg-4">
+									<button class="color black button">楼宇自动系统</button>
+								</div>
+								<div class="col-lg-4">
+									<button class="color black button">机房群控系统</button>
+								</div>
+								<div class="col-lg-4">
+									<button class="color black button">照明控制系统</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /#wrapper -->
 		</div>
-		<!-- /#wrapper -->
-
-		<!-- jQuery -->
+		<div class="col-md-1 left-right-empty"></div>
+	</div>
+	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 
@@ -102,8 +92,8 @@ body{text-align:center}
 	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
 
-		<script type="text/javascript" src="js/ECOTree.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="js/ECOTree.js"></script>
+	<script type="text/javascript">
 		function loadImages(sources, callback) {
 	        var images = {};
 	        var loadedImages = 0;
@@ -299,7 +289,7 @@ body{text-align:center}
 		};
 			
 		</script>
-		               <script>
+	<script>
                        $(document).ready(function() {
                     	   loadImages(sources, animat);
                            $('#dm_table').DataTable({
@@ -370,9 +360,9 @@ body{text-align:center}
                        };
                        
                </script>
-		
-		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-		
+
+	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
 </body>
 
 </html>
