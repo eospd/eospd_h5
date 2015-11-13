@@ -187,6 +187,9 @@
 		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
 		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 			});
+			$("#def_page").click(function() {
+				window.location.href="/eospd_h5/efd";
+			});
 		});
 	</script>
 

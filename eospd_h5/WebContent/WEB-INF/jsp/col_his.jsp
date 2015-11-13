@@ -103,6 +103,9 @@
 				col_his();	
 				$("#his_page").toggleClass('active');
 				$("#index").toggleClass('active');
+				$("#def_page").click(function() {
+					window.location.href="/eospd_h5/efd_chart";
+				});
 			});
 		</script>
 </body>
