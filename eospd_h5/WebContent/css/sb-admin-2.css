@@ -30,6 +30,11 @@ body {
     }
 }
 
+.navbar {
+    position: relative;
+    height: 56px;
+}
+
 .navbar-top-links {
     margin-right: 0;
 }
@@ -142,13 +147,12 @@ cursor: pointer;
 }
 
 .sidebar-right ul li {
-    background-color: rgba(45,52,61,1);
+    background-color: rgb(45,52,61);
     color: white;
-    border-bottom-color: #000000;
 }
 
 .sidebar-right ul li a.active {
-    background-color: rgba(30,35,43,1);
+    background-color: rgb(45,52,61);
     color: white;
 }
 
@@ -181,13 +185,17 @@ cursor: pointer;
 	border-style: none;
 }
 
+.table tbody tr th {
+	border: none;
+}
+
 
 @media(min-width:768px) {
     .sidebar {
         z-index: 1;
         position: absolute;
         width: 180px;
-        margin-top: 51px;
+        margin-top: 56px;
     }
 
     .navbar-top-links .dropdown-messages,

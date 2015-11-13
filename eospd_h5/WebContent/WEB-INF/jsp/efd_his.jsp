@@ -16,13 +16,10 @@
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									电支路信息
-									<div class="pull-right">
-										<button "class="btn btn-default" data-toggle="modal"
+									<div class="pull-right" style="margin-bottom: 10px">
+										<button class="color black button" data-toggle="modal"
 											data-target="#myModal">增加电支路</button>
 									</div>
-								</div>
 
 								<!-- modal window -->
 								<!-- Modal -->
@@ -158,6 +155,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(function() {
+			$("#efd").toggleClass('active');
 			$('#dm_table').DataTable({
 				"processing" : true,
 				"serverSide" : true,
@@ -186,7 +184,7 @@
 			});
 			$('.input-daterange input').each(function() {
 		    	var d = new Date()
-		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+		    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
 		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 			});
 		});

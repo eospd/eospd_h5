@@ -20,12 +20,10 @@
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
-								<div class="panel-heading">数据管理</div>
 								<div class="panel-body">
-									<table class="table table-bordered" id="filter_table">
+									<table class="table" id="filter_table">
 										<tr>
 											<th>
-												<div class="pull-left">累计</div>
 											</th>
 											<th style="width: 400px;">
 												<div class="input-group input-daterange pull-right">
@@ -150,7 +148,7 @@
 								$(this).val(
 										d.getFullYear() + "年"
 												+ (d.getMonth() + 1) + "月"
-												+ (d.getDay() + 1) + "日");
+												+ (d.getDate()) + "日");
 								$(this).datepicker({
 									language : 'zh-CN',
 									autoclose : true,

@@ -99,6 +99,10 @@
   border-color: #57a957;
 }
 
+.button:focus{
+	border:none;
+}
+
 .button.green:hover {
   background-color: #62c462;
 }
@@ -139,7 +143,11 @@
 
 .button.black {
   background-color: #3b404a;
-  border-color: #00001c;
+  border-color: #3b404a;
+}
+
+.button.black:active {
+  background: #269CE9;
 }
 
 

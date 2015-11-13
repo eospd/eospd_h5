@@ -26,11 +26,8 @@ body p {
 }
 
 .navbar-default {
-    border-top-color:#555963;
-    border-top-width:1px;
     background:-webkit-gradient(linear, 0 0, 0 100%, from(#4A4D57), to(#3E434D)); 
-    border-bottom-color: #40454F;
-    border-bottom-width: 1px;
+	border:none;
 }
 .navbar-default .navbar-nav > li.active > a {
     background-color: transparent;
@@ -38,7 +35,7 @@ body p {
     font-weight: bolder;
     border-bottom: 3px solid rgb(62,152, 197);
 }
-@media (max-width: 980px) {
+@media (max-width: 960px) {
     .navbar-default .navbar-nav > li > a {
         padding-left: 8px;
         padding-right: 8px;
@@ -117,8 +114,8 @@ hr {
 }
 
 .row {
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 .jumbotron {
     margin: 0;
@@ -210,7 +207,6 @@ hr {
     padding: 25px 0;
 }
 .sidebar-nav {
-    padding: 9px 0;
     margin-bottom: 0;
 }
 .nav-header {

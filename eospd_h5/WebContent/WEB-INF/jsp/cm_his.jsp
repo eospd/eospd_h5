@@ -17,13 +17,11 @@
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
-								<div class="panel-heading">历史数据</div>
 								<div class="panel-body">
 
-									<table class="table table-bordered" id="filter_table">
+									<table class="table " id="filter_table">
 										<tr>
 											<th>
-												<div class="pull-left">累计</div>
 											</th>
 											<th style="width: 400px">
 												<div class="input-group input-daterange pull-right">
@@ -114,9 +112,13 @@
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
-	$(document).ready(function() {
-		cm_his();
-	});
+		$(document).ready(function(){
+			cm_his();
+			$("#def_page").click(function() {
+				window.location.href="/eospd_h5/cm_chart";
+			});
+			$("#cm").toggleClass('active');
+		});	
 	</script>
 </body>
 </html>

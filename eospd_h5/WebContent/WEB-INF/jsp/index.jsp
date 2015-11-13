@@ -19,7 +19,7 @@
 						<table class="table-none" id="filter_table">
 							<tr>
 								<th></th>
-								<th style="width: 250px; padding-left: 10px">
+								<th style="width: 250px; padding-left: 10px; padding-top: 10px">
 									<div class="input-group input-daterange pull-right">
 										<span class="input-group-addon">选择日期：</span> <input
 											type="text" class="form-control" value="">
@@ -27,7 +27,7 @@
 								</th>
 								<th>
 									<button id="btn_refresh" class="color black button"
-										style="margin-left: 250px">刷新</button>
+										style="margin-left: 370px">刷新</button>
 								</th>
 							</tr>
 						</table>
@@ -289,7 +289,8 @@
 		};
 			
 		</script>
-	<script>
+
+        <script>
                        $(document).ready(function() {
                     	   loadImages(sources, animat);
                            $('#dm_table').DataTable({
@@ -330,13 +331,17 @@
                         	   //midV = data.dataEffRate;
                         	   //rightV = data.meterOnlineRate;
                         	   });
+                           
+                           $("#his_page").click(function(){
+                        	   window.location.href="/eospd_h5/col_his";
+                           });
                        
                        });
                        
                        getMeterData = function (date, deviceid) {
             			   var time = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
                     	   $.get('/eospd_h5/cid/sys_spec?time='+time+'&deviceid='+deviceid,  function(result){
-                   		 	
+                    		   
                    	        $.each(result, function(key, val) {
                    	        	$.each(val, function(a, b) {
                    	        		if (a == 'dataEffRate') {
@@ -349,7 +354,6 @@
                    	        			leftV = b;
                    	        		}
                    	        		
-                   	        	console.log(a+" "+b);
                    	        	});
                    	        });
 

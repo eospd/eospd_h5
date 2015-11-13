@@ -3,7 +3,7 @@ function mm_his() {
 
 	$('.input-daterange input').each(function() {
     	var d = new Date()
-    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 	});
 }
@@ -32,7 +32,7 @@ function col_his() {
 	
 	$('.input-daterange input').each(function() {
     	var d = new Date()
-    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 	});
 }
@@ -61,7 +61,7 @@ function cm_his() {
 
 	$('.input-daterange input').each(function() {
     	var d = new Date()
-    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDay() + 1) + "日");
+    	$(this).val(d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (d.getDate()) + "日");
         $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"});
 	});
 	

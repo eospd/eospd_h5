@@ -19,13 +19,6 @@
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									表具管理
-									<div class="pull-right">
-										<button "class="btn btn-default" data-toggle="modal"
-											data-target="#myModal">增加表具</button>
-									</div>
-								</div>
 
 								<!-- modal window -->
 
@@ -66,20 +59,18 @@
 								</div>
 
 								<div class="panel-body">
-									<table class="table table-bordered" id="filter_table">
+									<table class="table" id="filter_table">
 										<tr>
-											<th>
-												<div class="pull-left">累计</div>
-											</th>
-											<th style="width: 400px">
-												<div class="input-group input-daterange pull-right">
-													<input type="text" class="form-control" value=""> <span
-														class="input-group-addon">到</span> <input type="text"
-														class="form-control" value="">
-												</div>
-											</th>
+										<th><div class="pull-right">
+										<button class="color black button" data-toggle="modal"
+											data-target="#myModal">增加表具</button>
+									</div></th>
 											<th style="width: 100px">
-												<div class="btn-group dc-meter-dropdown"></div>
+												<div class="btn-group dc-meter-dropdown"><button type="button"
+															class="btn btn-default btn-xs dropdown-toggle"
+															data-toggle="dropdown">
+															全部采集器<span class="caret"></span>
+														</button></div>
 											</th>
 											<th style="width: 100px">
 												<div class="pull-right">
@@ -87,11 +78,11 @@
 														<button type="button"
 															class="btn btn-default btn-xs dropdown-toggle"
 															data-toggle="dropdown">
-															全部采集器 <span class="caret"></span>
+															采集器类型 <span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu pull-right" role="menu">
-															<li onclick=gen_dc_div()><a href="#">全部采集器</a></li>
-															<li onclick=gen_meter_div()><a href="#">全部仪表</a></li>
+															<li onclick=gen_dc_div()><a href="#">采集器类型</a></li>
+															<li onclick=gen_meter_div()><a href="#">仪表类型</a></li>
 														</ul>
 													</div>
 												</div>

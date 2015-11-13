@@ -18,12 +18,8 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">
-								<div class="panel-heading">系统配置</div>
-
 								<div class="panel-body">
 
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="home">
 
 											<div class="dataTable_wrapper">
 												<table
@@ -48,8 +44,7 @@
 									</div>
 								</div>
 								<!-- /.panel-body -->
-							</div>
-						</div>
+							
 						<!-- /.col-lg-12 -->
 					</div>
 

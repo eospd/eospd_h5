@@ -237,15 +237,15 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 				tree.ctx.lineCap="round";
 				tree.ctx.lineWidth = 3;
 				tree.ctx.shadowColor = "RGBA(127,127,127,1)";
-				tree.ctx.shadowOffsetX = 5;
-				tree.ctx.shadowOffsetY = 5;
+				tree.ctx.shadowOffsetX = 4;
+				tree.ctx.shadowOffsetY = 4;
 				tree.ctx.shadowBlur = 1;
 				
 				switch (tree.config.linkType)
 				{
 					case "M":						
-						tree.ctx.moveTo(xa-3*k,ya);
-						tree.ctx.moveTo(xa+3*k,ya);
+						tree.ctx.moveTo(xa-4*k,ya);
+						tree.ctx.moveTo(xa+4*k,ya);
 						tree.ctx.quadraticCurveTo(xb, yb, xd, yd);
 						//tree.ctx.lineTo(xb,yb);
 						//tree.ctx.lineTo(xc,yc);
@@ -297,7 +297,7 @@ ECOTree = function (obj, elm) {
 		linkType : "M",
 		linkColor : "#458BF2",
 		nodeColor : "#458BF2",
-		nodeFill : ECOTree.NF_GRADIENT,
+		nodeFill : ECOTree.NF_FLAT,
 		nodeBorderColor : "blue",
 		nodeSelColor : "#FFFFCC",
 		levelColors : ["#5555FF","#8888FF","#AAAAFF","#CCCCFF"],
@@ -675,8 +675,8 @@ ECOTree._loadImages = function (tree){
     for (var n = 0; n < tree.nDatabaseNodes.length; n++)
 	{ 
 		node = this.nDatabaseNodes[n];	console.log("this.node.YPosition:"+node.YPosition);
-    this.ctx.drawImage (image, node.XPosition, node.YPosition, node.w, node.h); 
-}  
+		this.ctx.drawImage (image, node.XPosition, node.YPosition, node.w, node.h); 
+	}  
 }  
 
 ECOTree.prototype._drawTree = function () {
@@ -722,15 +722,20 @@ ECOTree.prototype._drawTree = function () {
 							break;
 					}			
 					
-					console.log("node x:"+node.XPosition+", y:"+node.YPosition);
+					console.log("node.w:"+node.w+",node x:"+node.XPosition+", y:"+node.YPosition);
 					var img = new Image();
 					img.src = "imgs/meter.png";
-					this.ctx.drawImage(img, node.XPosition,node.YPosition,node.w,node.h);//,node.w,node.h);
-					//ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
+					//this.ctx.drawImage(img, node.XPosition,node.YPosition,node.w,node.h);//,node.w,node.h);
+					if (node.id != 1011 && node.id != 1021 && node.id != 1022){
+						ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
+					} else {
+						ECOTree._roundedRect(this.ctx,node.XPosition+25,node.YPosition,35,35,5);
+					}
+					
 					var textWidth = this.ctx.measureText(node.meta).width; 
-					var textSize = 11;
+					var textSize = 10;
 			        this.ctx.font= textSize + "px serif";
-			        this.ctx.fillStyle="grey";
+			        this.ctx.fillStyle="white";
 			        if (node.id == 0) {
 			        	this.ctx.fillText(node.meta,node.XPosition + (node.w-textWidth)/2,node.YPosition+(node.h-textSize)/2);
 			        } else {
@@ -817,7 +822,7 @@ ECOTree.prototype.toString = function () {
 	switch (this.render)
 	{
 		case "CANVAS":
-			s.push('<canvas id="ECOTreecanvas" style="overflow:auto;" width=1024 height=800></canvas>');
+			s.push('<canvas id="ECOTreecanvas" style="overflow:auto;" width=960 height=550></canvas>');
 			break;
 			
 		case "HTML":

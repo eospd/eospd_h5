@@ -26,7 +26,7 @@ import com.eospd.bean.CollectIndexDay;
 
 public class Collectindexday {
 
-	@At("/")
+	@At("/index")
 	@Ok("jsp:jsp.index")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public void index() {

@@ -16,18 +16,11 @@
 
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">电支路结构</div>
 								<!-- /.panel-heading -->
-								<div class="panel-body">
 									<div class="panel-body">
 										<div style="overflow: auto" id="topo_canvas" class="col-lg-12">
 										</div>
 									</div>
-									<!-- /.panel-body -->
-								</div>
-								<!-- /.panel -->
-							</div>
 							<!-- /.col-lg-12 -->
 						</div>
 
@@ -62,27 +55,26 @@
 	<script type="text/javascript">
 			var CreateTree = function() {
 				myTree = new ECOTree('myTree','topo_canvas');		
-				myTree.config.linkType = 'B';
+				//myTree.config.linkType = 'B';
 				//myTree.config.iRootOrientation = ECOTree.RO_TOP;						
 				//myTree.config.topYAdjustment = -180;
-				myTree.config.linkColor = "black";
-				myTree.config.nodeColor = "#FFAAAA";
-				myTree.config.nodeBorderColor = "black";
-				myTree.config.useTarget = false;
+				//myTree.config.linkColor = "black";
+				//myTree.config.nodeColor = "#FFAAAA";
+				//myTree.config.nodeBorderColor = "black";
+				//myTree.config.useTarget = false;
 				myTree.config.iLevelSeparation = 80;
-				myTree.config.iSiblingSeparation = 150;
+				//myTree.config.iSiblingSeparation = 150;
 				//myTree.config.selectMode = ECOTree.SL_SINGLE;			
 				//(id, pid, dsc, w, h, c, bc, target, meta)		
-				myTree.add(0,-1,"Apex Node", 100, 50, "#CCCCFF", "#CCCCFF", "head", "能源采集系统");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
-				var w = 70;
-				var h = 80;
-				myTree.add(1,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/total\n支路名称:浦东T2能源站总进线\n额定电率:500A");
-				myTree.add(2,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/cooler/1\n支路名称:浦东T2能源站1号冷机支路\n额定电率:500A");
-				myTree.add(3,1,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/chwp/1\n支路名称:浦东T2能源站1号冷却泵支路\n额定电率:500A");
-				myTree.add(4,1,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/cooler/1\n支路名称:浦东T2能源站2号冷机支路\n额定电率:500A");
-				myTree.add(5,0,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/cooler/1\n支路名称:浦东T2能源站2号冷机支路\n额定电率:500A");
-				myTree.add(6,5,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/chwp/2\n支路名称:浦东T2能源站2号冷却泵支路\n额定电率:500A");
-				myTree.add(7,5,"Apex Node", w, h, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/t2/eng_station/chwp/1\n支路名称:浦东T2能源站1号冷却泵支路\n额定电率:500A");
+				myTree.add(0,-1,"Apex Node", 150, 50, "rgb(40,159,86)", "rgb(40,159,86)", "head", "浦东T2能源站总进线\n500A");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
+				var w = 100;
+				var h = 50;
+				myTree.add(1,0,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n1号冷机支路\n额定电率:500A");
+				myTree.add(3,1,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/1\n1号冷却泵支路\n额定电率:500A");
+				myTree.add(4,1,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n2号冷机支路\n额定电率:500A");
+				myTree.add(5,0,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n2号冷机支路\n额定电率:500A");
+				myTree.add(6,5,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/2\n2号冷却泵支路\n额定电率:500A");
+				myTree.add(7,5,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/1\n1号冷却泵支路\n额定电率:500A");
 				myTree.UpdateTree();
 			}			
 		</script>
@@ -92,6 +84,9 @@
 		CreateTree();
         $('#dataTables-example').DataTable({
                 responsive: true
+        });
+        $("#his_page").click(function(){
+     	   window.location.href="/eospd_h5/efd_his";
         });
     });
     </script>
