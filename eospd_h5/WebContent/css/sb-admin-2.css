@@ -451,3 +451,7 @@ body{text-align:center}
 	background-color:rgb(50,50,50);
 	height:696px;
 }
+
+#dm_table_wrapper > div:nth-child(1) > div:nth-child(1) {
+	text-align: left;
+}

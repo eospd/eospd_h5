@@ -11,7 +11,6 @@
 
 <title>浦东机场能源管理系统</title>
 
-
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,10 +18,10 @@
 <link href="css/metisMenu.min.css" rel="stylesheet">
 
 <!-- DataTables CSS -->
-<link href="css/dataTables.bootstrap.css" rel="stylesheet">
-
-<!-- DataTables Responsive CSS -->
-<link href="css/dataTables.responsive.css" rel="stylesheet">
+<link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="css/select.bootstrap.min.css" rel="stylesheet">
+<link href="css/editor.bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="css/sb-admin-2.css" rel="stylesheet">

@@ -4,32 +4,98 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
 import org.nutz.dao.sql.SqlCallback;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.mvc.Mvcs;
+import org.nutz.mvc.adaptor.JsonAdaptor;
+import org.nutz.mvc.adaptor.VoidAdaptor;
+import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
+import com.eospd.DataTablesAdaptor;
+import com.eospd.bean.DataTableEdtorRequestDTO;
 import com.eospd.bean.Dc;
 import com.eospd.bean.Meter;
 
 public class MeterManagement {
 
+    private static final Log log = Logs.get();
+    
 	@At("/mm")
 	@Ok("jsp:jsp.meter_management")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public String index() {
 		return "";
 	}
+	
+	class DataList {
+		private String DT_RowId;
 
+		private List<Dc> dcs;
+
+		public List<Dc> getDcs() {
+			return dcs;
+		}
+		
+		public String getDT_RowId() {
+			return DT_RowId;
+		}
+
+		public void setDT_RowId(String dT_RowId) {
+			DT_RowId = dT_RowId;
+		}
+		public void setDcs(List<Dc> dcs) {
+			this.dcs = dcs;
+		}
+	}
+	// {"data":[{"DT_RowId":"row_58","first_name":"1","last_name":"1","position":"1","email":"","office":"1","extn":"1","age":null,"salary":"1","start_date":"2015-11-14"}]}
+	@SuppressWarnings({ "rawtypes" })
+	@AdaptBy(type=VoidAdaptor.class)
+	@At("/mm/dc/staff")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map dc_staff(HttpServletRequest req) {
+
+		DataTableEdtorRequestDTO mm = new DataTableEdtorRequestDTO(req);
+		System.out.println("action:" + mm.getAction());
+		Map<String, String> dcMap = mm.getData().get("0");
+		
+		Dc dc = new Dc();
+		dc.setDcUrl(dcMap.get("dcUrl"));
+		//dc.setDcName(dcMap.get("dcName"));
+		dc.setLocation(dcMap.get("location"));
+		dc.setDesc(dcMap.get("desc"));
+		dc.setChannelCount(Integer.parseInt(dcMap.get("channelCount")));
+		dc.setDcIP(dcMap.get("dcIP"));
+		dc.setAutoSign(0);
+		dc.setInstallTime(new Date(System.currentTimeMillis()));
+		dc.setInsertTime(new Date(System.currentTimeMillis()));
+		
+		
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+
+		dao.insert(dc);
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("data", mm.getData().get("0"));
+		return map;
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/mm/list")
 	@Ok("json")

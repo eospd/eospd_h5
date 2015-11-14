@@ -108,6 +108,7 @@
 		</div>
 		<div class="col-md-1 left-right-empty"></div>
 	</div>
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
@@ -123,6 +124,11 @@
 	<!-- DataTables JavaScript -->
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/dataTables.buttons.min.js"></script>
+	<script src="js/buttons.bootstrap.min.js"></script>
+	<script src="js/dataTables.select.min.js"></script>
+	<script src="js/dataTables.editor.min.js"></script>
+	<script src="js/editor.bootstrap.min.js"></script>
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>

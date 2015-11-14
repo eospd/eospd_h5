@@ -83,6 +83,7 @@
 		$(document).ready(
 				function() {
 					$('#dm_table').DataTable({
+						"language": chinese_langue,
 						"processing" : true,
 						"serverSide" : true,
 						"ajax" : {
