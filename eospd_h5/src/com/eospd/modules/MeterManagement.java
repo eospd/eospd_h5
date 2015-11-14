@@ -19,7 +19,6 @@ import org.nutz.dao.sql.SqlCallback;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.Mvcs;
-import org.nutz.mvc.adaptor.JsonAdaptor;
 import org.nutz.mvc.adaptor.VoidAdaptor;
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
@@ -27,7 +26,6 @@ import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
-import com.eospd.DataTablesAdaptor;
 import com.eospd.bean.DataTableEdtorRequestDTO;
 import com.eospd.bean.Dc;
 import com.eospd.bean.Meter;
