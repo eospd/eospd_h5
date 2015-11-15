@@ -13,6 +13,7 @@ package com.eospd.bean;
   `parentId` int(11) DEFAULT NULL COMMENT '上级电支路，0-动态，-1-没有，>0-静态',
   `dynamicParent1Id` int(11) DEFAULT NULL COMMENT '动态上级1',
   `dynamicParent2Id` int(11) DEFAULT NULL COMMENT '动态上级2',
+  `deviceId` int(11) DEFAULT NULL COMMENT '仪表ID',
   PRIMARY KEY (`circuitId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='3 电支路信息';
  */
@@ -45,6 +46,16 @@ public class CircuitInfo {
 	private int dynamicParent1Id;
 	@Column
 	private int dynamicParent2Id;
+	
+	@Column
+	private int deviceId;
+	
+	public int getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(int deviceId) {
+		this.deviceId = deviceId;
+	}
 	public int getCircuitId() {
 		return circuitId;
 	}

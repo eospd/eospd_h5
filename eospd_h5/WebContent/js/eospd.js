@@ -158,11 +158,13 @@ function gen_meter_div() {
 	document.getElementById("home").innerHTML = "";
 	$('#home')
 			.html(
-					'<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th><th>仪表ID</th></tr></thead></table></div>');
+					'<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th><th>安装时间</th><th>关联电支路</th><th>仪表ID</th></tr></thead></table></div>');
 
 	$.get('/eospd_h5/mm/dcs', function(dcs_result) {
 		$.get('/eospd_h5/mm/metertypes', function(metertypes_result) {
-			
+			$.get('/eospd_h5/mm/circuits', function(circuits_result) {
+				
+
 		var dc_select_options = [];
 		$.each(dcs_result, function(n, item) {
 			dc_select_options.push({
@@ -179,6 +181,14 @@ function gen_meter_div() {
 			});
 		});
 		
+		var circuit_type_select_options = [];
+		$.each(circuits_result, function(n, item) {
+			circuit_type_select_options.push({
+				label : item.circuitUrl,
+				value : item.circuitId
+			});
+		});
+		
 		var editor = new $.fn.dataTable.Editor({
 			ajax : "/eospd_h5/mm/meter/staff",
 			table : "#dm_table",
@@ -192,11 +202,6 @@ function gen_meter_div() {
 				label : "仪表名称:",
 				name : "deviceUrl"
 			}, {
-				label : "仪表类型:",
-				name : "typeName",
-				type : "select",
-				options : meter_type_select_options
-			}, {
 				label : "仪表通讯地址:",
 				name : "deviceCommAddr"
 			}, {
@@ -205,6 +210,16 @@ function gen_meter_div() {
 			}, {
 				label : "描述:",
 				name : "desc"
+			}, {
+				label : "关联电支路:",
+				name : "circuitUrl",
+				type : "select",
+				options : circuit_type_select_options
+			}, {
+				label : "仪表类型:",
+				name : "typeName",
+				type : "select",
+				options : meter_type_select_options
 			}, {
 				label : "采集器:",
 				name : "dcUrl",
@@ -235,9 +250,12 @@ function gen_meter_div() {
 				"data" : "desc"
 			}, {
 				"data" : "dcUrl"
+			}, {
+				"data" : "installTime"
+			}, {
+				"data" : "circuitUrl"
 			} , {
-				"data" : "deviceId", 
-				"type": "hidden"
+				"data" : "deviceId"
 			} ]
 		});
 
@@ -256,6 +274,7 @@ function gen_meter_div() {
 		table.buttons().container().appendTo(
 				$('.col-sm-6:eq(0)', table.table().container()));
 
+		});
 		});
 	});
 }
