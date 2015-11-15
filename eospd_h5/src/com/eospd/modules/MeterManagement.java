@@ -32,6 +32,7 @@ import org.nutz.mvc.annotation.Param;
 import com.eospd.bean.DataTableEdtorRequestDTO;
 import com.eospd.bean.Dc;
 import com.eospd.bean.Meter;
+import com.eospd.bean.MeterType;
 
 public class MeterManagement {
 
@@ -66,7 +67,6 @@ public class MeterManagement {
 		}
 	}
 
-	// {"data":[{"DT_RowId":"row_58","first_name":"1","last_name":"1","position":"1","email":"","office":"1","extn":"1","age":null,"salary":"1","start_date":"2015-11-14"}]}
 	@SuppressWarnings({ "rawtypes" })
 	@AdaptBy(type = VoidAdaptor.class)
 	@At("/mm/dc/staff")
@@ -74,19 +74,18 @@ public class MeterManagement {
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map dc_staff(HttpServletRequest req) {
 		DataTableEdtorRequestDTO mm = new DataTableEdtorRequestDTO(req);
-		
+
 		String action = mm.getAction().trim();
 		System.out.println("action:" + mm.getAction());
-		
+
 		Iterator<String> item = mm.getData().keySet().iterator();
 		List<Object> datas = new ArrayList<Object>();
-		
+
 		while (item.hasNext()) {
 			String rowKey = item.next();
 			System.out.println("rowKey:" + rowKey);
-			
+
 			Map<String, String> dcMap = mm.getData().get(rowKey);
-			
 
 			System.out.println("dcMap.get(\"dcUrl\"):" + dcMap.get("dcUrl"));
 
@@ -101,17 +100,17 @@ public class MeterManagement {
 			dc.setInstallTime(new Date(System.currentTimeMillis()));
 
 			Dao dao = Mvcs.getIoc().get(Dao.class);
-			
+
 			if (action.equals("create")) {
 				System.out.println("getAction:" + action);
 				dao.insert(dc);
-			} else if (action.equals("edit")){
-				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=", dc.getDcUrl()));
+			} else if (action.equals("edit")) {
+				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl", "=", dc.getDcUrl()));
 				dc.setDcId(dc0.getDcId());
-				dao.update(Dc.class, Chain.from(dc), Cnd.where("dcId","=", dc0.getDcId()));
-				
+				dao.update(Dc.class, Chain.from(dc), Cnd.where("dcId", "=", dc0.getDcId()));
+
 			} else if (action.equals("remove")) {
-				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=", dc.getDcUrl()));
+				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl", "=", dc.getDcUrl()));
 				dao.delete(dc0);
 			} else {
 				System.out.println("getAction:" + action);
@@ -122,6 +121,68 @@ public class MeterManagement {
 		map.put("data", datas);
 		return map;
 	}
+
+	@SuppressWarnings({ "rawtypes" })
+	@AdaptBy(type = VoidAdaptor.class)
+	@At("/mm/meter/staff")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map meter_staff(HttpServletRequest req) {
+		DataTableEdtorRequestDTO mm = new DataTableEdtorRequestDTO(req);
+
+		String action = mm.getAction().trim();
+		System.out.println("action:" + mm.getAction());
+
+		Iterator<String> item = mm.getData().keySet().iterator();
+		List<Object> datas = new ArrayList<Object>();
+		while (item.hasNext()) {
+			String rowKey = item.next();
+			System.out.println("rowKey:" + rowKey);
+
+			Map<String, String> dcMap = mm.getData().get(rowKey);
+			System.out.println("dcMap.get(\"dcUrl\"):" + dcMap.get("dcUrl"));
+
+			Meter meter = new Meter();
+			meter.setDeviceUrl(dcMap.get("deviceUrl"));
+			meter.setDeviceCommAddr(dcMap.get("deviceCommAddr"));
+			meter.setLocation(dcMap.get("location"));
+			meter.setDesc(dcMap.get("desc"));
+
+			Dao dao = Mvcs.getIoc().get(Dao.class);
+
+			if (action.equals("create")) {
+				System.out.println("getAction:" + action);
+				Sql sql = Sqls.create(
+						"INSERT INTO `meter` (`dataTypeId`, `autoSign`, `insertTime`, `installTime`, `updateTime`, deviceUrl,deviceCommAddr, location, `desc`, `dcId`) VALUES(@dataTypeId, 0, @insertTime, @installTime, @updateTime, @deviceUrl,@deviceCommAddr,@location, @desc, @dcId)");
+				sql.params().set("deviceUrl", dcMap.get("deviceUrl")).set("deviceCommAddr", dcMap.get("deviceCommAddr"))
+						.set("location", dcMap.get("location")).set("desc", dcMap.get("desc")).set("dcId", dcMap.get("dcUrl"))
+						.set("dataTypeId", dcMap.get("typeName"))
+						.set("insertTime", new Date(System.currentTimeMillis())).set("installTime", new Date(System.currentTimeMillis()))
+						.set("updateTime", new Date(System.currentTimeMillis()));
+				sql.addBatch();
+				dao.execute(sql);
+			} else if (action.equals("edit")) {
+				// Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=",
+				// dc.getDcUrl()));
+				// dc.setDcId(dc0.getDcId());
+				// dao.update(Dc.class, Chain.from(dc), Cnd.where("dcId","=",
+				// dc0.getDcId()));
+
+			} else if (action.equals("remove")) {
+				// Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=",
+				// dc.getDcUrl()));
+				// dao.delete(dc0);
+			} else {
+				System.out.println("getAction:" + action);
+			}
+			datas.add(meter);
+		}
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("data", datas);
+		return map;
+	}
+
+	@SuppressWarnings("rawtypes")
 	@At("/mm/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
@@ -134,6 +195,7 @@ public class MeterManagement {
 		map.put("recordsTotal", items.size());
 		map.put("recordsFiltered", items.size());
 
+		@SuppressWarnings("unchecked")
 		List<Object> data = new ArrayList();
 		for (int i = 0; i < items.size(); i++) {
 			Dc d = items.get(i);
@@ -296,6 +358,15 @@ public class MeterManagement {
 	public List<Dc> dcs_json() {
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 		List<Dc> items = dao.query(Dc.class, null);
+		return items;
+	}
+	
+	@At("/mm/metertypes")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public List<MeterType> metertypes_json() {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		List<MeterType> items = dao.query(MeterType.class, null);
 		return items;
 	}
 }
