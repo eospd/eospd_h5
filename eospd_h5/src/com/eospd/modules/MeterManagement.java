@@ -163,7 +163,7 @@ public class MeterManagement {
 				CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				meter = dao.insert(meter);
 				circuit.setDeviceId(meter.getDeviceId());
-				dao.insert(circuit);
+				dao.update(Meter.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				
 			} else if (action.equals("edit")) {
 				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
@@ -228,7 +228,7 @@ public class MeterManagement {
 
 		dao.execute(sql);
 
-		String sqlString1 = "SELECT count(*) as recordsTotal FROM `meter` a";
+		String sqlString1 = "SELECT count(*) as recordsTotal FROM `meter` a, `metertype` b, `dc` c, `circuitinfo` d WHERE a.dataTypeId = b.dataTypeId and a.dcId = c.dcId and a.deviceId = d.deviceId";
 		Sql sql1 = Sqls.create(sqlString1);
 
 		sql1.setCallback(new SqlCallback() {
