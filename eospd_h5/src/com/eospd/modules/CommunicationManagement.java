@@ -51,8 +51,8 @@ public class CommunicationManagement {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-		String sqlString = null;
-		String sqlString1 = null;
+		String sqlString = "";
+		String sqlString1 = "";
 		String[] sArray = new String[]{"2015-11-15", "2015-11-15"};
 
 		if (deviceType == 1) {
@@ -61,7 +61,8 @@ public class CommunicationManagement {
 		} else if (2 == deviceType) {
 			sqlString = "SELECT a.currentTime, a.deviceType, b.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
 			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
-		} else {
+		} else {	
+			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId union SELECT a.currentTime, a.deviceType, c.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` c WHERE a. deviceType = 2 and a.deviceId = c.deviceId";
 			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a ";
 		}
 		
@@ -88,7 +89,11 @@ public class CommunicationManagement {
 
 		Sql sql = Sqls.create(sqlString);
 
-		sql.vars().set("s_time", sArray[0]).set("e_time", sArray[1]).set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
+		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
+		
+		if (!sValue.equals("")) {
+			sql.vars().set("s_time", sArray[0]).set("e_time", sArray[1]);
+		}
 
 		System.out.println("sql:" + sql.toString());
 		sql.setCallback(new SqlCallback() {
@@ -124,7 +129,10 @@ public class CommunicationManagement {
 		dao.execute(sql);
 
 		Sql sql1 = Sqls.create(sqlString1);
-		sql1.vars().set("s_time", sArray[0]).set("e_time", sArray[1]);
+		
+		if (!sValue.equals("")) {
+			sql1.vars().set("s_time", sArray[0]).set("e_time", sArray[1]);
+		}
 
 		sql1.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
