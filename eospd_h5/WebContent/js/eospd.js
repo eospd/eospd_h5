@@ -257,7 +257,8 @@ function gen_meter_div() {
 			}, {
 				"data" : "circuitUrl"
 			} , {
-				"data" : "deviceId"
+				"data" : "deviceId",
+				"visible": false
 			} ]
 		});
 

@@ -135,6 +135,8 @@ public class MeterManagement {
 
 		Iterator<String> item = mm.getData().keySet().iterator();
 		List<Object> datas = new ArrayList<Object>();
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		
 		while (item.hasNext()) {
 			String rowKey = item.next();
 			System.out.println("rowKey:" + rowKey);
@@ -160,6 +162,19 @@ public class MeterManagement {
 
 			if (action.equals("create")) {
 				System.out.println("getAction:" + action);
+
+				if (dcMap.get("circuitUrl").equals("")) {
+					List<Object> fieldErrors = new ArrayList<Object>();
+					
+					Map<Object, Object> fieldError = new HashMap<Object, Object>();
+					fieldError.put("name", "circuitUrl");
+					fieldError.put("status", "请先添加电支路");
+					fieldErrors.add(fieldError);
+					
+					map.put("fieldErrors", fieldErrors);
+					return map;
+				}
+				
 				CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				meter = dao.insert(meter);
 				circuit.setDeviceId(meter.getDeviceId());
@@ -169,9 +184,11 @@ public class MeterManagement {
 				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
 				dao.update(Meter.class, Chain.from(meter), Cnd.where("deviceId", "=", meter.getDeviceId()));
 				
-				CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
-				circuit.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
-				dao.update(CircuitInfo.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
+				if (!dcMap.get("circuitUrl").equals("")) {
+					CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
+					circuit.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
+					dao.update(CircuitInfo.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
+				}
 
 			} else if (action.equals("remove")) {
 				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
@@ -181,7 +198,6 @@ public class MeterManagement {
 			}
 			datas.add(meter);
 		}
-		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("data", datas);
 		return map;
 	}
