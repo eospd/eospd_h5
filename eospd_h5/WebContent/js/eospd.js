@@ -78,17 +78,33 @@ function cm_his() {
 	});
 
 	$('.input-daterange input').each(
-			function() {
+			function(n, val) {
+				
 				var d = new Date()
 				$(this).val(
 						d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 								+ (d.getDate()) + "日");
-				$(this).datepicker({
+				
+				var datepicker = $(this).datepicker({
 					language : 'zh-CN',
 					autoclose : true,
 					todayHighlight : true,
 					todayBtn : "linked"
 				});
+				
+				console.log("n:" + n);
+				
+				if (1 == n) {
+					datepicker.on('changeDate', function(ev){
+					    var s_date = $('.input-daterange input')[0].value;
+					    var e_date = $('.input-daterange input')[1].value;
+					    console.log("s_date:" + s_date);
+					    console.log("e_date:" + e_date);
+
+						var table = $('#dm_table').DataTable();
+						table.columns(0).search(s_date + "," + e_date).draw();
+					});
+				}
 			});
 
 }

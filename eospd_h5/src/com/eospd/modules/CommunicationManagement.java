@@ -18,9 +18,6 @@ import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
-import com.eospd.bean.DataOnTime;
-import com.eospd.bean.DevOnline;
-
 public class CommunicationManagement {
 
 	@At("/cm")
@@ -44,38 +41,56 @@ public class CommunicationManagement {
 		return "";
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	@At("/cm/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
 			@Param(value = "draw") int draw, @Param("search[value]") String tsearch,
-			@Param("columns[1][search][value]") int deviceType) {
-		/*
-		 * "data" : "currentTime" }, { "data" : "deviceType" }, { "data" :
-		 * "deviceUrl" }, { "data" : "deviceStatus" }, { "data" : "bpSign"
-		 */
+			@Param("columns[1][search][value]") int deviceType, @Param("columns[0][search][value]") String sValue) {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
 		String sqlString = null;
 		String sqlString1 = null;
+		String[] sArray = new String[]{"2015-11-15", "2015-11-15"};
 
 		if (deviceType == 1) {
-			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId limit $start, $length";
+			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId";
 			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId";
 		} else if (2 == deviceType) {
-			sqlString = "SELECT a.currentTime, a.deviceType, b.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId limit $start, $length";
+			sqlString = "SELECT a.currentTime, a.deviceType, b.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
 			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a, `meter` b WHERE a.deviceType = 2 and a.deviceId = b.deviceId";
 		} else {
-			sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId union SELECT a.currentTime, a.deviceType, c.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` c WHERE a. deviceType = 2 and a.deviceId = c.deviceId limit $start, $length";
-			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline`;";
+			sqlString1 = "SELECT count(*) as recordsTotal FROM `devonline` a ";
 		}
+		
+		if (!sValue.equals("")) {
+			sValue = sValue.replaceAll("年", "-");
+			sValue = sValue.replaceAll("月", "-");
+			sValue = sValue.replaceAll("日", "-");
+			sArray = sValue.split(",");
+
+			sArray[0] = sArray[0].substring(0, sArray[0].length()-1);
+			sArray[1] = sArray[1].substring(0, sArray[1].length()-1);
+
+			
+			if (1 != deviceType && 2 != deviceType) {
+				sqlString1 += " WHERE a.deviceType = a.deviceType";
+				sqlString = "SELECT a.currentTime, a.deviceType, b.dcUrl as deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `dc` b WHERE a.deviceType = 1 and a.dcId = b.dcId and a.insertTime >= '$s_time' and a.insertTime <= '$e_time' union SELECT a.currentTime, a.deviceType, c.deviceUrl, a.deviceStatus, a.bpSign FROM `devonline` a, `meter` c WHERE a. deviceType = 2 and a.deviceId = c.deviceId and a.insertTime >= '$s_time' and a.insertTime <= '$e_time'";
+			} else {
+				sqlString += " and a.insertTime >= '$s_time' and a.insertTime <= '$e_time'";
+			}
+			sqlString1 += " and a.insertTime >= '$s_time' and a.insertTime <= '$e_time'";
+		}
+		
+		sqlString += " limit $start, $length";
 
 		Sql sql = Sqls.create(sqlString);
 
-		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
+		sql.vars().set("s_time", sArray[0]).set("e_time", sArray[1]).set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
 
+		System.out.println("sql:" + sql.toString());
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 
@@ -109,6 +124,7 @@ public class CommunicationManagement {
 		dao.execute(sql);
 
 		Sql sql1 = Sqls.create(sqlString1);
+		sql1.vars().set("s_time", sArray[0]).set("e_time", sArray[1]);
 
 		sql1.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {

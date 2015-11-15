@@ -118,7 +118,7 @@
 				window.location.href="/eospd_h5/cm_chart";
 			});
 			$("#cm").toggleClass('active');
-		});	
+		});
 	</script>
 </body>
 </html>
