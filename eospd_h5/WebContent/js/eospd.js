@@ -183,10 +183,12 @@ function gen_meter_div() {
 		
 		var circuit_type_select_options = [];
 		$.each(circuits_result, function(n, item) {
-			circuit_type_select_options.push({
-				label : item.circuitUrl,
-				value : item.circuitId
-			});
+			if (0 === item.deviceId) {
+				circuit_type_select_options.push({
+					label : item.circuitUrl,
+					value : item.circuitId
+				});
+			}
 		});
 		
 		var editor = new $.fn.dataTable.Editor({
