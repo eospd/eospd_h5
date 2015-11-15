@@ -158,7 +158,7 @@ function gen_meter_div() {
 	document.getElementById("home").innerHTML = "";
 	$('#home')
 			.html(
-					'<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th><th>安装时间</th><th>关联电支路</th><th>仪表ID</th></tr></thead></table></div>');
+					'<div class="dataTable_wrapper" style="overflow: auto"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th><th>安装时间</th><th>关联电支路</th><th>仪表ID</th></tr></thead></table></div>');
 
 	$.get('/eospd_h5/mm/dcs', function(dcs_result) {
 		$.get('/eospd_h5/mm/metertypes', function(metertypes_result) {
