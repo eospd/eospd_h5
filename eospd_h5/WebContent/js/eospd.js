@@ -153,7 +153,7 @@ function gen_dc_div(){
         ajax: "/eospd_h5/mm/dc/staff",
         table: "#dm_table",
         i18n: table_editor_chinese,
-        idSrc:  'id',
+        idSrc:  'dcUrl',
         fields: [ {
                 label: "采集器URL:",
                 name: "dcUrl"

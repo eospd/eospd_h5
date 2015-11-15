@@ -9,9 +9,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.nutz.dao.Chain;
+import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
@@ -32,15 +35,15 @@ import com.eospd.bean.Meter;
 
 public class MeterManagement {
 
-    private static final Log log = Logs.get();
-    
+	private static final Log log = Logs.get();
+
 	@At("/mm")
 	@Ok("jsp:jsp.meter_management")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public String index() {
 		return "";
 	}
-	
+
 	class DataList {
 		private String DT_RowId;
 
@@ -49,7 +52,7 @@ public class MeterManagement {
 		public List<Dc> getDcs() {
 			return dcs;
 		}
-		
+
 		public String getDT_RowId() {
 			return DT_RowId;
 		}
@@ -57,44 +60,68 @@ public class MeterManagement {
 		public void setDT_RowId(String dT_RowId) {
 			DT_RowId = dT_RowId;
 		}
+
 		public void setDcs(List<Dc> dcs) {
 			this.dcs = dcs;
 		}
 	}
+
 	// {"data":[{"DT_RowId":"row_58","first_name":"1","last_name":"1","position":"1","email":"","office":"1","extn":"1","age":null,"salary":"1","start_date":"2015-11-14"}]}
 	@SuppressWarnings({ "rawtypes" })
-	@AdaptBy(type=VoidAdaptor.class)
+	@AdaptBy(type = VoidAdaptor.class)
 	@At("/mm/dc/staff")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map dc_staff(HttpServletRequest req) {
-
 		DataTableEdtorRequestDTO mm = new DataTableEdtorRequestDTO(req);
+		
+		String action = mm.getAction().trim();
 		System.out.println("action:" + mm.getAction());
-		Map<String, String> dcMap = mm.getData().get("0");
 		
-		Dc dc = new Dc();
-		dc.setDcUrl(dcMap.get("dcUrl"));
-		//dc.setDcName(dcMap.get("dcName"));
-		dc.setLocation(dcMap.get("location"));
-		dc.setDesc(dcMap.get("desc"));
-		dc.setChannelCount(Integer.parseInt(dcMap.get("channelCount")));
-		dc.setDcIP(dcMap.get("dcIP"));
-		dc.setAutoSign(0);
-		dc.setInstallTime(new Date(System.currentTimeMillis()));
-		dc.setInsertTime(new Date(System.currentTimeMillis()));
+		Iterator<String> item = mm.getData().keySet().iterator();
+		List<Object> datas = new ArrayList<Object>();
 		
-		
-		Dao dao = Mvcs.getIoc().get(Dao.class);
+		while (item.hasNext()) {
+			String rowKey = item.next();
+			System.out.println("rowKey:" + rowKey);
+			
+			Map<String, String> dcMap = mm.getData().get(rowKey);
+			
 
-		dao.insert(dc);
-		
+			System.out.println("dcMap.get(\"dcUrl\"):" + dcMap.get("dcUrl"));
+
+			Dc dc = new Dc();
+			dc.setDcUrl(dcMap.get("dcUrl"));
+			dc.setDcName(dcMap.get("dcName"));
+			dc.setLocation(dcMap.get("location"));
+			dc.setDesc(dcMap.get("desc"));
+			dc.setChannelCount(Integer.parseInt(dcMap.get("channelCount")));
+			dc.setDcIP(dcMap.get("dcIP"));
+			dc.setInsertTime(new Date(System.currentTimeMillis()));
+			dc.setInstallTime(new Date(System.currentTimeMillis()));
+
+			Dao dao = Mvcs.getIoc().get(Dao.class);
+			
+			if (action.equals("create")) {
+				System.out.println("getAction:" + action);
+				dao.insert(dc);
+			} else if (action.equals("edit")){
+				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=", dc.getDcUrl()));
+				dc.setDcId(dc0.getDcId());
+				dao.update(Dc.class, Chain.from(dc), Cnd.where("dcId","=", dc0.getDcId()));
+				
+			} else if (action.equals("remove")) {
+				Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=", dc.getDcUrl()));
+				dao.delete(dc0);
+			} else {
+				System.out.println("getAction:" + action);
+			}
+			datas.add(dc);
+		}
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("data", mm.getData().get("0"));
+		map.put("data", datas);
 		return map;
 	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@At("/mm/list")
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
@@ -114,7 +141,7 @@ public class MeterManagement {
 			Map<Object, Object> map1 = new HashMap<Object, Object>();
 
 			map1.put("currentTime", d.getInsertTime());
-			map1.put("meterId", d.getDcId());
+			map1.put("meterId", "" + d.getDcId());
 			map1.put("meterName", d.getDcUrl());
 			map1.put("dcId", d.getDcId());
 			map1.put("dcName", d.getDcId());
@@ -125,7 +152,7 @@ public class MeterManagement {
 		map.put("data", data);
 		return map;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes" })
 	@At("/mm/meter/list")
 	@Ok("json")
@@ -152,9 +179,9 @@ public class MeterManagement {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
 					map1.put("deviceUrl", rs.getString("deviceUrl"));
 					map1.put("typeName", rs.getString("typeName"));
-					map1.put("deviceCommAddr", ""+rs.getString("deviceCommAddr"));
-					map1.put("location", ""+rs.getString("location"));
-					map1.put("desc", ""+rs.getString("desc"));
+					map1.put("deviceCommAddr", "" + rs.getString("deviceCommAddr"));
+					map1.put("location", "" + rs.getString("location"));
+					map1.put("desc", "" + rs.getString("desc"));
 					map1.put("dcUrl", rs.getString("dcUrl"));
 
 					data.add(map1);
@@ -187,7 +214,7 @@ public class MeterManagement {
 
 		return map;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes" })
 	@At("/mm/dc/list")
 	@Ok("json")
@@ -209,16 +236,19 @@ public class MeterManagement {
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 
+				int rowCnt = 0;
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
+					map1.put("DT_RowId", "row_" + rowCnt++);
 					map1.put("dcUrl", rs.getString("dcUrl"));
-					map1.put("dcName", ""+rs.getString("dcName"));
-					map1.put("location", ""+rs.getString("location"));
-					map1.put("desc", ""+rs.getString("desc"));
-					map1.put("channelCount", ""+rs.getString("channelCount"));
+					map1.put("dcName", "" + rs.getString("dcName"));
+					map1.put("location", "" + rs.getString("location"));
+					map1.put("desc", "" + rs.getString("desc"));
+					map1.put("channelCount", "" + rs.getString("channelCount"));
 					map1.put("dcIP", rs.getString("dcIP"));
-					map1.put("installTime", new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("installTime")));
+					map1.put("installTime",
+							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("installTime")));
 
 					data.add(map1);
 				}

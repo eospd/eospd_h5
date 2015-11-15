@@ -29,6 +29,9 @@ public class Dc {
 	private int dcId;
 	@Column
 	private String dcUrl;
+	
+	@Column
+	private String dcName;
 	@Column
 	private String location;
 	@Column("`desc`")
@@ -81,6 +84,12 @@ public class Dc {
 	}
 	public int getAutoSign() {
 		return autoSign;
+	}
+	public String getDcName() {
+		return dcName;
+	}
+	public void setDcName(String dcName) {
+		this.dcName = dcName;
 	}
 	public void setAutoSign(int autoSign) {
 		this.autoSign = autoSign;
