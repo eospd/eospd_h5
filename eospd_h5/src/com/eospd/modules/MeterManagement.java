@@ -147,31 +147,27 @@ public class MeterManagement {
 			meter.setDeviceCommAddr(dcMap.get("deviceCommAddr"));
 			meter.setLocation(dcMap.get("location"));
 			meter.setDesc(dcMap.get("desc"));
-
+			meter.setInsertTime(new Date(System.currentTimeMillis()));
+			meter.setInstallTime(new Date(System.currentTimeMillis()));
+			meter.setUpdateTime(new Date(System.currentTimeMillis()));
+			meter.setAutoSign(0);
+			if (!action.equals("remove")) {
+				meter.setDataTypeId(Integer.valueOf(dcMap.get("typeName")));
+				meter.setDcId(Integer.valueOf(dcMap.get("dcUrl")));
+			}
+			
 			Dao dao = Mvcs.getIoc().get(Dao.class);
 
 			if (action.equals("create")) {
 				System.out.println("getAction:" + action);
-				Sql sql = Sqls.create(
-						"INSERT INTO `meter` (`dataTypeId`, `autoSign`, `insertTime`, `installTime`, `updateTime`, deviceUrl,deviceCommAddr, location, `desc`, `dcId`) VALUES(@dataTypeId, 0, @insertTime, @installTime, @updateTime, @deviceUrl,@deviceCommAddr,@location, @desc, @dcId)");
-				sql.params().set("deviceUrl", dcMap.get("deviceUrl")).set("deviceCommAddr", dcMap.get("deviceCommAddr"))
-						.set("location", dcMap.get("location")).set("desc", dcMap.get("desc")).set("dcId", dcMap.get("dcUrl"))
-						.set("dataTypeId", dcMap.get("typeName"))
-						.set("insertTime", new Date(System.currentTimeMillis())).set("installTime", new Date(System.currentTimeMillis()))
-						.set("updateTime", new Date(System.currentTimeMillis()));
-				sql.addBatch();
-				dao.execute(sql);
+				dao.insert(meter);
 			} else if (action.equals("edit")) {
-				// Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=",
-				// dc.getDcUrl()));
-				// dc.setDcId(dc0.getDcId());
-				// dao.update(Dc.class, Chain.from(dc), Cnd.where("dcId","=",
-				// dc0.getDcId()));
+				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
+				dao.update(Meter.class, Chain.from(meter), Cnd.where("deviceId", "=", meter.getDeviceId()));
 
 			} else if (action.equals("remove")) {
-				// Dc dc0 = dao.fetch(Dc.class, Cnd.where("dcUrl","=",
-				// dc.getDcUrl()));
-				// dao.delete(dc0);
+				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
+				dao.delete(meter);
 			} else {
 				System.out.println("getAction:" + action);
 			}
@@ -179,39 +175,6 @@ public class MeterManagement {
 		}
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("data", datas);
-		return map;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@At("/mm/list")
-	@Ok("json")
-	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-	public Map list() {
-		Dao dao = Mvcs.getIoc().get(Dao.class);
-		List<Dc> items = dao.query(Dc.class, null);
-
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("draw", 1);
-		map.put("recordsTotal", items.size());
-		map.put("recordsFiltered", items.size());
-
-		@SuppressWarnings("unchecked")
-		List<Object> data = new ArrayList();
-		for (int i = 0; i < items.size(); i++) {
-			Dc d = items.get(i);
-
-			Map<Object, Object> map1 = new HashMap<Object, Object>();
-
-			map1.put("currentTime", d.getInsertTime());
-			map1.put("meterId", "" + d.getDcId());
-			map1.put("meterName", d.getDcUrl());
-			map1.put("dcId", d.getDcId());
-			map1.put("dcName", d.getDcId());
-			map1.put("venderName", d.getDcId());
-			map1.put("circuitName", d.getDcId());
-			data.add(map1);
-		}
-		map.put("data", data);
 		return map;
 	}
 
@@ -224,10 +187,10 @@ public class MeterManagement {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-		String sqlString = "SELECT a.deviceUrl, b.typeName, a.deviceCommAddr, a.location, a.desc, c.dcUrl FROM `meter` a, `metertype` b, `dc` c WHERE a.dataTypeId = b.dataTypeId and a.dcId = c.dcId limit $start, $length";
+		String sqlString = "SELECT a.deviceId, a.deviceUrl, b.typeName, a.deviceCommAddr, a.location, a.desc, c.dcUrl FROM `meter` a, `metertype` b, `dc` c WHERE a.dataTypeId = b.dataTypeId and a.dcId = c.dcId limit $start, $length";
 
 		if (tsearch.length() != 0) {
-			sqlString = "SELECT a.deviceUrl, b.typeName, a.deviceCommAddr, a.location, a.desc, c.dcUrl FROM `meter` a, `metertype` b, `dc` c WHERE a.dataTypeId = b.dataTypeId and a.dcId = c.dcId and b.dataUrl = \"$dataUrl\" limit $start, $length";
+			sqlString = "SELECT a.deviceId, a.deviceUrl, b.typeName, a.deviceCommAddr, a.location, a.desc, c.dcUrl FROM `meter` a, `metertype` b, `dc` c WHERE a.dataTypeId = b.dataTypeId and a.dcId = c.dcId and b.dataUrl = \"$dataUrl\" limit $start, $length";
 		}
 		Sql sql = Sqls.create(sqlString);
 
@@ -239,6 +202,7 @@ public class MeterManagement {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
+					map1.put("deviceId", rs.getString("deviceId"));
 					map1.put("deviceUrl", rs.getString("deviceUrl"));
 					map1.put("typeName", rs.getString("typeName"));
 					map1.put("deviceCommAddr", "" + rs.getString("deviceCommAddr"));

@@ -158,7 +158,7 @@ function gen_meter_div() {
 	document.getElementById("home").innerHTML = "";
 	$('#home')
 			.html(
-					'<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th></tr></thead></table></div>');
+					'<div class="dataTable_wrapper"><table class="table table-striped table-bordered table-hover" id="dm_table"><thead><tr><th>仪表名称</th><th>仪表类型</th><th>仪表通讯地址</th><th>位置</th><th>描述</th><th>采集器</th><th>仪表ID</th></tr></thead></table></div>');
 
 	$.get('/eospd_h5/mm/dcs', function(dcs_result) {
 		$.get('/eospd_h5/mm/metertypes', function(metertypes_result) {
@@ -183,15 +183,19 @@ function gen_meter_div() {
 			ajax : "/eospd_h5/mm/meter/staff",
 			table : "#dm_table",
 			i18n : table_editor_chinese,
-			idSrc : 'dcUrl',
+			idSrc : 'deviceId',
 			fields : [ {
+				label : "仪表ID:",
+				name : "deviceId", 
+				type:    "hidden"
+			}, {
 				label : "仪表名称:",
 				name : "deviceUrl"
 			}, {
 				label : "仪表类型:",
 				name : "typeName",
-					type : "select",
-					options : meter_type_select_options
+				type : "select",
+				options : meter_type_select_options
 			}, {
 				label : "仪表通讯地址:",
 				name : "deviceCommAddr"
@@ -231,6 +235,9 @@ function gen_meter_div() {
 				"data" : "desc"
 			}, {
 				"data" : "dcUrl"
+			} , {
+				"data" : "deviceId", 
+				"type": "hidden"
 			} ]
 		});
 

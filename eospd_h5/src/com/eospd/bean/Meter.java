@@ -1,6 +1,6 @@
 package com.eospd.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
@@ -36,7 +36,7 @@ public class Meter {
 	private String deviceCommAddr;
 	@Column
 	private String location;
-	@Column
+	@Column("`desc`")
 	private String desc;
 	@Column
 	private int dcId;
