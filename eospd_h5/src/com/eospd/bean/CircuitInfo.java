@@ -30,7 +30,8 @@ public class CircuitInfo {
 	private String circuitUrl;
 	@Column
 	private String circuitName;
-	@Column
+	
+	@Column("`location`")
 	private String location;
 	@Column
 	private int switchRatedC;

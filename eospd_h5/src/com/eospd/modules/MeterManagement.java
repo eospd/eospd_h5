@@ -163,7 +163,7 @@ public class MeterManagement {
 				CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				meter = dao.insert(meter);
 				circuit.setDeviceId(meter.getDeviceId());
-				dao.update(Meter.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
+				dao.update(CircuitInfo.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				
 			} else if (action.equals("edit")) {
 				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
@@ -171,7 +171,7 @@ public class MeterManagement {
 				
 				CircuitInfo circuit = dao.fetch(CircuitInfo.class, Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 				circuit.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
-				dao.update(Meter.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
+				dao.update(CircuitInfo.class, Chain.from(circuit), Cnd.where("circuitId", "=", dcMap.get("circuitUrl")));
 
 			} else if (action.equals("remove")) {
 				meter.setDeviceId(Integer.valueOf(dcMap.get("deviceId")));
