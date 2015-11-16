@@ -58,7 +58,6 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 	<script type="text/javascript" src="js/ECOTree.js"></script>
-	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->

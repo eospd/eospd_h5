@@ -50,8 +50,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
-
-	<script src="js/echarts.js"></script>
 	<script src="js/eospd.js"></script>
 
 
