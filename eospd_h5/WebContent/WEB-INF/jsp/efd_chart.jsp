@@ -23,11 +23,10 @@
 										<li onclick="get_all_efd_info('总功率')"><a href ="#">总功率</a></li>
 										<li onclick="get_all_efd_info('功率因素')"><a href ="#">功率因素</a></li>
 										<li onclick="get_all_efd_info('电流')"><a href ="#">电流</a></li>
-										<li onclick="get_all_efd_info('电压')"><a href ="#">电压</a></li>'
+										<li onclick="get_all_efd_info('电压')"><a href ="#">电压</a></li>
 										</ul>
 										</div>
 									<div class="panel-body">
-										
 										<div style="overflow: auto" id="topo_canvas" class="col-lg-12">
 										</div>
 									</div>
@@ -57,85 +56,13 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
-
 	<script src="js/echarts.js"></script>
+	<script type="text/javascript" src="js/ECOTree.js"></script>
 	<script src="js/eospd.js"></script>
 
-	<script type="text/javascript" src="js/ECOTree.js"></script>
-	<script type="text/javascript">
-			var CreateTree = function(title) {
-				myTree = new ECOTree('myTree','topo_canvas');
-				var w = 100;
-				var h = 50;
-				
-				//myTree.config.linkType = 'B';
-				//myTree.config.iRootOrientation = ECOTree.RO_TOP;						
-				//myTree.config.topYAdjustment = -180;
-				myTree.config.linkColor = "black";
-				//myTree.config.nodeColor = "#FFAAAA";
-				//myTree.config.nodeBorderColor = "black";
-				//myTree.config.useTarget = false;
-				myTree.config.iLevelSeparation = 80;
-				//myTree.config.iSiblingSeparation = 150;
-				//myTree.config.selectMode = ECOTree.SL_SINGLE;			
-				//(id, pid, dsc, w, h, c, bc, target, meta)		
-				
-				var json = {circuits:[{url:'/pd/t2/eng_station/total', title:'浦东T2能源站总进线', parent:''},
-                                {url:'/pd/t2/eng_station/cooler/1', title:'浦东T2能源站1号冷机支路', parent:'/pd/t2/eng_station/total'},
-                                {url:'/pd/t2/eng_station/cooler/2', title:'浦东T2能源站2号冷机支路', parent:'/pd/t2/eng_station/total'},
-                                {url:'/pd/t2/eng_station/chwp/1', title:'浦东T2能源站1号冷冻泵支路', parent:'/pd/t2/eng_station/total'},
-                                {url:'/pd/t2/eng_station/chwp/2', title:'浦东T2能源站2号冷冻泵支路', parent:'/pd/t2/eng_station/total'},
-                                {url:'/pd/t2/eng_station/cwp/1', title:'浦东T2能源站1号冷却泵支路', parent:'/pd/t2/eng_station/total'},
-                                {url:'/pd/t2/eng_station/cwp/2', title:'浦东T2能源站2号冷却泵支路', parent:'/pd/t2/eng_station/total'},
-                                	]
-                                };
-			
-			var obj = eval (json);
-			var dcs = new Map();
-			$.each(obj, function (key, item) {
-				  if (key == "circuits") {
-					  var i = 0;
-					  $.each(item, function (key, item) {
-					  		var circuit = new Object();
-					  		circuit.url=item.url;
-					  		circuit.title=item.title;
-					  		circuit.parent = item.parent;
-					  		console.log(circuit.url+','+circuit.title);
-					  		if (circuit.parent == '') {
-							  myTree.add(circuit.url, -1, "Apex Node", w, h, "rgb(24,157,139)","rgb(24,157,139)",
-										"hello", circuit.title+"\n"+circuit.url);
-					  		} else {
-					  			myTree.add(circuit.url, circuit.parent, "Apex Node", w, h, "rgb(24,157,139)","rgb(24,157,139)",
-										"hello", circuit.title+"\n"+circuit.url);
-					  		}
-							 
-					  });
-				  }
-				});
-				/*myTree.add(0,-1,"Apex Node", 150, 50, "rgb(40,159,86)", "rgb(40,159,86)", "head", "浦东T2能源站总进线\n500A");//, 150, 150, "#CCCCFF", "#CCCCFF", "hello", "URL:/pd/meter/e/1\n有效率:%30\n在线率:%40\n采集率:70%");
-				var w = 100;
-				var h = 50;
-				myTree.add(1,0,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n1号冷机支路\n额定电率:500A");
-				myTree.add(3,1,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/1\n1号冷却泵支路\n额定电率:500A");
-				myTree.add(4,1,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n2号冷机支路\n额定电率:500A");
-				myTree.add(5,0,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/cooler/1\n2号冷机支路\n额定电率:500A");
-				myTree.add(6,5,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/2\n2号冷却泵支路\n额定电率:500A");
-				myTree.add(7,5,"Apex Node", w, h, "rgb(40,159,86)", "rgb(40,159,86)", "hello", "/pd/t2/eng_station/chwp/1\n1号冷却泵支路\n额定电率:500A");
-				*/
-				myTree.UpdateTree();
-			}
-			
-			var get_all_efd_info = function(title) {
-				console.log("title:"+title);
-				$('#select_info').html(title+' <span class="caret"></span>');
-				CreateTree();
-			};
-			
-		</script>
-	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
     $(document).ready(function() {
-		CreateTree();
+    	CreateEfdChartTree();
         $('#dataTables-example').DataTable({
                 responsive: true
         });

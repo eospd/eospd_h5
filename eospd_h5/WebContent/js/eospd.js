@@ -1,3 +1,125 @@
+var CreateEfdChartTree = function(title) {
+	$.get('/eospd_h5/efd/tree_data', function(obj) {
+		myTree = new ECOTree('myTree', 'topo_canvas');
+		var w = 100;
+		var h = 50;
+		// myTree.config.linkType = 'B';
+		// myTree.config.iRootOrientation = ECOTree.RO_TOP;
+		// myTree.config.topYAdjustment = -180;
+		myTree.config.linkColor = "black";
+		// myTree.config.nodeColor = "#FFAAAA";
+		// myTree.config.nodeBorderColor = "black";
+		// myTree.config.useTarget = false;
+		myTree.config.iLevelSeparation = 80;
+		// myTree.config.iSiblingSeparation = 150;
+		// myTree.config.selectMode = ECOTree.SL_SINGLE;
+		// (id, pid, dsc, w, h, c, bc, target, meta)
+
+		var dcs = new Map();
+		$.each(obj, function(key, item) {
+			if (key == "circuits") {
+				var i = 0;
+				$.each(item, function(key, item) {
+					var circuit = new Object();
+					circuit.url = item.url;
+					circuit.title = item.title;
+					circuit.parent = item.parent;
+					console.log(circuit.url + ',' + circuit.title);
+					if (circuit.parent == '') {
+						myTree.add(circuit.url, -1, "Apex Node", w, h,
+								"rgb(24,157,139)", "rgb(24,157,139)", "hello",
+								circuit.title + "\n" + circuit.url);
+					} else {
+						myTree.add(circuit.url, circuit.parent, "Apex Node", w,
+								h, "rgb(24,157,139)", "rgb(24,157,139)",
+								"hello", circuit.title + "\n" + circuit.url);
+					}
+
+				});
+			}
+		});
+		myTree.UpdateTree();
+	});
+}
+
+var get_all_efd_info = function(title) {
+	console.log("title:" + title);
+	$('#select_info').html(title + ' <span class="caret"></span>');
+	CreateEfdChartTree();
+};
+			
+
+var CreateCmChartTree = function() {
+	$.get('/eospd_h5/mm/dc/mter/tree_data', function(obj) {
+		
+		myTree = new ECOTree('myTree', 'topo_canvas');
+		myTree.config.nodeColor = "#FFAAAA";
+		// myTree.config.nodeBorderColor = "black";
+		myTree.config.useTarget = false;
+		myTree.config.linkType = 'Q';
+		myTree.config.iLevelSeparation = 5;
+		myTree.config.iSiblingSeparation = 5;
+		myTree.config.iSubtreeSeparation = 5;
+
+		myTree.add(0, -1, "Apex Node", 100, 40, "rgb(40,159,86)",
+				"rgb(40,159,86)", "head", "能源采集系统");
+		var w = 80;
+		var h = 60;
+
+		var dcs = new Map();
+		$.each(obj, function(key, item) {
+			if (key == "dcs") {
+				var i = 0;
+				$.each(item, function(key, item) {
+					var dc = new Object();
+					dc.title = item.title;
+					dc.ip = item.ip;
+					console.log(dc.title + " " + dc.ip);
+					myTree.add(dc.title, 0, "Apex Node", w, h,
+							"rgb(24,157,139)", "rgb(24,157,139)", "hello",
+							dc.title + "\n" + dc.ip);
+					$.each(item.sns, function(key, item) {
+						myTree.add(dc.title + "/#" + item, dc.title,
+								"Apex Node", 1, 1, "rgb(69,139,242)",
+								"rgb(69,139,242)", "hello", "总线地址:" + item);
+						console.log("item:" + item);
+					});
+					// dcs.put(dc.title, dc);
+				});
+			}
+
+		});
+		var meters = new Map();
+		$.each(obj, function(key, item) {
+			if (key == "meters") {
+				$.each(item, function(key, item) {
+					var meter = new Object();
+					meter.title = item.title;
+					meter.addr = item.addr;
+					meter.dc = item.dc;
+					meter.dc_sn = item.dc_sn;
+					meter.status = item.status;
+					console.log(meter.title + "," + meter.addr + "," + meter.dc
+							+ "," + meter.dc_sn);
+					myTree.add(meter.title, meter.dc + "/#" + meter.dc_sn,
+							"Apex Node", 0, 0, meter.status ? "rgb(34,92,171)"
+									: "rgb(244,92,72)", "rgb(34,92,171)",
+							"hello", meter.title + "\n" + meter.addr);
+
+					// meters.put(dc.title, meter);
+				});
+			}
+
+		});
+		myTree.config.nodeColor = "#FFAAAA";
+		myTree.config.useTarget = false;
+		myTree.config.iLevelSeparation = 60;
+		myTree.config.iSiblingSeparation = 30;
+		myTree.UpdateTree();
+	});
+}
+
+
 function mm_his() {
 	gen_dc_div();
 

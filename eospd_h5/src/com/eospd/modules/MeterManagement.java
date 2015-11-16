@@ -31,8 +31,10 @@ import org.nutz.mvc.annotation.Param;
 import com.eospd.bean.CircuitInfo;
 import com.eospd.bean.DataTableEdtorRequestDTO;
 import com.eospd.bean.Dc;
+import com.eospd.bean.DcTreeData;
 import com.eospd.bean.EfdTreeData;
 import com.eospd.bean.Meter;
+import com.eospd.bean.MeterTreeData;
 import com.eospd.bean.MeterType;
 
 public class MeterManagement {
@@ -374,35 +376,9 @@ public class MeterManagement {
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map<Object, Object> tree_data() {
-
-		Dao dao = Mvcs.getIoc().get(Dao.class);
-
-		Sql sql = Sqls.create("select dcUrl, dcIP, channelCount from dc;;");
-
-		sql.setCallback(new SqlCallback() {
-			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
-
-				List<EfdTreeData> res = new ArrayList<EfdTreeData>();
-				while (rs.next()) {
-					EfdTreeData item = new EfdTreeData();
-					item.setUrl(rs.getString(1));
-					item.setTitle(rs.getString(2));
-					if (null == rs.getString(3)) {
-						item.setParent("");
-					} else {
-
-						item.setParent(rs.getString(3));
-					}
-					res.add(item);
-				}
-				return res;
-			}
-		});
-
-		dao.execute(sql);
-
 		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("circuits", sql.getResult());
+		map.put("dcs", get_dcs_tree());
+		map.put("meters", get_meters_tree());
 
 		return map;
 	}
@@ -415,47 +391,28 @@ public class MeterManagement {
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 
-				List<EfdTreeData> res = new ArrayList<EfdTreeData>();
+				List<DcTreeData> res = new ArrayList<DcTreeData>();
 				while (rs.next()) {
-					EfdTreeData item = new EfdTreeData();
-					item.setUrl(rs.getString(1));
-					item.setTitle(rs.getString(2));
-					if (null == rs.getString(3)) {
-						item.setParent("");
-					} else {
-
-						item.setParent(rs.getString(3));
-					}
+					DcTreeData item = new DcTreeData(rs.getString(1), rs.getString(2), 0, rs.getInt(3));
 					res.add(item);
 				}
 				return res;
 			}
 		});
-
 		dao.execute(sql);
-
 		return sql.getResult();
 	}
 	
 	private Object get_meters_tree() {
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-
 		Sql sql = Sqls.create("select deviceUrl, deviceCommAddr, b.dcUrl,  dcChannelSn from meter a, dc b where a.dcId = b.dcId;");
 
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 
-				List<EfdTreeData> res = new ArrayList<EfdTreeData>();
+				List<MeterTreeData> res = new ArrayList<MeterTreeData>();
 				while (rs.next()) {
-					EfdTreeData item = new EfdTreeData();
-					item.setUrl(rs.getString(1));
-					item.setTitle(rs.getString(2));
-					if (null == rs.getString(3)) {
-						item.setParent("");
-					} else {
-
-						item.setParent(rs.getString(3));
-					}
+					MeterTreeData item = new MeterTreeData(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 0);
 					res.add(item);
 				}
 				return res;
