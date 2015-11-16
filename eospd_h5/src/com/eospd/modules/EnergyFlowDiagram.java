@@ -2,6 +2,7 @@ package com.eospd.modules;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import org.nutz.mvc.annotation.Param;
 import com.eospd.bean.CircuitInfo;
 import com.eospd.bean.Dc;
 import com.eospd.bean.DevOnline;
+import com.eospd.bean.EfdTreeData;
 
 public class EnergyFlowDiagram {
 
@@ -128,6 +130,44 @@ public class EnergyFlowDiagram {
 		}
 
 		map.put("efd", efd);
+		return map;
+	}
+
+	@At("/efd/tree_data")
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map<Object, Object> tree_data() {
+
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+
+		Sql sql = Sqls.create(
+				"SELECT a.circuitUrl AS url, a.circuitName AS tile, b.circuitUrl AS parent FROM eospd_h5.circuitinfo a left join eospd_h5.circuitinfo b on a.parentId = b.circuitId;");
+
+		sql.setCallback(new SqlCallback() {
+			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+
+				List<EfdTreeData> res = new ArrayList<EfdTreeData>();
+				while (rs.next()) {
+					EfdTreeData item = new EfdTreeData();
+					item.setUrl(rs.getString(1));
+					item.setTitle(rs.getString(2));
+					if (null == rs.getString(3)) {
+						item.setParent("");
+					} else {
+
+						item.setParent(rs.getString(3));
+					}
+					res.add(item);
+				}
+				return res;
+			}
+		});
+
+		dao.execute(sql);
+
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("circuits", sql.getResult());
+
 		return map;
 	}
 }
