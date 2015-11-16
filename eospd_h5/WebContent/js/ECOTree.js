@@ -234,16 +234,24 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 				tree.ctx.strokeStyle = tree.config.linkColor;
 				tree.ctx.beginPath();
 				
-				tree.ctx.lineCap="round";
-				tree.ctx.lineWidth = 3;
-				tree.ctx.shadowColor = "RGBA(127,127,127,1)";
-				tree.ctx.shadowOffsetX = 4;
-				tree.ctx.shadowOffsetY = 4;
-				tree.ctx.shadowBlur = 1;
+				
+				//tree.ctx.shadowColor = "RGBA(127,127,127,1)";
+				//tree.ctx.shadowOffsetX = 4;
+				//tree.ctx.shadowOffsetY = 4;
+				//tree.ctx.shadowBlur = 1;
 				
 				switch (tree.config.linkType)
 				{
-					case "M":						
+					case "M":	
+					//tree.ctx.strokeStyle
+					tree.ctx.moveTo(xa,ya);
+					tree.ctx.lineTo(xb,yb);
+					tree.ctx.lineTo(xc,yc);
+					tree.ctx.lineTo(xd,yd);
+					break;
+					case "Q":	
+						tree.ctx.lineCap="round";
+						tree.ctx.lineWidth = 3;
 						tree.ctx.moveTo(xa-4*k,ya);
 						tree.ctx.moveTo(xa+4*k,ya);
 						tree.ctx.quadraticCurveTo(xb, yb, xd, yd);
@@ -726,10 +734,10 @@ ECOTree.prototype._drawTree = function () {
 					var img = new Image();
 					img.src = "imgs/meter.png";
 					//this.ctx.drawImage(img, node.XPosition,node.YPosition,node.w,node.h);//,node.w,node.h);
-					if (node.id != 1011 && node.id != 1021 && node.id != 1022){
+					if (node.w != 1){
 						ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
 					} else {
-						ECOTree._roundedRect(this.ctx,node.XPosition+25,node.YPosition,35,35,5);
+						ECOTree._roundedRect(this.ctx,node.XPosition-2,node.YPosition-2,10,10,5);
 					}
 					
 					var textWidth = this.ctx.measureText(node.meta).width; 
