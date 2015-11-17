@@ -154,7 +154,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(function() {
-			$("#efd").toggleClass('active');
+			//$("#efd").toggleClass('active');
 			$('#dm_table').DataTable({
 				"language": chinese_langue,
 				"processing" : true,

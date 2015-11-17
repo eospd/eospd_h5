@@ -54,7 +54,7 @@ var CreateCmChartTree = function() {
 		
 		myTree = new ECOTree('myTree', 'topo_canvas');
 		myTree.config.nodeColor = "#FFAAAA";
-		// myTree.config.nodeBorderColor = "black";
+		myTree.config.iRootOrientation=ECOTree.RO_LEFT;
 		myTree.config.useTarget = false;
 		myTree.config.linkType = 'Q';
 		myTree.config.iLevelSeparation = 5;

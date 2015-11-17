@@ -20,30 +20,44 @@
 </div>
 </nav>
 
+
 <!-- /.navbar-header -->
 <div class="navbar-default sidebar" role="navigation">
+	<div style="margin: 0 auto;height: 50px; width:180px; background-color: rgb(30,30,30)">
+	<label  style="float:left; line-height:50px; margin-left:10px; color:white;font-size:16px;">数据采集</label>
+	</div>
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
-			<li><p class="text-justify">数据采集</p></li>
 
-			<li><a href="/eospd_h5/index" id="index">数据质量</a></li>
-		
-			<li><a href="/eospd_h5/col_his">数据查询	</a></li>
+			<li><a href="/eospd_h5/index" id="index"><i class="fa fa-dashboard fa-fw"></i>
+					数据质量</a></li>
+					<!-- 
+			<li><a href="/eospd_h5/col_his"><i
+					class="fa fa-dashboard fa-fw"></i> 历史数据</a></li>
+ -->
+ 			<li><a href="/eospd_h5/col_his" id="col_his"><i
+					class="fa fa-bar-chart-o fa-fw"></i> 数据查询</a></li>
+			<li><a href="/eospd_h5/dm" id="dm"><i
+					class="fa fa-table fa-fw"></i> 数据管理</a></li>
 
-			<li><a href="/eospd_h5/dm" id="dm">数据管理</a></li>
-
-			<li><a href="/eospd_h5/cm_chart" id="cm">通讯管理</a></li>
+			<li><a href="/eospd_h5/cm_chart" id="cm"><i
+					class="fa fa-edit  fa-fw"></i>通讯管理</a></li>
 			<!--  
 			<li><a href="/eospd_h5/cm_his"><i class="fa fa-table fa-fw"></i>
 					历史数据</a></li>
 -->
-			<li><a href="/eospd_h5/efd_chart" id="efd">能流管理 </a></li>
-			<!--  
+			<li><a href="/eospd_h5/efd_chart" id="efd"><i
+					class="fa fa-edit fa-fw"></i> 能流管理</a></li>
+					<!--  
 			<li><a href="/eospd_h5/efd_his"><i class="fa fa-edit fa-fw"></i>
 					电支路信息 </a></li>
 					-->
-			<li><a href="/eospd_h5/sc" id="sc">逻辑管理</a></li>
-			<li><a href="/eospd_h5/mm" id="mm">表具管理</a></li>
+			<li><a href="/eospd_h5/efd_his" id="mm"><i class="fa fa-wrench fa-fw"></i>
+					逻辑管理</a></li>
+			<li><a href="/eospd_h5/mm" id="mm"><i class="fa fa-wrench fa-fw"></i>
+					表具管理</a></li>
+			<li><a href="/eospd_h5/sc" id="sc"><i class="fa fa-files-o fa-fw"></i>
+					系统配置</a></li>
 		</ul>
 	</div>
 	<!-- /.sidebar-collapse -->
@@ -52,9 +66,12 @@
 
 <!-- /.navbar-header -->
 <div class="navbar-right sidebar-right" role="navigation">
+<div style="margin: 0 auto;height: 50px; width:180px; background-color: rgb(30,30,30);">
+	<label  style="float:left; line-height:50px; margin-left:10px; color:white;font-size:16px;">机场建筑</label>
+	</div>
 	<div class="sidebar-nav navbar-default">
 		<ul class="nav" id="side-menu">
-			<li><p class="text-justify">机场建筑</p></li>
+			<li><p class="text-justify" style="height:0px; padding-top:10px; margin-left:10px;font-size: 16px ">机场建筑</p></li>
 			<li><p class="text-justify">机场</a></li>
 			<li>
 				<ul class="nav nav-second-level ">

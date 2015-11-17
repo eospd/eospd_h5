@@ -141,7 +141,8 @@ cursor: pointer;
 
 .sidebar ul li a.active {
 	height:50px;
-    background-color: rgb(226, 9, 9);
+    background-color: rgba(30,35,43,1);
+	border-left: 4px solid rgb(50, 132, 184);
     color: white;
 }
 
@@ -194,7 +195,7 @@ cursor: pointer;
         z-index: 1;
         position: absolute;
         width: 180px;
-        margin-top: 5px;
+        margin-top: 0px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -455,12 +456,12 @@ body{text-align:center}
 	text-align: left;
 }
 #side-menu > li:nth-child(1) {
-	 background-color: #000;
+	 /*background-color: #000;*/
 }
 #side-menu > li:nth-child(1) > p, #side-menu > li:nth-child(2) > p{
 	margin-bottom: 0px;
     font-size: 17px;
-    padding-left: 20px;
+    padding-left: 15px;
     margin-top: 0px;
 }
 #page-wrapper > div:nth-child(1) {
@@ -472,5 +473,5 @@ body{text-align:center}
 }
 
 #side-menu > li:nth-child(2) > p {
-	background-color: rgb(130, 40, 40);
+	/*background-color: rgb(130, 40, 40);*/
 }
