@@ -29,34 +29,34 @@
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
 
-			<li><a href="/eospd_h5/index" id="index"><i class="fa fa-dashboard fa-fw"></i>
+			<li><a href="/eospd_h5/index" id="index"><i class="fa  fa-fw"></i>
 					数据质量</a></li>
 					<!-- 
 			<li><a href="/eospd_h5/col_his"><i
 					class="fa fa-dashboard fa-fw"></i> 历史数据</a></li>
  -->
  			<li><a href="/eospd_h5/col_his" id="col_his"><i
-					class="fa fa-bar-chart-o fa-fw"></i> 数据查询</a></li>
+					class="fa  fa-fw"></i> 数据查询</a></li>
 			<li><a href="/eospd_h5/dm" id="dm"><i
-					class="fa fa-table fa-fw"></i> 数据管理</a></li>
+					class="fa  fa-fw"></i> 数据管理</a></li>
 
 			<li><a href="/eospd_h5/cm_chart" id="cm"><i
-					class="fa fa-edit  fa-fw"></i>通讯管理</a></li>
+					class="fa   fa-fw"></i>通讯管理</a></li>
 			<!--  
 			<li><a href="/eospd_h5/cm_his"><i class="fa fa-table fa-fw"></i>
 					历史数据</a></li>
 -->
 			<li><a href="/eospd_h5/efd_chart" id="efd"><i
-					class="fa fa-edit fa-fw"></i> 能流管理</a></li>
+					class="fa  fa-fw"></i> 能流管理</a></li>
 					<!--  
 			<li><a href="/eospd_h5/efd_his"><i class="fa fa-edit fa-fw"></i>
 					电支路信息 </a></li>
 					-->
-			<li><a href="/eospd_h5/efd_his" id="mm"><i class="fa fa-wrench fa-fw"></i>
+			<li><a href="/eospd_h5/efd_his" id="mm"><i class="fa  fa-fw"></i>
 					逻辑管理</a></li>
-			<li><a href="/eospd_h5/mm" id="mm"><i class="fa fa-wrench fa-fw"></i>
+			<li><a href="/eospd_h5/mm" id="mm"><i class="fa  fa-fw"></i>
 					表具管理</a></li>
-			<li><a href="/eospd_h5/sc" id="sc"><i class="fa fa-files-o fa-fw"></i>
+			<li><a href="/eospd_h5/sc" id="sc"><i class="fa  fa-fw"></i>
 					系统配置</a></li>
 		</ul>
 	</div>

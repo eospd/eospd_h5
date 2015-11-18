@@ -150,6 +150,19 @@
   background: #269CE9;
 }
 
+.button.darkorange {
+  background: rgb(149,139,84);
+  border: none;
+  color:black;
+}
+
+.button.darkorange_ac {
+  background: rgb(149,139,84);
+  color:black;
+  border-color:red;
+  border-width:1px;
+}
+
 
 /* */
 

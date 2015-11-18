@@ -140,9 +140,12 @@ cursor: pointer;
 }
 
 .sidebar ul li a.active {
-	height:50px;
+	height:45px;
+	background-color: rgb(226, 9, 9);
+	/*
     background-color: rgba(30,35,43,1);
 	border-left: 4px solid rgb(50, 132, 184);
+    */
     color: white;
 }
 
@@ -438,7 +441,7 @@ body{text-align:center}
 .div{
 	margin:0 auto; 
 	padding-top: 40px;
-	padding-bottom: 40px;
+	padding-bottom: 0px;
 	border-bottom-width:1px;
 	border-bottom-style:solid;
 	border-color: rgb(50,55,65);
@@ -451,6 +454,18 @@ body{text-align:center}
 	background-color:rgb(50,50,50);
 	height:696px;
 }
+
+.col-lg-3 {
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.col-lg-4{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+
 
 #dm_table_wrapper > div:nth-child(1) > div:nth-child(1) {
 	text-align: left;
@@ -473,5 +488,5 @@ body{text-align:center}
 }
 
 #side-menu > li:nth-child(2) > p {
-	/*background-color: rgb(130, 40, 40);*/
+	background-color: rgb(130, 40, 40);
 }

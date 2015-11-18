@@ -35,40 +35,51 @@
 								<div class="col-lg-3" style="padding-left:0px"><input style="text-align:center; width:60px; height:34px; border-radius: 0 3px 3px 0;background-color:rgb(47,52,63);border:none;color:darkgray" value="12:00"></input>
 								</div>
 							</div>
-
 									</div>
 						
 
 						<div class="div">
 							<canvas id="meter_canvas" width=508 height=220
 								style="margin:0 auto;"></canvas>
-						</div>
+						<div class="row" style="height: 50px">
+							<div class="col-lg-4">
+							<label style="float:right; font-size: 16px">数据有效</label></div>
+							<div class="col-lg-4">
+							<label style="font-size: 18px">数据质量</label></div>
+							<div class="col-lg-4">
+							<label style="float:left; font-size: 16px">通讯有效</label></div>
+							</div>
 
-						<div class="div" style="height: 120px;padding-top: 10px">
-							<div class="row" style="height:50px;padding-top: 10px">
+						</div>
+						<div class="div" style="height: 100px; margin-left:50px; margin-right:50px;margin-top:10px;margin-bottom:10px;background-color:black; padding-top: 10px">
+							<div class="row" style="height:50px;">
 								<div class="col-lg-3">
-									<button class="color black button" style="float: left;margin-left: 80px">机场电力</button>
+									<button class="color darkorange button" style="float: left;margin-left: 12px;width:124px">机场电力</button>
+									<label style="font-size: 20px; color:white;">=</label>
 								</div>
 								<div class="col-lg-3">
-									<button class="color black button" style="margin-left:40px" >远程抄表</button>
+									<button class="color darkorange button" style="width:124px" >远程抄表</button>
+									<img alt="" src="imgs/system.png">
+								
 								</div>
 								<div class="col-lg-3">
-									<button class="color green button" style="margin-right:40px" >电力监控</button>
+									<button id="electric_monitor" class="color darkorange_ac button" style="width:124px; " >电力监控</button>
+								<img  alt="" src="imgs/system.png">
 								</div>
 								<div class="col-lg-3">
-									<button class="color black button" style="float: right; margin-right: 80px">能耗监测</button>
+									<button class="color darkorange button" style=" float: right; margin-right:22px; width:124px">能耗监测</button>
 								</div>
 							</div>
 
-							<div class="row" style="padding-top: 10px;">
+							<div class="row">
 								<div class="col-lg-4">
-									<button class="color black button" style="float: left; margin-left: 80px"">楼宇自动系统</button>
+									<button class="color darkorange button" style="width:170px; float: left; margin-left: 12px">楼宇自控系统</button>
 								</div>
 								<div class="col-lg-4">
-									<button class="color black button">机房群控系统</button>
+									<button class="color darkorange button" style="width:170px;">机房群控系统</button>
 								</div>
 								<div class="col-lg-4">
-									<button class="color black button" style="float: right; margin-right: 80px">照明控制系统</button>
+									<button class="color darkorange button" style="width:170px; float: right; margin-right: 22px">照明控制系统</button>
 								</div>
 							</div>
 						</div>
@@ -183,7 +194,7 @@
 			var textWidth = ctx.measureText("数据质量").width; //文字宽
 			ctx.fillStyle = "white";
 			ctx.font = "18px serif";
-			ctx.fillText("数据质量", midx - textWidth / 2 - 10, midy + midy / 3 +40);
+			//ctx.fillText("数据质量", midx - textWidth / 2 - 10, midy + midy / 3 +40);
 			ctx.fillText(midR + "%", midx - textWidth / 2 + 10, midy + 10
 					+ midy / 3);
 			ctx.restore();
@@ -225,7 +236,7 @@
 			var textWidth = ctx.measureText("通讯有效").width; //文字宽
 			ctx.fillStyle = "white";
 			ctx.font = "16px serif";
-			ctx.fillText("通讯有效", rightx - textWidth / 2 - 10, righty + righty / 3 + 24);
+			//ctx.fillText("通讯有效", rightx - textWidth / 2 - 10, righty + righty / 3 + 24);
 			ctx.fillText(rightR + "%", rightx - textWidth / 2 + 15, righty + 5
 					+ righty / 3);
 			ctx.restore();
@@ -267,7 +278,7 @@
 			var textWidth = ctx.measureText("数据有效").width; //文字宽
 			ctx.fillStyle = "white";
 			ctx.font = "16px serif";
-			ctx.fillText("数据有效", leftx - 20, lefty + lefty / 3 + 24);
+			//ctx.fillText("数据有效", leftx - 20, lefty + lefty / 3 + 24);
 			ctx.fillText(leftR + "%", leftx - 5, lefty + 5 + lefty / 3);
 			ctx.restore();
 		};
@@ -375,6 +386,7 @@
 
 				loadImages(sources, animat);
 			});
+			$("#electric_monitor").toggleClass('active');
 		};
 	</script>
 
