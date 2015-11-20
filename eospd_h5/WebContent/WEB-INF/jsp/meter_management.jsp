@@ -15,7 +15,7 @@
 
 				<div id="page-wrapper">
 
-					<div class="row">
+					<div class="row" style="height:480px; border-bottom: solid; border-bottom-width: 1px; border-bottom-color: rgb(50,55,65)">
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
@@ -98,13 +98,14 @@
 								</div>
 								<!-- /.panel-body -->
 							</div>
-						</div>
-						<!-- /.col-lg-12 -->
 					</div>
 				</div>
+				<jsp:include page="bottom_bar.jsp"></jsp:include>
 				<!-- /#page-wrapper -->
+				
 			</div>
 			<!-- /#wrapper -->
+			</div>
 		</div>
 		<div class="col-md-1 left-right-empty"></div>
 	</div>

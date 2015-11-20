@@ -12,7 +12,7 @@
 			<div id="wrapper">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
-					<div class="row">
+					<div class="row" style="height:400px;">
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
@@ -99,7 +99,7 @@
 
 								<div class="panel-body">
 									<div class="col-lg-12">
-										<div style="overflow: auto">
+										<div class="div scrollbar" style="padding-top:0px; height:350px;overflow: auto">
 											<table class="table table-striped table-bordered table-hover"
 												id="dm_table">
 												<thead>
@@ -124,7 +124,9 @@
 						</div>
 						<!-- /.col-lg-12 -->
 					</div>
+				<jsp:include page="bottom_bar.jsp"></jsp:include>
 				</div>
+				
 				<!-- /#page-wrapper -->
 			</div>
 			<!-- /#wrapper -->
@@ -154,7 +156,9 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(function() {
-			//$("#efd").toggleClass('active');
+			$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
+			$("#his_page").css({'background-color':'#269CE9'});
+			$("#efd").toggleClass('active');
 			$('#dm_table').DataTable({
 				"language": chinese_langue,
 				"processing" : true,
@@ -188,7 +192,7 @@
 		        $(this).datepicker({language: 'zh-CN',autoclose:true, todayHighlight:true, todayBtn: "linked"} );
 			});
 			$("#def_page").click(function() {
-				window.location.href="/eospd_h5/efd";
+				window.location.href="/eospd_h5/efd_chart";
 			});
 		});
 	</script>

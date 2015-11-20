@@ -9,6 +9,8 @@ body {
 }
 
 #wrapper {
+	width:1024px;
+	margin:auto;
     border-top-color:#555963;
     background:rgb(45,52,61);
     border-width: 1px;
@@ -490,3 +492,22 @@ body{text-align:center}
 #side-menu > li:nth-child(2) > p {
 	background-color: rgb(130, 40, 40);
 }
+
+.scrollbar::-webkit-scrollbar {
+ width: 16px;
+ height:20px;
+}
+ .scrollbar::-webkit-scrollbar-track {
+ background-color:rgb(54,58,70);
+
+}
+ .scrollbar::-webkit-scrollbar-thumb {
+ background-color: rgb(127,127,127);
+}
+
+.form-control{
+	background-color:rgb(47,52,63);
+	color:darkgrey;
+	border: none;
+}
+

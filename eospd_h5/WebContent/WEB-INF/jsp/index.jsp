@@ -12,13 +12,13 @@
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
-					<div class="panel-body">
+					<div class="panel-body div" style="height:380px">
 					
 					<div class="row" style="height:50px;padding-top: 10px">
 					<div class="col-lg-6">
 					<div class="col-lg-9">
 									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color:darkgray">开始时间</span> <input style="color:darkgrey; margin-left: 10px"
+										<span class="input-group-addon" style="color:darkgray">开始时间</span> <input style="color:darkgrey; margin-left: 5px"
 											type="text" class="form-control" value="">
 									</div>
 								</div>	
@@ -28,7 +28,7 @@
 									<div class="col-lg-6">
 							<div class="col-lg-9">
 									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color:darkgray">结束时间</span> <input style="color:darkgrey; margin-left: 10px"
+										<span class="input-group-addon" style="color:darkgray">结束时间</span> <input style="color:darkgrey; margin-left: 5px"
 											type="text" class="form-control" value="">
 									</div>
 								</div>	
@@ -38,7 +38,7 @@
 									</div>
 						
 
-						<div class="div">
+						<div class="row" style="margin-top: 60px">
 							<canvas id="meter_canvas" width=508 height=220
 								style="margin:0 auto;"></canvas>
 						<div class="row" style="height: 50px">
@@ -51,39 +51,8 @@
 							</div>
 
 						</div>
-						<div class="div" style="height: 100px; margin-left:50px; margin-right:50px;margin-top:10px;margin-bottom:10px;background-color:black; padding-top: 10px">
-							<div class="row" style="height:50px;">
-								<div class="col-lg-3">
-									<button class="color darkorange button" style="float: left;margin-left: 12px;width:124px">机场电力</button>
-									<label style="font-size: 20px; color:white;">=</label>
-								</div>
-								<div class="col-lg-3">
-									<button class="color darkorange button" style="width:124px" >远程抄表</button>
-									<img alt="" src="imgs/system.png">
-								
-								</div>
-								<div class="col-lg-3">
-									<button id="electric_monitor" class="color darkorange_ac button" style="width:124px; " >电力监控</button>
-								<img  alt="" src="imgs/system.png">
-								</div>
-								<div class="col-lg-3">
-									<button class="color darkorange button" style=" float: right; margin-right:22px; width:124px">能耗监测</button>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-lg-4">
-									<button class="color darkorange button" style="width:170px; float: left; margin-left: 12px">楼宇自控系统</button>
-								</div>
-								<div class="col-lg-4">
-									<button class="color darkorange button" style="width:170px;">机房群控系统</button>
-								</div>
-								<div class="col-lg-4">
-									<button class="color darkorange button" style="width:170px; float: right; margin-right: 22px">照明控制系统</button>
-								</div>
-							</div>
-						</div>
 					</div>
+						<jsp:include page="bottom_bar.jsp"></jsp:include>
 			</div>
 			<!-- /#wrapper -->
 		</div>

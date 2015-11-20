@@ -29,6 +29,13 @@ public class DataManagement {
 	public String index() {
 		return "";
 	}
+	
+	@At("/datam_chart")
+    @Ok("jsp:jsp.data_manage_chart")
+    @Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+    public String chart() {
+        return "";
+    }
 
 	@At("/test")
 	@Ok("jsp:jsp.test")

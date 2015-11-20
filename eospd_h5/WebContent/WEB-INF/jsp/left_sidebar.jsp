@@ -35,11 +35,14 @@
 			<li><a href="/eospd_h5/col_his"><i
 					class="fa fa-dashboard fa-fw"></i> 历史数据</a></li>
  -->
- 			<li><a href="/eospd_h5/col_his" id="col_his"><i
+ 			<li><a href="/eospd_h5/dm" id="dm"><i
 					class="fa  fa-fw"></i> 数据查询</a></li>
-			<li><a href="/eospd_h5/dm" id="dm"><i
+					<!-- 
+					<li><a href="/eospd_h5/col_his" id="dm_chart"><i
 					class="fa  fa-fw"></i> 数据管理</a></li>
-
+					 -->
+			<li><a href="/eospd_h5/datam_chart" id="dm_chart"><i
+					class="fa  fa-fw"></i> 数据管理</a></li>
 			<li><a href="/eospd_h5/cm_chart" id="cm"><i
 					class="fa   fa-fw"></i>通讯管理</a></li>
 			<!--  
@@ -52,12 +55,12 @@
 			<li><a href="/eospd_h5/efd_his"><i class="fa fa-edit fa-fw"></i>
 					电支路信息 </a></li>
 					-->
-			<li><a href="/eospd_h5/efd_his" id="mm"><i class="fa  fa-fw"></i>
+			<li><a href="#" id="mm" style="color:grey;background-color: darygray" disabled="disabled"><i class="fa  fa-fw" ></i>
 					逻辑管理</a></li>
 			<li><a href="/eospd_h5/mm" id="mm"><i class="fa  fa-fw"></i>
 					表具管理</a></li>
-			<li><a href="/eospd_h5/sc" id="sc"><i class="fa  fa-fw"></i>
-					系统配置</a></li>
+			<!--  <li><a href="/eospd_h5/sc" id="sc"><i class="fa  fa-fw"></i>
+					系统配置</a></li>-->
 		</ul>
 	</div>
 	<!-- /.sidebar-collapse -->

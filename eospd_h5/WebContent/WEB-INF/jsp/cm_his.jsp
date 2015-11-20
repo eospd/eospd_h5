@@ -117,6 +117,8 @@
 				window.location.href="/eospd_h5/cm_chart";
 			});
 			$("#cm").toggleClass('active');
+			$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
+			$("#his_page").css({'background-color':'#269CE9'});
 		});
 	</script>
 </body>

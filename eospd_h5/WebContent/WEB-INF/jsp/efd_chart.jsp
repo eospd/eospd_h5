@@ -13,10 +13,11 @@
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 				<div id="page-wrapper">
-					<div class="row">
-						<div class="col-lg-12">
+					  <div class="div scrollbar" id="container" style="padding-top:10px; height:400px;overflow: auto">
+					 	<img src="imgs/energy_chart.png "/>
+					  </div>
 								<!-- /.panel-heading -->
-										<div class="dropdown pull-right ">
+					<!--  	 			<div class="dropdown pull-right ">
 										<button id="select_info" type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">总电量<span class="caret"></span></button>
 										<ul class="dropdown-menu pull-right" role="menu">
 										<li onclick="get_all_efd_info('总电量')"><a href ="#">总电量</a></li>
@@ -28,17 +29,13 @@
 										</div>
 									<div class="panel-body">
 										<div style="overflow: auto" id="topo_canvas" class="col-lg-12">
-										</div>
-									</div>
-							<!-- /.col-lg-12 -->
-						</div>
-
+										</div>-->	
+						<jsp:include page="bottom_bar.jsp"></jsp:include>
 					</div>
 					<!-- /#page-wrapper -->
 				</div>
 			</div>
 			<!-- /#wrapper -->
-		</div>
 		<div class="col-md-1 left-right-empty"></div>
 	</div>
 	<!-- jQuery -->
@@ -58,10 +55,12 @@
 	<script src="js/sb-admin-2.js"></script>
 	<script type="text/javascript" src="js/ECOTree.js"></script>
 	<script src="js/eospd.js"></script>
+	<script src="js/jquery.dragscroll.js"></script>
 
 	<script>
     $(document).ready(function() {
-    	CreateEfdChartTree();
+    	$('#container').dragScroll({});
+    	//CreateEfdChartTree();
         $('#dataTables-example').DataTable({
                 responsive: true
         });

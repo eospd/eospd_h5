@@ -15,11 +15,10 @@
 
 				<div id="page-wrapper">
 
-					<div class="row">
-						<div class="col-lg-12">
+					<div class="row" style="height: 450px">
 							<div class="panel panel-default">
 								<div class="panel-body">
-
+									
 									<table class="table" id="filter_table">
 										<tr>
 											<th>
@@ -39,7 +38,7 @@
 									</table>
 
 									<!-- history pannel -->
-									<div class="tab-content">
+									<div class="tab-content" style="overflow: auto; height:350px">
 										<div class="tab-pane fade in active" id="home">
 
 											<div class="dataTable_wrapper">
@@ -62,11 +61,10 @@
 										<!-- /.panel-body -->
 									</div>
 									<!-- /.panel -->
-								</div>
-								<!-- /.col-lg-12 -->
 							</div>
 							<!-- /.col-lg-12 -->
 						</div>
+<jsp:include page="bottom_bar.jsp"></jsp:include>
 					</div>
 					<!-- /#page-wrapper -->
 
@@ -99,11 +97,12 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 			$(document).ready(function() {
-				col_his();	
-				$("#his_page").toggleClass('active');
-				//$("#index").toggleClass('active');
+				col_his();
+				$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
+				$("#his_page").css({'background-color':'#269CE9'});
+				$("#index").toggleClass('active');
 				$("#def_page").click(function() {
-					window.location.href="/eospd_h5/efd_chart";
+					window.location.href="/eospd_h5/index";
 				});
 			});
 		</script>

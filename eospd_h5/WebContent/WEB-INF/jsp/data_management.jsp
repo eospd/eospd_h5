@@ -13,17 +13,13 @@
 			<div id="wrapper">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
-
-				<div id="page-wrapper">
-
-					<div class="row">
-						<div class="col-lg-12">
-
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<table class="table" id="filter_table">
+				<div id="page-wrapper" >
+					<div class="div" style="height:400px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
+							<table class="table" style="margin-bottom: 0px"id="filter_table">
 										<tr>
 											<th>
+											<button class="color  black button">+</button>
+											<button class="color  black button">-</button>
 											</th>
 											<th style="width: 400px;">
 												<div class="input-group input-daterange pull-right">
@@ -34,7 +30,13 @@
 											</th>
 										</tr>
 									</table>
-									<div class="dataTable_wrapper" style="overflow: auto">
+				 <div id="container" class="scrollbar" style="overflow:auto; overflow-x: hidden; overflow-y: hidden; height:150px"></div>
+									<!-- 
+							<img  src="imgs/data_search.png"/> -->
+							<div class="panel panel-default">
+								<div class="panel-body scrollbar" style="height:180px;overflow: auto">
+									
+									<div class="dataTable_wrapper" >
 										<table class="table table-striped table-bordered table-hover"
 											id="dm_table">
 											<thead>
@@ -44,9 +46,9 @@
 													<th>电支路</th>
 													<th>插值标志</th>
 													<th>总电量</th>
-													<th>总电量错误标志</th>
-													<th>总电量差值</th>
-													<th>总电量归零标志</th>
+													<th>错误标志</th>
+													<th>差值</th>
+													<th>归零标志</th>
 													<th>总功率</th>
 													<th>总功率因数</th>
 													<th>A相电流</th>
@@ -60,12 +62,12 @@
 										</table>
 									</div>
 									<!-- /.table-responsive -->
+									
 								</div>
 							</div>
 						</div>
+									<jsp:include page="bottom_bar.jsp"></jsp:include>
 						<!-- /.panel-body -->
-					</div>
-					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /#page-wrapper -->
 			</div>
@@ -94,11 +96,73 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 	<script src="js/eospd.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/jquery.dragscroll.js"></script>
 
+	<script>
+	$(function () {
+	    var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
+	    Highcharts.setOptions({colors : defaultColors});
+	    $('#container').highcharts({
+	        chart: {
+	        	height:150,
+	        	width: 1000,
+	            type: 'area',
+	            backgroundColor:'rgba(0,0,0,0)'
+	        },
+	        xAxis: {
+	            categories: ['11-01', '11-02', '11-03', '11-04', '11-05', '11-06', '11-07', 
+	                         '11-08', '11-09', '11-10', '11-11', '11-12', '11-13', '11-14', 
+	                         ],
+	            tickmarkPlacement: 'off',
+	            title: {
+	                enabled: false
+	            }
+	        },
+	        yAxis: {
+	            
+	        },
+	        tooltip: {
+	            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
+	            shared: true
+	        },
+	        plotOptions: {
+	            area: {
+	                stacking: 'percent',
+	                lineColor: '#ffffff',
+	                lineWidth: 1,
+	                marker: {
+	                    lineWidth: 1,
+	                    lineColor: '#ffffff'
+	                }
+	            }
+	        },
+	        series: [
+	            {
+	            name: '无法修复',                
+	            data: [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201]
+	        },{
+	            name: '错误未修复',
+	            data: [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766]
+	        }, {
+	            name: '错误修复',
+	            data: [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628]
+	        },{
+	            name: '重传数据',
+	            data: [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201]
+	        },  {
+	            name: '正常数据',
+	            data: [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868]
+	        }]
+	    });
+	});				
+	
+	</script>
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(
 				function() {
+					$('#container').dragScroll({});
 					$('#dm_table').DataTable({
 						"language": chinese_langue,
 						"processing" : true,
