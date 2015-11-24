@@ -7,14 +7,14 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 
 			<div id="wrapper">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper" >
-					<div class="div" style="height:400px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
+					<div class="div" style="height:480px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
 							<table class="table" style="margin-bottom: 0px"id="filter_table">
 										<tr>
 											<th>
@@ -31,32 +31,30 @@
 										</tr>
 									</table>
 				 <div id="container" class="scrollbar" style="overflow:auto; overflow-x: hidden; overflow-y: hidden; height:150px"></div>
-									<!-- 
-							<img  src="imgs/data_search.png"/> -->
-							<div class="panel panel-default">
-								<div class="panel-body scrollbar" style="height:180px;overflow: auto">
+							<div class="panel panel-default" style="padding:5px;">
+								<div class="panel-body scrollbar" style="height:250px;overflow: auto">
 									
 									<div class="dataTable_wrapper" >
-										<table class="table table-striped table-bordered table-hover"
+										<table class="table table-striped table-bordered table-hover" allowHeaderWrap="true"
 											id="dm_table">
 											<thead>
 												<tr>
-													<th>采集时间</th>
-													<th>断点续传</th>
-													<th>电支路</th>
-													<th>插值标志</th>
-													<th>总电量</th>
-													<th>错误标志</th>
-													<th>差值</th>
-													<th>归零标志</th>
-													<th>总功率</th>
-													<th>总功率因数</th>
-													<th>A相电流</th>
-													<th>B相电流</th>
-													<th>C相电流</th>
-													<th>A相电压</th>
-													<th>B相电压</th>
-													<th>C相电压</th>
+													<th style="font-size:5px;">采集<br/>时间</th>
+													<th style="font-size:5px;">电支路</th>
+													<th style="font-size:5px;">断点<br/>续传</th>
+													<th style="font-size:5px">插值<br/>标志</th>
+													<th style="font-size:4px">总电量<br/>(KWh)</th>
+													<th style="font-size:5px">错误<br/>标志</th>
+													<th style="font-size:5px">差值<br/>(KWh)</th>
+													<th style="font-size:5px">归零<br/>标志</th>
+													<th style="font-size:4px">总功率<br/>(KW)</th>
+													<th style="font-size:4px">总功率<br/>因数</th>
+													<!--  <th style="font-size:5px">A相<br/>电流(A)</th>
+													<th style="font-size:5px">B相<br/>电流(A)</th>
+													<th style="font-size:5px">C相<br/>电流(A)</th>
+													<th style="font-size:5px">A相<br/>电压(V)</th>
+													<th style="font-size:5px">B相<br/>电压(V)</th>
+													<th style="font-size:5px">C相<br/>电压(V)</th>-->
 												</tr>
 											</thead>
 										</table>
@@ -74,7 +72,7 @@
 			<!-- /#wrapper -->
 
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 
 	<!-- jQuery -->
@@ -118,9 +116,9 @@
 	            title: {
 	                enabled: false
 	            }
+	        	
 	        },
 	        yAxis: {
-	            
 	        },
 	        tooltip: {
 	            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
@@ -132,26 +130,31 @@
 	                lineColor: '#ffffff',
 	                lineWidth: 1,
 	                marker: {
+	                	enabled:false,
 	                    lineWidth: 1,
 	                    lineColor: '#ffffff'
 	                }
 	            }
 	        },
+	        legend:{
+	        	reversed:true
+	        },
+	        
 	        series: [
 	            {
-	            name: '无法修复',                
+	            name: '<label style="color:white">无数据</label>',                
 	            data: [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201]
 	        },{
-	            name: '错误未修复',
+	            name: '<label style="color:white">错误未修复</label>',
 	            data: [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766]
 	        }, {
-	            name: '错误修复',
+	            name: '<label style="color:white">错误修复</label>',
 	            data: [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628]
 	        },{
-	            name: '重传数据',
+	            name: '<label style="color:white">重传数据</label>',
 	            data: [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201]
 	        },  {
-	            name: '正常数据',
+	            name: '<label style="color:white">正常数据</label>',
 	            data: [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868]
 	        }]
 	    });
@@ -167,6 +170,7 @@
 						"language": chinese_langue,
 						"processing" : true,
 						"serverSide" : true,
+						"bSort" : false,
 						"ajax" : {
 							"url" : "/eospd_h5/dm/list",
 							"type" : "POST"
@@ -174,9 +178,9 @@
 						"columns" : [ {
 							"data" : "currentTime"
 						}, {
-							"data" : "bpSign"
-						}, {
 							"data" : "dataUrl"
+						}, {
+							"data" : "bpSign"
 						}, {
 							"data" : "ivSign"
 						}, {
@@ -191,7 +195,8 @@
 							"data" : "p2Pv"
 						}, {
 							"data" : "p3Pv"
-						}, {
+						}
+						/*, {
 							"data" : "p4Pv"
 						}, {
 							"data" : "p5Pv"
@@ -203,7 +208,8 @@
 							"data" : "p8Pv"
 						}, {
 							"data" : "p9Pv"
-						} ]
+						}*/ 
+						]
 					});
 
 					$('.input-daterange input').each(

@@ -7,7 +7,7 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 
@@ -107,7 +107,7 @@
 			<!-- /#wrapper -->
 			</div>
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 
 	<!-- jQuery -->

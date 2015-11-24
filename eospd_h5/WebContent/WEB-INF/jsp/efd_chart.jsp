@@ -7,13 +7,13 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 				<div id="page-wrapper">
-					  <div class="div scrollbar" id="container" style="padding-top:10px; height:400px;overflow: auto">
+					  <div class="div scrollbar" id="container" style="padding-top:10px; height:480px;overflow: auto">
 					 	<img src="imgs/energy_chart.png "/>
 					  </div>
 								<!-- /.panel-heading -->
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<!-- /#wrapper -->
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

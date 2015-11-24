@@ -7,12 +7,12 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
-					<div class="row" style="height:400px;">
+					<div class="row div" style="height:480px; padding-top:10px;">
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
@@ -99,7 +99,7 @@
 
 								<div class="panel-body">
 									<div class="col-lg-12">
-										<div class="div scrollbar" style="padding-top:0px; height:350px;overflow: auto">
+										<div class="scrollbar" style="padding-top:0px; height:350px;overflow: auto">
 											<table class="table table-striped table-bordered table-hover"
 												id="dm_table">
 												<thead>
@@ -131,7 +131,7 @@
 			</div>
 			<!-- /#wrapper -->
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

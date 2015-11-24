@@ -6,14 +6,15 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
-	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
 				<div id="page-wrapper">
+				
+				<div class="panel-body div" style="height:480px">
 				<div class="row" style="height:50px;padding-top: 10px">
 					<div class="col-lg-6">
 					<div class="col-lg-9">
@@ -38,7 +39,7 @@
 									</div>
 
 
-					<div class="div scrollbar" id="container" style="padding-top:0px; height:340px; overflow: auto; overflow-x: hidden">
+					<div class="scrollbar" id="container" style="padding-top:0px; height:400px; overflow: auto; overflow-x: hidden">
 					<img src="imgs/cm_chart.png"/>
 						
 							<!-- 
@@ -48,13 +49,13 @@
 									</div> -->
 				</div>
 
-					<jsp:include page="bottom_bar.jsp"></jsp:include>
 			</div>
+					<jsp:include page="bottom_bar.jsp"></jsp:include>
 			<!-- /#page-wrapper -->
 			</div>
 
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- /#wrapper -->
 

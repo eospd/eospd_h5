@@ -9,7 +9,7 @@ body {
 }
 
 #wrapper {
-	width:1024px;
+	width:1280px;
 	margin:auto;
     border-top-color:#555963;
     background:rgb(45,52,61);
@@ -19,14 +19,13 @@ body {
 
 #page-wrapper {
     padding: 0 1px;
-    min-height: 568px;
     background-color: #363b46;
 }
 
 @media(min-width:368px) {
     #page-wrapper {
         position: inherit;
-        margin:  0 180px 0 180px;
+        margin:  0 150px 0 150px;
         padding: 1px;
         border: 1px solid #2f353e;
     }
@@ -119,7 +118,7 @@ cursor: pointer;
 }
 
 .sidebar-right {
-	width: 180px;
+	width: 150px;
     padding-right: 0;
 }
 
@@ -199,7 +198,7 @@ cursor: pointer;
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 180px;
+        width: 150px;
         margin-top: 0px;
     }
 
@@ -452,9 +451,21 @@ body{text-align:center}
 	border:1px;
 	border-style: solid;
 }
+
+.col-md-1 {
+	width:10px;
+	margin: auto;
+}
+
+.col-md-10 {
+	width:1366px;
+	padding-left:0px;
+	padding-right:0px;
+}
+
 .left-right-empty{
 	background-color:rgb(50,50,50);
-	height:696px;
+	height:720px;
 }
 
 .col-lg-3 {
@@ -466,7 +477,11 @@ body{text-align:center}
 	padding-left:0px;
 	padding-right:0px;
 }
-
+.table>thead>tr>th{
+	/*padding:4px;
+	margin:auto;
+	vertical-align:middle;*/
+}
 
 
 #dm_table_wrapper > div:nth-child(1) > div:nth-child(1) {

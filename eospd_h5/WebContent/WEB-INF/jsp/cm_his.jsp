@@ -7,13 +7,13 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
-					<div class="row">
+					<div class="row div" style="padding-top:10px; height:480px">
 						<div class="col-lg-12">
 
 							<div class="panel panel-default">
@@ -82,12 +82,14 @@
 						</div>
 						<!-- /.col-lg-12 -->
 					</div>
+				<jsp:include page="bottom_bar.jsp"></jsp:include>
 				</div>
+				
 				<!-- /#page-wrapper -->
 			</div>
 			<!-- /#wrapper -->
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--<div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

@@ -7,15 +7,15 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
-			<div id="wrapper">
-
+			<div id="wrapper" style="height:720px">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
-				<div id="page-wrapper">
+				<div id="page-wrapper" style="height:580px">
 
-					<div class="row" style="height: 450px">
+					<div class="row div" style="height:480px; padding-top:10px">
+					<div class="col-lg-12">
 							<div class="panel panel-default">
 								<div class="panel-body">
 									
@@ -38,7 +38,7 @@
 									</table>
 
 									<!-- history pannel -->
-									<div class="tab-content" style="overflow: auto; height:350px">
+									<div class="scrollbar tab-content" style="overflow: auto; height:350px">
 										<div class="tab-pane fade in active" id="home">
 
 											<div class="dataTable_wrapper">
@@ -67,12 +67,12 @@
 <jsp:include page="bottom_bar.jsp"></jsp:include>
 					</div>
 					<!-- /#page-wrapper -->
-
+</div>
 				</div>
 				<!-- /#wrapper -->
 			</div>
 		</div>
-		<div class="col-md-1 left-right-empty"></div>
+	<!--  	<div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

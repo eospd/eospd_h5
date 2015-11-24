@@ -6,13 +6,13 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
-					<div class="panel-body div" style="height:380px">
+					<div class="panel-body div" style="height:480px">
 					
 					<div class="row" style="height:50px;padding-top: 10px">
 					<div class="col-lg-6">
@@ -57,7 +57,7 @@
 			<!-- /#wrapper -->
 		</div>
 	</div>
-		<div class="col-md-1 left-right-empty"></div>
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
