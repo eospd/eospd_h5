@@ -39,7 +39,7 @@
 						
 
 						<div class="row" style="margin-top: 60px">
-							<canvas id="meter_canvas" width=508 height=220
+							<canvas id="meter_canvas" width=678 height=293
 								style="margin:0 auto;"></canvas>
 						<div class="row" style="height: 50px">
 							<div class="col-lg-4">
@@ -109,7 +109,12 @@
 		};
 
 		createMeter = function(ctx, images, start, leftV, midV, rightV) {
-			ctx.clearRect(0, 0, 508, 220);
+			var w = 678;
+			var h = 293;
+			
+			var small_r = 251 / 2 + 4;
+			
+			ctx.clearRect(0, 0, w, h);
 
 			var canvas = document.getElementById("meter_canvas");
 			var ctx = canvas.getContext('2d');
@@ -125,9 +130,9 @@
 
 			var img = new Image();
 			img.src = "imgs/guage.png";
-			ctx.drawImage(img, 0, 0, 508, 220);
-			var midx = 508 / 2;
-			var midy = 220 / 2;
+			ctx.drawImage(img, 0, 0, w, h);
+			var midx = w / 2;
+			var midy = h / 2;
 			var midR = start;
 
 			ctx.save();
@@ -168,8 +173,8 @@
 					+ midy / 3);
 			ctx.restore();
 
-			var rightx = 508 - 95;
-			var righty = 220 - 97;
+			var rightx = w - small_r;
+			var righty = h - small_r;
 			var rightR = start;
 
 			ctx.save();
@@ -210,8 +215,8 @@
 					+ righty / 3);
 			ctx.restore();
 
-			var leftx = 95;
-			var lefty = 220 - 97;
+			var leftx = small_r;
+			var lefty = h - small_r;
 			ctx.beginPath();
 			ctx.save();
 			ctx.translate(leftx, lefty);
