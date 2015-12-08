@@ -14,14 +14,14 @@
 
 				<div id="page-wrapper">
 				
-				<div class="panel-body div" style="height:480px">
-				<div class="row" style="height:50px;padding-top: 10px">
+				<div class="panel-body div " style="height:480px;">
+				<!--<div class="row" style="height:50px;padding-top: 10px">
 					<div class="col-lg-6">
 					<div class="col-lg-9">
-									<div class="input-group input-daterange">
+								  	<div class="input-group input-daterange">
 										<span class="input-group-addon" style="color:darkgray">开始时间</span> <input style="color:darkgrey; margin-left: 5px"
 											type="text" class="form-control" value="">
-									</div>
+									
 								</div>	
 								<div class="col-lg-3" style="padding-left:0px"><input style="color:darkgrey; text-align:center; width:60px; height:34px; border-radius: 0 3px 3px 0;background-color:rgb(47,52,63);border:none;" value="12:00"></input>
 								</div>
@@ -37,9 +37,9 @@
 								</div>
 							</div>
 									</div>
+-->
 
-
-					<div class="scrollbar" id="container" style="padding-top:0px; height:400px; overflow: auto; overflow-x: hidden">
+					<div class="scrollbar" id="container" style="padding-top:0px; height:450px; overflow: auto; overflow-x: hidden">
 					<img src="imgs/cm_chart.png"/>
 						
 							<!-- 
@@ -96,7 +96,7 @@
         $("#his_page").click(function(){
      	   window.location.href="/eospd_h5/cm_his";
         });
-        
+        <!--
         $('.input-daterange input').each(
 				function() {
 					var d = new Date()
@@ -113,6 +113,7 @@
 						//getMeterData(value.date, 0)
 					});
 				});
+        -->
     });
     </script>
 

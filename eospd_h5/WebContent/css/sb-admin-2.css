@@ -505,7 +505,7 @@ body{text-align:center}
 }
 
 #side-menu > li:nth-child(2) > p {
-	background-color: rgb(130, 40, 40);
+	/*background-color: rgb(130, 40, 40);*/
 }
 
 .scrollbar::-webkit-scrollbar {

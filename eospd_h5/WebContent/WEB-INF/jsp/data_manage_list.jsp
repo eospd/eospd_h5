@@ -17,7 +17,7 @@
 					<div class="div" style="height:480px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
 							<table class="table" style="margin-bottom: 0px"id="filter_table">
 										<tr>
-											<th>
+										<th>
 											<!--  <button class="color  black button">+</button>
 											<button class="color  black button">-</button>
 											-->
@@ -31,8 +31,38 @@
 											</th>
 										</tr>
 									</table>
-				 		<div id="container" class="scrollbar" style="margin-top:50px; overflow:auto; overflow-x: hidden; overflow-y: hidden; height:350px"></div>
-							
+							<div class="panel panel-default" style="padding:5px;">
+								<div class="panel-body scrollbar" style="height:450px;overflow: auto">
+									
+									<div class="dataTable_wrapper" >
+										<table class="table table-striped table-bordered table-hover" allowHeaderWrap="true"
+											id="dm_table">
+											<thead>
+												<tr>
+													<th style="font-size:5px;">采集<br/>时间</th>
+													<th style="font-size:5px;">电支路</th>
+													<th style="font-size:5px;">断点<br/>续传</th>
+													<th style="font-size:5px">插值<br/>标志</th>
+													<th style="font-size:4px">总电量<br/>(KWh)</th>
+													<th style="font-size:5px">错误<br/>标志</th>
+													<th style="font-size:5px">差值<br/>(KWh)</th>
+													<th style="font-size:5px">归零<br/>标志</th>
+													<th style="font-size:4px">总功率<br/>(KW)</th>
+													<th style="font-size:4px">总功率<br/>因数</th>
+													<!--  <th style="font-size:5px">A相<br/>电流(A)</th>
+													<th style="font-size:5px">B相<br/>电流(A)</th>
+													<th style="font-size:5px">C相<br/>电流(A)</th>
+													<th style="font-size:5px">A相<br/>电压(V)</th>
+													<th style="font-size:5px">B相<br/>电压(V)</th>
+													<th style="font-size:5px">C相<br/>电压(V)</th>-->
+												</tr>
+											</thead>
+										</table>
+									</div>
+									<!-- /.table-responsive -->
+									
+								</div>
+							</div>
 						</div>
 									<jsp:include page="bottom_bar.jsp"></jsp:include>
 						<!-- /.panel-body -->
@@ -67,82 +97,56 @@
 	<script src="js/highcharts.js"></script>
 	<script src="js/jquery.dragscroll.js"></script>
 
-	<script>
-	$(function () {
-	    var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
-	    Highcharts.setOptions({colors : defaultColors});
-	    $('#container').highcharts({
-	        chart: {
-	        	height:350,
-	        	width: 1000,
-	            type: 'area',
-	            backgroundColor:'rgba(0,0,0,0)'
-	        },
-	        xAxis: {
-	            categories: ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
-	                         '13:00', '13:15', '13:30', '13:45', '14:00', '14:15',  
-	                         ],
-	            tickmarkPlacement: 'off',
-	            title: {
-	                enabled: false
-	            }
-	        	
-	        },
-	        yAxis: {
-	        	gridLineColor:'rgba(0,0,0,0)',
-	        	tickPositions:[0,100],
-                   tickmarkPlacement: 'off',
-   	            title: {
-   	                enabled: false
-   	            }
-	        },
-	        tooltip: {
-	            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
-	            shared: true
-	        },
-	        plotOptions: {
-	            area: {
-	                stacking: 'percent',
-	                lineColor: '#ffffff',
-	                lineWidth: 2,
-	                marker: {
-	                	enabled:false,
-	                    lineWidth: 2,
-	                    lineColor: '#ffffff'
-	                }
-	            }
-	        },
-	        legend:{
-	        	reversed:true
-	        },
-	        
-	        series: [
-	            {
-	            name: '<label style="color:white">无数据</label>',                
-	            data: [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201]
-	        },{
-	            name: '<label style="color:white">错误未修复</label>',
-	            data: [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766]
-	        }, {
-	            name: '<label style="color:white">错误修复</label>',
-	            data: [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628]
-	        },{
-	            name: '<label style="color:white">重传数据</label>',
-	            data: [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201]
-	        },  {
-	            name: '<label style="color:white">正常数据</label>',
-	            data: [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868]
-	        }]
-	    });
-	});				
-	
-	</script>
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(
 				function() {
 					$('#container').dragScroll({});
-					
+					$('#dm_table').DataTable({
+						"language": chinese_langue,
+						"processing" : true,
+						"serverSide" : true,
+						"bSort" : false,
+						"ajax" : {
+							"url" : "/eospd_h5/dm/list",
+							"type" : "POST"
+						},
+						"columns" : [ {
+							"data" : "currentTime"
+						}, {
+							"data" : "dataUrl"
+						}, {
+							"data" : "bpSign"
+						}, {
+							"data" : "ivSign"
+						}, {
+							"data" : "p1Pv"
+						}, {
+							"data" : "p1Err"
+						}, {
+							"data" : "p1Dv"
+						}, {
+							"data" : "p1Rsz"
+						}, {
+							"data" : "p2Pv"
+						}, {
+							"data" : "p3Pv"
+						}
+						/*, {
+							"data" : "p4Pv"
+						}, {
+							"data" : "p5Pv"
+						}, {
+							"data" : "p6Pv"
+						}, {
+							"data" : "p7Pv"
+						}, {
+							"data" : "p8Pv"
+						}, {
+							"data" : "p9Pv"
+						}*/ 
+						]
+					});
 
 					$('.input-daterange input').each(
 							function() {
@@ -159,9 +163,14 @@
 								});
 							});
 				});
-		$("#his_page").click(function(){
-	     	   window.location.href="/eospd_h5/datam_list";
+		
+		$("#def_page").click(function(){
+	     	   window.location.href="/eospd_h5/dm";
 	        });
+		
+		$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
+		$("#his_page").css({'background-color':'#269CE9'});
+		$("#dm").toggleClass('active');
 	</script>
 
 </body>

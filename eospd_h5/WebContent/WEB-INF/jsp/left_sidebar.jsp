@@ -36,35 +36,37 @@
 	<div class="sidebar-nav navbar-collapse">
 		<ul class="nav" id="side-menu">
 
-			<li><a href="/eospd_h5/index" id="index"><i class="fa  fa-fw"></i>
+			<li><a href="/eospd_h5/index" id="index"><img src="imgs/data_quality_icon.png" style="margin-right:10px"  width="20px" height="20px" /><i class="fa  fa-fw"></i>
 					数据质量</a></li>
 					<!-- 
 			<li><a href="/eospd_h5/col_his"><i
 					class="fa fa-dashboard fa-fw"></i> 历史数据</a></li>
  -->
- 			<li><a href="/eospd_h5/dm" id="dm"><i
+ 			<li><a href="/eospd_h5/dm" id="dm"><img src="imgs/data_query_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
 					class="fa  fa-fw"></i> 数据查询</a></li>
 					<!-- 
 					<li><a href="/eospd_h5/col_his" id="dm_chart"><i
 					class="fa  fa-fw"></i> 数据管理</a></li>
 					 -->
-			<li><a href="/eospd_h5/datam_chart" id="dm_chart"><i
+			<li><a href="/eospd_h5/datam_chart" id="dm_chart"><img src="imgs/datam_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
 					class="fa  fa-fw"></i> 数据管理</a></li>
-			<li><a href="/eospd_h5/cm_chart" id="cm"><i
+			<li><a href="/eospd_h5/cm_chart" id="cm"><img src="imgs/cm_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
 					class="fa   fa-fw"></i>通讯管理</a></li>
 			<!--  
 			<li><a href="/eospd_h5/cm_his"><i class="fa fa-table fa-fw"></i>
 					历史数据</a></li>
 -->
-			<li><a href="/eospd_h5/efd_chart" id="efd"><i
+			<li><a href="/eospd_h5/efd_chart" id="efd"><img src="imgs/energy_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
 					class="fa  fa-fw"></i> 能流管理</a></li>
 					<!--  
 			<li><a href="/eospd_h5/efd_his"><i class="fa fa-edit fa-fw"></i>
 					电支路信息 </a></li>
 					-->
-			<li><a href="#" id="mm" style="color:grey;background-color: darygray" disabled="disabled"><i class="fa  fa-fw" ></i>
+			<li><a href="#" id="mm" style="color:grey;background-color: darygray" disabled="disabled"><img src="imgs/logic_icon.png" style="margin-right:10px" width="20px" height="20px"/><i class="fa  fa-fw" ></i>
 					逻辑管理</a></li>
-			<li><a href="/eospd_h5/mm" id="mm"><i class="fa  fa-fw"></i>
+					<!-- <li><a href="/eospd_h5/mm" id="mm"><i class="fa  fa-fw"></i>
+			 -->
+			<li><a href="#" id="mm" style="color:grey;background-color: darygray" disabled="disabled"><img src="imgs/mm_icon.png" style="margin-right:10px" width="20px" height="20px"/><i class="fa  fa-fw"></i>
 					表具管理</a></li>
 			<!--  <li><a href="/eospd_h5/sc" id="sc"><i class="fa  fa-fw"></i>
 					系统配置</a></li>-->
@@ -94,7 +96,7 @@
 						<li><a href="#">T2</a>
 						<ul class="nav nav-second-level ">
 							<li><a href="#">T2航站楼</a></li>
-							<li><a href="#">T2能源楼</a></li>
+							<li><a style="background-color:rgb(130,40,40)" href="#">T2能源楼</a></li>
 							<li><a href="#">T2停车场</a></li>
 						</ul></li>
 				</ul></li>
