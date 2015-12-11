@@ -453,12 +453,11 @@ body{text-align:center}
 }
 
 .col-md-1 {
-	width:10px;
 	margin: auto;
 }
 
 .col-md-10 {
-	width:1366px;
+	/*width:1366px;*/
 	padding-left:0px;
 	padding-right:0px;
 }
