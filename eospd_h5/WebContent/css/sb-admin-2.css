@@ -9,7 +9,7 @@ body {
 }
 
 #wrapper {
-	width:1280px;
+	width:100%;
 	margin:auto;
     border-top-color:#555963;
     background:rgb(45,52,61);
@@ -453,11 +453,12 @@ body{text-align:center}
 }
 
 .col-md-1 {
+	width:1%;
 	margin: auto;
 }
 
 .col-md-10 {
-	/*width:1366px;*/
+	width:1280px;
 	padding-left:0px;
 	padding-right:0px;
 }

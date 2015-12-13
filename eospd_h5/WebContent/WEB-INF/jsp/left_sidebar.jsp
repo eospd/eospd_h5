@@ -2,13 +2,6 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<div style="height:80px; background-color: rgb(83,30,29);"> 
-	<img style="float:left; padding-top:20px;padding-left: 10px; " src="imgs/arrow-back.png"/>
-	<label style="float:left; padding-top:20px;padding-left: 10px;font-size: 20px; color:white;">数据采集</label>
-	
-	<img style="float:right; padding-top:20px;padding-right: 50px; " src="imgs/logo.png"/>
-</div>
-
 <!-- Navigation -->
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid" style="margin-top: 10px">

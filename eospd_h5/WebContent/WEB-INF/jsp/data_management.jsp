@@ -7,10 +7,12 @@
 
 <body>
 	<div class="row">
-		<!--  <div class="col-md-1 left-right-empty"></div>-->
+		<!--  <div class="col-md-1 left-right-empty"></div>
 		<div class="col-md-10 left-right-empty">
 
+			<div id="wrapper">-->
 			<div id="wrapper">
+		<div style="width:1280px; margin: auto">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper" >

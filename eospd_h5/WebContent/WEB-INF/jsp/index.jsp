@@ -6,9 +6,9 @@
 
 <body>
 	<div class="row">
-		 <div class="col-md-1 left-right-empty"></div>
-		<div class="col-md-10 left-right-empty">
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 			<div id="wrapper">
+		<div style="width:1280px; margin: auto">
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
@@ -39,15 +39,15 @@
 						
 
 						<div class="row" style="margin-top: 60px">
-							<canvas id="meter_canvas" width=678 height=293
+							<canvas id="meter_canvas" width=715 height=324
 								style="margin:0 auto;"></canvas>
 						<div class="row" style="height: 50px">
 							<div class="col-lg-4">
-							<label style="float:right; font-size: 16px">数据有效</label></div>
+							<label style="padding-right:25px; float:right; font-size: 18px">数据有效</label></div>
 							<div class="col-lg-4">
-							<label style="font-size: 18px">数据质量</label></div>
+							<label style="font-size: 20px">数据质量</label></div>
 							<div class="col-lg-4">
-							<label style="float:left; font-size: 16px">通讯有效</label></div>
+							<label style="padding-left:25px; float:left; font-size: 18px">通讯有效</label></div>
 							</div>
 
 						</div>
@@ -57,7 +57,7 @@
 			<!-- /#wrapper -->
 		</div>
 	</div>
-	 <div class="col-md-1 left-right-empty"></div>
+	 <!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
@@ -109,10 +109,10 @@
 		};
 
 		createMeter = function(ctx, images, start, leftV, midV, rightV) {
-			var w = 678;
-			var h = 293;
+			var w = 715;
+			var h = 324;
 			
-			var small_r = 251 / 2 + 4;
+			var small_r = 251 / 2;
 			
 			ctx.clearRect(0, 0, w, h);
 
@@ -167,14 +167,14 @@
 			ctx.save();
 			var textWidth = ctx.measureText("数据质量").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "18px serif";
+			ctx.font = "20px serif";
 			//ctx.fillText("数据质量", midx - textWidth / 2 - 10, midy + midy / 3 +40);
 			ctx.fillText(midR + "%", midx - textWidth / 2 + 10, midy + 10
 					+ midy / 3);
 			ctx.restore();
 
 			var rightx = w - small_r;
-			var righty = h - small_r;
+			var righty = h - small_r - 18;
 			var rightR = start;
 
 			ctx.save();
@@ -209,14 +209,14 @@
 			ctx.save();
 			var textWidth = ctx.measureText("通讯有效").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "16px serif";
+			ctx.font = "18px serif";
 			//ctx.fillText("通讯有效", rightx - textWidth / 2 - 10, righty + righty / 3 + 24);
 			ctx.fillText(rightR + "%", rightx - textWidth / 2 + 15, righty + 5
 					+ righty / 3);
 			ctx.restore();
 
 			var leftx = small_r;
-			var lefty = h - small_r;
+			var lefty = h - small_r - 18;
 			ctx.beginPath();
 			ctx.save();
 			ctx.translate(leftx, lefty);
@@ -251,7 +251,7 @@
 			ctx.save();
 			var textWidth = ctx.measureText("数据有效").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "16px serif";
+			ctx.font = "18px serif";
 			//ctx.fillText("数据有效", leftx - 20, lefty + lefty / 3 + 24);
 			ctx.fillText(leftR + "%", leftx - 5, lefty + 5 + lefty / 3);
 			ctx.restore();
