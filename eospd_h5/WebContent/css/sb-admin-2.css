@@ -12,9 +12,15 @@ body {
 	width:100%;
 	margin:auto;
     border-top-color:#555963;
-    background:rgb(45,52,61);
+    background:#505050;
     border-width: 1px;
     border-color: #40454F;
+}
+
+#content-div {
+	width:1280px;
+	margin:auto;
+    background:rgb(45,52,61);
 }
 
 #page-wrapper {

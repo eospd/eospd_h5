@@ -8,8 +8,8 @@
 	<div class="row">
 		<!--  <div class="col-md-1 left-right-empty"></div>-->
 			<div id="wrapper">
-		<div style="width:1280px; margin: auto">
-				<jsp:include page="left_sidebar.jsp"></jsp:include>
+			<div id="content-div">		
+			<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
 					<div class="panel-body div" style="height:480px">

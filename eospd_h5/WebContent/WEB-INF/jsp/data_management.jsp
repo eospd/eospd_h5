@@ -12,7 +12,7 @@
 
 			<div id="wrapper">-->
 			<div id="wrapper">
-		<div style="width:1280px; margin: auto">
+		<div id="content-div">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper" >

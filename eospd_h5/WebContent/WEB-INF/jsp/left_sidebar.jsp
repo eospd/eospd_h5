@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!-- Navigation -->
-<nav class="navbar navbar-default" role="navigation">
-<div class="container-fluid" style="margin-top: 10px">
+<nav class="navbar navbar-default" style="border-radius:0px" role="navigation">
+<div class="container-fluid" style="margin-top: 10px;">
 	<div class="navbar-header" style="margin-left: 10px;">
 		<button class="color green button">电力</button>
 		<button class="color black button">燃气</button>

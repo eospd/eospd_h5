@@ -46,8 +46,8 @@
 </head>
 
 <div style="height:80px; background-color: rgb(83,30,29);"> 
-	<img style="float:left; padding-top:20px;padding-left: 10px; " src="imgs/arrow-back.png"/>
-	<label style="float:left; padding-top:20px;padding-left: 10px;font-size: 20px; color:white;">数据采集</label>
-	
-	<img style="float:right; padding-top:20px;padding-right: 50px; " src="imgs/logo.png"/>
+	<a href="http://127.0.0.1:8080/springmvc/index.jsp?roleId=1" target="_self">
+	<img style="float:left; padding-top:20px;padding-left: 20px; " src="imgs/arrow-back.png"/></a>
+	<label style="float:left; padding-top:14px;padding-left: 10px;font-size: 33px; color:white;">数&nbsp;据&nbsp;采&nbsp;集</label>
+	<img style="float:right;padding-right: 50px; " src="imgs/logo.png"/>
 </div>

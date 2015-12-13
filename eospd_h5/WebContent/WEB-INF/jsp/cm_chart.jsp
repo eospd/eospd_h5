@@ -10,7 +10,7 @@
 		<div class="col-md-10 left-right-empty">
 			<div id="wrapper"> -->
 			<div id="wrapper">
-		<div style="width:1280px; margin: auto">
+		<div id="content-div">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 
