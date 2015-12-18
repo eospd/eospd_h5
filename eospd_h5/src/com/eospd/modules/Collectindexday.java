@@ -59,7 +59,7 @@ public class Collectindexday {
 	        	
 	        	Map<Object, Object> map = new HashMap<Object, Object>();
 	        	
-	            while (rs.next()) {
+	        	if (rs.next()) {
 	                map.put("commValid", String.format("%.2f", rs.getDouble("commValid")));
 	                map.put("dataValid",  String.format("%.2f", rs.getDouble("dataValid")));
 	                map.put("dataQuality",  String.format("%.2f", rs.getDouble("dataQuality")));
@@ -72,7 +72,43 @@ public class Collectindexday {
 	    dao.execute(sql);
 		return (Map) sql.getResult();
 	}
-
+	
+	@SuppressWarnings({ "rawtypes" })
+	@At("/cid/data_query")
+	@AdaptBy(type = PairAdaptor.class)
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map data_query(@Param(value = "s_time") Date s_time, @Param(value = "e_time") Date e_time) {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		
+		Sql sql = Sqls.create("SELECT SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt " +
+					"FROM v_dataquality where qualityTime >= @s_time and qualityTime < @e_time;");
+		
+		sql.params().set("s_time", s_time);
+		sql.params().set("e_time", e_time);
+		
+	    sql.setCallback(new SqlCallback() {
+	        public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+	        	
+	        	Map<Object, Object> map = new HashMap<Object, Object>();
+	        	
+	            if (rs.next()) {
+	                map.put("realNormalCnt", rs.getInt("realNormalCnt"));
+	                map.put("retranNormalCnt", rs.getInt("retranNormalCnt"));
+	                map.put("dataRepairCnt", rs.getInt("dataRepairCnt"));
+	                map.put("dataErrCnt", rs.getInt("dataErrCnt"));
+	                map.put("dataLoseCnt", rs.getInt("dataLoseCnt"));
+	            }
+	            
+	            return map;
+	        }
+	    });
+	    
+	    dao.execute(sql);
+		return (Map) sql.getResult();
+	}
+	
+	
 	@SuppressWarnings({ "rawtypes" })
 	@At("/cid/list")
 	@AdaptBy(type = PairAdaptor.class)
