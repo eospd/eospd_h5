@@ -1,5 +1,52 @@
-1.在能流图和表具管理需要体现出对“电支路和仪表”的增加，编辑和删除的入口。
-2.调整数据采集也的3个仪表的显示
-3.在数据采集需要增加按日查询的入口
-4.表格界面调整，确定字段名称
-5.需要增加左右滚动条显示字段
+浦东机场数据采集界面接口文档_20151215
+一，“数据质量”菜单：
+对应视图v_dataquality
+1，	每一个仪表15分钟产生一行数据；
+2，	列dataId对应表circuitinfo的列circuitId；
+3，	列qualityTime表示开始时间，比如：2015-12-15 10:00:00 代表2015-12-15 10:00:00到2015-12-15 10:15:00这15分钟之内的数据质量；
+界面时间范围即指该时间，2个时间范围，我们取 qualityTime大于等于 开始时间 qualityTime小于 结束时间；
+4，	列commValid/planCollectCnt对应界面 通讯有效；
+5，	列dataValid/planCollectCnt对应界面 数据有效；
+6，	列dataQuality/planCollectCnt对应界面 数据质量；
+7，	界面右侧仅“T2能源站”可用，点击后即根据界面时间范围查询本视图，查到该时间范围内的的所有电支路的行，相关列求和，然后根据上面的公式做除法，然后乘以100，取2位小数点；
+表格中的每行为15分钟数据，即该时间点所有数据汇总；
+二，“数据查询“菜单：
+百分比堆叠图对应表dataquality
+1，	每一个仪表15分钟产生一行数据；
+2，	列dataId对应表circuitinfo的列circuitId；
+3，	列qualityTime表示开始时间，比如：2015-12-15 10:00:00 代表2015-12-15 10:00:00到2015-12-15 10:15:00这15分钟之内的数据质量；
+界面时间范围即指该时间，2个时间范围，我们取 qualityTime大于等于 开始时间 qualityTime小于 结束时间；
+4，	列realNormalCnt表示在线正常数据个数；
+5，	列retranNormalCnt表示重传正常数据个数；
+6，	列dataRepairCnt表示数据修复个数；
+7，	列dataErrCnt表示数据错误个数；
+8，	列dataLoseCnt表示数据丢失个数；
+9，	根据时间范围查询，图中每组数据为同一时间点所有行的5列数据分别求和，得到每组的5个数；
+表格：仍然对应表dataontime；
+三，“数据管理“菜单：
+主页面对应表datamanage，下侧子系统对应表subsysinfo，右侧区域对应表areainfo，仍暂支持T2能源站；
+1，	areaId，关联到表areainfo；
+2，	subsysId，关联到表 subsysinfo
+3，	能耗数据采集间隔 对应列 enconCollection；
+4，	能耗本地上传间隔 对应列 enconLocal
+5，	能耗远程上传间隔 对应列 cnconRemote
+6，	能耗上传精度 对应列 enconDecimal，后台保存小数点位数
+7，	能量数据采集间隔 对应列 ecCollection；
+8，	能量本地上传间隔 对应列 enLocal
+9，	能量远程上传间隔 对应列 cnRemote
+10，	能量上传精度 对应列 enDecimal，后台保存小数点位数
+11，	环境数据采集间隔 对应列 envCollection；
+12，	环境本地上传间隔 对应列 envLocal
+13，	环境远程上传间隔 对应列 envRemote
+14，	环境上传精度 对应列 envDecimal，后台保存小数点位数
+四，通讯管理：
+页面对应表 commmanage
+1，	deviceType，设备类型，1-DC，2-网关，3-仪表，不同设备类型对应不同图标；
+2，	deviceName，设备名称，设备图标内显示；
+3，	deviceUrl，设备Url，可选，用于查询在线状态，部分设备不支持查询在线状态；
+4，	commType，通讯类型，1-gprs 2-以太网 3-RS485 255-未知 gprs要在界面上用无线图标表示；
+5，	firstShow，首页面显示布尔值，1-显示 0-不显示，仪表显示方式一般显示同组的第一个和最后一个
+6，	parentId，父设备ID，0-代表顶级设备
+7，	parentChannelSn，父设备通道编号，专用于带多个RS485的设备，可选
+8，	canQuery，在线状态可查询标志，1-可查询 0-不可查询。
+查询接口不变，根据deviceUrl定时查询在线状态，查到后更新界面状态

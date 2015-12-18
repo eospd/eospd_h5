@@ -7,57 +7,69 @@
 <body>
 	<div class="row">
 		<!--  <div class="col-md-1 left-right-empty"></div>-->
-			<div id="wrapper">
-			<div id="content-div">		
-			<jsp:include page="left_sidebar.jsp"></jsp:include>
+		<div id="wrapper">
+			<div id="content-div">
+				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
 
-					<div class="panel-body div" style="height:480px">
-					
-					<div class="row" style="height:50px;padding-top: 10px">
-					<div class="col-lg-6">
-					<div class="col-lg-9">
+					<div class="panel-body div" style="height: 480px">
+
+						<div class="row" style="height: 50px; padding-top: 10px">
+							<div class="col-lg-6">
+								<div class="col-lg-9">
 									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color:darkgray">开始时间</span> <input style="color:darkgrey; margin-left: 5px"
-											type="text" class="form-control" value="">
+										<span class="input-group-addon" style="color: darkgray">开始时间</span>
+										<input style="color: darkgrey; margin-left: 5px" type="text"
+											class="form-control" value="">
 									</div>
-								</div>	
-								<div class="col-lg-3" style="padding-left:0px"><input style="color:darkgrey; text-align:center; width:60px; height:34px; border-radius: 0 3px 3px 0;background-color:rgb(47,52,63);border:none;" value="12:00"></input>
 								</div>
-									</div>
-									<div class="col-lg-6">
-							<div class="col-lg-9">
-									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color:darkgray">结束时间</span> <input style="color:darkgrey; margin-left: 5px"
-											type="text" class="form-control" value="">
-									</div>
-								</div>	
-								<div class="col-lg-3" style="padding-left:0px"><input style="text-align:center; width:60px; height:34px; border-radius: 0 3px 3px 0;background-color:rgb(47,52,63);border:none;color:darkgray" value="12:00"></input>
+								<div class="col-lg-3" style="padding-left: 0px">
+									<input
+										style="color: darkgrey; text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none;"
+										value="12:00"></input>
 								</div>
 							</div>
+							<div class="col-lg-6">
+								<div class="col-lg-9">
+									<div class="input-group input-daterange">
+										<span class="input-group-addon" style="color: darkgray">结束时间</span>
+										<input style="color: darkgrey; margin-left: 5px" type="text"
+											class="form-control" value="">
 									</div>
-						
+								</div>
+								<div class="col-lg-3" style="padding-left: 0px">
+									<input
+										style="text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none; color: darkgray"
+										value="12:00"></input>
+								</div>
+							</div>
+						</div>
+
 
 						<div class="row" style="margin-top: 60px">
 							<canvas id="meter_canvas" width=715 height=324
 								style="margin:0 auto;"></canvas>
-						<div class="row" style="height: 50px">
-							<div class="col-lg-4">
-							<label style="padding-right:25px; float:right; font-size: 18px">数据有效</label></div>
-							<div class="col-lg-4">
-							<label style="font-size: 20px">数据质量</label></div>
-							<div class="col-lg-4">
-							<label style="padding-left:25px; float:left; font-size: 18px">通讯有效</label></div>
+							<div class="row" style="height: 50px">
+								<div class="col-lg-4">
+									<label
+										style="padding-right: 25px; float: right; font-size: 18px">数据有效</label>
+								</div>
+								<div class="col-lg-4">
+									<label style="font-size: 20px">数据质量</label>
+								</div>
+								<div class="col-lg-4">
+									<label style="padding-left: 25px; float: left; font-size: 18px">通讯有效</label>
+								</div>
 							</div>
 
 						</div>
 					</div>
-						<jsp:include page="bottom_bar.jsp"></jsp:include>
+					<jsp:include page="bottom_bar.jsp"></jsp:include>
+				</div>
+				<!-- /#wrapper -->
 			</div>
-			<!-- /#wrapper -->
 		</div>
-	</div>
-	 <!--  <div class="col-md-1 left-right-empty"></div>-->
+		<!--  <div class="col-md-1 left-right-empty"></div>-->
 	</div>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
@@ -111,9 +123,9 @@
 		createMeter = function(ctx, images, start, leftV, midV, rightV) {
 			var w = 715;
 			var h = 324;
-			
+
 			var small_r = 251 / 2;
-			
+
 			ctx.clearRect(0, 0, w, h);
 
 			var canvas = document.getElementById("meter_canvas");
@@ -334,24 +346,20 @@
 
 				});
 
-		getMeterData = function(date, deviceid) {
-			var time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"
-					+ date.getDate();
-			$.get('/eospd_h5/cid/sys_spec?time=' + time + '&deviceid='
-					+ deviceid, function(result) {
+		getMeterData = function(s_time, e_time) {
+			$.get('/eospd_h5/cid/sys_spec/?s_time=' + s_time + '&e_time=' + e_time, function(result) {
 
 				$.each(result, function(key, val) {
 					$.each(val, function(a, b) {
-						if (a == 'dataEffRate') {
+						if (a == 'dataQuality') {
 							midV = b;
 						}
-						if (a == 'meterOnlineRate') {
+						if (a == 'commValid') {
 							rightV = b;
 						}
-						if (a == 'realCollectRate') {
+						if (a == 'dataValid') {
 							leftV = b;
 						}
-
 					});
 				});
 

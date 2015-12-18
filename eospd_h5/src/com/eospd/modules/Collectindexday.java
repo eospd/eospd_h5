@@ -43,17 +43,34 @@ public class Collectindexday {
 	@AdaptBy(type = PairAdaptor.class)
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
-	public Map system_specification(@Param(value = "time") Date time, @Param(value = "deviceid") int deviceid) {
+	public Map system_specification(@Param(value = "s_time") Date s_time, @Param(value = "e_time") Date e_time) {
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		if (null == time) {
-			time = new Date();
-		}
-		CollectIndexDay item = dao.fetch(CollectIndexDay.class,
-				Cnd.where("deviceId", "=", deviceid).and("indexTime", "=", time));
-
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("sys_spec", item);
-		return map;
+		
+		Sql sql = Sqls.create("SELECT ((100.0* sum(commValid)) / sum(planCollectCnt)) as commValid, " +
+					"((100.0* sum(dataValid)) / sum(planCollectCnt)) as dataValid, " +
+					"((100.0* sum(dataQuality)) / sum(planCollectCnt)) as dataQuality " +
+					"FROM v_dataquality where qualityTime >= @s_time and qualityTime < @e_time;");
+		
+		sql.params().set("s_time", s_time);
+		sql.params().set("e_time", e_time);
+		
+	    sql.setCallback(new SqlCallback() {
+	        public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+	        	
+	        	Map<Object, Object> map = new HashMap<Object, Object>();
+	        	
+	            while (rs.next()) {
+	                map.put("commValid", String.format("%.2f", rs.getDouble("commValid")));
+	                map.put("dataValid",  String.format("%.2f", rs.getDouble("dataValid")));
+	                map.put("dataQuality",  String.format("%.2f", rs.getDouble("dataQuality")));
+	            }
+	            
+	            return map;
+	        }
+	    });
+	    
+	    dao.execute(sql);
+		return (Map) sql.getResult();
 	}
 
 	@SuppressWarnings({ "rawtypes" })
