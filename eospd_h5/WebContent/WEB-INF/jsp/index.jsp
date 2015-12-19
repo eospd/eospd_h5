@@ -18,13 +18,13 @@
 							<div class="col-lg-6">
 								<div class="col-lg-9">
 									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color: darkgray">开始时间</span>
+										<span class="input-group-addon" style="color: darkgray;background-color: transparent;border: 0;">开始时间</span>
 										<input style="color: darkgrey; margin-left: 5px" type="text"
-											class="form-control" value="">
+											class="form-control s_time_y" value="">
 									</div>
 								</div>
 								<div class="col-lg-3" style="padding-left: 0px">
-									<input
+									<input class ="s_time_hm"
 										style="color: darkgrey; text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none;"
 										value="12:00"></input>
 								</div>
@@ -32,13 +32,13 @@
 							<div class="col-lg-6">
 								<div class="col-lg-9">
 									<div class="input-group input-daterange">
-										<span class="input-group-addon" style="color: darkgray">结束时间</span>
+										<span class="input-group-addon" style="color: darkgray;background-color: transparent;border: 0;">结束时间</span>
 										<input style="color: darkgrey; margin-left: 5px" type="text"
-											class="form-control" value="">
+											class="form-control e_time_y" value="">
 									</div>
 								</div>
 								<div class="col-lg-3" style="padding-left: 0px">
-									<input
+									<input  class ="e_time_hm"
 										style="text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none; color: darkgray"
 										value="12:00"></input>
 								</div>
@@ -74,11 +74,13 @@
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.plugin.min.js"></script>
+	<script src="js/jquery.timer.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+		src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="js/metisMenu.min.js"></script>
@@ -314,43 +316,85 @@
 					});
 
 					$('.input-daterange input').each(
-							function() {
-								var d = new Date()
+							function(i) {
+								if (0 == i) {
+									var d = new Date();
+									d = new Date(d.valueOf() - 900000);
+									$('.s_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+								} else {
+									var d = new Date();
+									$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+								}
+
 								$(this).val(
-										d.getFullYear() + "年"
-												+ (d.getMonth() + 1) + "月"
+										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 												+ (d.getDate()) + "日");
-								$(this).datepicker({
+								
+								$(this).datetimepicker({
 									language : 'zh-CN',
 									autoclose : true,
+									endDate: new Date(),
 									todayHighlight : true,
 									todayBtn : "linked",
+									format: 'yyyy年mm月dd日'
 								}).on('changeDate', function(value) {
-									getMeterData(value.date, 0)
+									//console.log("i:" +i);
+									if (0 == i) {
+										$('.s_time_hm').val(value.date.toGMTString().split(' ')[4].substring(0, 5));
+									} else {
+										$('.e_time_hm').val(value.date.toGMTString().split(' ')[4].substring(0, 5));
+									}
+									//getMeterData();
 								});
 							});
 
+					// 每隔十五分钟，自动拉取服务器数据
+					$('body').timer({
+						callback: function() {
+
+							var d = new Date();
+							$('.e_time_y').val(
+									d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+											+ (d.getDate()) + "日");
+
+							$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+							
+							
+
+							d = new Date(d.valueOf() - 900000);
+							$('.s_time_y').val(
+									d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+											+ (d.getDate()) + "日");
+							
+							$('.s_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+
+							
+							getMeterData(); },
+						repeat: true,
+						//delay: 60000
+						delay: 900000
+					});
+					
 					$("#btn_refresh").click(function() {
-						console.log("------click refresh btn------");
-						var d = new Date();
-						getMeterData(d, 0);
-						//"dataEffRate":98.0,"meterOnlineRate":90.0,"realCollectRate":
-						//leftV = data.realCollectRate;
-						//midV = data.dataEffRate;
-						//rightV = data.meterOnlineRate;
+						getMeterData();
 					});
 
 					$("#his_page").click(function() {
 						window.location.href = "/eospd_h5/col_his";
 					});
 
+					$(".t2_e").click(function() {
+						getMeterData();
+					});
 				});
 
-		getMeterData = function(s_time, e_time) {
-			$.get('/eospd_h5/cid/sys_spec/?s_time=' + s_time + '&e_time=' + e_time, function(result) {
+		getMeterData = function() {
+			var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'') + " " + $('.s_time_hm').val();
+			var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'') + " " + $('.e_time_hm').val();
+			$.get('/eospd_h5/cid/sys_spec/?s_time=' + s_time + '&e_time=' + e_time, 
+					function(result) {
 
-				$.each(result, function(key, val) {
-					$.each(val, function(a, b) {
+					$.each(result, function(a, b) {
 						if (a == 'dataQuality') {
 							midV = b;
 						}
@@ -361,7 +405,6 @@
 							leftV = b;
 						}
 					});
-				});
 
 				console.log(' leftV:' + leftV + ",midV:" + midV + ",rightV:"
 						+ rightV);

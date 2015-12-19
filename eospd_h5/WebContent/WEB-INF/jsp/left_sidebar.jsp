@@ -89,7 +89,7 @@
 						<li><a href="#">T2</a>
 						<ul class="nav nav-second-level ">
 							<li><a href="#">T2航站楼</a></li>
-							<li><a style="background-color:rgb(130,40,40)" href="#">T2能源楼</a></li>
+							<li><a style="background-color:rgb(130,40,40);cursor:pointer;" class='t2_e'>T2能源楼</a></li>
 							<li><a href="#">T2停车场</a></li>
 						</ul></li>
 				</ul></li>
