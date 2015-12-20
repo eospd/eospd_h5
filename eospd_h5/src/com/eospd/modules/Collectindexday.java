@@ -119,14 +119,21 @@ public class Collectindexday {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-		String sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId limit $start, $length";
-
-		if (tsearch.length() != 0) {
-			sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" limit $start, $length";
-		}
-		Sql sql = Sqls.create(sqlString);
-
-		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
+		Sql sql = Sqls.create("SELECT qualityTime as qualityTime,dataUrl as dataUrl, ((100.0* (commValid)) / (planCollectCnt)) as commValid, " +
+                "((100.0* (dataValid)) / (planCollectCnt)) as dataValid, " +
+                "((100.0* (dataQuality)) / (planCollectCnt)) as dataQuality " +
+                "FROM v_dataquality limit @start, @length");
+        sql.params().set("start", start);
+        sql.params().set("length", length);
+		
+//		String sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId limit $start, $length";
+//
+//		if (tsearch.length() != 0) {
+//			sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" limit $start, $length";
+//		}
+//		Sql sql = Sqls.create(sqlString);
+//
+//		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
 
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
@@ -134,12 +141,16 @@ public class Collectindexday {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
-					map1.put("currentTime",
-							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("indexTime")));
-					map1.put("meterUrl", rs.getString("deviceUrl"));
-					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
-					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");
-					map1.put("realCollectRate", rs.getDouble("realCollectRate") + "%");
+					map1.put("currentTime",rs.getString("qualityTime"));
+					map1.put("meterUrl", rs.getString("dataUrl"));
+//					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
+//					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");
+//					map1.put("realCollectRate", rs.getDouble("realCollectRate") + "%");
+					
+					map1.put("meterOnlineRate", String.format("%.2f%%", rs.getDouble("commValid")));
+                    map1.put("realCollectRate",  String.format("%.2f%%", rs.getDouble("dataValid")));
+                    map1.put("dataEffRate",  String.format("%.2f%%", rs.getDouble("dataQuality")));
+					
 					data.add(map1);
 				}
 				return data;
@@ -148,9 +159,9 @@ public class Collectindexday {
 
 		dao.execute(sql);
 
-		String sqlString1 = "SELECT count(*) as recordsTotal FROM `collectindexday` a";
+		String sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a";
 		if (tsearch.length() != 0) {
-			sqlString1 = "SELECT count(*) as recordsTotal FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\"";
+			sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\"";
 		}
 
 		Sql sql1 = Sqls.create(sqlString1);
