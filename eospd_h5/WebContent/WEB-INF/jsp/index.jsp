@@ -78,7 +78,7 @@
 	<script src="js/jquery.timer.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"
 		src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 
@@ -335,12 +335,15 @@
 												+ (d.getDate()) + "日");
 								
 								$(this).datetimepicker({
-									language : 'zh-CN',
+							        language:  'zh-CN',
+							        weekStart: 1,
+							        todayBtn:  1,
+									autoclose: 1,
+									todayHighlight: 1,
+									startView: 2,
+									forceParse: 0,
 									autoclose : true,
-									startDate: new Date("2015-11-01"),
 									endDate: new Date(),
-									todayHighlight : true,
-									todayBtn : "linked",
 									format: 'yyyy年mm月dd日'
 								}).on('changeDate', function(value) {
 									//console.log("i:" +i);
@@ -351,6 +354,7 @@
 									}
 									//getMeterData();
 								});
+								$(this).datetimepicker('update');
 							});
 
 					// 每隔十五分钟，自动拉取服务器数据
