@@ -60,9 +60,9 @@ public class Collectindexday {
 	        	Map<Object, Object> map = new HashMap<Object, Object>();
 	        	
 	        	if (rs.next()) {
-	                map.put("commValid", String.format("%.2f", rs.getDouble("commValid")));
-	                map.put("dataValid",  String.format("%.2f", rs.getDouble("dataValid")));
-	                map.put("dataQuality",  String.format("%.2f", rs.getDouble("dataQuality")));
+	                map.put("commValid", ((int)(100 * rs.getDouble("commValid"))) / 100.0f);
+	                map.put("dataValid", ((int)(100 * rs.getDouble("dataValid"))) / 100.0f);
+	                map.put("dataQuality",((int)(100 * rs.getDouble("dataQuality"))) / 100.0f);
 	            }
 	            
 	            return map;

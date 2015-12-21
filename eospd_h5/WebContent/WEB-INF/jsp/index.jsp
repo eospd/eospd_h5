@@ -181,9 +181,10 @@
 			ctx.save();
 			var textWidth = ctx.measureText("数据质量").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "20px serif";
+			ctx.font = "22px serif";
 			//ctx.fillText("数据质量", midx - textWidth / 2 - 10, midy + midy / 3 +40);
-			ctx.fillText(midR + "%", midx - textWidth / 2 + 10, midy + 10
+			var m_width = ctx.measureText(midR + "%").width;
+			ctx.fillText(midR + "%", midx - m_width / 2, midy + 10
 					+ midy / 3);
 			ctx.restore();
 
@@ -223,9 +224,10 @@
 			ctx.save();
 			var textWidth = ctx.measureText("通讯有效").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "18px serif";
+			ctx.font = "20px serif";
 			//ctx.fillText("通讯有效", rightx - textWidth / 2 - 10, righty + righty / 3 + 24);
-			ctx.fillText(rightR + "%", rightx - textWidth / 2 + 15, righty + 5
+			var r_width = ctx.measureText(rightR + "%").width;
+			ctx.fillText(rightR + "%", rightx - r_width / 2, righty + 5
 					+ righty / 3);
 			ctx.restore();
 
@@ -265,9 +267,11 @@
 			ctx.save();
 			var textWidth = ctx.measureText("数据有效").width; //文字宽
 			ctx.fillStyle = "white";
-			ctx.font = "18px serif";
+			ctx.font = "20px serif";
 			//ctx.fillText("数据有效", leftx - 20, lefty + lefty / 3 + 24);
-			ctx.fillText(leftR + "%", leftx - 5, lefty + 5 + lefty / 3);
+			var l_width = ctx.measureText(leftR + "%").width;
+			
+			ctx.fillText(leftR + "%", leftx - l_width / 2, lefty + 5 + lefty / 3);
 			ctx.restore();
 		};
 
