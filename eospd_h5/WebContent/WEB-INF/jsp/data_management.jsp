@@ -11,33 +11,35 @@
 		<div class="col-md-10 left-right-empty">
 
 			<div id="wrapper">-->
-			<div id="wrapper">
-		<div id="content-div">
+		<div id="wrapper">
+			<div id="content-div">
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
-				<div id="page-wrapper" >
-					<div class="div" style="height:480px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
-							<table class="table" style="margin-bottom: 0px"id="filter_table">
-										<tr>
-											<th>
-											<!--  <button class="color  black button">+</button>
+				<div id="page-wrapper">
+					<div class="div"
+						style="height: 480px; padding-left: 5px; padding-right: 5px; padding-top: 0px">
+						<table class="table" style="margin-bottom: 0px" id="filter_table">
+							<tr>
+								<th>
+									<!--  <button class="color  black button">+</button>
 											<button class="color  black button">-</button>
 											-->
-											</th>
-											<th style="width: 400px;">
-												<div class="input-group input-daterange pull-right">
-													<input type="text" class="form-control" value=""> <span
-														class="input-group-addon">到</span> <input type="text"
-														class="form-control" value="">
-												</div>
-											</th>
-										</tr>
-									</table>
-				 		<div id="container" class="scrollbar" style="margin-top:50px; overflow:auto; overflow-x: hidden; overflow-y: hidden; height:350px"></div>
-							
-						</div>
-									<jsp:include page="bottom_bar.jsp"></jsp:include>
-						<!-- /.panel-body -->
+								</th>
+								<th style="width: 400px;">
+									<div class="input-group input-daterange pull-right">
+										<input type="text" class="form-control s_time_y" value=""> <span
+											class="input-group-addon">到</span> 
+										<input type="text" class="form-control e_time_y" value="">
+									</div>
+								</th>
+							</tr>
+						</table>
+						<div id="container" class="scrollbar"
+							style="margin-top: 50px; overflow: auto; overflow-x: hidden; overflow-y: hidden; height: 350px"></div>
+
+					</div>
+					<jsp:include page="bottom_bar.jsp"></jsp:include>
+					<!-- /.panel-body -->
 				</div>
 				<!-- /#page-wrapper -->
 			</div>
@@ -52,9 +54,9 @@
 	<script src="js/jquery-ui.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+		src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="js/metisMenu.min.js"></script>
@@ -65,101 +67,44 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
-	<script src="js/eospd.js"></script>
 	<script src="js/highcharts.js"></script>
 	<script src="js/jquery.dragscroll.js"></script>
+	<script src="js/eospd.js"></script>
 
-	<script>
-	$(function () {
-	    var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
-	    Highcharts.setOptions({colors : defaultColors});
-	    $('#container').highcharts({
-	        chart: {
-	        	height:350,
-	        	width: 1000,
-	            type: 'area',
-	            backgroundColor:'rgba(0,0,0,0)'
-	        },
-	        xAxis: {
-	            categories: ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
-	                         '13:00', '13:15', '13:30', '13:45', '14:00', '14:15',  
-	                         ],
-	            tickmarkPlacement: 'off',
-	            title: {
-	                enabled: false
-	            }
-	        	
-	        },
-	        yAxis: {
-	        	gridLineColor:'rgba(0,0,0,0)',
-	        	tickPositions:[0,100],
-                   tickmarkPlacement: 'off',
-   	            title: {
-   	                enabled: false
-   	            }
-	        },
-	        tooltip: {
-	            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
-	            shared: true
-	        },
-	        plotOptions: {
-	            area: {
-	                stacking: 'percent',
-	                lineColor: '#ffffff',
-	                lineWidth: 2,
-	                marker: {
-	                	enabled:false,
-	                    lineWidth: 2,
-	                    lineColor: '#ffffff'
-	                }
-	            }
-	        },
-	        legend:{
-	        	reversed:true
-	        },
-	        
-	        series: [
-	            {
-	            name: '<label style="color:white">无数据</label>',                
-	            data: [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201]
-	        },{
-	            name: '<label style="color:white">错误未修复</label>',
-	            data: [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766]
-	        }, {
-	            name: '<label style="color:white">错误修复</label>',
-	            data: [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628]
-	        },{
-	            name: '<label style="color:white">重传数据</label>',
-	            data: [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201]
-	        },  {
-	            name: '<label style="color:white">正常数据</label>',
-	            data: [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868]
-	        }]
-	    });
-	});				
-	
-	</script>
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 		$(document).ready(
 				function() {
-					$('#container').dragScroll({});
+					render_data_admin("2015-12-01 00:00:00", "2015-12-01 00:00:00");
 					
+					 $('.input-daterange input').each(
+								function(i) {
 
-					$('.input-daterange input').each(
-							function() {
-								var d = new Date()
-								$(this).val(
-										d.getFullYear() + "年"
-												+ (d.getMonth() + 1) + "月"
-												+ (d.getDate()) + "日");
-								$(this).datepicker({
-									language : 'zh-CN',
-									autoclose : true,
-									todayHighlight : true,
-									todayBtn : "linked"
+									var d = new Date();
+									$(this).val(
+											d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+													+ (d.getDate()) + "日  " + d.toString().split(' ')[4].substring(0, 5));
+									
+									$(this).datetimepicker({
+								        language:  'zh-CN',
+								        weekStart: 1,
+								        todayBtn:  1,
+										autoclose: 1,
+										todayHighlight: 1,
+										startView: 2,
+										forceParse: 0,
+										autoclose : true,
+										endDate: new Date(),
+										format: 'yyyy年mm月dd日  hh:ii'
+									}).on('changeDate', function(value) {
+										
+										var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日 ', '');
+										var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日 ', '');
+										
+										render_data_admin(s_time, e_time);
+									});
 								});
-							});
+
 				});
 		$("#his_page").click(function(){
 	     	   window.location.href="/eospd_h5/datam_list";

@@ -81,8 +81,7 @@ public class Collectindexday {
 	public Map data_query(@Param(value = "s_time") Date s_time, @Param(value = "e_time") Date e_time) {
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 		
-		Sql sql = Sqls.create("SELECT SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt " +
-					"FROM v_dataquality where qualityTime >= @s_time and qualityTime < @e_time;");
+		Sql sql = Sqls.create("SELECT qualityTime, SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt FROM v_dataquality WHERE qualityTime >= @s_time and qualityTime < @e_time group by qualityTime;");
 		
 		sql.params().set("s_time", s_time);
 		sql.params().set("e_time", e_time);
@@ -91,14 +90,27 @@ public class Collectindexday {
 	        public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 	        	
 	        	Map<Object, Object> map = new HashMap<Object, Object>();
+	        	List<Object> qualityTime = new ArrayList<Object>();
+	        	List<Object> realNormalCnt = new ArrayList<Object>();
+	        	List<Object> dataRepairCnt = new ArrayList<Object>();
+	        	List<Object> retranNormalCnt = new ArrayList<Object>();
+	        	List<Object> dataErrCnt = new ArrayList<Object>();
+	        	List<Object> dataLoseCnt = new ArrayList<Object>();
 	        	
-	            if (rs.next()) {
-	                map.put("realNormalCnt", rs.getInt("realNormalCnt"));
-	                map.put("retranNormalCnt", rs.getInt("retranNormalCnt"));
-	                map.put("dataRepairCnt", rs.getInt("dataRepairCnt"));
-	                map.put("dataErrCnt", rs.getInt("dataErrCnt"));
-	                map.put("dataLoseCnt", rs.getInt("dataLoseCnt"));
+	            while (rs.next()) {
+	            	qualityTime.add(rs.getString("qualityTime"));
+	            	realNormalCnt.add(rs.getInt("realNormalCnt"));
+	            	dataRepairCnt.add(rs.getInt("dataRepairCnt"));
+	            	retranNormalCnt.add(rs.getInt("retranNormalCnt"));
+	            	dataErrCnt.add(rs.getInt("dataErrCnt"));
+	            	dataLoseCnt.add(rs.getInt("dataLoseCnt"));
 	            }
+	            map.put("qualityTime", qualityTime);
+	            map.put("realNormalCnt", realNormalCnt);
+	            map.put("dataRepairCnt", dataRepairCnt);
+	            map.put("retranNormalCnt", retranNormalCnt);
+	            map.put("dataErrCnt", dataErrCnt);
+	            map.put("dataLoseCnt", dataLoseCnt);
 	            
 	            return map;
 	        }

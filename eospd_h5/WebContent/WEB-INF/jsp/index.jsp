@@ -354,7 +354,6 @@
 									}
 									//getMeterData();
 								});
-								$(this).datetimepicker('update');
 							});
 
 					// 每隔十五分钟，自动拉取服务器数据

@@ -1,3 +1,90 @@
+
+function render_data_admin(s_time, e_time){
+	$.get("http://localhost:8080/eospd_h5/cid/data_query?s_time="+s_time +"&e_time=" + e_time, function(data ,status){
+	 	data_admin(data);
+	});
+}
+function data_admin(response_data) {
+	
+	if (typeof response_data.qualityTime == "undefined" || 0 === response_data.qualityTime.length) {
+		response_data = new Object();
+		response_data.qualityTime = ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
+	                         '13:00', '13:15', '13:30', '13:45', '14:00', '14:15',  
+	                         ];
+		response_data.realNormalCnt = [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868];
+		response_data.retranNormalCnt = [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201];
+		response_data.dataRepairCnt = [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628];
+		response_data.dataErrCnt = [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766];
+		response_data.dataLoseCnt = [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201];
+	}
+	
+	var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
+    Highcharts.setOptions({colors : defaultColors});
+    
+    $('#container').highcharts({
+        chart: {
+        	height:350,
+        	width: 1000,
+            type: 'area',
+            backgroundColor:'rgba(0,0,0,0)'
+        },
+        xAxis: {
+            categories: response_data.qualityTime,
+            tickmarkPlacement: 'off',
+            title: {
+                enabled: false
+            }
+        	
+        },
+        yAxis: {
+        	gridLineColor:'rgba(0,0,0,0)',
+        	tickPositions:[0,100],
+               tickmarkPlacement: 'off',
+	            title: {
+	                enabled: false
+	            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
+            shared: true
+        },
+        plotOptions: {
+            area: {
+                stacking: 'percent',
+                lineColor: '#ffffff',
+                lineWidth: 2,
+                marker: {
+                	enabled:false,
+                    lineWidth: 2,
+                    lineColor: '#ffffff'
+                }
+            }
+        },
+        legend:{
+        	reversed:true
+        },
+        
+        series: [
+            {
+            name: '<label style="color:white">数据丢失</label>',                
+            data: response_data.dataLoseCnt 
+        },{
+            name: '<label style="color:white">错误未修复</label>',
+            data: response_data.dataErrCnt
+        }, {
+            name: '<label style="color:white">错误修复</label>',
+            data: response_data.dataRepairCnt
+        },{
+            name: '<label style="color:white">重传数据</label>',
+            data: response_data.retranNormalCnt
+        },  {
+            name: '<label style="color:white">正常数据</label>',
+            data: response_data.realNormalCnt
+        }]
+    });
+    $('#container').dragScroll({});
+}
+
 var CreateEfdChartTree = function(title) {
 	$.get('/eospd_h5/efd/tree_data', function(obj) {
 		myTree = new ECOTree('myTree', 'topo_canvas');
