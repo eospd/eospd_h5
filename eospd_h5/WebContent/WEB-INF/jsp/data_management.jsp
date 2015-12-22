@@ -83,7 +83,7 @@
 									var d = new Date();
 									$(this).val(
 											d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
-													+ (d.getDate()) + "日  " + d.toString().split(' ')[4].substring(0, 5));
+													+ (d.getDate()) + "日 " + d.toString().split(' ')[4].substring(0, 5));
 									
 									$(this).datetimepicker({
 								        language:  'zh-CN',
@@ -95,11 +95,11 @@
 										forceParse: 0,
 										autoclose : true,
 										endDate: new Date(),
-										format: 'yyyy年mm月dd日  hh:ii'
+										format: 'yyyy年mm月dd日 hh:ii'
 									}).on('changeDate', function(value) {
 										
-										var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日 ', '');
-										var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日 ', '');
+										var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日', '');
+										var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日', '');
 										
 										render_data_admin(s_time, e_time);
 									});
