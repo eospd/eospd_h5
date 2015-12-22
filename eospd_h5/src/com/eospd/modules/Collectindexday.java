@@ -107,6 +107,48 @@ public class Collectindexday {
 	    dao.execute(sql);
 		return (Map) sql.getResult();
 	}
+	@SuppressWarnings({ "rawtypes" })
+	@At("/cid/data_admin")
+	@AdaptBy(type = PairAdaptor.class)
+	@Ok("json")
+	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+	public Map data_admin(@Param(value = "areaId") String areaId, @Param(value = "subsysId") String subsysId) {
+		Dao dao = Mvcs.getIoc().get(Dao.class);
+		
+		Sql sql = Sqls.create("SELECT areaId, subsysId, enconCollection, enconLocal,enconRemote, enconDecimal,enCollection,enLocal, enRemote,enDecimal,envCollection, envLocal, envRemote, envDecimal FROM datamanage where areaId = @areaId and subsysId = @subsysId;");
+		
+		sql.params().set("areaId", areaId);
+		sql.params().set("subsysId", subsysId);
+		
+	    sql.setCallback(new SqlCallback() {
+	        public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
+	        	
+	        	Map<Object, Object> map = new HashMap<Object, Object>();
+	        	
+	            if (rs.next()) {
+	                map.put("areaId", rs.getString("areaId"));
+	                map.put("subsysId", rs.getString("subsysId"));
+	                map.put("enconCollection", rs.getString("enconCollection"));
+	                map.put("enconLocal", rs.getString("enconLocal"));
+	                map.put("enconRemote", rs.getString("enconRemote"));
+	                map.put("enconDecimal", rs.getString("enconDecimal"));
+	                map.put("enCollection", rs.getString("enCollection"));
+	                map.put("enLocal", rs.getString("enLocal"));
+	                map.put("enRemote", rs.getString("enRemote"));
+	                map.put("enDecimal", rs.getString("enDecimal"));
+	                map.put("envCollection", rs.getString("envCollection"));
+	                map.put("envLocal", rs.getString("envLocal"));
+	                map.put("envRemote", rs.getString("envRemote"));
+	                map.put("envDecimal", rs.getString("envDecimal"));
+	            }
+	            
+	            return map;
+	        }
+	    });
+	    
+	    dao.execute(sql);
+		return (Map) sql.getResult();
+	}
 	
 	
 	@SuppressWarnings({ "rawtypes" })
