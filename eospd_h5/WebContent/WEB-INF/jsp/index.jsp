@@ -276,8 +276,8 @@
 		};
 
 		var leftV = 10;
-		var midV = 56;
-		var rightV = 0;
+		var midV = 30;
+		var rightV = 75;
 		var start = 0;
 		var step = 0;
 		animat = function(images) {
@@ -298,6 +298,7 @@
 	<script>
 		$(document).ready(
 				function() {
+					getMeterData();
 					loadImages(sources, animat);
 					$('#dm_table').DataTable({
 						"processing" : true,
@@ -386,6 +387,30 @@
 					$("#btn_refresh").click(function() {
 						getMeterData();
 					});
+					
+					$("#btn_rest").click(function() {
+						
+						var d = new Date();
+						$('.e_time_y').val(
+								d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+										+ (d.getDate()) + "日");
+
+						$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+						
+						
+
+						d = new Date(d.valueOf() - 900000);
+						$('.s_time_y').val(
+								d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+										+ (d.getDate()) + "日");
+						
+						$('.s_time_hm').val("00:00");
+
+						
+						
+						getMeterData();
+					});
+					
 
 					$("#his_page").click(function() {
 						window.location.href = "/eospd_h5/col_his";

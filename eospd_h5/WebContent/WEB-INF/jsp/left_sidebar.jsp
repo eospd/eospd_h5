@@ -13,7 +13,7 @@
 	</div>
 	<div class="nav navbar-nav navbar-right">
 		<button id="btn_refresh" class="color black button">刷新</button>
-		<button class="color black button" style="margin-right: 30px;">复位</button>
+		<button id="btn_rest" class="color black button" style="margin-right: 30px;">复位</button>
 		<button id="def_page" class="color blue button">仪表</button>
 		<button id="his_page" class="color black button">列表</button>
 	</div>
