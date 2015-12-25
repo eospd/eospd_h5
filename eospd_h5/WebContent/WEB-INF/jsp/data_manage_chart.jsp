@@ -22,12 +22,36 @@
             text-align: center;
             font-size: 8px;
             width: 160px;
-            height:100px;
+            height:110px;
             color: white;
             -webkit-border-radius: 0px 0px 15px 15px;
             -moz-border-radius: 0px 0px 15px 15px;
             background-color: rgb(51,55,65);
         }
+        
+      
+
+input {
+  -webkit-appearance: none; /* remove default */
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: hsla(0,0%,100%,.15) 0 1px 1px, inset hsla(0,0%,0%,.5) 0 0 0 1px;
+  background-color: hsla(0,0%,0%,.2);
+  background-image: -webkit-radial-gradient( hsla(200,100%,90%,1) 0%, hsla(200,100%,70%,1) 15%, hsla(200,100%,60%,.3) 28%, hsla(200,100%,30%,0) 70% );
+  background-repeat: no-repeat;
+}
+
+input,
+input:active {
+  background-position: 0 24px;
+}
+input:checked {
+  background-position: 0 0;
+}
 </style>
 
 <body>
@@ -40,7 +64,7 @@
 
 				<jsp:include page="left_sidebar.jsp"></jsp:include>
 				<div id="page-wrapper">
-				<div class="div scrollbar" style="padding-top:15px; height:480px; overflow: auto">
+				<div class="div scrollbar" style="padding-top:10px; height:480px; overflow: auto">
 				
 				<div class="row" style="padding-top:15px; margin:auto; width:80%;">
 				<div class="col-lg-3">
@@ -48,17 +72,29 @@
 					<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td ><input style="margin:auto;" id="r1" type="radio" name="group1"/></td>
+						<td><input style="margin:auto;" id="r2" type="radio" name="group1" /></td>
+						<td><input style="margin:auto;" id="r3" type="radio" name="group1" /></td>
+						<td><input style="margin:auto;" id="r4" type="radio" name="group1" /></td>
+						</tr>
+						<tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
+					<td><input style="margin:auto;" id="r5" type="radio" name="group1" /></td>
+					<td><input style="margin:auto;" id="r6" type="radio" name="group1" /></td>
+					<td><input style="margin:auto;" id="r7" type="radio" name="group1" checked="checked" /></td>
+					<td><input style="margin:auto;" id="r8" type="radio" name="group1" /></td>
 					</tr>
+					<tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -68,17 +104,28 @@
 				<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group2" checked="checked" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+						</tr>
+						<tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group2" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -89,31 +136,49 @@
 				<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group3" checked="checked" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group3" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
 				<div class="col-lg-3">
 				<div class="topRoundRect">能耗数据上传精度</div>
 				<div class="bottomRoundRect">
-					<table style="margin:auto; height:100%; width:80%">
-						
-					<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.0</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>1.00</td>
-						</tr>
-				</table>
+						<div class="row" style="padding-top: 30px" >
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group4" />
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group4" />
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;"  type="radio" name="group4" checked="checked" />
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-lg-4">1.</div>
+						<div class="col-lg-4">1.0</div>
+						<div class="col-lg-4">1.00</div>
+						</div>
 				</div>
 				</div>
     			</div>
@@ -126,17 +191,27 @@
 					<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group5" checked="checked" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio"  style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"   name="group5" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group5" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -146,17 +221,27 @@
 				<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group6" checked="checked" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group6" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -167,31 +252,49 @@
 				<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group7" checked="checked" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group7" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
 				<div class="col-lg-3">
 				<div class="topRoundRect">能量数据上传精度</div>
 				<div class="bottomRoundRect">
-					<table style="margin:auto; height:100%; width:80%">
-						
-					<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.0</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>1.00</td>
-						</tr>
-				</table>
+						<div class="row" style="padding-top: 30px" >
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group8" checked="checked"/>
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group8" />
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;"  type="radio" name="group8"  />
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-lg-4">1.</div>
+						<div class="col-lg-4">1.0</div>
+						<div class="col-lg-4">1.00</div>
+						</div>
 				</div>
 				</div>
 				
@@ -207,17 +310,27 @@
 					<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group9" checked="checked" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group9" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -227,17 +340,27 @@
 				<div class="bottomRoundRect">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group10" checked="checked" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group10" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
@@ -245,33 +368,52 @@
 				
 				<div class="col-lg-3">
 				<div class="topRoundRect">环境数据上传间隔</div>
-				<div class="bottomRoundRect">
+				<div class="bottomRoundRect radioGroup">
 					<table style="margin:auto; height:100%; width:80%">
 						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>10s</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>30s</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>60s</td>
+						<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group11" checked="checked" /></td>
+						<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+						</tr><tr>
+						<td>1s</td>
+						<td>10s</td>
+						<td>30s</td>
+						<td>60s</td>
 						</tr>
 					<tr>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>5m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>10m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>15m</td>
-					<td><input type="radio" style="width:20px;height:20px"/><br/>30m</td>
-					</tr>
+					<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+					<td><input style="margin:auto;" type="radio"  name="group11" /></td>
+					</tr><tr>
+						<td>5m</td>
+						<td>10m</td>
+						<td>15m</td>
+						<td>30m</td>
+						</tr>
 				</table>
 				</div>
 				</div>
 				<div class="col-lg-3">
-				<div class="topRoundRect">能耗数据上传精度</div>
+				<div class="topRoundRect">环境数据上传精度</div>
 				<div class="bottomRoundRect">
-					<table style="margin:auto; height:100%; width:80%">
-						<tr>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.</td>
-						<td><input type="radio" style="width:20px;height:20px"/><br/>1.0</td>
-						<td><input type="radio" checked="checked" style="width:20px;height:20px"/><br/>1.00</td>
-						</tr>
-				</table>
+						<div class="row" style="padding-top: 30px" >
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group12" />
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;" type="radio" name="group12" checked="checked"  />
+						</div>
+						<div class="col-lg-4" >
+						<input style="margin:auto;"  type="radio" name="group12" />
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-lg-4">1.</div>
+						<div class="col-lg-4">1.0</div>
+						<div class="col-lg-4">1.00</div>
+						</div>
 				</div>
 				</div>
 				
@@ -318,6 +460,11 @@
 				$("#def_page").click(function() {
 					window.location.href="/eospd_h5/efd_chart";
 				});
+				
+				$("#r1").on("change", function(e) {
+					console.log($(e.target).val()); 
+				});
+				
 			});
 		</script>
 </body>
