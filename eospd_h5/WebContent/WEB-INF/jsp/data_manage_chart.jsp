@@ -195,13 +195,13 @@ input:checked {
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal0.96" type="radio" name="group4" />
+											<input style="margin: auto;" id="enconDecimal96" type="radio" name="group4" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal1.00" type="radio" name="group4" />
+											<input style="margin: auto;" id="enconDecimal100" type="radio" name="group4" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal2.00" type="radio" name="group4"
+											<input style="margin: auto;" id="enconDecimal200" type="radio" name="group4"
 												checked="checked" />
 										</div>
 									</div>
@@ -219,17 +219,17 @@ input:checked {
 						<div class="row"
 							style="padding-top: 15px; margin: auto; width: 80%;">
 							<div class="col-lg-3">
-								<div class="topRoundRect">能量数据采集间隔</div>
+								<div class="topRoundRect">能量数据采集间隔 </div>
 								<div class="bottomRoundRect">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection1" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection10" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection30" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection60" type="radio"
 												name="group5" checked="checked" /></td>
 										</tr>
 										<tr>
@@ -239,13 +239,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection300" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection600" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection900" type="radio"
 												name="group5" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enCollection1800" type="radio"
 												name="group5" /></td>
 										</tr>
 										<tr>
@@ -259,17 +259,17 @@ input:checked {
 							</div>
 
 							<div class="col-lg-3">
-								<div class="topRoundRect">能量数据存储间隔</div>
+								<div class="topRoundRect">能量本地上传间隔</div>
 								<div class="bottomRoundRect">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal1" type="radio"
 												name="group6" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal0" type="radio"
 												name="group6" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal30" type="radio"
 												name="group6" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal60" type="radio"
 												name="group6" /></td>
 										</tr>
 										<tr>
@@ -279,13 +279,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal300" type="radio"
 												name="group6" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal600" type="radio"
 												name="group6" checked="checked" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal900" type="radio"
 												name="group6" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enLocal1800" type="radio"
 												name="group6" /></td>
 										</tr>
 										<tr>
@@ -300,17 +300,17 @@ input:checked {
 
 
 							<div class="col-lg-3">
-								<div class="topRoundRect">能量数据上传间隔</div>
+								<div class="topRoundRect">能量远程上传间隔</div>
 								<div class="bottomRoundRect">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote1" type="radio"
 												name="group7" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote10" type="radio"
 												name="group7" checked="checked" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote30" type="radio"
 												name="group7" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote60" type="radio"
 												name="group7" /></td>
 										</tr>
 										<tr>
@@ -320,13 +320,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote300" type="radio"
 												name="group7" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote600" type="radio"
 												name="group7" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote900" type="radio"
 												name="group7" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="enRemote1800" type="radio"
 												name="group7" /></td>
 										</tr>
 										<tr>
@@ -339,24 +339,24 @@ input:checked {
 								</div>
 							</div>
 							<div class="col-lg-3">
-								<div class="topRoundRect">能量数据上传精度</div>
+								<div class="topRoundRect">能量上传精度</div>
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group8"
+											<input style="margin: auto;" id="enDecimal96" type="radio" name="group8"
 												checked="checked" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group8" />
+											<input style="margin: auto;" id="enDecimal100" type="radio" name="group8" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group8" />
+											<input style="margin: auto;" id="enDecimal200" type="radio" name="group8" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">1.</div>
-										<div class="col-lg-4">1.0</div>
+										<div class="col-lg-4">0.96</div>
 										<div class="col-lg-4">1.00</div>
+										<div class="col-lg-4">2.00</div>
 									</div>
 								</div>
 							</div>
@@ -374,13 +374,13 @@ input:checked {
 								<div class="bottomRoundRect">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection1" type="radio"
 												name="group9" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection10" type="radio"
 												name="group9" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection30" type="radio"
 												name="group9" checked="checked" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection60" type="radio"
 												name="group9" /></td>
 										</tr>
 										<tr>
@@ -390,13 +390,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection300" type="radio"
 												name="group9" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection600" type="radio"
 												name="group9" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection900" type="radio"
 												name="group9" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envCollection1800" type="radio"
 												name="group9" /></td>
 										</tr>
 										<tr>
@@ -410,17 +410,17 @@ input:checked {
 							</div>
 
 							<div class="col-lg-3">
-								<div class="topRoundRect">环境数据存储间隔</div>
+								<div class="topRoundRect">环境本地上传间隔</div>
 								<div class="bottomRoundRect">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal1" type="radio"
 												name="group10" checked="checked" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal10" type="radio"
 												name="group10" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal30" type="radio"
 												name="group10" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal60" type="radio"
 												name="group10" /></td>
 										</tr>
 										<tr>
@@ -430,13 +430,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal300" type="radio"
 												name="group10" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal600" type="radio"
 												name="group10" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal900" type="radio"
 												name="group10" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envLocal1800" type="radio"
 												name="group10" /></td>
 										</tr>
 										<tr>
@@ -451,17 +451,17 @@ input:checked {
 
 
 							<div class="col-lg-3">
-								<div class="topRoundRect">环境数据上传间隔</div>
+								<div class="topRoundRect">环境远程上传间隔</div>
 								<div class="bottomRoundRect radioGroup">
 									<table style="margin: auto; height: 100%; width: 80%">
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote1" type="radio"
 												name="group11" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote10" type="radio"
 												name="group11" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote30" type="radio"
 												name="group11" checked="checked" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote60" type="radio"
 												name="group11" /></td>
 										</tr>
 										<tr>
@@ -471,13 +471,13 @@ input:checked {
 											<td>60s</td>
 										</tr>
 										<tr>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote300" type="radio"
 												name="group11" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote600" type="radio"
 												name="group11" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote900" type="radio"
 												name="group11" /></td>
-											<td><input style="margin: auto;" type="radio"
+											<td><input style="margin: auto;" id="envRemote1800" type="radio"
 												name="group11" /></td>
 										</tr>
 										<tr>
@@ -494,20 +494,20 @@ input:checked {
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group12" />
+											<input style="margin: auto;" id="envDecimal96" type="radio" name="group12" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group12"
+											<input style="margin: auto;" id="envDecimal100" type="radio" name="group12"
 												checked="checked" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" type="radio" name="group12" />
+											<input style="margin: auto;" id="envDecimal200" type="radio" name="group12" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">1.</div>
-										<div class="col-lg-4">1.0</div>
+										<div class="col-lg-4">0.96</div>
 										<div class="col-lg-4">1.00</div>
+										<div class="col-lg-4">2.00</div>
 									</div>
 								</div>
 							</div>
@@ -561,7 +561,7 @@ input:checked {
 				 	var kvs = data.kvs;
 				 	for(var k in kvs) {
 				 		var kk = '#'+ k + kvs[k];
-						console.log("kk:" +kk);
+						//console.log("kk:" +kk);
 				        $(kk).attr("checked",'checked');
 				 	 
 				 	}

@@ -147,15 +147,15 @@ public class Collectindexday {
 	                kvs.put("enconCollection", rs.getString("enconCollection"));
 	                kvs.put("enconLocal", rs.getString("enconLocal"));
 	                kvs.put("enconRemote", rs.getString("enconRemote"));
-	                kvs.put("enconDecimal", rs.getString("enconDecimal"));
+	                kvs.put("enconDecimal", String.format("%.0f",  100 * rs.getDouble("enconDecimal")));
 	                kvs.put("enCollection", rs.getString("enCollection"));
 	                kvs.put("enLocal", rs.getString("enLocal"));
 	                kvs.put("enRemote", rs.getString("enRemote"));
-	                kvs.put("enDecimal", rs.getString("enDecimal"));
+	                kvs.put("enDecimal", String.format("%.0f", 100 * rs.getDouble("enDecimal")));
 	                kvs.put("envCollection", rs.getString("envCollection"));
 	                kvs.put("envLocal", rs.getString("envLocal"));
 	                kvs.put("envRemote", rs.getString("envRemote"));
-	                kvs.put("envDecimal", rs.getString("envDecimal"));
+	                kvs.put("envDecimal", String.format("%.0f", 100 * rs.getDouble("envDecimal")));
 	            }
 	            
 	            map.put("kvs", kvs);
