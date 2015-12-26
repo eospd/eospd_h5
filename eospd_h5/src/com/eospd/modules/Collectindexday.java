@@ -134,25 +134,31 @@ public class Collectindexday {
 		
 	    sql.setCallback(new SqlCallback() {
 	        public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
-	        	
+
 	        	Map<Object, Object> map = new HashMap<Object, Object>();
+	        	
+
+	        	Map<Object, Object> kvs = new HashMap<Object, Object>();
 	        	
 	            if (rs.next()) {
 	                map.put("areaId", rs.getString("areaId"));
 	                map.put("subsysId", rs.getString("subsysId"));
-	                map.put("enconCollection", rs.getString("enconCollection"));
-	                map.put("enconLocal", rs.getString("enconLocal"));
-	                map.put("enconRemote", rs.getString("enconRemote"));
-	                map.put("enconDecimal", rs.getString("enconDecimal"));
-	                map.put("enCollection", rs.getString("enCollection"));
-	                map.put("enLocal", rs.getString("enLocal"));
-	                map.put("enRemote", rs.getString("enRemote"));
-	                map.put("enDecimal", rs.getString("enDecimal"));
-	                map.put("envCollection", rs.getString("envCollection"));
-	                map.put("envLocal", rs.getString("envLocal"));
-	                map.put("envRemote", rs.getString("envRemote"));
-	                map.put("envDecimal", rs.getString("envDecimal"));
+	                
+	                kvs.put("enconCollection", rs.getString("enconCollection"));
+	                kvs.put("enconLocal", rs.getString("enconLocal"));
+	                kvs.put("enconRemote", rs.getString("enconRemote"));
+	                kvs.put("enconDecimal", rs.getString("enconDecimal"));
+	                kvs.put("enCollection", rs.getString("enCollection"));
+	                kvs.put("enLocal", rs.getString("enLocal"));
+	                kvs.put("enRemote", rs.getString("enRemote"));
+	                kvs.put("enDecimal", rs.getString("enDecimal"));
+	                kvs.put("envCollection", rs.getString("envCollection"));
+	                kvs.put("envLocal", rs.getString("envLocal"));
+	                kvs.put("envRemote", rs.getString("envRemote"));
+	                kvs.put("envDecimal", rs.getString("envDecimal"));
 	            }
+	            
+	            map.put("kvs", kvs);
 	            
 	            return map;
 	        }

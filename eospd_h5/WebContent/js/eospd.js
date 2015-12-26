@@ -1,6 +1,6 @@
 
 function render_data_admin(s_time, e_time){
-	$.get("http://localhost:8080/eospd_h5/cid/data_query?s_time="+s_time +"&e_time=" + e_time, function(data ,status){
+	$.get("/eospd_h5/cid/data_query?s_time="+s_time +"&e_time=" + e_time, function(data ,status){
 	 	data_admin(data);
 	});
 }

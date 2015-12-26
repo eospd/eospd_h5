@@ -29,7 +29,7 @@
 2，	subsysId，关联到表 subsysinfo
 3，	能耗数据采集间隔 对应列 enconCollection；
 4，	能耗本地上传间隔 对应列 enconLocal
-5，	能耗远程上传间隔 对应列 cnconRemote
+5，	能耗远程上传间隔 对应列 enconRemote
 6，	能耗上传精度 对应列 enconDecimal，后台保存小数点位数
 7，	能量数据采集间隔 对应列 ecCollection；
 8，	能量本地上传间隔 对应列 enLocal
