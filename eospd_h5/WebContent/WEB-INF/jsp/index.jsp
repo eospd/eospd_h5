@@ -275,9 +275,9 @@
 			ctx.restore();
 		};
 
-		var leftV = 10;
-		var midV = 30;
-		var rightV = 75;
+		var leftV = 0;
+		var midV = 0;
+		var rightV = 0;
 		var start = 0;
 		var step = 0;
 		animat = function(images) {
@@ -286,12 +286,15 @@
 			var ctx = canvas.getContext('2d');
 
 			createMeter(ctx, images, start, leftV, midV, rightV);
-			console.log(step);
-			start++;
-			step += 0.02;
+			//console.log(step);
+			start ++;
+			//step += 0.02;
 			if (start <= leftV || start <= midV || start <= rightV) {
 				setTimeout(animat, 10);
+			} else {
+				createMeter(ctx, images, start, leftV, midV, rightV);
 			}
+			
 		};
 	</script>
 

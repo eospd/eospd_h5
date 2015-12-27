@@ -83,12 +83,12 @@
 					<li><a href="#">T1</a>
 						<ul class="nav nav-second-level ">
 							<li><a href="#">T1航站楼</a></li>
-							<li><a href="#">T1能源楼</a></li>
+							<li><a href="#">T1能源站</a></li>
 							<li><a href="#">T1停车场</a></li>
 						</ul></li>
 						<li><a href="#">T2</a>
 						<ul class="nav nav-second-level ">
-							<li><a href="#">T2航站楼</a></li>
+							<li><a href="#">T2航站</a></li>
 							<li><a style="background-color:rgb(130,40,40);cursor:pointer;" class='t2_e'>T2能源楼</a></li>
 							<li><a href="#">T2停车场</a></li>
 						</ul></li>
