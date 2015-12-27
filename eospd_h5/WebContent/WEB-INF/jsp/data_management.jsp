@@ -28,7 +28,7 @@
 								<th style="width: 400px;">
 									<div class="input-group input-daterange pull-right">
 										<input type="text" class="form-control s_time_y" value=""> <span
-											class="input-group-addon">到</span> 
+											class="input-group-addon" style="color: grey; background: rgb(54,59,70); border: none;">到</span> 
 										<input type="text" class="form-control e_time_y" value="">
 									</div>
 								</th>
@@ -52,6 +52,8 @@
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.plugin.min.js"></script>
+	<script src="js/jquery.timer.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
@@ -60,7 +62,7 @@
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="js/metisMenu.min.js"></script>
-
+	
 	<!-- DataTables JavaScript -->
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
@@ -75,16 +77,20 @@
 	<script>
 		$(document).ready(
 				function() {
-					render_data_admin("2015-12-01 00:00:00", "2015-12-01 00:00:00");
+					
+					var d = new Date();
+					$('.e_time_y').val(
+							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+									+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
+
+					d = new Date(d.valueOf() - 900000);
+					$('.s_time_y').val(
+							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+									+ (d.getDate()) + "日"+" "+d.toString().split(' ')[4].substring(0, 5));
 					
 					 $('.input-daterange input').each(
 								function(i) {
 
-									var d = new Date();
-									$(this).val(
-											d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
-													+ (d.getDate()) + "日 " + d.toString().split(' ')[4].substring(0, 5));
-									
 									$(this).datetimepicker({
 								        language:  'zh-CN',
 								        weekStart: 1,
@@ -97,18 +103,48 @@
 										endDate: new Date(),
 										format: 'yyyy年mm月dd日 hh:ii'
 									}).on('changeDate', function(value) {
-										
-										var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日', '');
-										var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日', '');
-										
-										render_data_admin(s_time, e_time);
+										render_data_admin();
 									});
 								});
+					 render_data_admin();
+					// 每隔十五分钟，自动拉取服务器数据
+						$('body').timer({
+							callback: function() {
 
+								var d = new Date();
+								$('.e_time_y').val(
+										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+												+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
+
+								d = new Date(d.valueOf() - 900000);
+								$('.s_time_y').val(
+										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+												+ (d.getDate()) + "日"+" "+d.toString().split(' ')[4].substring(0, 5));
+								
+						render_data_admin();
+								 },
+							repeat: true,
+							//delay: 2000
+							delay: 900000
+						});
 				});
+		
 		$("#his_page").click(function(){
 	     	   window.location.href="/eospd_h5/datam_list";
 	        });
+		
+		$("#btn_rest").click(function() {
+			
+			var d = new Date();
+			$('.e_time_y').val(
+					d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+							+ (d.getDate()) + "日" + " " +d.toString().split(' ')[4].substring(0, 5));
+			$('.s_time_y').val(
+					d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+							+ (d.getDate()) + "日" + " " + "00:00");
+			
+			render_data_admin();
+		});
 	</script>
 
 </body>
