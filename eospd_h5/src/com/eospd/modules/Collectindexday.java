@@ -147,15 +147,15 @@ public class Collectindexday {
 	                kvs.put("enconCollection", rs.getString("enconCollection"));
 	                kvs.put("enconLocal", rs.getString("enconLocal"));
 	                kvs.put("enconRemote", rs.getString("enconRemote"));
-	                kvs.put("enconDecimal", String.format("%.0f",  100 * rs.getDouble("enconDecimal")));
+	                kvs.put("enconDecimal", rs.getString("enconDecimal"));
 	                kvs.put("enCollection", rs.getString("enCollection"));
 	                kvs.put("enLocal", rs.getString("enLocal"));
 	                kvs.put("enRemote", rs.getString("enRemote"));
-	                kvs.put("enDecimal", String.format("%.0f", 100 * rs.getDouble("enDecimal")));
+	                kvs.put("enDecimal", rs.getString("enDecimal"));
 	                kvs.put("envCollection", rs.getString("envCollection"));
 	                kvs.put("envLocal", rs.getString("envLocal"));
 	                kvs.put("envRemote", rs.getString("envRemote"));
-	                kvs.put("envDecimal", String.format("%.0f", 100 * rs.getDouble("envDecimal")));
+	                kvs.put("envDecimal", rs.getDouble("envDecimal"));
 	            }
 	            
 	            map.put("kvs", kvs);
@@ -168,6 +168,44 @@ public class Collectindexday {
 		return (Map) sql.getResult();
 	}
 	
+	@SuppressWarnings({ "rawtypes" })
+	@At("/cid/data_edit")
+    @Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
+    public void data_edit(@Param(value = "areaId") String areaId, @Param(value = "subsysId") String subsysId,
+            @Param(value = "enconCollection") String enconCollection,// , ,,, ,,, , , 
+            @Param(value = "enconRemote") String enconRemote,
+            @Param(value = "enconDecimal") String enconDecimal,
+            @Param(value = "enconLocal") String enconLocal,
+            @Param(value = "enCollection") String enCollection,
+            @Param(value = "enLocal") String enLocal,
+            @Param(value = "enRemote") String enRemote,
+            @Param(value = "enDecimal") String enDecimal,
+            @Param(value = "envCollection") String envCollection,
+            @Param(value = "envLocal") String envLocal,
+            @Param(value = "envRemote") String envRemote,
+            @Param(value = "envDecimal") String envDecimal
+            ) {
+        Dao dao = Mvcs.getIoc().get(Dao.class);
+        
+        Sql sql = Sqls.create("UPDATE datamanage SET enconCollection = @enconCollection, enconLocal = @enconLocal, enconRemote = @enconRemote, enconDecimal = @enconDecimal, enCollection = @enCollection, enLocal = @enLocal, enRemote = @enRemote, enDecimal = @enDecimal,envCollection = @envCollection, envLocal = @envLocal, envRemote = @envRemote, envDecimal = @envDecimal WHERE areaId = @areaId and subsysId = @subsysId;");
+        
+        sql.params().set("areaId", areaId);
+        sql.params().set("subsysId", subsysId);
+        sql.params().set("enconCollection", enconCollection);
+        sql.params().set("enconRemote", enconRemote);
+        sql.params().set("enconDecimal", enconDecimal);
+        sql.params().set("enconLocal", enconLocal);
+        sql.params().set("enCollection", enCollection);
+        sql.params().set("enLocal", enLocal);
+        sql.params().set("enRemote", enRemote);
+        sql.params().set("enDecimal", enDecimal);
+        sql.params().set("envCollection", envCollection);
+        sql.params().set("envLocal", envLocal);
+        sql.params().set("envRemote", envRemote);
+        sql.params().set("envDecimal", envDecimal);
+        
+        dao.execute(sql);
+    }
 	
 	@SuppressWarnings({ "rawtypes" })
 	@At("/cid/list")

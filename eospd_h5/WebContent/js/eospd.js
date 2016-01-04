@@ -1,4 +1,3 @@
-
 function render_data_admin(s_time, e_time){
 	var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
 	var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
@@ -7,19 +6,20 @@ function render_data_admin(s_time, e_time){
 	 	data_admin(data);
 	});
 }
+
 function data_admin(response_data) {
 	
-	if (typeof response_data.qualityTime == "undefined" || 0 === response_data.qualityTime.length) {
-		response_data = new Object();
-		response_data.qualityTime = ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
-	                         '13:00', '13:15', '13:30', '13:45', '14:00', '14:15',  
-	                         ];
-		response_data.realNormalCnt = [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868];
-		response_data.retranNormalCnt = [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201];
-		response_data.dataRepairCnt = [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628];
-		response_data.dataErrCnt = [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766];
-		response_data.dataLoseCnt = [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201];
-	}
+//	if (typeof response_data.qualityTime == "undefined" || 0 === response_data.qualityTime.length) {
+//		response_data = new Object();
+//		response_data.qualityTime = ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
+//	                         '13:00', '13:15', '13:30', '13:45', '14:00', '14:15',  
+//	                         ];
+//		response_data.realNormalCnt = [402, 335, 409, 847, 902, 834, 868,402, 335, 409, 847, 902, 834, 868];
+//		response_data.retranNormalCnt = [300, 31, 54, 156, 339, 818, 201,300, 31, 54, 156, 339, 818, 201];
+//		response_data.dataRepairCnt = [163, 203, 276, 408, 547, 729, 628,163, 203, 276, 408, 547, 729, 628];
+//		response_data.dataErrCnt = [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766];
+//		response_data.dataLoseCnt = [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201];
+//	}
 	
 	var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
     Highcharts.setOptions({colors : defaultColors});

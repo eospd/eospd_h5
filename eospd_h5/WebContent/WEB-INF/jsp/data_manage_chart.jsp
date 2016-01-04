@@ -195,20 +195,20 @@ input:checked {
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal96" type="radio" name="group4" />
+											<input style="margin: auto;" id="enconDecimal0" type="radio" name="group4" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal100" type="radio" name="group4" />
+											<input style="margin: auto;" id="enconDecimal1" type="radio" name="group4" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enconDecimal200" type="radio" name="group4"
+											<input style="margin: auto;" id="enconDecimal2" type="radio" name="group4"
 												checked="checked" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">0.96</div>
+										<div class="col-lg-4">1.</div>
+										<div class="col-lg-4">1.0</div>
 										<div class="col-lg-4">1.00</div>
-										<div class="col-lg-4">2.00</div>
 									</div>
 								</div>
 							</div>
@@ -343,20 +343,20 @@ input:checked {
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enDecimal96" type="radio" name="group8"
+											<input style="margin: auto;" id="enDecimal0" type="radio" name="group8"
 												checked="checked" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enDecimal100" type="radio" name="group8" />
+											<input style="margin: auto;" id="enDecimal1" type="radio" name="group8" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="enDecimal200" type="radio" name="group8" />
+											<input style="margin: auto;" id="enDecimal2" type="radio" name="group8" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">0.96</div>
+										<div class="col-lg-4">1.</div>
+										<div class="col-lg-4">1.0</div>
 										<div class="col-lg-4">1.00</div>
-										<div class="col-lg-4">2.00</div>
 									</div>
 								</div>
 							</div>
@@ -494,20 +494,20 @@ input:checked {
 								<div class="bottomRoundRect">
 									<div class="row" style="padding-top: 30px">
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="envDecimal96" type="radio" name="group12" />
+											<input style="margin: auto;" id="envDecimal0" type="radio" name="group12" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="envDecimal100" type="radio" name="group12"
+											<input style="margin: auto;" id="envDecimal1" type="radio" name="group12"
 												checked="checked" />
 										</div>
 										<div class="col-lg-4">
-											<input style="margin: auto;" id="envDecimal200" type="radio" name="group12" />
+											<input style="margin: auto;" id="envDecimal2" type="radio" name="group12" />
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">0.96</div>
+										<div class="col-lg-4">1.</div>
+										<div class="col-lg-4">1.0</div>
 										<div class="col-lg-4">1.00</div>
-										<div class="col-lg-4">2.00</div>
 									</div>
 								</div>
 							</div>
@@ -546,6 +546,9 @@ input:checked {
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 			$(document).ready(function() {
+				
+				var rt = document.getElementById("btn_rest");
+				rt.innerHTML = "修改";
 				col_his();	
 				$("#his_page").toggleClass('active');
 				//$("#index").toggleClass('active');
@@ -561,12 +564,30 @@ input:checked {
 				 	var kvs = data.kvs;
 				 	for(var k in kvs) {
 				 		var kk = '#'+ k + kvs[k];
-						//console.log("kk:" +kk);
+						console.log("kk:" +kk);
 				        $(kk).attr("checked",'checked');
 				 	 
 				 	}
 				});
+				$("#btn_rest").click(function() {
+					var parms = "";
+					for(var k = 1; k <= 12; k++) {
+						var name = "group" + k;
+						var group = $("[name='"+name+"']").filter(":checked");
+						var id = group.attr("id");
+						console.log(id);
+						parms += "&";
+						parms += id.replace(/[0-9]/g, '');
+						parms += "=";
+						parms += id.replace(/[a-zA-Z]/g, '');
+					}
+					console.log("/eospd_h5/cid/data_edit?areaId=8&subsysId=3"+parms);
+					$.get("/eospd_h5/cid/data_edit?areaId=8&subsysId=3"+parms);
+				});
 				
+				$("#btn_reset").click(function() {
+					window.location.href="/eospd_h5/efd_chart";
+				});
 			});
 		</script>
 </body>
