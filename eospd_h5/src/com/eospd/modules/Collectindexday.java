@@ -216,11 +216,12 @@ public class Collectindexday {
 			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-
-		Sql sql = Sqls.create("SELECT qualityTime as qualityTime,dataUrl as dataUrl, ((100.0* (commValid)) / (planCollectCnt)) as commValid, " +
-                "((100.0* (dataValid)) / (planCollectCnt)) as dataValid, " +
-                "((100.0* (dataQuality)) / (planCollectCnt)) as dataQuality " +
-                "FROM v_dataquality limit @start, @length");
+		//Sql sql = Sqls.create("SELECT qualityTime, SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt FROM v_dataquality WHERE qualityTime >= @s_time and qualityTime < @e_time group by qualityTime;");
+	    
+		Sql sql = Sqls.create("SELECT qualityTime as qualityTime,dataUrl as dataUrl, (100.0* SUM(commValid) / SUM(planCollectCnt)) as commValid, " +
+                "(100.0* SUM(dataValid) / SUM(planCollectCnt)) as dataValid, " +
+                "(100.0* SUM(dataQuality) / SUM(planCollectCnt)) as dataQuality " +
+                "FROM v_dataquality GROUP BY qualityTime limit @start, @length");
         sql.params().set("start", start);
         sql.params().set("length", length);
 		
@@ -240,7 +241,7 @@ public class Collectindexday {
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
 					map1.put("currentTime",rs.getString("qualityTime"));
-					map1.put("meterUrl", rs.getString("dataUrl"));
+					map1.put("meterUrl", "机场建筑"/*rs.getString("dataUrl")*/);
 //					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
 //					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");
 //					map1.put("realCollectRate", rs.getDouble("realCollectRate") + "%");

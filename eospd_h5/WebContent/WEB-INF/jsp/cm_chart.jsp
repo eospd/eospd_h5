@@ -41,10 +41,11 @@
 									</div>
 -->
 
-					<div class="scrollbar" id="container" style="padding-top:0px; height:450px; overflow: auto; overflow-x: hidden">
-					<img src="imgs/cm_chart.png"/>
+					<div class="scrollbar" id="topo_canvas" style="padding-top:0px; height:450px; overflow: auto; overflow-x: hidden">
+					
 						
 							<!-- 
+					<img src="imgs/cm_chart.png"/>
 									<div class="panel-body">
 										<div id="topo_canvas">
 										</div>
@@ -84,12 +85,100 @@
 	<script src="js/eospd.js"></script>
 	<script src="js/jquery.dragscroll.js"></script>
 
+<script>
+			var t = null;
+			
+			function CreateTree() {
+				t = new ECOTree('t','topo_canvas');						
+				t.config.iRootOrientation = ECOTree.RO_LEFT;
+				var w = 120;
+				var h = 40;
+				var c = "#208DAD";
+				var nodeCode = "#0F70A7";
+				c = nodeCode;
+				var target = false;
+				var meta = 'hide';
+				var show = 'show';
+				t.config.defaultNodeWidth = w;
+				t.config.defaultNodeHeight = h;
+				t.config.iSubtreeSeparation = 40;
+				t.config.iSiblingSeparation = 20;										
+				//t.config.linkType = 'B';
+				t.config.useTarget = target;
+				t.config.nodeFill = ECOTree.NF_FLAT;//ECOTree.NF_GRADIENT;
+				//t.config.colorStyle = ECOTree.CS_LEVEL;
+				//t.config.levelColors = ["#966E00","#BC9400","#D9B100","#FFD700"];
+				//t.config.levelBorderColors = ["#FFD700","#D9B100","#BC9400","#966E00"];
+				t.config.nodeColor = c;
+				t.config.nodeBorderColor = c;
+				t.config.linkColor = "#208DAD";
+				//32,141,173 
+				t.add('0','-1', '', 50, 50,c, c, target, meta);
+				t.add('1','0','DC-1', 60, 30, "#189C8B", "#189C8B", target, meta);
+				t.add('2','1','MOXA-1', 70, 30, "#208DAD", "#208DAD", target, 'gate');
+
+				t.add('2_1','2','SN2_1', 100, 1,c, c, target, meta, 1);
+				t.add('3','2_1','EPM 5500P-1');
+
+				t.add('2_2','2','SN2_2', 100, 1,c, c, target, meta, 1);
+				t.add('4','2_2','EPM 5500P-2', w, h, c, c, target, meta);
+				t.add('5','2_2','EPM 5500P-3', w, h, c, c, target, meta);
+
+				t.add('2_3', '2','SN2_3', 100, 1,c, c, target, meta, 1);
+				t.add('6','2_3','PMAC600B-4', w, h, c, '#FF0000', target, show);
+				t.add('7','2_3','PMAC600B-5', w, h, c, c, target, meta);
+				t.add('8','2_3','PMAC600B-6', w, h, c, c, target, meta);
+				t.add('9','2_3','PMAC600B-7', w, h, c, c, target, meta);
+				t.add('10','2_3','PMAC600B-8', w, h, c, '#FF0000', target, show);
+
+				t.add('2_4','2','SN2_4', 100, 1, c, c, target, meta, 1);
+				t.add('12','2_4','PMAC600B-1', w, h, c, c, target, show);
+				t.add('13','2_4','PMAC600B-2', w, h, c, c, target, meta);
+				t.add('14','2_4','PMAC600B-3', w, h, c, c, target, meta);
+				t.add('15','2_4','PMAC600B-4', w, h, c, c, target, meta);
+				t.add('16','2_4','PMAC600B-5', w, h, c, c, target, meta);
+				t.add('17','2_4','PMAC600B-6', w, h, c, '#FF0000', target, show);
+
+				t.add('2_5','2','SN2_5', 100, 1,c, c, target, meta, 1);
+				t.add('19','2_5','PMAC600B-1', w, h, c, c, target, show);
+				t.add('20','2_5','PMAC600B-2', w, h, c, c, target, meta);
+				t.add('21','2_5','PMAC600B-3', w, h, c, c, target, meta);
+				t.add('22','2_5','PMAC600B-4', w, h, c, c, target, meta);
+				t.add('23','2_5','PMAC600B-5', w, h, c, c, target, meta);
+				t.add('24','2_5','PMAC600B-6', w, h, c, c, target, meta);
+				t.add('25','2_5','PMAC600B-7', w, h, c, c, target, meta);
+				t.add('26','2_5','PMAC600B-8', w, h, c, c, target, show);
+
+				t.add('2_6','2','SN2_6', 100, 1,c, c, target, meta, 1);
+				t.add('28','2_6','PMAC600B-1', w, h, c, c, target, show);
+				t.add('29','2_6','PMAC600B-2', w, h, c, c, target, meta);
+				t.add('30','2_6','PMAC600B-3', w, h, c, c, target, meta);
+				t.add('31','2_6','PMAC600B-4', w, h, c, c, target, meta);
+				t.add('32','2_6','PMAC600B-5', w, h, c, c, target, meta);
+				t.add('33','2_6','PMAC600B-6', w, h, c, c, target, meta);
+				t.add('34','2_6','PMAC600B-7', w, h, c, c, target, meta);
+				t.add('35','2_6','PMAC600B-8', w, h, c, c, target, show);
+				t.UpdateTree();
+				t.initClick(function (id) {
+					console.log("initClick click:"+id);
+					t.collapseNode(id, true);
+				});
+				t.collapseNode('2_3');
+				t.collapseNode('2_4');
+				t.collapseNode('2_5');
+				t.collapseNode('2_6');
+				t.UpdateTree();
+			}									
+		</script>
+
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 
     $(document).ready(function() {
     	$('#container').dragScroll({});
     	//CreateCmChartTree();
+    	loadImages(sources, CreateTree);
+    	//CreateTree();
         $('#dataTables-example').DataTable({
                 responsive: true
         });
@@ -117,6 +206,36 @@
 				});
         -->
     });
+    
+    function loadImages(sources, callback) {
+		var images = {};
+		var loadedImages = 0;
+		var numImages = 0;
+		start = 0;
+		step = 0;
+		// get num of sources
+		for ( var src in sources) {
+			numImages++;
+		}
+		for ( var src in sources) {
+			images[src] = new Image();
+			images[src].onload = function() {
+				if (++loadedImages >= numImages) {
+					callback(images);
+				}
+			};
+			images[src].src = sources[src];
+		}
+	};
+
+	var sources = {
+		root : 'imgs/root.png',
+		meta: 'imgs/meta.png',
+		offline: 'imgs/offline.png',
+		plug: 'imgs/plus.gif',
+		less: 'imgs/less.gif',
+		tran: 'imgs/trans.gif'
+	};
     </script>
 
 </body>

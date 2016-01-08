@@ -20,14 +20,15 @@
 |     References:
 |                                                                
 |     Walker II, J. Q., "A Node-Positioning Algorithm for General Trees"
-|	     			   Software � Practice and Experience 10, 1980 553-561.    
+|	     			   Software — Practice and Experience 10, 1980 553-561.    
 |                      (Obtained from C++ User's journal. Feb. 1991)                                                                              
 |					   
 |     Last updated: October 26th, 2006
 |     Version: 1.0
 \------------------------------------------------------------------------------------------*/
 
-ECONode = function (id, pid, dsc, w, h, c, bc, target, meta) {
+var elements = [];
+ECONode = function (id, pid, dsc, w, h, c, bc, target, meta, type) {
 	this.id = id;
 	this.pid = pid;
 	this.dsc = dsc;
@@ -37,6 +38,7 @@ ECONode = function (id, pid, dsc, w, h, c, bc, target, meta) {
 	this.bc = bc;
 	this.target = target;
 	this.meta = meta;
+	this.type = type;
 	
 	this.siblingIndex = 0;
 	this.dbIndex = 0;
@@ -49,6 +51,7 @@ ECONode = function (id, pid, dsc, w, h, c, bc, target, meta) {
 	this.rightNeighbor = null;
 	this.nodeParent = null;	
 	this.nodeChildren = [];
+	
 	
 	this.isCollapsed = false;
 	this.canCollapse = false;
@@ -80,7 +83,7 @@ ECONode.prototype._setAncestorsExpanded = function () {
 }
 
 ECONode.prototype._getChildrenCount = function () {
-	if (this.isCollapsed) return 0;
+    if (this.isCollapsed && this.nodeChildren.length >= 2) return 2;
     if(this.nodeChildren == null)
         return 0;
     else
@@ -123,7 +126,7 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 	var s = [];
 	var xa = 0, ya = 0, xb = 0, yb = 0, xc = 0, yc = 0, xd = 0, yd = 0;
 	var node1 = null;
-	console.log("_drawChildrenLinks");
+	
 	switch(tree.config.iRootOrientation)
 	{
 		case ECOTree.RO_TOP:
@@ -149,8 +152,18 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 	
 	for (var k = 0; k < this.nodeChildren.length; k++)
 	{
+		if (this.isCollapsed && k > 1) break;
+		
+		var offline = false;
+		if (this.isCollapsed) {
+			var index = k == 1 ? this.nodeChildren.length - 1 : k;
+			offline = this.nodeChildren[index].bc != this.nodeChildren[index].c;
+		} else {
+			offline = this.nodeChildren[k].bc != this.nodeChildren[k].c;
+		}
+		
 		node1 = this.nodeChildren[k];
-				
+
 		switch(tree.config.iRootOrientation)
 		{
 			case ECOTree.RO_TOP:
@@ -226,14 +239,14 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 				break;				
 		}		
 		
-		console.log("_drawChildrenLinks:"+tree.render);
+		
 		switch(tree.render)
 		{
 			case "CANVAS":
 				tree.ctx.save();
+				tree.ctx.fillStyle = tree.config.linkColor;
 				tree.ctx.strokeStyle = tree.config.linkColor;
 				tree.ctx.beginPath();
-				
 				
 				//tree.ctx.shadowColor = "RGBA(127,127,127,1)";
 				//tree.ctx.shadowOffsetX = 4;
@@ -246,8 +259,10 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 					//tree.ctx.strokeStyle
 					tree.ctx.moveTo(xa,ya);
 					tree.ctx.lineTo(xb,yb);
+					if (this.nodeChildren.length > 1)
+						tree.ctx.lineTo(xc,yd > ya ? yc+20 : yc-20);
 					tree.ctx.lineTo(xc,yc);
-					tree.ctx.lineTo(xd,yd);
+					tree.ctx.lineTo(xd+20,yd);
 					break;
 					case "Q":	
 						tree.ctx.lineCap="round";
@@ -266,7 +281,18 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 						break;					
 				}
 				tree.ctx.stroke();
+				tree.ctx.closePath();	
 				tree.ctx.restore();
+				if (offline){
+					var img = new Image();
+					img.src = "./imgs/offline.png";
+					tree.ctx.drawImage(img, (xc + 2)+10, (yc - 10), 19, 19);
+					//s.push('<div class="econode" style="top:'+(yc+35)+'; left:'+(xc+8)+'; width:19; height:19;" >');
+					//s.push('<img src=./imgs/offline.png />')
+					//s.push('</div>')
+				}
+				
+			  
 				break;
 											
 			case "VML":
@@ -303,9 +329,9 @@ ECOTree = function (obj, elm) {
 		topYAdjustment : 0,		
 		render : "AUTO",
 		linkType : "M",
-		linkColor : "#458BF2",
-		nodeColor : "#458BF2",
-		nodeFill : ECOTree.NF_FLAT,
+		linkColor : "blue",
+		nodeColor : "#CCCCFF",
+		nodeFill : ECOTree.NF_GRADIENT,
 		nodeBorderColor : "blue",
 		nodeSelColor : "#FFFFCC",
 		levelColors : ["#5555FF","#8888FF","#AAAAFF","#CCCCFF"],
@@ -317,14 +343,15 @@ ECOTree = function (obj, elm) {
 		defaultNodeWidth : 80,
 		defaultNodeHeight : 40,
 		defaultTarget : 'javascript:void(0);',
-		expandedImage : './img/less.gif',
-		collapsedImage : './img/plus.gif',
-		transImage : './img/trans.gif'
+		expandedImage : './imgs/less.gif',
+		collapsedImage : './imgs/plus.gif',
+		transImage : './imgs/trans.gif'
 	}
 	
 	this.version = "1.1";
 	this.obj = obj;
 	this.elm = document.getElementById(elm);
+	
 	this.self = this;
 	this.render = (this.config.render == "AUTO" ) ? ECOTree._getAutoRenderMode() : this.config.render;
 	this.ctx = null;
@@ -344,7 +371,7 @@ ECOTree = function (obj, elm) {
 	this.root = new ECONode(-1, null, null, 2, 2);
 	this.iSelectedNode = -1;
 	this.iLastSearch = 0;
-	console.log("NodeTree construct..."+this.nDatabaseNodes.length);
+	
 }
 
 //Constant values
@@ -377,6 +404,9 @@ ECOTree.SM_BOTH = 2;
 ECOTree.SL_MULTIPLE = 0;
 ECOTree.SL_SINGLE = 1;
 ECOTree.SL_NONE = 2;
+
+
+
 
 
 ECOTree._getAutoRenderMode = function() {
@@ -709,7 +739,7 @@ ECOTree.prototype._drawTree = function () {
 				break;
 		}
 		
-		if (!node._isAncestorCollapsed())
+		if (!node._isAncestorCollapsed() || node.meta == 'show')
 		{
 			switch (this.render)
 			{
@@ -717,6 +747,7 @@ ECOTree.prototype._drawTree = function () {
 					//Canvas part...
 					this.ctx.save();
 					this.ctx.strokeStyle = border;
+					var yp = node.YPosition;
 					switch (this.config.nodeFill) {
 						case ECOTree.NF_GRADIENT:							
 							var lgradient = this.ctx.createLinearGradient(node.XPosition,0,node.XPosition+node.w,0);
@@ -728,61 +759,89 @@ ECOTree.prototype._drawTree = function () {
 						case ECOTree.NF_FLAT:
 							this.ctx.fillStyle = ((node.isSelected)?this.config.nodeSelColor:color);
 							break;
-					}			
-					
-					console.log("node.w:"+node.w+",node x:"+node.XPosition+", y:"+node.YPosition);
-					var img = new Image();
-					img.src = "imgs/meter.png";
-					//this.ctx.drawImage(img, node.XPosition,node.YPosition,node.w,node.h);//,node.w,node.h);
-					if (node.w != 1){
-						ECOTree._roundedRect(this.ctx,node.XPosition,node.YPosition,node.w,node.h,5);
-					} else {
-						ECOTree._roundedRect(this.ctx,node.XPosition-2,node.YPosition-2,10,10,5);
-					}
-					
-					var textWidth = this.ctx.measureText(node.meta).width; 
-					var textSize = 10;
-			        this.ctx.font= textSize + "px serif";
-			        this.ctx.fillStyle="white";
-			        if (node.id == 0) {
-			        	this.ctx.fillText(node.meta,node.XPosition + (node.w-textWidth)/2,node.YPosition+(node.h-textSize)/2);
-			        } else {
-			        	var sub = node.meta.split("\n");
-						for (var i = 0; i < sub.length; i++) {
-							this.ctx.fillText(sub[i],node.XPosition+2,node.YPosition+20+(5+textSize)*i);
+					}					
+					if (node.id != '0') {
+					if (node._isAncestorCollapsed() && node.meta == 'show') {
+						if (node.YPosition != node.nodeParent.nodeChildren[0].YPosition) {
+							yp = node.nodeParent.nodeChildren[1].YPosition;
 						}
-			        }
+						ECOTree._roundedRect(this.ctx,node.XPosition + 20,yp,node.w,node.h,5);
+					} else {
+						if (node.id.indexOf("_") >= 0) {
+							ECOTree._roundedRect(this.ctx,node.XPosition-20,node.YPosition,node.w+40,1,0);
+						} else {
+							var xp = node.XPosition;
+							if (node.meta != 'gate') {
+								xp = node.XPosition+20;
+							} 
+							ECOTree._roundedRect(this.ctx, xp,node.YPosition,node.w,node.h,5);
+						}
+					}
+				}
 					this.ctx.restore();
 					
-//					//HTML part...
-//					s.push('<div id="' + node.id + '" class="econode" style="{top:'+(node.YPosition+this.canvasoffsetTop)+'; left:'+(node.XPosition+this.canvasoffsetLeft)+'; width:'+node.w+'; height:'+node.h+';}" ');
-//					if (this.config.selectMode != ECOTree.SL_NONE)											
-//						s.push('onclick="javascript:ECOTree._canvasNodeClickHandler('+this.obj+',event.target.id,\''+node.id+'\');" ');										
-//					s.push('>');
-//					s.push('<font face=Verdana size=1>');					
-//					if (node.canCollapse) {
-//						s.push('<a id="c' + node.id + '" href="javascript:'+this.obj+'.collapseNode(\''+node.id+'\', true);" >');
-//						s.push('<img border=0 src="'+((node.isCollapsed) ? this.config.collapsedImage : this.config.expandedImage)+'" >');							
-//						s.push('</a>');
-//						s.push('<img src="'+this.config.transImage+'" >');						
-//					}					
-//					if (node.target && this.config.useTarget)
-//					{
-//						s.push('<a id="t' + node.id + '" href="'+node.target+'">');
-//						s.push(node.dsc);
-//						s.push('</a>');
-//					}				
-//					else
-//					{						
-//						s.push(node.dsc);
-//					}
-//					s.push('</font>');
-//					s.push('</div>');		
+					
+					
+					//HTML part...
+					//s.push('<div id="' + node.id + '" class="econode" style="top:'+(yp+this.canvasoffsetTop)+'; left:'+(node.XPosition+this.canvasoffsetLeft)+'; width:'+node.w+'; height:'+node.h+';" ');
+					//if (this.config.selectMode != ECOTree.SL_NONE)											
+					//	s.push('onclick="javascript:ECOTree._canvasNodeClickHandler('+this.obj+',event.target.id,\''+node.id+'\');" ');										
+					//s.push('>');
+					//s.push('<font face=Verdana size=1>');					
+					if (node.canCollapse) {
+						if (node.type == 1) {
+							//s.push('<a id="c' + node.id + '" href="javascript:'+this.obj+'.collapseNode(\''+node.id+'\', true);" >');
+							//s.push('<img border=0 src="'+((node.isCollapsed) ? this.config.collapsedImage : this.config.expandedImage)+'" >');							
+							//s.push('</a>');
+							//s.push('<img src="'+this.config.transImage+'" >');
+							if (node._getChildrenCount() > 2 || node.isCollapsed) {
+								var img = new Image();
+								img.src = ((node.isCollapsed) ? this.config.collapsedImage : this.config.expandedImage);
+								this.ctx.drawImage(img, node.XPosition+50, yp, 15, 15);
+								elements.push({
+									 width: 150,
+									    height: 100,
+									    top: yp,
+									    left: node.XPosition,
+									    id:node.id
+								});
+							}
+						}
+						if (node.id == '0') {
+							var img = new Image();
+							img.src = "./imgs/root.png";
+							this.ctx.drawImage(img, node.XPosition, yp, 50, 50);
+							//s.push('<img src=./imgs/root.png >');
+						} else {
+							if (!(node.id.indexOf("_") >= 0)) {
+								this.ctx.fillText(node.dsc, node.XPosition + 25, yp + 20);
+							}
+						}				
+					} else {
+						var img = new Image();
+						img.src = "./imgs/meta.png";
+						this.ctx.drawImage(img, node.XPosition + 22, yp + 5, 32, 32);
+						this.ctx.fillText(node.dsc, node.XPosition + 38 + 20, yp + 25);
+						//s.push('<img border=0 src=./imgs/meta.png />');							
+					}					
+					if (node.target && this.config.useTarget)
+					{
+						s.push('<a id="t' + node.id + '" href="'+node.target+'">');
+						s.push(node.dsc);
+						s.push('</a>');
+					}				
+					else
+					{	
+						//this.ctx.fillText(node.dsc, node.XPosition + 5, yp + 25);
+						//s.push(node.dsc);
+					}
+					//s.push('</font>');
+					//s.push('</div>');		
 					break;
 					
 				case "VML":
 					s.push('<v:roundrect id="' + node.id + '" strokecolor="'+border+'" arcsize="0.18"	');
-					s.push('style="position:absolute; top:'+node.YPosition+'; left:'+node.XPosition+'; width:'+node.w+'; height:'+node.h+'" ');
+					s.push('style="position:absolute; top:'+yp+'; left:'+node.XPosition+'; width:'+node.w+'; height:'+node.h+'" ');
 					if (this.config.selectMode != ECOTree.SL_NONE)
 						s.push('href="javascript:'+this.obj+'.selectNode(\''+node.id+'\', true);" ');										
 					s.push('>');
@@ -816,7 +875,8 @@ ECOTree.prototype._drawTree = function () {
 					s.push('</v:roundrect>');																									
 					break;
 			}	
-			if (!node.isCollapsed)	s.push(node._drawChildrenLinks(this.self));
+			//if (!node.isCollapsed || node.metadata == 'show')
+			s.push(node._drawChildrenLinks(this.self));
 		}
 	}	
 	return s.join('');	
@@ -824,13 +884,13 @@ ECOTree.prototype._drawTree = function () {
 
 ECOTree.prototype.toString = function () {	
 	var s = [];
-	console.log("====toString===");
+	
 	this._positionTree();
-	console.log("====_positionTree===");
+	
 	switch (this.render)
 	{
 		case "CANVAS":
-			s.push('<canvas id="ECOTreecanvas" style="overflow:auto;" width=960 height=550></canvas>');
+			s.push('<canvas id="ECOTreecanvas"  style="overflow: auto; overflow-x: hidden" width=960 height=1000></canvas>');
 			break;
 			
 		case "HTML":
@@ -859,7 +919,6 @@ ECOTree.prototype.UpdateTree = function () {
 			this.canvasoffsetLeft = canvas.offsetLeft;
 			this.canvasoffsetTop = canvas.offsetTop;
 			this.ctx = canvas.getContext('2d');
-			
 			var h = this._drawTree();	
 			var r = this.elm.ownerDocument.createRange();
 			r.setStartBefore(this.elm);
@@ -872,14 +931,14 @@ ECOTree.prototype.UpdateTree = function () {
 	}
 }
 
-ECOTree.prototype.add = function (id, pid, dsc, w, h, c, bc, target, meta) {	
+ECOTree.prototype.add = function (id, pid, dsc, w, h, c, bc, target, meta, type) {	
 	var nw = w || this.config.defaultNodeWidth; //Width, height, colors, target and metadata defaults...
 	var nh = h || this.config.defaultNodeHeight;
 	var color = c || this.config.nodeColor;
 	var border = bc || this.config.nodeBorderColor;
 	var tg = (this.config.useTarget) ? ((typeof target == "undefined") ? (this.config.defaultTarget) : target) : null;
 	var metadata = (typeof meta != "undefined")	? meta : "";
-	
+	var ty = type || 3;
 	var pnode = null; //Search for parent node in database
 	if (pid == -1) 
 		{
@@ -897,7 +956,7 @@ ECOTree.prototype.add = function (id, pid, dsc, w, h, c, bc, target, meta) {
 			}	
 		}
 	
-	var node = new ECONode(id, pid, dsc, nw, nh, color, border, tg, metadata);	//New node creation...
+	var node = new ECONode(id, pid, dsc, nw, nh, color, border, tg, metadata, type);	//New node creation...
 	node.nodeParent = pnode;  //Set it's parent
 	pnode.canCollapse = true; //It's obvious that now the parent can collapse	
 	var i = this.nDatabaseNodes.length;	//Save it in database
@@ -949,11 +1008,7 @@ ECOTree.prototype.expandAll = function () {
 	this._collapseAllInt(false);
 }
 
-ECOTree.prototype.collapseNode = function (nodeid, upd) {
-	var dbindex = this.mapIDs[nodeid];
-	this.nDatabaseNodes[dbindex].isCollapsed = !this.nDatabaseNodes[dbindex].isCollapsed;
-	if (upd) this.UpdateTree();
-}
+
 
 ECOTree.prototype.selectNode = function (nodeid, upd) {		
 	this._selectNodeInt(this.mapIDs[nodeid], true);
@@ -1003,4 +1058,41 @@ ECOTree.prototype.getSelectedNodes = function () {
 		}
 	}
 	return selection;
+}
+
+ECOTree.prototype.collapseNode = function (nodeid, upd) {
+	var dbindex = this.mapIDs[nodeid];
+	this.nDatabaseNodes[dbindex].isCollapsed = !this.nDatabaseNodes[dbindex].isCollapsed;
+	if (upd) this.UpdateTree();
+}
+
+ECOTree.prototype.initClick = function (callback) {
+
+	// Add event listener for `click` events.
+	this.elm.addEventListener('click', function(event) {
+		var docEle = this.elm;
+		var item = document.getElementById("topo_canvas")
+		var top = item.offsetTop;
+		var left = item.offsetLeft;
+		var sTop = item.scrollTop;
+	    var x = event.pageX - left,
+	        y = event.pageY - top + sTop ;
+	    console.log("x="+x+",y="+y+",event.pageX="+event.pageX+",event.pageY="+event.pageY+" this.elm.scrollTop="+sTop+" left:"+left+" top:"+top);
+	    // Collision detection between clicked offset and element.
+	    for (var i = 0; i < elements.length; i++) {
+	    	var element = elements[i];
+	    	console.log(element.id+",x="+element.left+",y="+element.top+",element.width="+element.width+",element.height="+element.height);
+		    
+	        if (y > element.top && y < element.top + element.height 
+	            && x > element.left && x < element.left + element.width) {
+	            console.log('clicked an element:'+element.id);
+	        	//this.collapseNode(element.id, true);
+	        	//var dbindex = this.mapIDs[element.id];
+	        	//this.nDatabaseNodes[dbindex].isCollapsed = !this.nDatabaseNodes[dbindex].isCollapsed;
+	            elements = [];
+	            callback(element.id);
+	            break;
+	        }
+	    }
+	}, false);
 }
