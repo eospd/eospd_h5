@@ -82,9 +82,10 @@
 	<script src="js/jquery-ui.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+		src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+		
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="js/metisMenu.min.js"></script>
@@ -151,17 +152,36 @@
 					});
 
 					$('.input-daterange input').each(
-							function() {
-								var d = new Date()
+							function(i) {
+
+								var d = new Date();
+								if (0 == i) {
+									d = new Date(d.valueOf() - 900000);
+								}
+								
 								$(this).val(
-										d.getFullYear() + "年"
-												+ (d.getMonth() + 1) + "月"
-												+ (d.getDate()) + "日");
-								$(this).datepicker({
-									language : 'zh-CN',
+										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+												+ (d.getDate()) + "日 "+ d.toString().split(' ')[4].substring(0, 5)); 
+								
+								$(this).datetimepicker({
+							        language:  'zh-CN',
+							        weekStart: 1,
+							        todayBtn:  1,
+									autoclose: 1,
+									todayHighlight: 1,
+									startView: 2,
+									forceParse: 0,
 									autoclose : true,
-									todayHighlight : true,
-									todayBtn : "linked"
+									endDate: new Date(),
+									format: 'yyyy年mm月dd日 hh:ii'
+								}).on('changeDate', function(value) {
+								    var s_date = $('.input-daterange input')[0].value;
+								    var e_date = $('.input-daterange input')[1].value;
+								    //console.log("s_date:" + s_date);
+								    //console.log("e_date:" + e_date);
+
+									var table = $('#dm_table').DataTable();
+									table.columns(0).search(s_date + "," + e_date).draw();
 								});
 							});
 				});
