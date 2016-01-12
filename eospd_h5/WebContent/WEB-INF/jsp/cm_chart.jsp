@@ -41,7 +41,7 @@
 									</div>
 -->
 
-					<div class="scrollbar" id="topo_canvas" style="padding-top:0px; height:450px; overflow: auto; overflow-x: hidden">
+					<div class="scrollbar" id="topo_canvas" style="padding-top:10px; height:450px; overflow: auto; overflow-x: hidden">
 					
 						
 							<!-- 
@@ -64,6 +64,9 @@
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.plugin.min.js"></script>
+	<script src="js/jquery.timer.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
@@ -86,8 +89,8 @@
 	<script src="js/jquery.dragscroll.js"></script>
 
 <script>
+			var onlineMap = new Map();
 			var t = null;
-			
 			function CreateTree() {
 				t = new ECOTree('t','topo_canvas');						
 				t.config.iRootOrientation = ECOTree.RO_LEFT;
@@ -114,8 +117,8 @@
 				t.config.linkColor = "#208DAD";
 				//32,141,173 
 				t.add('0','-1', '', 50, 50,c, c, target, meta);
-				t.add('1','0','DC-1', 60, 30, "#189C8B", "#189C8B", target, meta);
-				t.add('2','1','MOXA-1', 70, 30, "#208DAD", "#208DAD", target, 'gate');
+				t.add('1','0','TB-9802', 60, 30, "#189C8B", onlineMap['/ec2/dc/1'] == 1 ? "#189C8B" : "#FF0000", target, 'dc_/ec2/dc/1');
+				t.add('2','1','MOXA DA-660-16', 120, 30, "#208DAD", onlineMap['/ec2/gw/1'] == 1 ? "#208DAD" : "#FF0000", target, 'gate_/ec2/gw/2');
 
 				t.add('2_1','2','SN2_1', 100, 1,c, c, target, meta, 1);
 				t.add('3','2_1','EPM 5500P-1');
@@ -125,11 +128,11 @@
 				t.add('5','2_2','EPM 5500P-3', w, h, c, c, target, meta);
 
 				t.add('2_3', '2','SN2_3', 100, 1,c, c, target, meta, 1);
-				t.add('6','2_3','PMAC600B-4', w, h, c, '#FF0000', target, show);
+				t.add('6','2_3','PMAC600B-4', w, h, c, c, target, show);
 				t.add('7','2_3','PMAC600B-5', w, h, c, c, target, meta);
 				t.add('8','2_3','PMAC600B-6', w, h, c, c, target, meta);
 				t.add('9','2_3','PMAC600B-7', w, h, c, c, target, meta);
-				t.add('10','2_3','PMAC600B-8', w, h, c, '#FF0000', target, show);
+				t.add('10','2_3','PMAC600B-8', w, h, c, c, target, show);
 
 				t.add('2_4','2','SN2_4', 100, 1, c, c, target, meta, 1);
 				t.add('12','2_4','PMAC600B-1', w, h, c, c, target, show);
@@ -137,7 +140,7 @@
 				t.add('14','2_4','PMAC600B-3', w, h, c, c, target, meta);
 				t.add('15','2_4','PMAC600B-4', w, h, c, c, target, meta);
 				t.add('16','2_4','PMAC600B-5', w, h, c, c, target, meta);
-				t.add('17','2_4','PMAC600B-6', w, h, c, '#FF0000', target, show);
+				t.add('17','2_4','PMAC600B-6', w, h, c, c, target, show);
 
 				t.add('2_5','2','SN2_5', 100, 1,c, c, target, meta, 1);
 				t.add('19','2_5','PMAC600B-1', w, h, c, c, target, show);
@@ -174,9 +177,31 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
 
+	function getOnline () {
+		$.get('/eosserver/rest/getonline', function(result){
+    		onlineMap.clear();
+    		console.log("result="+result);	
+        	var arr = eval(result);
+        	for (var i = 0; i < arr.length; i++){
+        		console.log("key="+arr[i].deviceUrl+", item="+arr[i].deviceStatus);
+    			onlineMap[arr[i].deviceUrl] = arr[i].deviceStatus;
+        	}
+    		loadImages(sources, CreateTree);
+		});
+	}
+	
     $(document).ready(function() {
     	$('#container').dragScroll({});
     	//CreateCmChartTree();
+    	getOnline();
+    	$('body').timer({callback: function() {
+			getOnline();
+		},
+		repeat: true,
+		//delay: 6000
+		delay: 30000
+    	});
+    	
     	loadImages(sources, CreateTree);
     	//CreateTree();
         $('#dataTables-example').DataTable({
@@ -232,6 +257,7 @@
 		root : 'imgs/root.png',
 		meta: 'imgs/meta.png',
 		offline: 'imgs/offline.png',
+		wifi: 'imgs/wifi.png',
 		plug: 'imgs/plus.gif',
 		less: 'imgs/less.gif',
 		tran: 'imgs/trans.gif'

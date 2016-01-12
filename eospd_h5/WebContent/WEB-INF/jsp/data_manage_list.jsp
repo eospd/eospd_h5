@@ -33,7 +33,8 @@
 										</tr>
 									</table>
 							<div class="panel panel-default" style="padding:5px;">
-								<div class="panel-body scrollbar" style="height:450px;overflow: auto">
+								<div class="panel-body " style="height:450px;">
+									<div class="scrollbar tab-content" style="overflow: auto; height:400px">
 									
 									<div class="dataTable_wrapper" >
 										<table class="table table-striped table-bordered table-hover" allowHeaderWrap="true"
@@ -44,7 +45,7 @@
 													<th style="font-size:5px;">电支路</th>
 													<th style="font-size:5px;">断点<br/>续传</th>
 													<th style="font-size:5px">插值<br/>标志</th>
-													<th style="font-size:4px">总电量<br/>(KWh)</th>
+													<th style="font-size:4px">表头电量<br/>(KWh)</th>
 													<th style="font-size:5px">错误<br/>标志</th>
 													<th style="font-size:5px">差值<br/>(KWh)</th>
 													<th style="font-size:5px">归零<br/>标志</th>
@@ -61,7 +62,7 @@
 										</table>
 									</div>
 									<!-- /.table-responsive -->
-									
+									</div>
 								</div>
 							</div>
 						</div>
@@ -129,9 +130,9 @@
 						}, {
 							"data" : "p1Rsz"
 						}, {
-							"data" : "p2Pv"
+							"data" : "p25Pv"
 						}, {
-							"data" : "p3Pv"
+							"data" : "p37Pv"
 						}
 						/*, {
 							"data" : "p4Pv"

@@ -26,7 +26,7 @@
 								<div class="col-lg-3" style="padding-left: 0px">
 									<input class ="s_time_hm"
 										style="color: darkgrey; text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none;"
-										value="12:00"></input>
+										value="00:00"></input>
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -40,7 +40,7 @@
 								<div class="col-lg-3" style="padding-left: 0px">
 									<input  class ="e_time_hm"
 										style="text-align: center; width: 60px; height: 34px; border-radius: 0 3px 3px 0; background-color: rgb(47, 52, 63); border: none; color: darkgray"
-										value="12:00"></input>
+										value="00:00"></input>
 								</div>
 							</div>
 						</div>
@@ -325,12 +325,10 @@
 
 					$('.input-daterange input').each(
 							function(i) {
+								var d = new Date();
 								if (0 == i) {
-									var d = new Date();
-									d = new Date(d.valueOf() - 900000);
-									$('.s_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
+									$('.s_time_hm').val("00:00");
 								} else {
-									var d = new Date();
 									$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
 								}
 

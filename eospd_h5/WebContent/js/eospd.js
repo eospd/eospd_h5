@@ -229,7 +229,7 @@ function mm_his() {
 }
 
 function col_his() {
-	gen_all_meter();
+	//gen_all_meter();
 	$('#dm_table').DataTable({
 		"language" : chinese_langue,
 		"processing" : true,
@@ -340,8 +340,7 @@ function gen_all_dc() {
 					});
 }
 function gen_all_meter() {
-	$
-			.get(
+	$.get(
 					'/eospd_h5/mm/meters',
 					function(result) {
 						var output = '<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"> 全部仪表 <span class="caret"></span></button>';

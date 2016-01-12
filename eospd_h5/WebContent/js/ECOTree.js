@@ -286,7 +286,14 @@ ECONode.prototype._drawChildrenLinks = function (tree) {
 				if (offline){
 					var img = new Image();
 					img.src = "./imgs/offline.png";
-					tree.ctx.drawImage(img, (xc + 2)+10, (yc - 10), 19, 19);
+					if (node1.meta.indexOf('dc_') >= 0) {
+						tree.ctx.drawImage(img, (xc + 2)-20, (yc - 10), 19, 19);
+					}else if (node1.meta.indexOf('gate_') >= 0) {
+						tree.ctx.drawImage(img, (xc + 2), (yc - 10), 19, 19);
+					}
+					else{
+						tree.ctx.drawImage(img, (xc + 2)+10, (yc - 10), 19, 19);
+					}
 					//s.push('<div class="econode" style="top:'+(yc+35)+'; left:'+(xc+8)+'; width:19; height:19;" >');
 					//s.push('<img src=./imgs/offline.png />')
 					//s.push('</div>')
@@ -326,7 +333,7 @@ ECOTree = function (obj, elm) {
 		iRootOrientation : ECOTree.RO_TOP,
 		iNodeJustification : ECOTree.NJ_TOP,
 		topXAdjustment : 0,
-		topYAdjustment : 0,		
+		topYAdjustment : 40,		
 		render : "AUTO",
 		linkType : "M",
 		linkColor : "blue",
@@ -722,6 +729,15 @@ ECOTree.prototype._drawTree = function () {
 	var node = null;
 	var color = "";
 	var border = "";
+	
+	this.ctx.save();
+	this.ctx.fillStyle = "rgb(255,255,255)";
+	this.ctx.fillText("TCP/IP", 140, 20);
+	this.ctx.fillText("RS-485", 250, 20);
+	this.ctx.fillText("RS-485", 370, 20);
+	
+	this.ctx.restore();
+	
 	for (var n = 0; n < this.nDatabaseNodes.length; n++)
 	{ 
 		node = this.nDatabaseNodes[n];
@@ -771,9 +787,13 @@ ECOTree.prototype._drawTree = function () {
 							ECOTree._roundedRect(this.ctx,node.XPosition-20,node.YPosition,node.w+40,1,0);
 						} else {
 							var xp = node.XPosition;
-							if (node.meta != 'gate') {
+							if (node.meta.indexOf('gate') < 0) {
 								xp = node.XPosition+20;
-							} 
+							} else {
+								var img = new Image();
+								img.src = 'imgs/wifi.png';
+								this.ctx.drawImage(img, node.XPosition-120, yp -30, 40, 40);
+							}
 							ECOTree._roundedRect(this.ctx, xp,node.YPosition,node.w,node.h,5);
 						}
 					}

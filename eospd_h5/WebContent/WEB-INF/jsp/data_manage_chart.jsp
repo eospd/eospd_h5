@@ -549,16 +549,16 @@ input:checked {
 				
 				var rt = document.getElementById("btn_rest");
 				rt.innerHTML = "修改";
-				col_his();	
+				//col_his();	
 				$("#his_page").toggleClass('active');
 				//$("#index").toggleClass('active');
-				$("#def_page").click(function() {
-					window.location.href="/eospd_h5/efd_chart";
-				});
+				//$("#def_page").click(function() {
+				//	window.location.href="/eospd_h5/efd_chart";
+				//});
 				
-				$("#r1").on("change", function(e) {
-					console.log($(e.target).val()); 
-				});
+				//$("#r1").on("change", function(e) {
+					//console.log($(e.target).val()); 
+				//});
 				
 				$.get("/eospd_h5/cid/data_admin?areaId=8&subsysId=3", function(data ,status){
 				 	var kvs = data.kvs;
@@ -585,9 +585,6 @@ input:checked {
 					$.get("/eospd_h5/cid/data_edit?areaId=8&subsysId=3"+parms);
 				});
 				
-				$("#btn_reset").click(function() {
-					window.location.href="/eospd_h5/efd_chart";
-				});
 			});
 		</script>
 </body>

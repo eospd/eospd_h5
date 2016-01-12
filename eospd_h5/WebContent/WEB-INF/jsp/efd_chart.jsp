@@ -67,7 +67,7 @@
                 responsive: true
         });
         $("#his_page").click(function(){
-     	   window.location.href="/eospd_h5/efd_his";
+     	   //window.location.href="/eospd_h5/efd_his";
         });
     });
     </script>

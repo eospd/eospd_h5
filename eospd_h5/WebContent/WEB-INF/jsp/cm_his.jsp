@@ -57,7 +57,8 @@
 										</tr>
 									</table>
 								</div>
-
+<div class="scrollbar tab-content" style="overflow: auto; height:350px">
+									
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="home">
@@ -82,6 +83,7 @@
 								</div>
 							</div>
 							<!-- /.panel-body -->
+							</div>
 						</div>
 						<!-- /.col-lg-12 -->
 					</div>
@@ -124,7 +126,15 @@
 			$("#cm").toggleClass('active');
 			$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
 			$("#his_page").css({'background-color':'#269CE9'});
+			$("#btn_rest").click(function() {
+				window.location.href="/eospd_h5/cm_chart";
+			});
+			$("#btn_refresh").click(function() {
+				window.location.href="/eospd_h5/cm_chart";
+			});
 		});
+
+
 	</script>
 </body>
 </html>

@@ -83,7 +83,7 @@
 							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 									+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
 
-					d = new Date(d.valueOf() - 900000);
+					d = new Date(d.valueOf() - 12 * 60 * 60 * 1000);
 					$('.s_time_y').val(
 							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 									+ (d.getDate()) + "日"+" "+d.toString().split(' ')[4].substring(0, 5));
@@ -116,7 +116,7 @@
 										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 												+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
 
-								d = new Date(d.valueOf() - 900000);
+								d = new Date(d.valueOf() - 12 * 60 * 60 * 1000);
 								$('.s_time_y').val(
 										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 												+ (d.getDate()) + "日"+" "+d.toString().split(' ')[4].substring(0, 5));
@@ -139,9 +139,10 @@
 			$('.e_time_y').val(
 					d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 							+ (d.getDate()) + "日" + " " +d.toString().split(' ')[4].substring(0, 5));
+			d = new Date(d.valueOf() - 12 * 60 * 60 * 1000);
 			$('.s_time_y').val(
 					d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
-							+ (d.getDate()) + "日" + " " + "00:00");
+							+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
 			
 			render_data_admin();
 		});

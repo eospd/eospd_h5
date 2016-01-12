@@ -241,7 +241,7 @@ public class Collectindexday {
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
 					map1.put("currentTime",rs.getString("qualityTime"));
-					map1.put("meterUrl", "机场建筑"/*rs.getString("dataUrl")*/);
+					map1.put("meterUrl", "T2能源站"/*rs.getString("dataUrl")*/);
 //					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
 //					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");
 //					map1.put("realCollectRate", rs.getDouble("realCollectRate") + "%");
@@ -258,25 +258,23 @@ public class Collectindexday {
 
 		dao.execute(sql);
 
-		String sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a";
-		if (tsearch.length() != 0) {
-			sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\"";
-		}
+//		if (tsearch.length() != 0) {
+//			sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" GROUP BY qualityTime";
+//		}
 
-		Sql sql1 = Sqls.create(sqlString1);
-		sql1.vars().set("deviceUrl", tsearch.toString());
+		Sql sql1 = Sqls.create("SELECT qualityTime as qualityTime FROM `v_dataquality` a GROUP BY qualityTime");
 
 		sql1.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
 				int recordsTotal = 0;
 				while (rs.next()) {
-					recordsTotal = rs.getInt("recordsTotal");
+				    recordsTotal++;
 				}
 				return recordsTotal;
 			}
 		});
 		dao.execute(sql1);
-
+		
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		map.put("draw", draw + 1);
 		map.put("recordsFiltered", sql1.getResult());
