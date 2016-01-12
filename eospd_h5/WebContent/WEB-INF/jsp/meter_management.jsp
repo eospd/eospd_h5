@@ -115,10 +115,10 @@
 	<script src="js/jquery-ui.min.js"></script>
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"
-		src="js/bootstrap-datepicker.zh-CN.min.js"></script>
-
+		src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+		
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="js/metisMenu.min.js"></script>
 
