@@ -58,18 +58,18 @@ public class DataManagement {
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
 			@Param(value = "draw") int draw, @Param("search[value]") String tsearch, @Param("columns[0][search][value]") String searchTime) {
 		
-		String whereSql = " WHERE a.dataId = b.dataId ";
+		String whereSql = "";
 		if (searchTime.contains(",")) {
 			searchTime = searchTime.replace("年", "-").replace("月", "-").replace("日", "");
 			String stime = searchTime.split(",")[0];
 			String etime = searchTime.split(",")[1];
 			
-			whereSql = " and qualityTime >= '" + stime + "' and qualityTime <= '" + etime + "'";
+			whereSql = " WHERE insertTime >= '" + stime + "' and insertTime <= '" + etime + "'";
 		}
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 
-		String sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p25Pv, a.p37Pv FROM `dataontime` a, `dataurl` b" + whereSql + " limit $start, $length";
+		String sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p25Pv, a.p37Pv FROM `dataontime` a left join `dataurl` b on a.dataId = b.dataId " + whereSql + " limit $start, $length";
 
 		Sql sql = Sqls.create(sqlString);
 
@@ -84,7 +84,7 @@ public class DataManagement {
 					map1.put("currentTime",
 							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("currentTime")));
 					map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重传"));
-					map1.put("dataUrl", rs.getString("dataUrl"));
+					map1.put("dataUrl", rs.getString("dataUrl") + " ");
 					map1.put("ivSign", (rs.getInt("ivSign") == 0 ? "正常" : "插值"));
 					map1.put("p1Pv", (((int)(100*rs.getFloat("p1Pv")))/100.0 /*+ "KWh"*/));
 					map1.put("p1Err", (rs.getInt("bpSign") == 0 ? "正常" : "错误"));
@@ -101,7 +101,7 @@ public class DataManagement {
 
 		dao.execute(sql);
 
-		String sqlString1 = "SELECT count(*) as recordsTotal FROM `dataontime` a, `dataurl` b" + whereSql;
+		String sqlString1 = "SELECT count(*) as recordsTotal FROM `dataontime` a left join `dataurl` b on a.dataId = b.dataId" + whereSql;
 		Sql sql1 = Sqls.create(sqlString1);
 
 		sql1.setCallback(new SqlCallback() {
