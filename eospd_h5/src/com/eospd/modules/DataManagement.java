@@ -3,7 +3,9 @@ package com.eospd.modules;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,7 @@ public class DataManagement {
 			String stime = searchTime.split(",")[0];
 			String etime = searchTime.split(",")[1];
 			
-			whereSql = " WHERE insertTime >= '" + stime + "' and insertTime <= '" + etime + "'";
+			whereSql = " WHERE currentTime >= '" + stime + "' and currentTime <= '" + etime + "'";
 		}
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
@@ -81,8 +83,13 @@ public class DataManagement {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
-					map1.put("currentTime",
-							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("currentTime")));
+					try {
+						map1.put("currentTime",
+								new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("currentTime"))));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重传"));
 					map1.put("dataUrl", rs.getString("dataUrl") + " ");
 					map1.put("ivSign", (rs.getInt("ivSign") == 0 ? "正常" : "插值"));
