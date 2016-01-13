@@ -56,16 +56,21 @@ public class DataManagement {
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
-			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch, @Param("columns[0][search][value]") String searchTime) {
+		
+		String whereSql = " WHERE a.dataId = b.dataId ";
+		if (searchTime.contains(",")) {
+			searchTime = searchTime.replace("年", "-").replace("月", "-").replace("日", "");
+			String stime = searchTime.split(",")[0];
+			String etime = searchTime.split(",")[1];
+			
+			whereSql = " and qualityTime >= '" + stime + "' and qualityTime <= '" + etime + "'";
+		}
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		//String sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p2Pv, a.p3Pv, a.p4Pv, a.p5Pv, a.p6Pv, a.p7Pv, a.p8Pv, a.p9Pv FROM `dataontime` a, `dataurl` b WHERE a.dataId = b.dataId limit $start, $length";
 
-		String sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p25Pv, a.p37Pv FROM `dataontime` a, `dataurl` b WHERE a.dataId = b.dataId limit $start, $length";
+		String sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p25Pv, a.p37Pv FROM `dataontime` a, `dataurl` b" + whereSql + " limit $start, $length";
 
-//		if (tsearch.length() != 0) {
-//			sqlString = "SELECT a.currentTime, a.bpSign, b.dataUrl, a.ivSign, a.p1Pv, a.p1Err, a.p1Dv, a.p1Rsz, a.p2Pv, a.p3Pv FROM `dataontime` a, `dataurl` b WHERE a.dataId = b.dataId  and b.dataUrl = \"$dataUrl\" limit $start, $length";
-//		}
 		Sql sql = Sqls.create(sqlString);
 
 		sql.vars().set("dataUrl", tsearch.toString()).set("start", start).set("length", length);
@@ -87,12 +92,7 @@ public class DataManagement {
 					map1.put("p1Rsz", (rs.getInt("p1Rsz") == 0 ? "正常" : "归零"));
 					map1.put("p25Pv", (((int)(100*rs.getDouble("p25Pv")))/100.0 /*+ "KW"*/));
 					map1.put("p37Pv", (((int)(100*rs.getDouble("p37Pv")))/100.0));
-					//map1.put("p4Pv", (rs.getInt("p4Pv") /*+ "A"*/));
-					//map1.put("p5Pv", (rs.getInt("p5Pv") /*+ "A"*/));
-					//map1.put("p6Pv", (rs.getInt("p6Pv") /*+ "A"*/));
-					//map1.put("p7Pv", (rs.getInt("p7Pv") /*+ "V"*/));
-					//map1.put("p8Pv", (rs.getInt("p8Pv") /*+ "V"*/));
-					//map1.put("p9Pv", (rs.getInt("p9Pv") /*+ "V"*/));
+
 					data.add(map1);
 				}
 				return data;
@@ -101,7 +101,7 @@ public class DataManagement {
 
 		dao.execute(sql);
 
-		String sqlString1 = "SELECT count(*) as recordsTotal FROM `dataontime` a";
+		String sqlString1 = "SELECT count(*) as recordsTotal FROM `dataontime` a, `dataurl` b" + whereSql;
 		Sql sql1 = Sqls.create(sqlString1);
 
 		sql1.setCallback(new SqlCallback() {

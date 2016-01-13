@@ -213,26 +213,27 @@ public class Collectindexday {
 	@Ok("json")
 	@Filters // 覆盖UserModule类的@Filter设置,因为登陆可不能要求是个已经登陆的Session
 	public Map list(@Param(value = "start") int start, @Param(value = "length") int length,
-			@Param(value = "draw") int draw, @Param("search[value]") String tsearch) {
+			@Param(value = "draw") int draw, @Param("search[value]") String tsearch, @Param("columns[0][search][value]") String searchTime) {
+
+		String whereSql = "";
+		if (searchTime.contains(",")) {
+			searchTime = searchTime.replace("年", "-").replace("月", "-").replace("日", "");
+			String stime = searchTime.split(",")[0];
+			String etime = searchTime.split(",")[1];
+			
+			whereSql = " where qualityTime >= '" + stime + "' and qualityTime <= '" + etime + "'";
+		}
 
 		Dao dao = Mvcs.getIoc().get(Dao.class);
-		//Sql sql = Sqls.create("SELECT qualityTime, SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt FROM v_dataquality WHERE qualityTime >= @s_time and qualityTime < @e_time group by qualityTime;");
 	    
 		Sql sql = Sqls.create("SELECT qualityTime as qualityTime,dataUrl as dataUrl, (100.0* SUM(commValid) / SUM(planCollectCnt)) as commValid, " +
                 "(100.0* SUM(dataValid) / SUM(planCollectCnt)) as dataValid, " +
                 "(100.0* SUM(dataQuality) / SUM(planCollectCnt)) as dataQuality " +
-                "FROM v_dataquality GROUP BY qualityTime limit @start, @length");
+                "FROM v_dataquality " + whereSql + " GROUP BY qualityTime limit @start, @length");
+		
         sql.params().set("start", start);
         sql.params().set("length", length);
 		
-//		String sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId limit $start, $length";
-//
-//		if (tsearch.length() != 0) {
-//			sqlString = "SELECT a.indexTime, b.deviceUrl, a.dataEffRate, a.meterOnlineRate, a.realCollectRate  FROM `collectindexday` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" limit $start, $length";
-//		}
-//		Sql sql = Sqls.create(sqlString);
-//
-//		sql.vars().set("deviceUrl", tsearch.toString()).set("start", start).set("length", length);
 
 		sql.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
@@ -262,7 +263,7 @@ public class Collectindexday {
 //			sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" GROUP BY qualityTime";
 //		}
 
-		Sql sql1 = Sqls.create("SELECT qualityTime as qualityTime FROM `v_dataquality` a GROUP BY qualityTime");
+		Sql sql1 = Sqls.create("SELECT qualityTime as qualityTime FROM `v_dataquality` " + whereSql + " GROUP BY qualityTime");
 
 		sql1.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
