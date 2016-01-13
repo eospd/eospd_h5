@@ -103,7 +103,7 @@
 										endDate: new Date(),
 										format: 'yyyy年mm月dd日 hh:ii'
 									}).on('changeDate', function(value) {
-										render_data_admin();
+										//render_data_admin();
 									});
 								});
 					 render_data_admin();
@@ -132,7 +132,9 @@
 		$("#his_page").click(function(){
 	     	   window.location.href="/eospd_h5/datam_list";
 	        });
-		
+		$("#btn_refresh").click(function() {
+			render_data_admin();
+		});
 		$("#btn_rest").click(function() {
 			
 			var d = new Date();
