@@ -732,9 +732,9 @@ ECOTree.prototype._drawTree = function () {
 	
 	this.ctx.save();
 	this.ctx.fillStyle = "rgb(255,255,255)";
-	this.ctx.fillText("TCP/IP", 140, 20);
-	this.ctx.fillText("RS-485", 250, 20);
-	this.ctx.fillText("RS-485", 370, 20);
+	this.ctx.fillText("以太网/GPRS", 140, 20);
+	this.ctx.fillText("以太网", 250, 20);
+	this.ctx.fillText("RS485", 370, 20);
 	
 	this.ctx.restore();
 	
