@@ -241,7 +241,12 @@ public class Collectindexday {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
-					map1.put("currentTime",rs.getString("qualityTime"));
+					
+					String time = rs.getString("qualityTime");
+                    if (time.endsWith(".0")) {
+                        time = time.replace(".0", "");
+                    }
+					map1.put("currentTime",time);
 					map1.put("meterUrl", "T2能源站"/*rs.getString("dataUrl")*/);
 //					map1.put("dataEffRate", rs.getDouble("dataEffRate") + "%");
 //					map1.put("meterOnlineRate", rs.getDouble("meterOnlineRate") + "%");

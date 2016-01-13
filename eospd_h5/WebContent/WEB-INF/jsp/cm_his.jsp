@@ -129,9 +129,6 @@
 			$("#btn_rest").click(function() {
 				window.location.href="/eospd_h5/cm_chart";
 			});
-			$("#btn_refresh").click(function() {
-				window.location.href="/eospd_h5/cm_chart";
-			});
 		});
 
 

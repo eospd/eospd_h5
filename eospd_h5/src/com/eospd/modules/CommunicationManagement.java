@@ -102,8 +102,11 @@ public class CommunicationManagement {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
-					map1.put("currentTime",
-							new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(rs.getDate("currentTime")));
+					String time = rs.getString("currentTime");
+					if (time.endsWith(".0")) {
+					    time = time.replace(".0", "");
+					}
+					map1.put("currentTime", time);
 
 					if (1 == rs.getInt("deviceType")) {
 						map1.put("deviceType", "数据采集器");

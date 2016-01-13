@@ -175,13 +175,13 @@
 									endDate: new Date(),
 									format: 'yyyy年mm月dd日 hh:ii'
 								}).on('changeDate', function(value) {
-								    var s_date = $('.input-daterange input')[0].value;
-								    var e_date = $('.input-daterange input')[1].value;
+								    //var s_date = $('.input-daterange input')[0].value;
+								    //var e_date = $('.input-daterange input')[1].value;
 								    //console.log("s_date:" + s_date);
 								    //console.log("e_date:" + e_date);
 
-									var table = $('#dm_table').DataTable();
-									table.columns(0).search(s_date + "," + e_date).draw();
+									//var table = $('#dm_table').DataTable();
+									//table.columns(0).search(s_date + "," + e_date).draw();
 								});
 							});
 				});
@@ -193,6 +193,15 @@
 		$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
 		$("#his_page").css({'background-color':'#269CE9'});
 		$("#dm").toggleClass('active');
+		$("#btn_refresh").click(function() {
+			var s_date = $('.input-daterange input')[0].value;
+		    var e_date = $('.input-daterange input')[1].value;
+		    //console.log("s_date:" + s_date);
+		    //console.log("e_date:" + e_date);
+
+			var table = $('#dm_table').DataTable();
+			table.columns(0).search(s_date + "," + e_date).draw();
+		});
 	</script>
 
 </body>

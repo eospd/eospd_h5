@@ -106,7 +106,7 @@
 				$("#index").toggleClass('active');
 				$("#def_page").click(function() {
 					window.location.href="/eospd_h5/index";
-				});
+				});				
 			});
 		</script>
 </body>

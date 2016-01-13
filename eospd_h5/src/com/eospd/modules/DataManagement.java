@@ -83,13 +83,12 @@ public class DataManagement {
 				List<Object> data = new ArrayList<Object>();
 				while (rs.next()) {
 					Map<Object, Object> map1 = new HashMap<Object, Object>();
-					try {
-						map1.put("currentTime",
-								new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("currentTime"))));
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					String time = rs.getString("currentTime");
+                    if (time.endsWith(".0")) {
+                        time = time.replace(".0", "");
+                    }
+                    map1.put("currentTime", time);
+					
 					map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重传"));
 					map1.put("dataUrl", rs.getString("dataUrl") + " ");
 					map1.put("ivSign", (rs.getInt("ivSign") == 0 ? "正常" : "插值"));
