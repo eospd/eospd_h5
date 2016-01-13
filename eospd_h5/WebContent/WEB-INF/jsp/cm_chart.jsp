@@ -118,7 +118,7 @@
 				//32,141,173 
 				t.add('0','-1', '', 50, 50,c, c, target, meta);
 				t.add('1','0','TB-9802', 60, 30, "#189C8B", onlineMap['/ec2/dc/1'] == 1 ? "#189C8B" : "#FF0000", target, 'dc_/ec2/dc/1');
-				t.add('2','1','MOXA DA-660-16', 120, 30, "#208DAD", onlineMap['/ec2/gw/1'] == 1 ? "#208DAD" : "#FF0000", target, 'gate_/ec2/gw/2');
+				t.add('2','1','MOXA DA-660-16', 120, 30, "#208DAD", onlineMap['/ec2/gw/2'] == 1 ? "#208DAD" : "#FF0000", target, 'gate_/ec2/gw/2');
 
 				t.add('2_1','2','SN2_1', 100, 1,c, c, target, meta, 1);
 				t.add('3','2_1','EPM 5500P-1');
