@@ -89,16 +89,40 @@ public class DataManagement {
                     }
                     map1.put("currentTime", time);
 					
-					map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "重传"));
+                    map1.put("bpSign", (rs.getInt("bpSign") == 0 ? "正常" : "续传"));
 					map1.put("dataUrl", rs.getString("dataUrl") + " ");
 					map1.put("ivSign", (rs.getInt("ivSign") == 0 ? "正常" : "插值"));
-					map1.put("p1Pv", (((int)(100*rs.getFloat("p1Pv")))/100.0 /*+ "KWh"*/));
-					map1.put("p1Err", (rs.getInt("bpSign") == 0 ? "正常" : "错误"));
-					map1.put("p1Dv", (((int)(100*rs.getDouble("p1Dv")))/100.0/*+ + "KWh"*/));
-					map1.put("p1Rsz", (rs.getInt("p1Rsz") == 0 ? "正常" : "归零"));
-					map1.put("p25Pv", (((int)(100*rs.getDouble("p25Pv")))/100.0 /*+ "KW"*/));
-					map1.put("p37Pv", (((int)(100*rs.getDouble("p37Pv")))/100.0));
 
+					String value = rs.getString("p1Pv");
+					if (value == null || value.isEmpty()) {
+					    map1.put("p1Pv", "");
+					} else {
+					    map1.put("p1Pv", (((int)(100*rs.getFloat("p1Pv")))/100.0 /*+ "KWh"*/));
+					}
+					
+					map1.put("p1Err", (rs.getInt("p1Err") == 1 ? "错误" : "正常"));
+					
+					value = rs.getString("p1Dv");
+					if (value == null || value.isEmpty()) {
+                        map1.put("p1Dv", "");
+                    } else {
+                        map1.put("p1Dv", (((int)(100*rs.getFloat("p1Dv")))/100.0 /*+ "KWh"*/));
+                    }
+					map1.put("p1Rsz", (rs.getInt("p1Rsz") == 0 ? "正常" : "归零"));
+					
+					value = rs.getString("p25Pv");
+					if (value == null || value.isEmpty()) {
+                        map1.put("p25Pv", "");
+                    } else {
+                        map1.put("p25Pv", (((int)(100*rs.getFloat("p25Pv")))/100.0 /*+ "KWh"*/));
+                    }
+					
+					value = rs.getString("p37Pv");
+					if (value == null || value.isEmpty()) {
+					    map1.put("p37Pv", "");
+					} else {
+					    map1.put("p37Pv", (((int)(100*rs.getFloat("p37Pv")))/100.0));
+					}
 					data.add(map1);
 				}
 				return data;
