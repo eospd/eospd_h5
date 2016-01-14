@@ -49,7 +49,7 @@
 			<li><a href="/eospd_h5/cm_his"><i class="fa fa-table fa-fw"></i>
 					历史数据</a></li>
 -->
-			<li><a href="#" id="efd" style="color:grey;background-color: darygray" disabled="disabled"><img src="imgs/energy_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
+			<li><a href="#" id="mm" style="color:grey;background-color:darygray" disabled="disabled"><img src="imgs/energy_icon.png" style="margin-right:10px" width="20px" height="20px"/><i
 					class="fa  fa-fw"></i> 能流管理</a></li>
 					<!--  
 			<li><a href="/eospd_h5/efd_his"><i class="fa fa-edit fa-fw"></i>
