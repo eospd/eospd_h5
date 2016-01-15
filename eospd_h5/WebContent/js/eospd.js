@@ -277,13 +277,14 @@ function col_his() {
 				var d = new Date()
 				
 				if (0 == i) {
-					d = new Date(d.valueOf() - 900000);
-				}
-				
-				$(this).val(
+					$(this).val(
+							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+									+ (d.getDate()) + "日 00:00"); 
+				} else {
+					$(this).val(
 						d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 								+ (d.getDate()) + "日 "+ d.toString().split(' ')[4].substring(0, 5)); 
-				
+				}
 				$(this).datetimepicker({
 			        language:  'zh-CN',
 			        weekStart: 1,
@@ -305,16 +306,26 @@ function col_his() {
 					//table.columns(0).search(s_date + "," + e_date).draw();
 				});
 				
-				$("#btn_refresh").click(function() {
-					 var s_date = $('.input-daterange input')[0].value;
-					    var e_date = $('.input-daterange input')[1].value;
-					    //console.log("s_date:" + s_date);
-					    //console.log("e_date:" + e_date);
-
-						var table = $('#dm_table').DataTable();
-						table.columns(0).search(s_date + "," + e_date).draw();
-				})
+				
 			});
+	
+	var s_date = $('.input-daterange input')[0].value;
+    var e_date = $('.input-daterange input')[1].value;
+    //console.log("s_date:" + s_date);
+    //console.log("e_date:" + e_date);
+
+	var table = $('#dm_table').DataTable();
+	table.columns(0).search(s_date + "," + e_date).draw();
+	
+	$("#btn_refresh").click(function() {
+		 var s_date = $('.input-daterange input')[0].value;
+		    var e_date = $('.input-daterange input')[1].value;
+		    //console.log("s_date:" + s_date);
+		    //console.log("e_date:" + e_date);
+
+			var table = $('#dm_table').DataTable();
+			table.columns(0).search(s_date + "," + e_date).draw();
+	})
 }
 function cm_his() {
 	gen_all_meter();
@@ -339,21 +350,22 @@ function cm_his() {
 			"data" : "bpSign"
 		} ]
 	});
-
+	
 	$('.input-daterange input').each(
 			function(i) {
 
 				var d = new Date();
 				if (0 == i) {
-					d = new Date(d.valueOf() - 900000);
-				}
-				
-				$(this).val(
+					$(this).val(
+							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
+									+ (d.getDate()) + "日 00:00"); 
+				} else {
+					$(this).val(
 						d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 								+ (d.getDate()) + "日 "+ d.toString().split(' ')[4].substring(0, 5)); 
-				
+				}
 				$(this).datetimepicker({
-			        language:  'zh-CN',
+			        language: 'zh-CN',
 			        weekStart: 1,
 			        todayBtn:  1,
 					autoclose: 1,
@@ -372,17 +384,25 @@ function cm_his() {
 					//var table = $('#dm_table').DataTable();
 					//table.columns(0).search(s_date + "," + e_date).draw();
 				});
-				
-				$("#btn_refresh").click(function() {
-					var s_date = $('.input-daterange input')[0].value;
-				    var e_date = $('.input-daterange input')[1].value;
-				    //console.log("s_date:" + s_date);
-				    //console.log("e_date:" + e_date);
-
-					var table = $('#dm_table').DataTable();
-					table.columns(0).search(s_date + "," + e_date).draw();
-				});
 			});
+	
+	var s_date = $('.input-daterange input')[0].value;
+    var e_date = $('.input-daterange input')[1].value;
+    //console.log("s_date:" + s_date);
+    //console.log("e_date:" + e_date);
+
+	var table = $('#dm_table').DataTable();
+	table.columns(0).search(s_date + "," + e_date).draw();
+	
+	$("#btn_refresh").click(function() {
+		var s_date = $('.input-daterange input')[0].value;
+	    var e_date = $('.input-daterange input')[1].value;
+	    //console.log("s_date:" + s_date);
+	    //console.log("e_date:" + e_date);
+
+		var table = $('#dm_table').DataTable();
+		table.columns(0).search(s_date + "," + e_date).draw();
+	});
 
 }
 

@@ -156,7 +156,7 @@
 
 								var d = new Date();
 								if (0 == i) {
-									d = new Date(d.valueOf() - 900000);
+									d = new Date(d.valueOf() - 12 * 60 * 60 * 1000);
 								}
 								
 								$(this).val(
@@ -184,6 +184,14 @@
 									//table.columns(0).search(s_date + "," + e_date).draw();
 								});
 							});
+					
+					var s_date = $('.input-daterange input')[0].value;
+					    var e_date = $('.input-daterange input')[1].value;
+					    //console.log("s_date:" + s_date);
+					    //console.log("e_date:" + e_date);
+
+					var table = $('#dm_table').DataTable();
+					table.columns(0).search(s_date + "," + e_date).draw();
 				});
 		
 		$("#def_page").click(function(){
@@ -201,6 +209,9 @@
 
 			var table = $('#dm_table').DataTable();
 			table.columns(0).search(s_date + "," + e_date).draw();
+		});
+		$("#btn_rest").click(function() {
+			window.location.href="/eospd_h5/dm";
 		});
 	</script>
 

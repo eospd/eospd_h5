@@ -29,11 +29,11 @@
 											<th style="width: 400px">
 												<div class="input-group input-daterange pull-right">
 													<input type="text" class="form-control" value=""> <span
-														class="input-group-addon">到</span> <input type="text"
+														class="input-group-addon"  style="color: grey; background: rgb(54,59,70); border: none;">到</span> <input type="text"
 														class="form-control" value="">
 												</div>
 											</th>
-											<th style="width: 100px">
+											<th style="width: 2px">
 
 												<div class="btn-group dc-meter-dropdown"></div>
 											</th>
@@ -50,7 +50,7 @@
 													id="dm_table">
 													<thead>
 														<tr>
-															<th>时间</th>
+															<th style="width:160px">时间</th>
 															<th>机场建筑</th>
 															<th>数据有效率</th>
 															<th>仪表在线率</th>
@@ -106,7 +106,10 @@
 				$("#index").toggleClass('active');
 				$("#def_page").click(function() {
 					window.location.href="/eospd_h5/index";
-				});				
+				});	
+				$("#btn_rest").click(function() {
+					window.location.href="/eospd_h5/index";
+				});
 			});
 		</script>
 </body>

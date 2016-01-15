@@ -29,7 +29,7 @@
 											<th style="width: 400px">
 												<div class="input-group input-daterange pull-right">
 													<input type="text" class="form-control" value=""> <span
-														class="input-group-addon">到</span> <input type="text"
+														class="input-group-addon"  style="color: grey; background: rgb(54,59,70); border: none;">到</span> <input type="text"
 														class="form-control" value="">
 												</div>
 											</th>
