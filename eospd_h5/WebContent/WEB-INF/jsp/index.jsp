@@ -301,28 +301,6 @@
 	<script>
 		$(document).ready(
 				function() {
-					getMeterData();
-					loadImages(sources, animat);
-					$('#dm_table').DataTable({
-						"processing" : true,
-						"serverSide" : true,
-						"ajax" : {
-							"url" : "/eospd_h5/cid/list",
-							"type" : "POST"
-						},
-						"columns" : [ {
-							"data" : "currentTime"
-						}, {
-							"data" : "deviceId"
-						}, {
-							"data" : "dataEffRate"
-						}, {
-							"data" : "meterOnlineRate"
-						}, {
-							"data" : "realCollectRate"
-						} ]
-					});
-
 					$('.input-daterange input').each(
 							function(i) {
 								var d = new Date();
@@ -331,7 +309,7 @@
 								} else {
 									$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
 								}
-
+								
 								$(this).val(
 										d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 												+ (d.getDate()) + "日");
@@ -357,6 +335,30 @@
 									//getMeterData();
 								});
 							});
+					
+					getMeterData();
+					loadImages(sources, animat);
+					$('#dm_table').DataTable({
+						"processing" : true,
+						"serverSide" : true,
+						"ajax" : {
+							"url" : "/eospd_h5/cid/list",
+							"type" : "POST"
+						},
+						"columns" : [ {
+							"data" : "currentTime"
+						}, {
+							"data" : "deviceId"
+						}, {
+							"data" : "dataEffRate"
+						}, {
+							"data" : "meterOnlineRate"
+						}, {
+							"data" : "realCollectRate"
+						} ]
+					});
+
+					
 
 					// 每隔十五分钟，自动拉取服务器数据
 					$('body').timer({

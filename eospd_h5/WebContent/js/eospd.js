@@ -1,14 +1,13 @@
 function render_data_admin(s_time, e_time){
 	var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
 	var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
-	
-	$.get("/eospd_h5/cid/data_query?s_time="+s_time +"&e_time=" + e_time, function(data ,status){
+	console.log("query data s_time:"+s_time+",e_time:"+e_time);
+	$.get("/eospd_h5/cid/data_query?s_time="+s_time +"&e_time=" + e_time, function(data){
 	 	data_admin(data);
 	});
 }
 
 function data_admin(response_data) {
-	
 //	if (typeof response_data.qualityTime == "undefined" || 0 === response_data.qualityTime.length) {
 //		response_data = new Object();
 //		response_data.qualityTime = ['11:00', '11:15', '11:30', '11-45','12:00', '12:15', '12:30', '12:45', 
@@ -20,7 +19,7 @@ function data_admin(response_data) {
 //		response_data.dataErrCnt = [106, 107, 111, 133, 221, 767, 766,106, 107, 111, 133, 221, 767, 766];
 //		response_data.dataLoseCnt = [200, 31, 54, 156, 339, 818, 201,200, 31, 54, 156, 339, 818, 201];
 //	}
-	
+	console.log("/eospd_h5/cid/data_query repsonse success");
 	var defaultColors = ['grey', 'yellow','blue', '#006400',  'green'];
     Highcharts.setOptions({colors : defaultColors});
     

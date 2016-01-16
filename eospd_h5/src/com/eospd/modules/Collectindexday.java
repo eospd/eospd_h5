@@ -81,8 +81,7 @@ public class Collectindexday {
 	public Map data_query(@Param(value = "s_time") Date s_time, @Param(value = "e_time") Date e_time) {
 		Dao dao = Mvcs.getIoc().get(Dao.class);
 		
-		Sql sql = Sqls.create("SELECT qualityTime, SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt FROM v_dataquality WHERE qualityTime >= @s_time and qualityTime < @e_time group by qualityTime;");
-		
+		Sql sql = Sqls.create("SELECT qualityTime, SUM(realNormalCnt) as realNormalCnt, SUM(retranNormalCnt) as retranNormalCnt, SUM(dataRepairCnt) as dataRepairCnt,  SUM(dataErrCnt) as dataErrCnt, SUM(dataLoseCnt) as dataLoseCnt FROM dataquality WHERE qualityTime >= @s_time and qualityTime < @e_time group by qualityTime;");
 		sql.params().set("s_time", s_time);
 		sql.params().set("e_time", e_time);
 		
@@ -268,7 +267,7 @@ public class Collectindexday {
 //			sqlString1 = "SELECT count(*) as recordsTotal FROM `v_dataquality` a, `meter` b WHERE a.deviceId = b.deviceId and b.deviceUrl = \"$deviceUrl\" GROUP BY qualityTime";
 //		}
 
-		Sql sql1 = Sqls.create("SELECT qualityTime as qualityTime FROM `v_dataquality` " + whereSql + " GROUP BY qualityTime");
+		Sql sql1 = Sqls.create("SELECT qualityTime as qualityTime FROM `dataquality` " + whereSql + " GROUP BY qualityTime");
 
 		sql1.setCallback(new SqlCallback() {
 			public Object invoke(Connection conn, ResultSet rs, Sql sql) throws SQLException {
