@@ -28,9 +28,9 @@
 											</th>
 											<th style="width: 400px">
 												<div class="input-group input-daterange pull-right">
-													<input type="text" class="form-control" value=""> <span
+													<input type="text" class="form-control s_time" value=""> <span
 														class="input-group-addon"  style="color: grey; background: rgb(54,59,70); border: none;">到</span> <input type="text"
-														class="form-control" value="">
+														class="form-control e_time" value="">
 												</div>
 											</th>
 											<th style="width: 2px">
@@ -105,10 +105,16 @@
 				$("#his_page").css({'background-color':'#269CE9'});
 				$("#index").toggleClass('active');
 				$("#def_page").click(function() {
-					window.location.href="/eospd_h5/index";
+					var s_time =  $('.s_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+					var e_time = $('.e_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+				
+					window.location.href='/eospd_h5/index?s_time=' + s_time + '&e_time=' + e_time;;
 				});	
 				$("#btn_rest").click(function() {
-					window.location.href="/eospd_h5/index";
+					var s_time =  $('.s_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+					var e_time = $('.e_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+					
+					window.location.href='/eospd_h5/index?s_time=' + s_time + '&e_time=' + e_time;
 				});
 			});
 		</script>

@@ -305,8 +305,14 @@
 							function(i) {
 								var d = new Date();
 								if (0 == i) {
+									if (null != $.getUrlParam('s_time')) {
+										d = new Date($.getUrlParam('s_time'));
+									}
 									$('.s_time_hm').val("00:00");
 								} else {
+									if (null != $.getUrlParam('e_time')) {
+										d = new Date($.getUrlParam('e_time'));
+									}
 									$('.e_time_hm').val(d.toString().split(' ')[4].substring(0, 5));
 								}
 								
@@ -416,7 +422,10 @@
 					
 
 					$("#his_page").click(function() {
-						window.location.href = "/eospd_h5/col_his";
+						var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'') + " " + $('.s_time_hm').val();
+						var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'') + " " + $('.e_time_hm').val();
+					
+						window.location.href = '/eospd_h5/col_his?s_time=' + s_time + '&e_time=' + e_time;
 					});
 
 					$(".t2_e").click(function() {

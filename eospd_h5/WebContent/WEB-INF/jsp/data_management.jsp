@@ -77,8 +77,15 @@
 	<script>
 		$(document).ready(
 				function() {
-					
 					var d = new Date();
+	
+					if (null != $.getUrlParam('s_time')) {
+						d = new Date($.getUrlParam('s_time'));
+					}
+					if (null != $.getUrlParam('e_time')) {
+						d = new Date($.getUrlParam('e_time'));
+					}
+					
 					$('.e_time_y').val(
 							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 									+ (d.getDate()) + "日" + " " + d.toString().split(' ')[4].substring(0, 5));
@@ -130,7 +137,10 @@
 				});
 		
 		$("#his_page").click(function(){
-	     	   window.location.href="/eospd_h5/datam_list";
+			var s_time =  $('.s_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+			var e_time = $('.e_time_y').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+	
+	     	   window.location.href='/eospd_h5/datam_list?s_time=' + s_time + '&e_time=' + e_time;
 	        });
 		$("#btn_refresh").click(function() {
 			render_data_admin();

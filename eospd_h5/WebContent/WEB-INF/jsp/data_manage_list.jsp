@@ -25,9 +25,9 @@
 											</th>
 											<th style="width: 400px;">
 												<div class="input-group input-daterange pull-right">
-													<input type="text" class="form-control" value=""> <span
+													<input type="text" class="form-control s_time" value=""> <span
 														class="input-group-addon" style="color: grey; background: rgb(54,59,70); border: none;">到</span> <input type="text"
-														class="form-control" value="">
+														class="form-control e_time" value="">
 												</div>
 											</th>
 										</tr>
@@ -157,6 +157,15 @@
 								var d = new Date();
 								if (0 == i) {
 									d = new Date(d.valueOf() - 12 * 60 * 60 * 1000);
+									if (null != $.getUrlParam('s_time')) {
+										d = new Date($.getUrlParam('s_time'));
+									}
+								}
+								
+								if (1 == i) {
+									if (null != $.getUrlParam('e_time')) {
+										d = new Date($.getUrlParam('e_time'));
+									}
 								}
 								
 								$(this).val(
@@ -195,8 +204,11 @@
 				});
 		
 		$("#def_page").click(function(){
-	     	   window.location.href="/eospd_h5/dm";
-	        });
+			var s_time =  $('.s_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+			var e_time = $('.e_time').val().replace('年', '-').replace('月', '-').replace('日' ,'');
+		
+			window.location.href='/eospd_h5/dm?s_time=' + s_time + '&e_time=' + e_time;
+	      });
 		
 		$("#def_page").css({'background-color':'#3b404a', 'border-color':'#3b404a'});
 		$("#his_page").css({'background-color':'#269CE9'});

@@ -246,6 +246,18 @@ function mm_his() {
 				});
 			});
 }
+(function($){
+	$.getUrlParam
+	 = function(name)
+	{
+	var reg
+	 = new RegExp("(^|&)"+
+	 name +"=([^&]*)(&|$)");
+	var r
+	 = window.location.search.substr(1).match(reg);
+	if (r!=null) return unescape(r[2]); return null;
+	}
+	})(jQuery)
 
 function col_his() {
 	//gen_all_meter();
@@ -270,16 +282,23 @@ function col_his() {
 		} ]
 	});
 
-
 	$('.input-daterange input').each(
 			function(i) {
 				var d = new Date()
 				
 				if (0 == i) {
+					if (null != $.getUrlParam('s_time')) {
+						d = new Date($.getUrlParam('s_time'));
+					}
+					
 					$(this).val(
 							d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 									+ (d.getDate()) + "日 00:00"); 
 				} else {
+
+					if (null != $.getUrlParam('e_time')) {
+						d = new Date($.getUrlParam('e_time'));
+					}
 					$(this).val(
 						d.getFullYear() + "年" + (d.getMonth() + 1) + "月"
 								+ (d.getDate()) + "日 "+ d.toString().split(' ')[4].substring(0, 5)); 
